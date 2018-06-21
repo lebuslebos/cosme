@@ -3,6 +3,7 @@
 Route::get('/p', 'ProductController@index');
 Route::get('/b', 'BrandController@index');
 
+Route::get('/ttt', 'BrandController@index');
 
 
 
