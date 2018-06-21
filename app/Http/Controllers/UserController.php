@@ -35,10 +35,10 @@ class UserController extends Controller
         }*/
 
         //上面的不要，只要下面这部分
-        $request->validate([
+        /*$request->validate([
             'mobile'     => 'required|confirm_mobile_not_change|confirm_rule:mobile_required',
             'verifyCode' => 'required|verify_code',
-        ]);
+        ]);*/
 
         $user = User::firstOrCreate(['mobile' => $request->mobile],
             [

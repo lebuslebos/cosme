@@ -62,21 +62,24 @@
                             @click="requestCode">
                         发送验证码
                     </button>
-                    <img v-else-if="!showSendBtn" class="loading-size" :src="`${upyunDomain}/icons/loading.gif`" alt="正在玩命加载">
+                    <img v-else-if="!showSendBtn" class="loading-size" :src="`${upyunDomain}/icons/loading.gif`"
+                         alt="正在玩命加载">
                 </transition>
             </div>
         </template>
         <template v-else>
             <div class="d-flex align-items-center mt-3">
                 <div><span class="text-muted text-tiny">没收到验证码？</span></div>
-                <button :disabled="disabled" class="btn btn-easy" :class="{'btn-pc':!isMobile}" style="width: 6rem;letter-spacing: 1px;"
+                <button :disabled="disabled" class="btn btn-easy" :class="{'btn-pc':!isMobile}"
+                        style="width: 6rem;letter-spacing: 1px;"
                         @click="requestCode">{{ reText }}
                 </button>
             </div>
 
             <div class="mt-3" style="min-height: 2.4rem;">
                 <transition name="fade">
-                    <img v-if="getVerifyCode.length === numLength && !loginError" class="loading-size" :src="`${upyunDomain}/icons/loading.gif`" alt="正在玩命加载">
+                    <img v-if="getVerifyCode.length === numLength && !loginError" class="loading-size"
+                         :src="`${upyunDomain}/icons/loading.gif`" alt="正在玩命加载">
 
                 </transition>
             </div>
@@ -138,13 +141,13 @@
 
         },
         computed: {
-            upyunDomain(){
+            upyunDomain() {
                 return this.$store.state.device.upyunDomain;
             },
             getVerifyCode() {
                 return this.verifyCode.join('');
             },
-            isMobile(){
+            isMobile() {
                 return this.$store.getters.isMobile;
             }
         },
@@ -262,15 +265,12 @@
                     const phone = this.getVerifyCode;
 
 
-
-                    /*//测试专用
-                    this.$emit('toCode', phone)*/
-
+                    //测试专用
+                    this.$emit('toCode', phone)
 
 
                     // 正则验证
-                    const reg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-
+                    /*const reg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
                     if (reg.test(phone)) {
 
                         axios.post(this.requestCodeUrl, {mobile: phone})
@@ -286,7 +286,10 @@
                     } else {
                         this.loginError = '手机号好像输错啦';
                         this.showSendBtn = true;
-                    }
+                    }*/
+                    
+
+
                 } else {
                     // 立刻开始计数+focus
                     this.reText = '60 S';

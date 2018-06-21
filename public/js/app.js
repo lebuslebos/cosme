@@ -67446,6 +67446,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "verify-code-form",
@@ -67619,27 +67622,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 // 获取手机号
                 var phone = this.getVerifyCode;
 
-                /*//测试专用
-                this.$emit('toCode', phone)*/
+                //测试专用
+                this.$emit('toCode', phone);
 
                 // 正则验证
-                var reg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-
+                /*const reg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
                 if (reg.test(phone)) {
-
-                    axios.post(this.requestCodeUrl, { mobile: phone }).then(function (response) {
-                        console.log(response.data);
-                        if (response.data.success) {
-                            _this.$emit('toCode', phone);
-                        } else {
-                            _this.loginError = response.data.message;
-                            _this.showSendBtn = true;
-                        }
-                    });
+                     axios.post(this.requestCodeUrl, {mobile: phone})
+                        .then(response => {
+                            console.log(response.data);
+                            if (response.data.success) {
+                                this.$emit('toCode', phone)
+                            } else {
+                                this.loginError = response.data.message;
+                                this.showSendBtn = true;
+                            }
+                        })
                 } else {
                     this.loginError = '手机号好像输错啦';
                     this.showSendBtn = true;
-                }
+                }*/
             } else {
                 // 立刻开始计数+focus
                 this.reText = '60 S';
