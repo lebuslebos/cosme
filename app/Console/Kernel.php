@@ -39,7 +39,7 @@ class Kernel extends ConsoleKernel
 
                     DB::table('products')->where('id', $r_p_id)
                         ->update(['reviews_count' => Cache::get('r-' . $r_p_id . '-p')]);
-                    if (Cache::has('sh-' . $r_p_id)) Cache::forget('sh-' . $r_p_id);//刷新购入场所分布的缓存
+                    //if (Cache::has('sh-' . $r_p_id)) Cache::forget('sh-' . $r_p_id);//刷新购入场所分布的缓存
                 }
             }
 
@@ -63,7 +63,7 @@ class Kernel extends ConsoleKernel
                     Cache::forever('ra-' . $p_id, round(DB::table('reviews')
                         ->where([['body', '<>', ''], ['product_id', $p_id]])
                         ->avg('rate'), 1));
-                    if (Cache::has('sk-' . $p_id)) Cache::forget('sk-' . $p_id);//刷新肤质分布的缓存
+                    //if (Cache::has('sk-' . $p_id)) Cache::forget('sk-' . $p_id);//刷新肤质分布的缓存
                 }
             }
 

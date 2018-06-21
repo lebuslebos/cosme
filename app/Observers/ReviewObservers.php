@@ -15,11 +15,14 @@ class ReviewObservers
     //游客点评+登录用户新建点评（2种）
     public function created(Review $review)
     {
+        //刷新购入场所分布的缓存
+        if (Cache::has('sh-' . $review->product_id )) Cache::forget('sh-' . $review->product_id );
+
         //关于商品和品牌--点评数+回购数
         Cache::increment('r-' . $review->product_id . '-p');
+
         $r_p_ids=Cache::get('r-p-ids',[]);
         $r_p_ids[]=$review->product_id;
-//        array_push($r_p_ids,$review->product_id);
         Cache::forever('r-p-ids',$r_p_ids);
 
 
@@ -28,7 +31,6 @@ class ReviewObservers
             Cache::increment('b-' . $review->product_id . '-p');
             $b_p_ids=Cache::get('b-p-ids',[]);
             $b_p_ids[]=$review->product_id;
-//            array_push($b_p_ids,$review->product_id);
             Cache::forever('b-p-ids',$b_p_ids);
 
             Cache::increment('b-' . $review->brand_id . '-b');
@@ -37,7 +39,11 @@ class ReviewObservers
 
         //登录用户新建点评时
         if ($review->user_id) {
+            //刷新肤质分布的缓存
+            if (Cache::has('sk-' . $review->product_id)) Cache::forget('sk-' . $review->product_id);
+
             Cache::increment('r-' . $review->user_id . '-u');//用户点评数+1
+
             if ($review->buy == 0) Cache::increment('b-' . $review->user_id . '-u');//用户回购数+1
 
             if ($review->body) {
