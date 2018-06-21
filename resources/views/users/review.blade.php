@@ -1,9 +1,10 @@
 {{--在商品列表页直接展示点评、目前用在个人页--显示自己的所有点评--}}
 
-<user-review :product-id="{{$review->product->id}}" :review="{{$review}}"
+<user-review :product-id="{{$review->product_id}}" :review="{{$review}}"
              :can="@json(optional(Auth::user())->can('update',$user))"
              :likes="{{$review->likes_count}}"
              :hates="{{$review->hates_count}}"
+
 ></user-review>
 
 

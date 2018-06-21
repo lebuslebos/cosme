@@ -9,7 +9,7 @@
     你可以进她的主页看看她用过的其他商品以做参考。
 </div>
 <div class="text-muted text-tiny">
-    ( {{date('Y年n月j日')}}凌晨{{env('RANKING_UPDATED_AT')}}点更新 )
+    ( {{date('Y年n月j日')}}凌晨{{config('common.ranking_updated_at')}}点更新 )
 </div>
 @if($user->buys_count==0)
     <div class="text-muted py-3 border-top">至少需要写一篇会回购的点评才有可能匹配</div>

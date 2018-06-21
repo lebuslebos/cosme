@@ -62043,7 +62043,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             initBuy: 0,
             initShop: 0,
             updatedAt: {},
-            initReviewId: null,
+            // initReviewId: null,
 
             //一直在变化的数据，即双向绑定数据
             rate: null,
@@ -62074,7 +62074,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         this.showEditBtn = this.can && this.$store.getters.isMobile;
 
-        this.initReviewId = this.review.id;
+        // this.initReviewId = this.review.id;
         this.initRate = this.rate = this.hoverRate = this.review.rate;
         this.initBody = this.body = this.review.body;
         this.imgs = JSON.parse(this.review.imgs);
@@ -62156,7 +62156,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.initShop = this.shop;
 
                 //更新点评
-                axios.patch('/products/' + this.productId + '/reviews/' + this.initReviewId, {
+                axios.patch('/products/' + this.productId + '/reviews/' + this.review.id, {
                     rate: this.rate,
                     body: this.body,
                     imgs: this.imgs,
@@ -66165,7 +66165,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66210,6 +66210,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
+        console.log('okqqqq');
         //全部从本地获取数据
         if (this.likes !== 0 && this.$store.state.review.likeArr.includes(this.review)) {
             this.like = true;
@@ -66258,7 +66259,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "d-flex align-items-center " }, [
+  return _c("div", { staticClass: "d-flex align-items-center" }, [
     _c(
       "button",
       {
@@ -66341,7 +66342,6 @@ var render = function() {
       ? _c(
           "div",
           {
-            key: "review",
             staticClass: "rounded bg-light-brown p-3",
             on: { mouseover: _vm.enterReview, mouseout: _vm.leaveReview }
           },
@@ -66403,7 +66403,7 @@ var render = function() {
               [
                 _c("Vote", {
                   attrs: {
-                    review: _vm.initReviewId,
+                    review: _vm.review.id,
                     user: _vm.review.user_id,
                     likes: _vm.likes,
                     hates: _vm.hates
@@ -66453,7 +66453,7 @@ var render = function() {
       : _vm.can && _vm.showForm
         ? _c(
             "form",
-            { key: "form", staticClass: "rounded bg-light-brown p-3" },
+            { staticClass: "rounded bg-light-brown p-3" },
             [
               _c("div", { staticClass: "bg-easy rounded" }, [
                 _c("span", { staticClass: "rate ml-1" }, [

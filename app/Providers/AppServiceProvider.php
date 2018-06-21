@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
         View::share('is_tablet', Agent::isTablet());
 
         $all_cats =Cache::rememberForever('all-cats',function (){
-            return Cat::select('id','name')->orderBy('id')->get();
+            return Cat::select('id','name')->orderBy('id','asc')->get();
         });
 
         view()->composer(['home', 'cats.show', 'users.show'], function ($view) use ($all_cats) {

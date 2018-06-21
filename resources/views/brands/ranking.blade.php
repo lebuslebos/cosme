@@ -9,7 +9,7 @@
                 红榜
             </span>
     <span class="text-muted text-tiny">
-                ( {{date('Y年n月j日')}}凌晨{{env('RANKING_UPDATED_AT')}}点更新 )
+                ( {{date('Y年n月j日')}}凌晨{{config('common.ranking_updated_at')}}点更新 )
             </span>
 </div>
 <ul class="list-unstyled">
@@ -29,7 +29,7 @@
                 黑榜
             </span>
     <span class="text-muted text-tiny">
-                ( {{date('Y年n月j日')}}凌晨{{env('RANKING_UPDATED_AT')}}点更新 )
+                ( {{date('Y年n月j日')}}凌晨{{config('common.ranking_updated_at')}}点更新 )
             </span>
 </div>
 <ul class="list-unstyled">

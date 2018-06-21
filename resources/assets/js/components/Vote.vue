@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex align-items-center ">
+    <div class="d-flex align-items-center">
         <!--判断是否是pc端，若是则加btn-pc（有悬停效果）-->
         <button class="btn d-block mr-2" :disabled="btnDisabled"
                 :class="[like?'btn-main':'btn-easy',{'btn-pc':!isMobile}]"
@@ -32,6 +32,7 @@
             }
         },
         mounted() {
+            console.log('okqqqq');
             //全部从本地获取数据
             if (this.likes !== 0 && this.$store.state.review.likeArr.includes(this.review)) {
                 this.like = true;

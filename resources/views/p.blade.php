@@ -59,15 +59,17 @@
     品牌(3):
     r-1-b:reviews_count
     b-1-b:buys_count
-    //p-1-b:products_count product观察者created,deleted事件时递增,递减。
 
     商品():
     sh-1:shop分布---共用下面的r-p-ids，得出每日有点评入账的商品ids，刷新掉其的缓存
     sk-1:skin分布---共用下面的p-ids，得出每日有内容点评入账的商品ids，刷新掉其的缓存
+
     ra-1:rate
     p-ids:定时（每日）有内容点评入账的商品ids，review观察者created事件时push进，然后在缓存中用新值覆盖原来的值---定时执行(用户更新点评的时候暂不算)
+
     r-1-p:reviews_count
     r-p-ids:定时（每日）有点评入账的商品ids，review观察者created事件时push进，然后在缓存中用新值覆盖原来的值---定时执行
+
     b-1-p:buys_count
     b-p-ids:定时（每日）有回购点评入账的商品ids，review观察者created事件时push进，然后在缓存中用新值覆盖原来的值---定时执行(用户更新点评的时候暂不算)
 

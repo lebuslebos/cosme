@@ -2,7 +2,7 @@
     <!--最外层的过渡，多元素之间的过渡，并不属于列表过渡-->
     <transition name="fade" mode="out-in">
         <!--展示点评-->
-        <div v-if="!showForm" key="review" class="rounded bg-light-brown p-3"
+        <div v-if="!showForm" class="rounded bg-light-brown p-3"
              @mouseover="enterReview" @mouseout="leaveReview">
 
             <!--点评上部--评分、回购。购入地、时间-->
@@ -22,7 +22,7 @@
             </div>
             <!--点赞点踩+修改-->
             <div class="d-flex align-items-center pt-1">
-                <Vote :review="initReviewId"
+                <Vote :review="review.id"
                       :user="review.user_id"
                       :likes="likes" :hates="hates"/>
                 <template v-if="can">
@@ -38,7 +38,7 @@
         </div>
 
         <!--编辑点评-->
-        <form v-else-if="can && showForm" key="form" class="rounded bg-light-brown p-3">
+        <form v-else-if="can && showForm" class="rounded bg-light-brown p-3">
             <!--点评打分-->
             <div class="bg-easy rounded">
                 <span class="rate ml-1">
@@ -137,7 +137,7 @@
                 initBuy: 0,
                 initShop: 0,
                 updatedAt: {},
-                initReviewId: null,
+                // initReviewId: null,
 
                 //一直在变化的数据，即双向绑定数据
                 rate: null,
@@ -167,7 +167,7 @@
         mounted() {
             this.showEditBtn = this.can && this.$store.getters.isMobile;
 
-            this.initReviewId = this.review.id;
+            // this.initReviewId = this.review.id;
             this.initRate = this.rate = this.hoverRate = this.review.rate;
             this.initBody = this.body = this.review.body;
             this.imgs = JSON.parse(this.review.imgs);
@@ -242,7 +242,7 @@
                     this.initShop = this.shop;
 
                     //更新点评
-                    axios.patch(`/products/${this.productId}/reviews/${this.initReviewId}`, {
+                    axios.patch(`/products/${this.productId}/reviews/${this.review.id}`, {
                         rate: this.rate,
                         body: this.body,
                         imgs: this.imgs,
