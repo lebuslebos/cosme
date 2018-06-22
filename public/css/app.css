@@ -2,29 +2,8 @@
   font: .875rem/1.5 "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }*/
 
-html,
-body,
-#app {
-  height: 100%;
-  width: 100%;
-}
-
 html {
   font-size: 14px;
-}
-
-body,
-#app {
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: none;
-  overflow-x: hidden;
-  overflow-y: scroll !important;
-  /*height: 100%;
-  min-height: 100%;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;*/
 }
 
 /*!
@@ -10023,12 +10002,35 @@ a.text-dark:focus {
   }
 }
 
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: none;
+  overflow-x: hidden;
+  overflow-y: scroll !important;
+  /*height: 100%;
+  min-height: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;*/
+}
+
+#app {
+  min-height: 100%;
+}
+
 .navbar-laravel {
   /*background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);*/
 }
 
-.d-flex {
+.d-flex:not(#app) {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
@@ -10042,7 +10044,8 @@ a.text-main:hover {
   background: #eaf5f3;
 }
 
-a.btn-main:hover {
+a.btn-main:hover,
+a.back-to-top:hover {
   color: #fff;
 }
 
@@ -10195,6 +10198,11 @@ button:focus {
   height: 3rem;
   line-height: 3rem;
   padding: 0;
+}
+
+.back-to-top {
+  background: pink;
+  color: #fff;
 }
 
 .btn-pc.btn-easy:not([disabled]):hover,
@@ -10484,6 +10492,10 @@ img:not(.double-star-size) {
 
   .min-height-pc {
     min-height: 184px;
+  }
+
+  .back-to-top:hover {
+    background: #DE6B84;
   }
 }
 

@@ -3,17 +3,25 @@
 /*html{
   font: .875rem/1.5 "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
 }*/
-html,body,#app{
-  height: 100%;
-  width: 100%;
-}
 
 html {
   font-size: 14px;
   //overscroll-behavior-y: none;
 }
 
-body,#app{
+
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+html,body{
+  height: 100%;
+  width: 100%;
+}
+body{
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: none;
   overflow-x: hidden;
@@ -27,19 +35,16 @@ body,#app{
   -webkit-touch-callout: none;
   -webkit-user-select: none;*/
 }
-
-// Variables
-@import "variables";
-
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+#app{
+  min-height: 100%;
+}
 
 .navbar-laravel {
   /*background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);*/
 }
 
-.d-flex {
+.d-flex:not(#app) {
   flex-wrap: wrap;
 }
 
@@ -52,7 +57,8 @@ a.text-main:hover{
   background: $easy-bg-color;
 }
 //变成main按钮的a标签去掉hover效果（移动端）
-a.btn-main:hover{
+a.btn-main:hover,
+a.back-to-top:hover{
   color: #fff;
 }
 a.btn-easy-mobile:hover{
@@ -208,6 +214,12 @@ button:focus {
   //padding: 9px 26px 9px;
 }
 
+.back-to-top{
+  background: pink;
+  color: #fff;
+}
+
+
 
 //pc端的时候才有悬停效果
 .btn-pc.btn-easy:not([disabled]):hover,
@@ -300,7 +312,7 @@ button:focus {
 .fa-times,
 .fa-arrow-left,
 .fa-minus-square,
-.fa-plus-square {
+.fa-plus-square{
   color: pink
 }
 .fa-shopping-bag,
@@ -493,6 +505,9 @@ img:not(.double-star-size){
   }
   .min-height-pc{
     min-height: 184px;
+  }
+  .back-to-top:hover{
+    background: $pink-color;
   }
 }
 

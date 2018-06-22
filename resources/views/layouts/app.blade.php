@@ -25,7 +25,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
-<div id="app" >
+<div id="app" class="d-flex flex-column">
     <nav class="bg-light-brown">
         {{--<div class="container d-flex align-items-center justify-content-around px-0 px-md-3 py-2 py-md-3">
 
@@ -74,8 +74,11 @@
             @yield('content')
         </div>
     </main>
+    <a href="#app" target="_self" class="btn position-fixed back-to-top" style="bottom: 10%; right: 5%;">
+        <i class="fa fa-pc fa-arrow-up fa-2x"></i>
+    </a>
 
-    <footer>
+    <footer class="mt-auto">
         @include('common.footer')
     </footer>
 
