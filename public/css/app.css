@@ -10375,12 +10375,11 @@ body.modal-open {
 
 .popover {
   max-width: none;
-  border: none;
   border-radius: 0;
 }
 
 .popover-body {
-  padding: 0;
+  padding: 1px;
 }
 
 /*.product-img{

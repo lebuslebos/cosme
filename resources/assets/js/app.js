@@ -4,9 +4,7 @@ window.Vue = require('vue');
 
 //最后统计是否有第一层要用到组件 没有就删除
 $(function () {
-    $('[data-toggle="popover"]').popover({
-        delay:{ 'show': 300, 'hide': 100 }
-    });
+
     $('[data-toggle="tooltip"]').tooltip({
         container:'body',
         placement:'top'

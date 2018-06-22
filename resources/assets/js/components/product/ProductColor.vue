@@ -14,9 +14,9 @@
 
             <li class="list-inline-item text-center mr-1 mb-2" v-for="color in colors">
 
-                <img alt="色号" class="product-s-size" data-toggle="popover" data-boundary="viewport" data-container="body"
+                <img alt="色号" class="product-s-size" data-toggle="popover" data-container="body"
                      data-trigger="hover click"
-                     data-placement="auto"
+                     data-placement="top"
                      data-html="true"
                      :data-content="bigImg(color.id)"
                      :src="`${upyunDomain}/colors/${color.id}.jpg!product.s`"
@@ -39,6 +39,13 @@
             return {
                 showMore: false,
             }
+        },
+        mounted() {
+
+            $('[data-toggle="popover"]').popover({
+                delay: {'show': 300, 'hide': 100},
+                template:'<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body" style="min-width:184px;min-height: 184px"></div></div>'
+            })
         },
         computed:{
             upyunDomain(){

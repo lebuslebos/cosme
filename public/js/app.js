@@ -43539,9 +43539,7 @@ window.Vue = __webpack_require__(4);
 
 //最后统计是否有第一层要用到组件 没有就删除
 $(function () {
-    $('[data-toggle="popover"]').popover({
-        delay: { 'show': 300, 'hide': 100 }
-    });
+
     $('[data-toggle="tooltip"]').tooltip({
         container: 'body',
         placement: 'top'
@@ -57241,6 +57239,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             showMore: false
         };
     },
+    mounted: function mounted() {
+
+        $('[data-toggle="popover"]').popover({
+            delay: { 'show': 300, 'hide': 100 },
+            template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body" style="min-width:184px;min-height: 184px"></div></div>'
+        });
+    },
 
     computed: {
         upyunDomain: function upyunDomain() {
@@ -57252,7 +57257,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         bigImg: function bigImg(id) {
-            return "<img src=\"" + this.upyunDomain + "/colors/" + id + ".jpg!product.l\"  alt=\"\u8FD9\u91CC\u539F\u672C\u662F\u4E00\u5F20\u5927\u56FE\">";
+            return '<img src="' + this.upyunDomain + '/colors/' + id + '.jpg!product.l"  alt="\u8FD9\u91CC\u539F\u672C\u662F\u4E00\u5F20\u5927\u56FE">';
         }
     }
 
@@ -57319,10 +57324,9 @@ var render = function() {
               attrs: {
                 alt: "色号",
                 "data-toggle": "popover",
-                "data-boundary": "viewport",
                 "data-container": "body",
                 "data-trigger": "hover click",
-                "data-placement": "auto",
+                "data-placement": "top",
                 "data-html": "true",
                 "data-content": _vm.bigImg(color.id),
                 src: _vm.upyunDomain + "/colors/" + color.id + ".jpg!product.s"
@@ -58379,7 +58383,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -58407,7 +58411,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         // 因为是嵌套在里面的组件，需重新定义
         $('[data-toggle="popover"]').popover({
-            delay: { 'show': 500, 'hide': 100 }
+            delay: { 'show': 300, 'hide': 100 },
+            template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body" style="min-width:400px;min-height: 300px"></div></div>'
         });
     },
 
@@ -58431,7 +58436,6 @@ var render = function() {
     attrs: {
       alt: "点评图片",
       "data-toggle": "popover",
-      "data-boundary": "viewport",
       "data-container": "body",
       "data-trigger": "hover click",
       "data-placement": "auto",
