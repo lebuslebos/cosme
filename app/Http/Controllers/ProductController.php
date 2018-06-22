@@ -42,6 +42,7 @@ class ProductController extends Controller
                     return $product->reviews()
                         ->select('id', 'user_id', 'rate', 'body', 'imgs', 'buy', 'shop', 'updated_at')
                         ->with('user:id,name,avatar,skin')
+                        ->orderByRaw('if(body="",0,1) DESC')
                         ->latest('updated_at')
                         ->orderBy('id', 'desc')
                         ->paginate(config('common.pre_page'));

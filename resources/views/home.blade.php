@@ -5,7 +5,7 @@
     {{--左边部分--}}
     <div class="{{$is_tablet ? 'offset-md-1 col-md-10' : 'col-md-7'}}">
         <div class="d-flex align-items-baseline">
-            <div class="text-muted text-tiny">有文字的点评会展示在这里</div>
+            <div class="text-muted text-tiny">有内容的点评会展示在这里（实时更新）</div>
             {{--移动端--}}
             @if($is_mobile)
             <button type="button" class="ml-auto btn btn-pink rounded"

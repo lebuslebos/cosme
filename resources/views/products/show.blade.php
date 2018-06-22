@@ -104,7 +104,7 @@
             </div>
 
             {{--所有点评--}}
-            <div class="text-muted mt-3" id="product-reviews">所有点评({{$product->reviews_count}})</div>
+            <div class="text-muted mt-3" id="product-reviews">有内容的点评优先展示({{$product->reviews_count}})</div>
             <ul class="list-unstyled mt-1">
                 @foreach($reviews as $review)
                     <li class="py-3 py-md-4 border-top">
