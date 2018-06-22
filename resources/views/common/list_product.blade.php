@@ -1,10 +1,10 @@
-{{--商品列表（单个商品）--品牌页列表，分类页列表，搜索页列表--}}
+{{--商品列表（单个商品）--品牌页列表，分类页列表，搜索页列表，个人页--}}
 
 {{--商品-->左边为图，右边为信息--}}
 <div class="media align-items-center mb-2">
 
     {{--商品的左边部分--}}
-    <a href="{{route('products.show',[$product])}}">
+    <a href="{{route('products.show',[$product])}}" target="{{Route::currentRouteName()=='users.show'?'_blank':''}}">
         <img class="mr-md-3 product-size" src="{{config('app.url')}}/products/{{$product->id}}.jpg!product"
              alt="{{$product->name}}">
     </a>
@@ -12,18 +12,18 @@
     <div class="media-body">
         {{--品牌名--}}
         <div>
-            <a class="text-muted" target="{{Route::currentRouteName()=='brands.show'?'_self':''}}"
+            <a class="text-muted" target="{{Route::currentRouteName()=='brands.show'?'':'_blank'}}"
                href="{{Route::currentRouteName()=='brands.show'?'#app':route('brands.show',[$brand])}}">
                 {{$brand->name}} {{$brand->common_name}}
             </a>
         </div>
         {{--商品名+分类名--}}
         <div>
-            <a href="{{route('products.show',[$product])}}" class="text-main">
+            <a href="{{route('products.show',[$product])}}" target="{{Route::currentRouteName()=='users.show'?'_blank':''}}" class="text-main">
                 {{$product->name}} {{$product->nick_name}}
             </a>
             &nbsp;
-            <a class="text-muted text-tiny" target="{{Route::currentRouteName()=='cats.show'?'_self':''}}"
+            <a class="text-muted text-tiny" target="{{Route::currentRouteName()=='cats.show'?'':'_blank'}}"
                href="{{Route::currentRouteName()=='cats.show'?'#app':route('cats.show',[$cat])}}">
                 [ {{$cat->name}} ]
             </a>

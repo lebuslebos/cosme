@@ -21,13 +21,13 @@
         <img src="{{config('app.url')}}/icons/crown1.jpg!crown" class="mr-2 crown-size" alt="最匹配">
 
         {{--用户头像--}}
-        <a href="{{route('users.show',[$match_user])}}">
+        <a href="{{route('users.show',[$match_user])}}" target="_blank">
             <img class="mr-2 rounded product-s-size" src="{{$match_user->avatar}}!product.s" alt="{{$match_user->name}}">
         </a>
         {{--用户信息--}}
         <div class="media-body">
             <div><a href="{{route('users.show',[$match_user])}}"
-                    class="text-main">
+                    class="text-main" target="_blank">
                     {{$match_user->name}}
                 </a></div>
             <div class="text-muted text-tiny">{{$match_user->skin}}皮肤</div>

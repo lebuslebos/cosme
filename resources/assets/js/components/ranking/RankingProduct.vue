@@ -14,7 +14,7 @@
             <h5 v-else>{{index+1}}</h5>
         </div>
         <!--商品图片-->
-        <a :href="`/products/${product.id}`">
+        <a :href="productHref" :target="productTarget">
             <img :src="`${upyunDomain}/products/${product.id}.jpg!product.s`" class="product-s-size" :alt="product.name">
         </a>
         <!--商品信息-->
@@ -60,19 +60,19 @@
                 return this.in === 'cat' ? '#app' : `/cats/${this.cat.id}`
             },
             catTarget() {
-                return this.in === 'cat' ? '_self' : ''
+                return this.in === 'cat' ? '' : '_blank'
             },
             brandHref() {
                 return this.in === 'brand' ? '#app' : `/brands/${this.brand.id}`
             },
             brandTarget() {
-                return this.in === 'brand' ? '_self' : ''
+                return this.in === 'brand' ? '' : '_blank'
             },
             productHref() {
                 return this.currentProductId === this.product.id ? '#app' : `/products/${this.product.id}`
             },
             productTarget() {
-                return this.currentProductId === this.product.id ? '_self' : ''
+                return this.currentProductId === this.product.id ? '' : '_blank'
             }
         }
     }

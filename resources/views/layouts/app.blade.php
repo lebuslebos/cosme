@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }} @yield('title','首页')-我们的美妆笔记</title>
-    <base target="_blank"/>
+    {{--<base target="_blank"/>--}}
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -74,7 +74,7 @@
             @yield('content')
         </div>
     </main>
-    <a href="#app" target="_self" class="btn position-fixed back-to-top" style="bottom: 10%; right: 5%;">
+    <a href="#app" class="btn position-fixed back-to-top" style="bottom: 10%; right: 5%;">
         <i class="fa fa-pc fa-arrow-up fa-2x"></i>
     </a>
 

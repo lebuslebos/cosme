@@ -58559,19 +58559,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return this.in === 'cat' ? '#app' : '/cats/' + this.cat.id;
         },
         catTarget: function catTarget() {
-            return this.in === 'cat' ? '_self' : '';
+            return this.in === 'cat' ? '' : '_blank';
         },
         brandHref: function brandHref() {
             return this.in === 'brand' ? '#app' : '/brands/' + this.brand.id;
         },
         brandTarget: function brandTarget() {
-            return this.in === 'brand' ? '_self' : '';
+            return this.in === 'brand' ? '' : '_blank';
         },
         productHref: function productHref() {
             return this.currentProductId === this.product.id ? '#app' : '/products/' + this.product.id;
         },
         productTarget: function productTarget() {
-            return this.currentProductId === this.product.id ? '_self' : '';
+            return this.currentProductId === this.product.id ? '' : '_blank';
         }
     }
 });
@@ -58634,7 +58634,7 @@ var render = function() {
           ]
         ),
     _vm._v(" "),
-    _c("a", { attrs: { href: "/products/" + _vm.product.id } }, [
+    _c("a", { attrs: { href: _vm.productHref, target: _vm.productTarget } }, [
       _c("img", {
         staticClass: "product-s-size",
         attrs: {
@@ -67128,9 +67128,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         appHref: function appHref() {
             return this.currentRouteName === 'home' ? '#' : '/';
         },
-        appTarget: function appTarget() {
-            return this.currentRouteName === 'home' ? '_self' : '';
-        },
+
+        /*appTarget() {
+            return this.currentRouteName === 'home' ? '' : ''
+        },*/
         isMobile: function isMobile() {
             return this.$store.getters.isMobile;
         }
@@ -68973,7 +68974,7 @@ var render = function() {
               "a",
               {
                 staticClass: "text-main text-large d-block",
-                attrs: { href: _vm.appHref, target: _vm.appTarget }
+                attrs: { href: _vm.appHref }
               },
               [_vm._v("\n            " + _vm._s(_vm.appName) + "\n        ")]
             )
@@ -69121,7 +69122,10 @@ var render = function() {
                                 {
                                   staticClass:
                                     "list-group-item list-group-item-action px-2 px-md-4",
-                                  attrs: { href: "/cats/" + _vm.cat.id },
+                                  attrs: {
+                                    href: "/cats/" + _vm.cat.id,
+                                    target: "_blank"
+                                  },
                                   on: {
                                     mousedown: function($event) {
                                       $event.preventDefault()
@@ -69190,7 +69194,10 @@ var render = function() {
                                 {
                                   staticClass:
                                     "list-group-item list-group-item-action px-2 px-md-4",
-                                  attrs: { href: "/brands/" + _vm.brand.id },
+                                  attrs: {
+                                    href: "/brands/" + _vm.brand.id,
+                                    target: "_blank"
+                                  },
                                   on: {
                                     mousedown: function($event) {
                                       $event.preventDefault()
@@ -69295,7 +69302,10 @@ var render = function() {
                                   key: "product" + product.id,
                                   staticClass:
                                     "list-group-item list-group-item-action px-2 px-md-4",
-                                  attrs: { href: "/products/" + product.id },
+                                  attrs: {
+                                    href: "/products/" + product.id,
+                                    target: "_blank"
+                                  },
                                   on: {
                                     mousedown: function($event) {
                                       $event.preventDefault()
@@ -69417,7 +69427,10 @@ var render = function() {
                           {
                             staticClass:
                               "list-group-item list-group-item-action d-flex justify-content-end",
-                            attrs: { href: "https://www.algolia.com/" },
+                            attrs: {
+                              href: "https://www.algolia.com/",
+                              target: "_blank"
+                            },
                             on: {
                               mousedown: function($event) {
                                 $event.preventDefault()
@@ -69857,9 +69870,15 @@ var render = function() {
       _vm._v(" "),
       _c("div", { staticClass: "mt-1 mb-2" }, [
         _vm._v("\n        [ "),
-        _c("span", { staticClass: "text-main" }, [
-          _vm._v(_vm._s(_vm.initCat.name))
-        ]),
+        _c(
+          "a",
+          { attrs: { href: "/cats/" + _vm.initCat.id, target: "_blank" } },
+          [
+            _c("span", { staticClass: "text-main" }, [
+              _vm._v(_vm._s(_vm.initCat.name))
+            ])
+          ]
+        ),
         _vm._v(" ] \n        "),
         _c("span", { staticClass: "text-muted text-tiny" }, [
           _vm._v(

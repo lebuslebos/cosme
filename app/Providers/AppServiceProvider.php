@@ -39,9 +39,10 @@ class AppServiceProvider extends ServiceProvider
         $all_cats =Cache::rememberForever('all-cats',function (){
             return Cat::select('id','name')->orderBy('id','asc')->get();
         });
+        $big_cats=['护肤','底妆','彩妆','美发','香水','日常护理'];
 
-        view()->composer(['home', 'cats.show', 'users.show'], function ($view) use ($all_cats) {
-            $view->with(compact('all_cats'));
+        view()->composer(['home', 'cats.show', 'users.show'], function ($view) use ($all_cats,$big_cats) {
+            $view->with(compact('all_cats','big_cats'));
         });
 
         //注册观察者(cat,brand,product主要为后台更新时触发)

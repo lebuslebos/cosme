@@ -23,7 +23,6 @@ class CatController extends Controller
 
     public function show(int $cat_id)
     {
-        $big_cats=['护肤','底妆','彩妆','美发','香水','日常护理'];
 
         $cat = Cache::rememberForever('cats-' . $cat_id, function () use ($cat_id) {
             return Cat::find($cat_id,['id','name','similar_name']);

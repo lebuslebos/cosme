@@ -34,7 +34,7 @@
         {{--品牌官网--}}
         <div class="border-dotted pl-md-2 py-2">
             @if(filled($brand->official_website))
-                <a href="//{{$brand->official_website}}"
+                <a href="//{{$brand->official_website}}" target="_blank"
                    class="text-secondary font-italic text-normal">
                     {{$brand->official_website}}
                 </a>

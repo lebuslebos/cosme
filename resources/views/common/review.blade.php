@@ -5,7 +5,7 @@
     {{--用户头像，并分游客和用户处理--}}
     <div class="align-self-center mr-2">
         @if(!!$review->user_id)
-            <a href="{{route('users.show',[$review->user])}}">
+            <a href="{{route('users.show',[$review->user])}}" target="_blank">
                 <img src="{{$review->user->avatar}}!avatar" alt="头像" class="rounded avatar-size">
             </a>
         @else
@@ -17,7 +17,7 @@
         <div class="d-flex align-items-end mb-1">
             @if(!!$review->user_id)
                 <div class="text-truncate name-truncate">
-                    <a href="{{route('users.show',[$review->user])}}" class="text-main">
+                    <a href="{{route('users.show',[$review->user])}}" class="text-main" target="_blank">
                         {{$review->user->name}}
                     </a>
                 </div>

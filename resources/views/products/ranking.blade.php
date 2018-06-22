@@ -4,7 +4,7 @@
 {{--与此商品同一分类的好商品（按回购率排，取10个以上点评作为基数）--}}
 
 <div class="mb-2">
-    [ <span class="text-main">{{$cat->name}}</span> ]&nbsp;
+    [ <a href="{{route('cats.show',[$cat])}}" target="_blank"><span class="text-main">{{$cat->name}}</span></a> ]&nbsp;
     <span class="text-muted hover-help" data-toggle="tooltip"
           data-original-title="与该商品相同分类的好用排行榜（取一定点评数，按回购率排）">
                 红榜

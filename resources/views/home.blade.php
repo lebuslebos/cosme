@@ -4,14 +4,30 @@
 
     {{--左边部分--}}
     <div class="{{$is_tablet ? 'offset-md-1 col-md-10' : 'col-md-7'}}">
-        <div class="d-flex align-items-baseline">
+
+        {{--移动端显示所有分类+排行榜--}}
+        @if($is_mobile)
+            <div class="d-flex justify-content-between mb-3">
+                @include('common.all_cats')
+                <button type="button" class="btn btn-pink rounded"
+                        data-toggle="modal"
+                        data-target="#ranking">快速选化妆品
+                </button>
+            </div>
+        @endif
+
+
+        <div class="d-flex align-items-baseline justify-content-between">
             <div class="text-muted text-tiny">有内容的点评会展示在这里（实时更新）</div>
             {{--移动端--}}
-            @if($is_mobile)
-            <button type="button" class="ml-auto btn btn-pink rounded"
-                    data-toggle="modal"
-                    data-target="#ranking">快速选化妆品
-            </button>
+            {{--@if($is_mobile)
+                <button type="button" class="ml-auto btn btn-pink rounded"
+                        data-toggle="modal"
+                        data-target="#ranking">快速选化妆品
+                </button>
+            @else--}}
+            @if(!$is_mobile)
+                @include('common.all_cats')
             @endif
         </div>
         <ul class="list-unstyled mt-2">
@@ -40,29 +56,29 @@
 
     {{--移动端ranking的modal--}}
     @if($is_mobile)
-    <div class="modal fade" id="ranking" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-dialog-slide" role="document">
+        <div class="modal fade" id="ranking" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-slide" role="document">
 
-            {{--这里改border和radius--}}
-            <div class="modal-content rounded-0 border-0">
+                {{--这里改border和radius--}}
+                <div class="modal-content rounded-0 border-0">
 
-                {{--<div class="modal-header">
-                    <h5 class="modal-title">排行榜</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>--}}
-                <div class="modal-body">
-                    @include('common.ranking_all')
+                    {{--<div class="modal-header">
+                        <h5 class="modal-title">排行榜</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>--}}
+                    <div class="modal-body">
+                        @include('common.ranking_all')
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     @else
-    {{--右边部分（电脑端）--}}
-    <div class="offset-md-1 col-md-4 pl-md-5">
-        @include('common.ranking_all')
-    </div>
+        {{--右边部分（电脑端）--}}
+        <div class="offset-md-1 col-md-4 pl-md-5">
+            @include('common.ranking_all')
+        </div>
     @endif
 
 @endsection

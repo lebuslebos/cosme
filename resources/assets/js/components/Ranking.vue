@@ -25,7 +25,7 @@
 
         <!--排行榜-->
         <div class="mt-1 mb-2">
-            [ <span class="text-main">{{initCat.name}}</span> ]&nbsp;
+            [ <a :href="`/cats/${initCat.id}`" target="_blank"><span class="text-main">{{initCat.name}}</span></a> ]&nbsp;
             <span class="text-muted text-tiny">
                 ( {{new Date().getFullYear()}}年{{new Date().getMonth()+1}}月{{new Date().getDate()}}日凌晨{{$store.state.review.rankingUpdatedAt}}点更新 )
             </span>
