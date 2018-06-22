@@ -77,7 +77,7 @@ class UserController extends Controller
                     ->select('id', 'user_id', 'product_id', 'cat_id', 'brand_id', 'rate', 'body', 'imgs', 'buy', 'shop', 'updated_at')
                     ->with(['cat:id,name', 'brand:id,name,common_name', 'product:id,name,nick_name,rate', 'product.prices'])
                     ->latest('updated_at')
-                    ->paginate(3);
+                    ->paginate(config('common.pre_page'));
             });
 
 

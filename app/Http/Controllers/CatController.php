@@ -36,7 +36,7 @@ class CatController extends Controller
                     ->with(['brand:id,name,common_name','prices'])
                     ->orderBy('reviews_count','desc') //此处的数字是数据库中的旧数据，页面上显示的是最新缓存数据，因此页面上排名可能不是按最新排的
                     ->orderBy('id','asc')
-                    ->paginate(6);
+                    ->paginate(config('common.pre_page'));
             });
 
 

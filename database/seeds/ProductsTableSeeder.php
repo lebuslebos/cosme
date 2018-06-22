@@ -21,7 +21,7 @@ class ProductsTableSeeder extends Seeder
             [1,46,'亮采柔肤粉','Luminizing Face Enhancer',''],
             [1,23,'无瑕遮瑕膏','Concealer Stick',''],
             [1,22,'光柔粉霜','Cream Foundation',''],
-            [1,4,'沁肌紧肤蜜','Essential Correcting Refiner','水磨精华'],
+            [1,5,'沁肌紧肤蜜','Essential Correcting Refiner','水磨精华'],
             [1,21,'光凝妆前霜','Correcting Cream Veil',''],
             [1,22,'光盈粉饼芯','Radiant Powder Fd',''],
             [1,45,'瑰丽唇膏芯（丝缎）','Extra Rich Lipstick Silk',''],

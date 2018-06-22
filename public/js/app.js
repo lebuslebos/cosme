@@ -66346,7 +66346,7 @@ var render = function() {
       ? _c(
           "div",
           {
-            staticClass: "rounded bg-light-brown p-3",
+            staticClass: "rounded bg-light-brown py-3 px-4",
             on: { mouseover: _vm.enterReview, mouseout: _vm.leaveReview }
           },
           [
@@ -66457,7 +66457,7 @@ var render = function() {
       : _vm.can && _vm.showForm
         ? _c(
             "form",
-            { staticClass: "rounded bg-light-brown p-3" },
+            { staticClass: "rounded bg-light-brown py-3 px-4" },
             [
               _c("div", { staticClass: "bg-easy rounded" }, [
                 _c("span", { staticClass: "rate ml-1" }, [

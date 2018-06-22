@@ -52,7 +52,7 @@ class ReviewController extends Controller
                 ->with(['product:id,name', 'brand:id,name', 'user:id,name,avatar,skin'])
                 ->latest()
                 ->orderBy('id','')
-                ->take(5)
+                ->take(config('common.pre_page'))
                 ->get();
         });
 

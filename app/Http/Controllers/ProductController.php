@@ -44,7 +44,7 @@ class ProductController extends Controller
                         ->with('user:id,name,avatar,skin')
                         ->latest('updated_at')
                         ->orderBy('id', 'desc')
-                        ->paginate(3);
+                        ->paginate(config('common.pre_page'));
                 });
 
             //购入场所分布--映射--缓存处理

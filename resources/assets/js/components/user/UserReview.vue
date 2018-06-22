@@ -2,7 +2,7 @@
     <!--最外层的过渡，多元素之间的过渡，并不属于列表过渡-->
     <transition name="fade" mode="out-in">
         <!--展示点评-->
-        <div v-if="!showForm" class="rounded bg-light-brown p-3"
+        <div v-if="!showForm" class="rounded bg-light-brown py-3 px-4"
              @mouseover="enterReview" @mouseout="leaveReview">
 
             <!--点评上部--评分、回购。购入地、时间-->
@@ -38,7 +38,7 @@
         </div>
 
         <!--编辑点评-->
-        <form v-else-if="can && showForm" class="rounded bg-light-brown p-3">
+        <form v-else-if="can && showForm" class="rounded bg-light-brown py-3 px-4">
             <!--点评打分-->
             <div class="bg-easy rounded">
                 <span class="rate ml-1">
