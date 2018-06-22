@@ -10039,6 +10039,10 @@ a:hover {
   text-decoration: none;
 }
 
+a.text-pink:hover {
+  color: #DE6B84;
+}
+
 a.text-main:hover {
   color: #607d8b;
   background: #eaf5f3;
@@ -10277,10 +10281,9 @@ button:focus {
   font-weight: 500;
 }
 
-/*.text-pink{
-  color: $pink-color;
-  font-weight: bold;
-}*/
+.text-pink {
+  color: pink;
+}
 
 .bg-light-brown {
   background: #F6F6F6;

@@ -1,5 +1,5 @@
 <template>
-    <li class="d-flex border-dotted pl-2" style="min-height: 28px">
+    <li class="d-flex border-dotted pl-2" style="min-height: 28px" @mouseenter="enter" @mouseleave="leave">
         <!--刚开始显示的-->
         <!--<div class="text-main mr-2">昵称:</div>-->
         <img v-if="reviewsCount>=5" class="fav-size hover-help mx-1" style="margin-top: 5px;"
@@ -9,9 +9,12 @@
         <div v-if="showName" class="text-main" :class="{'hover-pointer':this.can}"
              @click="changeForm">{{initName}}
         </div>
-        <!--<a href="#" class="text-main" @click.prevent="changeForm" v-if="can && showEdit">
-            <i class="fa fa-pencil-square-o"></i>
-        </a>-->
+
+        <div v-if="!isMobile && can && showEdit" class="ml-3">
+            <a href="#" class="text-pink" @click.prevent="changeForm">
+                <i class="fa fa-pencil-square-o fa-fw"></i> 修改
+            </a>
+        </div>
 
         <!--点击编辑之后显示的-->
         <div class="d-md-flex align-items-md-center" v-if="can && showForm">
@@ -46,6 +49,7 @@
                 newName: this.name,
                 showForm: false,
                 showName: true,
+                showEdit: false,
             }
         },
         computed: {
@@ -68,16 +72,17 @@
             }
         },
         methods: {
-            /*enter() {
-                if (this.can && !this.showForm) this.showEdit = true;
+            enter() {
+                if (!this.isMobile && this.can && this.showName) this.showEdit = true;
             },
             leave() {
-                if (this.can && !this.showForm) this.showEdit = false;
-            },*/
+                if (!this.isMobile && this.can && this.showName) this.showEdit = false;
+            },
             changeForm() {
                 if (this.can) {
                     this.showName = false;
                     this.showForm = true;
+                    this.showEdit = false;
                     this.$nextTick(function () {
                         // DOM 更新了
                         $('input').focus();

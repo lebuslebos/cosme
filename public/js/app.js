@@ -43541,8 +43541,8 @@ window.Vue = __webpack_require__(4);
 $(function () {
 
     $('[data-toggle="tooltip"]').tooltip({
-        container: 'body',
-        placement: 'top'
+        container: 'body'
+        // placement:'top'
     });
     $('#loginModal').on('shown.bs.modal', function (e) {
         $('input[type="tel"]:first').focus();
@@ -57505,7 +57505,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.progress[data-v-12327e16] {\n    height: 1.6rem;\n    overflow: visible;\n}\n.chart-label-wrap[data-v-12327e16] {\n    width: 19px;\n    height: 19px;\n}\n.chart-label[data-v-12327e16]{\n    width: 12px;\n    height: 12px;\n}\n.progress-bar[data-v-12327e16] {\n    height: 100%;\n    -webkit-transition: height .15s;\n    transition: height .15s;\n}\nspan[data-v-12327e16] {\n    -webkit-transition: font-size .15s;\n    transition: font-size .15s;\n}\n\n/*.progress-label:hover{\n    transform:scale(1.5);\n}*/\n\n", ""]);
+exports.push([module.i, "\n.change[data-v-12327e16]{\n    -webkit-transform: scale(1.3);\n            transform: scale(1.3);\n}\n.progress[data-v-12327e16] {\n    height: 1.6rem;\n    overflow: visible;\n}\n\n", ""]);
 
 // exports
 
@@ -57543,27 +57543,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "base-progress",
     // 接受的数据为相同长度的数组，分别是文本、对应的数量、对应的颜色
-    props: ['texts', 'nums', 'colors'],
+    props: ['texts', 'nums', 'colors', 'fromShop'],
     data: function data() {
         return {
-            no: null,
-            heightData: '',
-            fontData: ''
+            no: null
         };
     },
+    mounted: function mounted() {
+        $('[data-toggle="tooltip"]').tooltip({
+            container: 'body'
+        });
+    },
+
 
     methods: {
         onenter: function onenter(index) {
             this.no = index;
-            this.heightData = '130%';
-            this.fontData = '130%';
         },
         onleave: function onleave() {
             this.no = null;
@@ -57588,28 +57587,33 @@ var render = function() {
           "div",
           {
             key: index,
-            staticClass: "progress-bar font-italic text-white",
-            style: {
-              width: num + "%",
-              backgroundColor: _vm.colors[index],
-              height: index === _vm.no ? _vm.heightData : ""
+            staticClass:
+              "progress-bar h-100 font-italic text-white hover-pointer",
+            style: { width: num + "%", backgroundColor: _vm.colors[index] },
+            attrs: {
+              role: "progressbar",
+              "data-toggle": "tooltip",
+              "data-original-title": _vm.fromShop
+                ? _vm.$store.state.review.shopHints[index]
+                : ""
             },
-            attrs: { role: "progressbar" }
+            on: {
+              mouseover: function($event) {
+                _vm.onenter(index)
+              },
+              mouseout: _vm.onleave
+            }
           },
           [
-            _c(
-              "div",
-              { style: { fontSize: index === _vm.no ? _vm.fontData : "" } },
-              [
-                num < 4
-                  ? _c("span")
-                  : num >= 4 && num <= 50
-                    ? _c("span", [_vm._v(_vm._s(num) + "%")])
-                    : _c("span", [
-                        _vm._v(_vm._s(_vm.texts[index]) + _vm._s(num) + "%")
-                      ])
-              ]
-            )
+            _c("div", [
+              num < 4
+                ? _c("span")
+                : num >= 4 && num <= 50
+                  ? _c("span", [_vm._v(_vm._s(num) + "%")])
+                  : _c("span", [
+                      _vm._v(_vm._s(_vm.texts[index]) + _vm._s(num) + "%")
+                    ])
+            ])
           ]
         )
       })
@@ -57623,30 +57627,15 @@ var render = function() {
           "div",
           {
             key: index,
-            staticClass: "d-flex progress-label hover-pointer",
-            on: {
-              mouseover: function($event) {
-                _vm.onenter(index)
-              },
-              mouseout: _vm.onleave
-            }
+            class: { change: index === _vm.no },
+            staticStyle: { transition: "all .15s" }
           },
           [
-            _c(
-              "div",
-              {
-                staticClass:
-                  "chart-label-wrap d-flex align-items-center justify-content-center"
-              },
-              [
-                _c("div", {
-                  staticClass: "chart-label",
-                  style: { backgroundColor: color }
-                })
-              ]
-            ),
+            _c("span", [
+              _c("i", { staticClass: "fa fa-square", style: { color: color } })
+            ]),
             _vm._v(" "),
-            _c("div", { staticClass: "text-secondary text-tiny" }, [
+            _c("span", { staticClass: "text-muted text-tiny" }, [
               _vm._v(_vm._s(_vm.texts[index]))
             ])
           ]
@@ -57820,7 +57809,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("BaseProgress", {
     staticClass: "mb-3",
-    attrs: { texts: _vm.shops, nums: _vm.shopNums, colors: _vm.shopBgcolors }
+    attrs: {
+      texts: _vm.shops,
+      nums: _vm.shopNums,
+      colors: _vm.shopBgcolors,
+      fromShop: true
+    }
   })
 }
 var staticRenderFns = []
@@ -61253,6 +61247,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "name",
@@ -61262,7 +61259,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             initName: this.name,
             newName: this.name,
             showForm: false,
-            showName: true
+            showName: true,
+            showEdit: false
         };
     },
 
@@ -61285,16 +61283,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        /*enter() {
-            if (this.can && !this.showForm) this.showEdit = true;
+        enter: function enter() {
+            if (!this.isMobile && this.can && this.showName) this.showEdit = true;
         },
-        leave() {
-            if (this.can && !this.showForm) this.showEdit = false;
-        },*/
+        leave: function leave() {
+            if (!this.isMobile && this.can && this.showName) this.showEdit = false;
+        },
         changeForm: function changeForm() {
             if (this.can) {
                 this.showName = false;
                 this.showForm = true;
+                this.showEdit = false;
                 this.$nextTick(function () {
                     // DOM 更新了
                     $('input').focus();
@@ -61330,7 +61329,8 @@ var render = function() {
     "li",
     {
       staticClass: "d-flex border-dotted pl-2",
-      staticStyle: { "min-height": "28px" }
+      staticStyle: { "min-height": "28px" },
+      on: { mouseenter: _vm.enter, mouseleave: _vm.leave }
     },
     [
       _vm.reviewsCount >= 5
@@ -61360,6 +61360,28 @@ var render = function() {
             },
             [_vm._v(_vm._s(_vm.initName) + "\n    ")]
           )
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.isMobile && _vm.can && _vm.showEdit
+        ? _c("div", { staticClass: "ml-3" }, [
+            _c(
+              "a",
+              {
+                staticClass: "text-pink",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.changeForm($event)
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fa fa-pencil-square-o fa-fw" }),
+                _vm._v(" 修改\n        ")
+              ]
+            )
+          ])
         : _vm._e(),
       _vm._v(" "),
       _vm.can && _vm.showForm
@@ -61589,6 +61611,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "skin",
@@ -61599,7 +61624,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             newSkin: 2,
             skins: this.$store.state.review.skins,
             showSkin: true,
-            showForm: false
+            showForm: false,
+            showEdit: false
         };
     },
 
@@ -61609,16 +61635,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     methods: {
-        /*enter() {
-            this.showEdit = true;
+        enter: function enter() {
+            if (!this.isMobile && this.can && this.showSkin) this.showEdit = true;
         },
-        leave() {
-            this.showEdit = false;
-        },*/
+        leave: function leave() {
+            if (!this.isMobile && this.can && this.showSkin) this.showEdit = false;
+        },
         changeForm: function changeForm() {
             if (this.can) {
                 this.showSkin = false;
                 this.showForm = true;
+                this.showEdit = false;
                 this.$nextTick(function () {
                     $('select').focus();
                 });
@@ -61652,7 +61679,8 @@ var render = function() {
     "li",
     {
       staticClass: "border-dotted pl-2 pt-2 d-flex",
-      staticStyle: { "min-height": "35px" }
+      staticStyle: { "min-height": "35px" },
+      on: { mouseenter: _vm.enter, mouseleave: _vm.leave }
     },
     [
       _c("div", [
@@ -61677,6 +61705,28 @@ var render = function() {
             },
             [_vm._v(_vm._s(_vm.initSkin) + "肤质\n    ")]
           )
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.isMobile && _vm.can && _vm.showEdit
+        ? _c("div", { staticClass: "ml-3" }, [
+            _c(
+              "a",
+              {
+                staticClass: "text-pink",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    return _vm.changeForm($event)
+                  }
+                }
+              },
+              [
+                _c("i", { staticClass: "fa fa-pencil-square-o fa-fw" }),
+                _vm._v(" 修改\n        ")
+              ]
+            )
+          ])
         : _vm._e(),
       _vm._v(" "),
       _vm.can && _vm.showForm

@@ -7,7 +7,7 @@ $(function () {
 
     $('[data-toggle="tooltip"]').tooltip({
         container:'body',
-        placement:'top'
+        // placement:'top'
     });
     $('#loginModal').on('shown.bs.modal', function (e) {
         $('input[type="tel"]:first').focus();

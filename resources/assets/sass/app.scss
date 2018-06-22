@@ -51,6 +51,9 @@ body{
 a:hover {
   text-decoration: none;
 }
+a.text-pink:hover{
+  color: $pink-color;
+}
 //pc端的绿色文字型a标签的hover效果
 a.text-main:hover{
   color: $easy-color;
@@ -290,10 +293,9 @@ button:focus {
   color: $brown-color;
   font-weight: 500;
 }
-/*.text-pink{
-  color: $pink-color;
-  font-weight: bold;
-}*/
+.text-pink{
+  color: pink;
+}
 
 .bg-light-brown {
   background: $light-brown-color;

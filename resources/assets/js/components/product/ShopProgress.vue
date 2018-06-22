@@ -1,5 +1,5 @@
 <template>
-    <BaseProgress :texts="shops" :nums="shopNums" :colors="shopBgcolors" class="mb-3" />
+    <BaseProgress :texts="shops" :nums="shopNums" :colors="shopBgcolors" :fromShop="true" class="mb-3" />
 </template>
 
 <script>

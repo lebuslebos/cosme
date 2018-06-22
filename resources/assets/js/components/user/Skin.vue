@@ -1,5 +1,5 @@
 <template>
-    <li class="border-dotted pl-2 pt-2 d-flex" style="min-height: 35px">
+    <li class="border-dotted pl-2 pt-2 d-flex" style="min-height: 35px" @mouseenter="enter" @mouseleave="leave">
         <!--刚开始显示的-->
         <!--<div class="text-main mr-2">肤质:</div>-->
         <div>
@@ -9,9 +9,12 @@
         <div v-if="showSkin" class="text-brown" :class="{'hover-pointer':this.can}"
              @click="changeForm">{{initSkin}}肤质
         </div>
-        <!--<a href="#" class="text-main" @click.prevent="changeForm" v-if="can && showEdit">
-            <i class="fa fa-pencil-square-o "></i>
-        </a>-->
+
+        <div v-if="!isMobile && can && showEdit" class="ml-3">
+            <a href="#" class="text-pink" @click.prevent="changeForm">
+                <i class="fa fa-pencil-square-o fa-fw"></i> 修改
+            </a>
+        </div>
 
         <!--点击编辑之后显示的-->
         <div class="d-flex align-items-center" v-if="can && showForm">
@@ -47,6 +50,7 @@
                 skins: this.$store.state.review.skins,
                 showSkin: true,
                 showForm: false,
+                showEdit: false,
             }
         },
         computed:{
@@ -55,16 +59,17 @@
             }
         },
         methods: {
-            /*enter() {
-                this.showEdit = true;
+            enter() {
+                if (!this.isMobile && this.can && this.showSkin) this.showEdit = true;
             },
             leave() {
-                this.showEdit = false;
-            },*/
+                if (!this.isMobile && this.can && this.showSkin) this.showEdit = false;
+            },
             changeForm() {
                 if (this.can) {
                     this.showSkin = false;
                     this.showForm = true;
+                    this.showEdit = false;
                     this.$nextTick(function () {
                         $('select').focus();
                     })
