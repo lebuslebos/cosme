@@ -1,8 +1,8 @@
 
 
-{{--简易商品信息（上下分布型）--首页列表--}}
+{{--简易商品信息（上下分布型）--首页--}}
 
-<div class="text-center mr-3">
+<div class="text-center mr-3" style="width: 119px;">
     <a href="{{route('products.show',[$review->product])}}" class="d-block mb-1">
         <img class="product-size" src="{{config('app.url')}}/products/{{$review->product->id}}.jpg!product" alt="{{$review->product->name}}">
     </a>
