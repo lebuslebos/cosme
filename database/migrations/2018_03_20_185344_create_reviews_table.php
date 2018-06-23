@@ -29,6 +29,7 @@ class CreateReviewsTable extends Migration
             $table->string('device')->default('');
             $table->string('city')->default('');
             $table->timestamps();
+            $table->unique(['user_id', 'product_id']);
         });
     }
 

@@ -17,13 +17,26 @@ class RankingRepository
     //根据分类排名
     public function ranking_by_cat(int $cat_id, string $type, int $limit = 5)
     {
-        $products = Product::select('id', 'brand_id', 'name', 'rate', 'reviews_count', 'buys_count')
-            ->where([['cat_id', $cat_id], ['reviews_count', '>', 3]])//点评数大于3
-            ->with('brand:id,name')//预加载brand
-            ->orderByRaw('buys_count/reviews_count ' . $type)//按回购数倒序or顺序排
-            ->orderBy('reviews_count',$type)
-            ->limit($limit)//取几个，默认5个
-            ->get();
+        //目前唯一的区别是where回购率大于50%还是小于50%
+        if ($type == 'desc') {
+            $products = Product::select('id', 'brand_id', 'name', 'rate', 'reviews_count', 'buys_count')
+                ->where([['cat_id', $cat_id], ['reviews_count', '>=', 1]])
+                ->whereRaw('100*buys_count/reviews_count >= 50')
+                ->with('brand:id,name')//预加载brand
+                ->orderByRaw('buys_count/reviews_count ' . $type)//按回购数倒序or顺序排
+                ->orderBy('reviews_count', $type)
+                ->limit($limit)//取几个，默认5个
+                ->get();
+        } else {
+            $products = Product::select('id', 'brand_id', 'name', 'rate', 'reviews_count', 'buys_count')
+                ->where([['cat_id', $cat_id], ['reviews_count', '>=', 1]])
+                ->whereRaw('100*buys_count/reviews_count < 50')
+                ->with('brand:id,name')//预加载brand
+                ->orderByRaw('buys_count/reviews_count ' . $type)//按回购数倒序or顺序排
+                ->orderBy('reviews_count', $type)
+                ->limit($limit)//取几个，默认5个
+                ->get();
+        }
 
         return $products;
     }
@@ -43,13 +56,26 @@ class RankingRepository
     //根据品牌排名
     public function ranking_by_brand(int $brand_id, string $type, int $limit = 5)
     {
-        $products = Product::select('id', 'cat_id', 'name', 'rate', 'reviews_count', 'buys_count')
-            ->where([['brand_id', $brand_id], ['reviews_count', '>', 3]])
-            ->with('cat:id,name')
-            ->orderByRaw('buys_count/reviews_count ' . $type)
-            ->orderBy('reviews_count',$type)
-            ->limit($limit)
-            ->get();
+        //目前唯一的区别是where回购率大于50%还是小于50%
+        if ($type == 'desc') {
+            $products = Product::select('id', 'cat_id', 'name', 'rate', 'reviews_count', 'buys_count')
+                ->where([['brand_id', $brand_id], ['reviews_count', '>=', 1]])
+                ->whereRaw('100*buys_count/reviews_count >= 50')
+                ->with('cat:id,name')
+                ->orderByRaw('buys_count/reviews_count ' . $type)
+                ->orderBy('reviews_count', $type)
+                ->limit($limit)
+                ->get();
+        }else{
+            $products = Product::select('id', 'cat_id', 'name', 'rate', 'reviews_count', 'buys_count')
+                ->where([['brand_id', $brand_id], ['reviews_count', '>=', 1]])
+                ->whereRaw('100*buys_count/reviews_count < 50')
+                ->with('cat:id,name')
+                ->orderByRaw('buys_count/reviews_count ' . $type)
+                ->orderBy('reviews_count', $type)
+                ->limit($limit)
+                ->get();
+        }
         return $products;
     }
 
