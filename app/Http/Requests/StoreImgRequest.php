@@ -24,7 +24,7 @@ class StoreImgRequest extends FormRequest
     public function rules()
     {
         return [
-            'file'=>'required|image|max:3072'
+            'file'=>'required|image|max:5120'
         ];
     }
 

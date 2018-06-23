@@ -164,7 +164,7 @@ class UserController extends Controller
     public function avatar(Request $request, User $user)
     {
 //        return ['aa'=>'ok'];
-        $request->validate(['file' => 'required|image|max:200|dimensions:max_width=400']);
+        $request->validate(['file' => 'required|image|max:5120|dimensions:max_width=119, max_height=119']);
 
         $this->authorize('update', $user);
 

@@ -26,7 +26,7 @@ class StoreReviewRequest extends FormRequest
         return [
             'rate'=>'required|in:1,2,3,4,5,6,7|integer',
             'body'=>'nullable|string|max:300',
-            'imgs'=>'array|max:5',
+            'imgs'=>'array|max:4',
             'imgs.*'=>'nullable|string|max:100',
 //            'imgs'=>'nullable|string|max:1024',
             'buy'=>'required|in:0,1|integer',
