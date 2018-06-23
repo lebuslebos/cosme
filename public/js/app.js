@@ -58724,7 +58724,7 @@ var render = function() {
                   "\n            " +
                     _vm._s(
                       _vm.product.buys_count === 0
-                        ? 0
+                        ? 100
                         : 100 -
                           Math.round(
                             100 *

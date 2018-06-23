@@ -39,7 +39,7 @@
                 {{product.buys_count===0 ? 0 : Math.round(100*product.buys_count/product.reviews_count)}}%的人会再次购买
             </div>
             <div class="text-easy bg-easy text-tiny d-inline-block px-1" v-else>
-                {{product.buys_count===0 ? 0 : 100-Math.round(100*product.buys_count/product.reviews_count)}}%的人不会再次购买
+                {{product.buys_count===0 ? 100 : 100-Math.round(100*product.buys_count/product.reviews_count)}}%的人不会再次购买
             </div>
         </div>
     </li>
