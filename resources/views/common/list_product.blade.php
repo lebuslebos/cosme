@@ -43,8 +43,8 @@
                     {{$price->price}}元
                 </li>
             @empty
-                <li class="list-inline-item hover-help" data-toggle="tooltip" data-original-title="将从小仙女们的点评中择准获取">
-                    <span>没有官方报价</span>
+                <li class="list-inline-item">
+                    <span>暂无官方报价</span>
                 </li>
             @endforelse
         </ul>

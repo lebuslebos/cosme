@@ -1,28 +1,5 @@
 <template>
-    <!--<div>
-        <croppa v-model="croppa" accept="image/*" placeholder="点击或者拖拽图片进来" :placeholder-font-size="14" prevent-white-space show-loading
-                :file-size-limit="3*1024*1024" :quality="2"
-                :initial-image="initImg"
-                :disable-scroll-to-zoom="disableZoom"
-                :disable-pinch-to-zoom="disableZoom"
-                @new-image="newImage"
-                @image-remove="remove"
-                @file-type-mismatch="onFileTypeMismatch"
-                @file-size-exceed="onFileSizeExceed"
-        >
-        </croppa>
-        <div class="text-center">
-            <div v-show="showUploadForm">
-                <button class="btn btn-sm btn-info" type="button" @click="save">确定</button>
-            </div>
-            <div class="upload-hint" v-text="hint" :style="{ color: hintColor}"></div>
-        </div>
-    </div>-->
     <div class="mb-2">
-        <!--<div class="d-flex align-items-center" v-if="seeUpload">
-            <div class="text-muted text-tiny">上传照片：</div>
-            <button type="button" class="btn btn-main" @click="showUpload">点击出现传图框</button>
-        </div>-->
 
         <div class="text-tiny mb-1">
             <span class="text-muted">上传照片：</span>
@@ -74,8 +51,8 @@
                 countError: false,
                 sizeError: false,
                 errorMsg: '',
-                limitCount: 3,
-                limitSize: 3,
+                limitCount: 4,
+                limitSize: 5,
                 hideUpload: false,
                 dialogImageUrl: '',
                 dialogVisible: false,

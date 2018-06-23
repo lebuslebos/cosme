@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="d-flex align-items-baseline">
-            <h4 class="hover-help mb-0" :class="[rankingType?'text-main':'']" data-toggle="tooltip"
-                :data-original-title="rankingType?'好用排行榜（取一定点评数，按回购率排）':'差评排行榜（取一定点评数，按回购率排）'"
+            <h4 class="hover-help mb-0" :class="[rankingType?'text-main':'text-muted']" data-toggle="tooltip"
+                :data-original-title="rankingType?'好用排行榜 | 取拥有一定数量点评的商品，按回购率由高到低排':'差评排行榜 | 取拥有一定数量点评的商品，按不会回购率由高到低排'"
             >{{rankingType?'红榜':'黑榜'}}</h4>
             <div class="ml-auto">
                 <a href="#" @click.prevent="showMore=!showMore" >
@@ -87,11 +87,11 @@
 <style scoped>
     .cats {
         overflow: hidden;
-        transition: max-height .2s;
+        transition: max-height .1s;
     }
 
     .fade-enter-active, .fade-leave-active {
-        transition: opacity .2s;
+        transition: opacity .1s;
     }
 
     .fade-enter, .fade-leave-to {

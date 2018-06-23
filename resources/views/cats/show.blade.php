@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','分类页')
+@section('title',$cat->name)
 
 @section('content')
 

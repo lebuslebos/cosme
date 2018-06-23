@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','个人页')
+@section('title',$user->name)
 
 @section('content')
 
@@ -126,7 +126,7 @@
 
         <div class="pt-5">
             <div class="mb-2 text-muted hover-help d-inline-block" data-toggle="tooltip"
-                 data-original-title="此分类一旦有一条点评、则点亮">
+                 data-original-title="此分类一旦有点评则点亮">
                 点评徽章
             </div>
 

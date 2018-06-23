@@ -17,7 +17,7 @@
         </div>
 
         <div class="d-flex mt-2 justify-content-around">
-            <div v-for="(color,index) in colors" :key="index" :class="{change:index===no}" style="transition: all .15s">
+            <div v-for="(color,index) in colors" :key="index" :class="{change:index===no}" style="transition: all .1s">
                 <span><i class="fa fa-square" :style="{color:color}"></i></span>
                 <span class="text-muted text-tiny">{{texts[index]}}</span>
             </div>

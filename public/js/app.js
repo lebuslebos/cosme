@@ -56896,10 +56896,10 @@ var index_esm = {
 
     state: {
         rankingUpdatedAt: 3,
-        rateHints: ['史上第一差', '很差', '比较差', '马马虎虎', '值得一用', '推荐用', '万年回购'],
+        rateHints: ['一分都不想给', '辣鸡', '不好用', '很一般', '值得买', '推荐用', '无限回购'],
         buys: ['会回购', '不会回购'],
         shops: ['官方', '代购', '化妆品店', '自营电商', '私人店铺'],
-        shopHints: ['专柜、官网、天猫官方店、京东官方店等', '找认识的人代买的', '屈臣氏、丝芙兰、便利店、超市等', '淘宝自营、京东自营等自营的电商平台', '微信店、淘宝店等私人店，及实体私人门店'],
+        shopHints: ['专柜、官网、天猫旗舰店等', '找认识的人代买的', '屈臣氏、丝芙兰、便利店、超市等', '小红书自营、网易考拉自营等', '电商平台的第三方商户：微店、淘宝私人店，及实体私人门店等'],
 
         solars: ['寒冬', '初春', '仲春', '阳春', '初夏', '仲夏', '盛夏', '初秋', '仲秋', '深秋', '初冬', '仲冬'],
         // solarHints:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
@@ -57628,7 +57628,7 @@ var render = function() {
           {
             key: index,
             class: { change: index === _vm.no },
-            staticStyle: { transition: "all .15s" }
+            staticStyle: { transition: "all .1s" }
           },
           [
             _c("span", [
@@ -60997,7 +60997,7 @@ var render = function() {
           "disable-pinch-to-zoom": _vm.disableZoom,
           width: _vm.isMobile ? 62 : 119,
           height: _vm.isMobile ? 62 : 119,
-          "file-size-limit": 3 * 1024 * 1024,
+          "file-size-limit": 5 * 1024 * 1024,
           quality: 1,
           "show-remove-button": false,
           "initial-image": _vm.imgSrc + "!product"
@@ -62313,29 +62313,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /*import Croppa from 'vue-croppa'
 import 'vue-croppa/dist/vue-croppa.css';*/
@@ -62352,8 +62329,8 @@ import 'vue-croppa/dist/vue-croppa.css';*/
             countError: false,
             sizeError: false,
             errorMsg: '',
-            limitCount: 3,
-            limitSize: 3,
+            limitCount: 4,
+            limitSize: 5,
             hideUpload: false,
             dialogImageUrl: '',
             dialogVisible: false
@@ -66859,7 +66836,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.position-relative[data-v-51ce9b39] {\n    -webkit-transition: all .2s;\n    transition: all .2s;\n}\n.position-absolute[data-v-51ce9b39] {\n    z-index: 1200;\n}\n.fade-enter-active[data-v-51ce9b39], .fade-leave-active[data-v-51ce9b39] {\n    -webkit-transition: opacity .1s;\n    transition: opacity .1s;\n}\n.fade-enter[data-v-51ce9b39], .fade-leave-to[data-v-51ce9b39] {\n    opacity: 0;\n}\n.logo-enter-active[data-v-51ce9b39] {\n    -webkit-transition: opacity .1s;\n    transition: opacity .1s;\n}\n.logo-enter[data-v-51ce9b39] {\n    opacity: 0;\n}\n\n", ""]);
+exports.push([module.i, "\n.position-relative[data-v-51ce9b39] {\n    -webkit-transition: all .1s;\n    transition: all .1s;\n}\n.position-absolute[data-v-51ce9b39] {\n    z-index: 1200;\n}\n.fade-enter-active[data-v-51ce9b39], .fade-leave-active[data-v-51ce9b39] {\n    -webkit-transition: opacity .1s;\n    transition: opacity .1s;\n}\n.fade-enter[data-v-51ce9b39], .fade-leave-to[data-v-51ce9b39] {\n    opacity: 0;\n}\n.logo-enter-active[data-v-51ce9b39] {\n    -webkit-transition: opacity .1s;\n    transition: opacity .1s;\n}\n.logo-enter[data-v-51ce9b39] {\n    opacity: 0;\n}\n\n", ""]);
 
 // exports
 
@@ -67224,7 +67201,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.fade-enter-active[data-v-7353e080], .fade-leave-active[data-v-7353e080] {\n    -webkit-transition: opacity .3s;\n    transition: opacity .3s;\n}\n.fade-enter[data-v-7353e080], .fade-leave-to[data-v-7353e080] {\n    opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.fade-enter-active[data-v-7353e080], .fade-leave-active[data-v-7353e080] {\n    -webkit-transition: opacity .1s;\n    transition: opacity .1s;\n}\n.fade-enter[data-v-7353e080], .fade-leave-to[data-v-7353e080] {\n    opacity: 0;\n}\n", ""]);
 
 // exports
 
@@ -67403,7 +67380,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.fade-enter-active[data-v-36628af2], .fade-leave-active[data-v-36628af2] {\n  -webkit-transition: opacity .3s;\n  transition: opacity .3s;\n}\n.fade-enter[data-v-36628af2], .fade-leave-to[data-v-36628af2] {\n  opacity: 0;\n}\ninput[data-v-36628af2]:focus {\n  border-width: 2px;\n}\n.mobile-input .form-control[data-v-36628af2] {\n  width: 34px;\n  height: 34px;\n  font-size: 19px;\n  /*@media only screen and (max-width: 768px) {\n            width: 20px;\n            height: 20px;\n            !*font-size: 16px;*!\n        }*/\n}\n.code-input[data-v-36628af2] {\n  /* &:nth-child(3) {\n         margin-right: 20px;\n     }*/\n}\n.code-input .form-control[data-v-36628af2] {\n    width: 44px;\n    height: 44px;\n    font-size: 30px;\n    /*@media only screen and (max-width: 768px) {\n            width: 42px;\n            height: 42px;\n        }*/\n}\n", ""]);
+exports.push([module.i, "\n.fade-enter-active[data-v-36628af2], .fade-leave-active[data-v-36628af2] {\n  -webkit-transition: opacity .1s;\n  transition: opacity .1s;\n}\n.fade-enter[data-v-36628af2], .fade-leave-to[data-v-36628af2] {\n  opacity: 0;\n}\ninput[data-v-36628af2]:focus {\n  border-width: 2px;\n}\n.mobile-input .form-control[data-v-36628af2] {\n  width: 34px;\n  height: 34px;\n  font-size: 19px;\n  /*@media only screen and (max-width: 768px) {\n            width: 20px;\n            height: 20px;\n            !*font-size: 16px;*!\n        }*/\n}\n.code-input[data-v-36628af2] {\n  /* &:nth-child(3) {\n         margin-right: 20px;\n     }*/\n}\n.code-input .form-control[data-v-36628af2] {\n    width: 44px;\n    height: 44px;\n    font-size: 30px;\n    /*@media only screen and (max-width: 768px) {\n            width: 42px;\n            height: 42px;\n        }*/\n}\n", ""]);
 
 // exports
 
@@ -68170,7 +68147,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.fade-enter-active[data-v-8a5644fc], .fade-leave-active[data-v-8a5644fc] {\n    -webkit-transition: opacity .3s;\n    transition: opacity .3s;\n}\n.fade-enter[data-v-8a5644fc], .fade-leave-to[data-v-8a5644fc] {\n    opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.fade-enter-active[data-v-8a5644fc], .fade-leave-active[data-v-8a5644fc] {\n    -webkit-transition: opacity .1s;\n    transition: opacity .1s;\n}\n.fade-enter[data-v-8a5644fc], .fade-leave-to[data-v-8a5644fc] {\n    opacity: 0;\n}\n", ""]);
 
 // exports
 
@@ -68332,7 +68309,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.fade-enter-active[data-v-219e1709], .fade-leave-active[data-v-219e1709] {\n  -webkit-transition: opacity .3s;\n  transition: opacity .3s;\n}\n.fade-enter[data-v-219e1709], .fade-leave-to[data-v-219e1709] {\n  opacity: 0;\n}\ninput[data-v-219e1709]:focus {\n  border-width: 2px;\n}\n.form-control[data-v-219e1709] {\n  line-height: normal;\n  /*padding: 8px 0;*/\n}\n.mobile-input .form-control[data-v-219e1709] {\n  width: 30px;\n  min-height: 30px;\n  /*line-height: 30px;*/\n  font-size: 29px;\n}\n@media only screen and (max-width: 375px) {\n.mobile-input .form-control[data-v-219e1709] {\n      width: 27px;\n      min-height: 34px;\n      /*line-height: 34px;*/\n}\n}\n@media only screen and (max-width: 320px) {\n.mobile-input .form-control[data-v-219e1709] {\n      width: 23px;\n      min-height: 30px;\n      /*line-height: 30px;*/\n}\n}\n.code-input .form-control[data-v-219e1709] {\n  width: 44px;\n  min-height: 44px;\n  font-size: 33px;\n}\n", ""]);
+exports.push([module.i, "\n.fade-enter-active[data-v-219e1709], .fade-leave-active[data-v-219e1709] {\n  -webkit-transition: opacity .1s;\n  transition: opacity .1s;\n}\n.fade-enter[data-v-219e1709], .fade-leave-to[data-v-219e1709] {\n  opacity: 0;\n}\ninput[data-v-219e1709]:focus {\n  border-width: 2px;\n}\n.form-control[data-v-219e1709] {\n  line-height: normal;\n  /*padding: 8px 0;*/\n}\n.mobile-input .form-control[data-v-219e1709] {\n  width: 30px;\n  min-height: 30px;\n  /*line-height: 30px;*/\n  font-size: 29px;\n}\n@media only screen and (max-width: 375px) {\n.mobile-input .form-control[data-v-219e1709] {\n      width: 27px;\n      min-height: 34px;\n      /*line-height: 34px;*/\n}\n}\n@media only screen and (max-width: 320px) {\n.mobile-input .form-control[data-v-219e1709] {\n      width: 23px;\n      min-height: 30px;\n      /*line-height: 30px;*/\n}\n}\n.code-input .form-control[data-v-219e1709] {\n  width: 44px;\n  min-height: 44px;\n  font-size: 33px;\n}\n", ""]);
 
 // exports
 
@@ -69665,7 +69642,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.cats[data-v-99244562] {\n    overflow: hidden;\n    -webkit-transition: max-height .2s;\n    transition: max-height .2s;\n}\n.fade-enter-active[data-v-99244562], .fade-leave-active[data-v-99244562] {\n    -webkit-transition: opacity .2s;\n    transition: opacity .2s;\n}\n.fade-enter[data-v-99244562], .fade-leave-to[data-v-99244562] {\n    opacity: 0;\n}\n\n", ""]);
+exports.push([module.i, "\n.cats[data-v-99244562] {\n    overflow: hidden;\n    -webkit-transition: max-height .1s;\n    transition: max-height .1s;\n}\n.fade-enter-active[data-v-99244562], .fade-leave-active[data-v-99244562] {\n    -webkit-transition: opacity .1s;\n    transition: opacity .1s;\n}\n.fade-enter[data-v-99244562], .fade-leave-to[data-v-99244562] {\n    opacity: 0;\n}\n\n", ""]);
 
 // exports
 
@@ -69781,12 +69758,12 @@ var render = function() {
           "h4",
           {
             staticClass: "hover-help mb-0",
-            class: [_vm.rankingType ? "text-main" : ""],
+            class: [_vm.rankingType ? "text-main" : "text-muted"],
             attrs: {
               "data-toggle": "tooltip",
               "data-original-title": _vm.rankingType
-                ? "好用排行榜（取一定点评数，按回购率排）"
-                : "差评排行榜（取一定点评数，按回购率排）"
+                ? "好用排行榜 | 取拥有一定数量点评的商品，按回购率由高到低排"
+                : "差评排行榜 | 取拥有一定数量点评的商品，按不会回购率由高到低排"
             }
           },
           [_vm._v(_vm._s(_vm.rankingType ? "红榜" : "黑榜"))]

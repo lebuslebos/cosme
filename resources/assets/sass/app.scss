@@ -380,7 +380,7 @@ body.modal-open {
 
 //两次transform属性的变化，x轴变化
 .modal.fade .modal-dialog-slide {
-  transition: transform .3s ease-out;
+  transition: transform .1s ease-out;
   transform: translate(-100%, 0);
 }
 
@@ -467,7 +467,7 @@ img:not(.double-star-size){
 .cat-nav {
   //padding-bottom: 2px;
   //border-bottom: 2px solid #fff;
-  transition: all 0.15s ;
+  transition: all 0.1s ;
 }
 .cat-nav.active {
   //background-color: $main-color;

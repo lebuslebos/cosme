@@ -4,7 +4,7 @@
 <div class="mb-2">
     [ <span class="text-main">{{$cat->name}}</span> ]&nbsp;
     <span class="text-muted hover-help" data-toggle="tooltip"
-          data-original-title="该分类的好用排行榜（取一定点评数，按回购率排）">
+          data-original-title="此分类的好用排行榜 | 取拥有一定数量点评的商品，按回购率由高到低排">
         红榜
     </span>
     <span class="text-muted text-tiny">
@@ -22,7 +22,7 @@
 <div class="pt-5">
     [ <span class="text-main">{{$cat->name}}</span> ]&nbsp;
     <span class="text-muted hover-help" data-toggle="tooltip"
-          data-original-title="该分类的不好用排行榜（取一定点评数，按回购率排）">
+          data-original-title="此分类的差评排行榜 | 取拥有一定数量点评的商品，按不会回购率由高到低排">
         黑榜
     </span>
     <span class="text-muted text-tiny">

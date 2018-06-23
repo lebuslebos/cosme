@@ -10363,10 +10363,10 @@ body.modal-open {
 }
 
 .modal.fade .modal-dialog-slide {
-  -webkit-transition: -webkit-transform .3s ease-out;
-  transition: -webkit-transform .3s ease-out;
-  transition: transform .3s ease-out;
-  transition: transform .3s ease-out, -webkit-transform .3s ease-out;
+  -webkit-transition: -webkit-transform .1s ease-out;
+  transition: -webkit-transform .1s ease-out;
+  transition: transform .1s ease-out;
+  transition: transform .1s ease-out, -webkit-transform .1s ease-out;
   -webkit-transform: translate(-100%, 0);
           transform: translate(-100%, 0);
 }
@@ -10454,8 +10454,8 @@ img:not(.double-star-size) {
 }
 
 .cat-nav {
-  -webkit-transition: all 0.15s;
-  transition: all 0.15s;
+  -webkit-transition: all 0.1s;
+  transition: all 0.1s;
 }
 
 .cat-nav.active {

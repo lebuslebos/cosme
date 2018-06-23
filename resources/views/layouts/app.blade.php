@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }} @yield('title','首页')-我们的美妆笔记</title>
+    <title>@yield('title','首页') | {{ config('app.name', 'Laravel') }}_我们的美妆功课</title>
     {{--<base target="_blank"/>--}}
 
     <!-- Scripts -->

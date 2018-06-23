@@ -258,7 +258,7 @@
 
 <style scoped>
     .position-relative {
-        transition: all .2s;
+        transition: all .1s;
     }
 
     .position-absolute {

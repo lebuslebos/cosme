@@ -6,7 +6,7 @@
 <div class="mb-2">
     [ <a href="{{route('cats.show',[$cat])}}" target="_blank"><span class="text-main">{{$cat->name}}</span></a> ]&nbsp;
     <span class="text-muted hover-help" data-toggle="tooltip"
-          data-original-title="与该商品相同分类的好用排行榜（取一定点评数，按回购率排）">
+          data-original-title="与此商品相同分类的好用排行榜 | 取拥有一定数量点评的商品，按回购率由高到低排">
                 红榜
             </span>
     <span class="text-muted text-tiny">

@@ -89,7 +89,7 @@ class BrandsTableSeeder extends Seeder
             ['赫莲娜 ', 'Helena Rubinstein', '',5, $c[5], 'www.helenarubinstein.cn'],
             ['宝拉珍选', 'Paula‘s Choice', '',2, $c[2], ''],
             ['修丽可', 'SkinCeuticals', '',2, $c[2], ''],
-            ['安热沙', 'ANESSA', '',3, $c[3], 'www.anessa.cn'],
+            ['安热沙', 'ANESSA', '安耐晒',3, $c[3], 'www.anessa.cn'],
             ['怡丽丝尔', 'ELIXIR', '',3, $c[3], 'www.elixir.com.cn'],
             ['苏菲娜', 'SOFINA', '',3, $c[3], 'web.sofina.com/cn'],
             ['后', 'Whoo', '',10, $c[10], 'www.whoo.com.cn'],

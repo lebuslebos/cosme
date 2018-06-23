@@ -8,7 +8,7 @@
                 :disable-pinch-to-zoom="disableZoom"
 
                 :width="isMobile?62:119" :height="isMobile?62:119"
-                :file-size-limit="3*1024*1024" :quality="1"
+                :file-size-limit="5*1024*1024" :quality="1"
                 :show-remove-button="false"
                 :initial-image="imgSrc+'!product'"
                 @new-image="newImage"
@@ -137,7 +137,6 @@
 </script>
 
 <style scoped>
-
     .croppa-container.croppa--has-target {
         cursor: auto;
     }
