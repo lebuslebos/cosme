@@ -58406,7 +58406,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // 因为是嵌套在里面的组件，需重新定义
         $('[data-toggle="popover"]').popover({
             delay: { 'show': 300, 'hide': 100 },
-            template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body" style="min-width:400px;min-height: 300px"></div></div>'
+            template: '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body" style="min-width:300px;min-height: 300px"></div></div>'
         });
     },
 
