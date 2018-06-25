@@ -68,7 +68,7 @@ return [
         'length'        => 4,
         'validMinutes'  => 5,
         'repeatIfValid' => true,
-        'maxAttempts'   => 0,
+        'maxAttempts'   => 10,
     ],
 
     /*
@@ -80,7 +80,7 @@ return [
     |
     */
     'content' => function ($code, $minutes, $input) {
-        return '【上妆网】您的验证码是' . $code ;
+        return '【有容网】验证码是'.$code.'，'.$minutes.'分钟内有效，若输错可重复使用。' ;
     },
 
     /*
@@ -171,7 +171,7 @@ return [
     | 运行'php artisan migrate'命令可以自动生成
     |
     */
-    'dbLogs' => false,
+    'dbLogs' => true,
 
     /*
     |--------------------------------------------------------------------------
