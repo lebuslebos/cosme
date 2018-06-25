@@ -5,7 +5,7 @@
 
     {{--商品的左边部分--}}
     <a href="{{route('products.show',[$product])}}" target="{{Route::currentRouteName()=='users.show'?'_blank':''}}">
-        <img class="mr-md-3 product-size" src="{{config('app.url')}}/products/{{$product->id}}.jpg!product"
+        <img class="mr-md-3 product-size" src="{{Storage::url('products')}}/{{$product->id}}.jpg!product"
              alt="{{$product->name}}">
     </a>
     {{--商品的右边部分--}}

@@ -3,12 +3,12 @@
 <div class="media align-items-center">
     @if(Route::currentRouteName()=='cats.show')
         <div class="mr-md-1" style="padding: 0 24px 0 25px;">
-            <img src="{{config('app.url')}}/cats/{{$cat->id}}.jpg!product.s" class="product-s-size" alt="{{$cat->name}}">
+            <img src="{{Storage::url('cats')}}/{{$cat->id}}.jpg!product.s" class="product-s-size" alt="{{$cat->name}}">
         </div>
     @else
         <a href="{{route('cats.show',[$cat])}}">
             <div class="mr-md-1" style="padding: 0 24px 0 25px;">
-                <img src="{{config('app.url')}}/cats/{{$cat->id}}.jpg!product.s" class="product-s-size" alt="{{$cat->name}}">
+                <img src="{{Storage::url('cats')}}/{{$cat->id}}.jpg!product.s" class="product-s-size" alt="{{$cat->name}}">
             </div>
         </a>
     @endif

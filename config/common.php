@@ -1,6 +1,8 @@
 <?php
 
 return [
+    //'upyun_domain'=>'cosme.test.upcdn.net',
+
     //排行更新时间
     'ranking_updated_at' => 3,
 

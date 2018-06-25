@@ -25,20 +25,20 @@
 
                 {{--其他统计信息--}}
                 <li class="border-dotted pl-2 py-2">
-                    <img src="{{config('app.url')}}/icons/double-star-size.jpg" class="align-text-bottom double-star-size"
+                    <img src="{{Storage::url('icons/double-star-size.jpg')}}" class="align-text-bottom double-star-size"
                          alt="花">
                     <span class="text-muted">收获的赞同数:</span>
                     <span class="text-brown">{{$user->reviews_count==0 ? 0 : $user->likes_count}}</span>
                 </li>
                 <li class="border-dotted pl-2 py-2">
-                    <img src="{{config('app.url')}}/icons/double-star-size.jpg" class="align-text-bottom double-star-size"
+                    <img src="{{Storage::url('icons/double-star-size.jpg')}}" class="align-text-bottom double-star-size"
                          alt="花">
                     <span class="text-muted">用过的化妆品数:</span>
                     <span class="text-brown">{{$user->reviews_count}}</span>
                 </li>
 
                 <li class="border-dotted pl-2 py-2">
-                    <img src="{{config('app.url')}}/icons/double-star-size.jpg" class="align-text-bottom double-star-size"
+                    <img src="{{Storage::url('icons/double-star-size.jpg')}}" class="align-text-bottom double-star-size"
                          alt="花">
                     <span class="text-muted hover-help" data-toggle="tooltip"
                           data-original-title="若一样多则随机取一个">用的最多的分类:</span>
@@ -51,7 +51,7 @@
                     @endif
                 </li>
                 <li class="border-dotted pl-2 py-2">
-                    <img src="{{config('app.url')}}/icons/double-star-size.jpg" class="align-text-bottom double-star-size"
+                    <img src="{{Storage::url('icons/double-star-size.jpg')}}" class="align-text-bottom double-star-size"
                          alt="花">
                     <span class="text-muted hover-help" data-toggle="tooltip"
                           data-original-title="若一样多则随机取一个">用的最多的品牌:</span>
@@ -136,7 +136,7 @@
                         <li class="list-inline-item text-center mr-1 mb-2">
                             <a href="{{route('cats.show',[$cat])}}">
                                 {{--此处需用!product.s处理--}}
-                                <img src="{{config('app.url')}}/cats/H-{{$cat->id}}.jpg!product.s"
+                                <img src="{{Storage::url('cats/H-')}}{{$cat->id}}.jpg!product.s"
                                      alt="未点亮的{{$cat->name}}" class="product-s-size">
                                 <div class="text-muted text-tiny">
                                     <div>{{$cat->name}}</div>
@@ -153,7 +153,7 @@
                                     {{--备份--}}
                                     {{--<img src="{{asset("img/cats/cat_light_$cat->id.gif")}}" alt="点亮的{{$cat->name}}"--}}
                                     {{--此处需用!product.s处理--}}
-                                    <img src="{{config('app.url')}}/cats/{{$cat->id}}.jpg!product.s"
+                                    <img src="{{Storage::url('cats')}}/{{$cat->id}}.jpg!product.s"
                                          alt="点亮的{{$cat->name}}"
                                          class="product-s-size">
                                     <div class="text-brown text-tiny">
@@ -164,7 +164,7 @@
                             @else
                                 <a href="{{route('cats.show',[$cat])}}">
                                     {{--此处需用!product.s处理--}}
-                                    <img src="{{config('app.url')}}/cats/H-{{$cat->id}}.jpg!product.s"
+                                    <img src="{{Storage::url('cats/H-')}}{{$cat->id}}.jpg!product.s"
                                          alt="未点亮的{{$cat->name}}" class="product-s-size">
                                     <div class="text-muted text-tiny">
                                         <div>{{$cat->name}}</div>

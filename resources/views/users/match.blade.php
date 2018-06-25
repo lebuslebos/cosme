@@ -18,7 +18,7 @@
 @else
     <div class="media py-3 mb-3 border-top align-items-center">
         {{--排序皇冠图--}}
-        <img src="{{config('app.url')}}/icons/crown1.jpg!crown" class="mr-2 crown-size" alt="最匹配">
+        <img src="{{Storage::url('icons/crown1.jpg')}}!crown" class="mr-2 crown-size" alt="最匹配">
 
         {{--用户头像--}}
         <a href="{{route('users.show',[$match_user])}}" target="_blank">

@@ -2,11 +2,11 @@
 <div class="media align-items-center">
     {{--品牌图片--}}
     @if(Route::currentRouteName()=='brands.show')
-        <img class="mr-md-3 product-size" src="{{config('app.url')}}/brands/{{$brand->id}}.jpg!product"
+        <img class="mr-md-3 product-size" src="{{Storage::url('brands')}}/{{$brand->id}}.jpg!product"
              alt="{{$brand->name}}">
     @else
         <a href="{{route('brands.show',[$brand])}}">
-            <img class="mr-md-1 product-size" src="{{config('app.url')}}/brands/{{$brand->id}}.jpg!product"
+            <img class="mr-md-1 product-size" src="{{Storage::url('brands')}}/{{$brand->id}}.jpg!product"
                  alt="{{$brand->name}}">
         </a>
     @endif
@@ -26,7 +26,7 @@
                 </a>
             @endif
 
-            <img src="{{config('app.url')}}/countries/{{$brand->country_id}}.jpg!tiny"
+            <img src="{{Storage::url('countries')}}/{{$brand->country_id}}.jpg!tiny"
                  class="border tiny-size country-img mr-1" alt="{{$brand->country}}"
                  style="margin-bottom: 3px">
             <div class="text-muted">{{$brand->country}}</div>

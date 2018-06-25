@@ -43,7 +43,7 @@ class UserController extends Controller
         $user = User::firstOrCreate(['mobile' => $request->mobile],
             [
                 'name' => array_random(['汀兰', '君撷', '杜若', '画玺', '德音', '雅南', '予心', '如英', '疏影', '晴岚','采苓']),
-                'avatar' => config('app.url').'/avatars/default.jpg'
+                'avatar' => Storage::url('avatars/default.jpg')
             ]);
 
 

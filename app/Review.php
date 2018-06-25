@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class Review extends Model
 {
@@ -88,7 +89,7 @@ class Review extends Model
     {
         return $this->belongsTo(User::class)->withDefault([
             'name' => '游客',
-            'avatar' => config('app.url').'/avatars/default.jpg',
+            'avatar' => Storage::url('avatars/default.jpg'),
             'skin' => 2
         ]);
     }
