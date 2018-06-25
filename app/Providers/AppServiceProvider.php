@@ -36,14 +36,13 @@ class AppServiceProvider extends ServiceProvider
         View::share('is_phone', Agent::isPhone());
         View::share('is_tablet', Agent::isTablet());
 
-        $all_cats =Cache::rememberForever('all-cats',function (){
+        /*$all_cats =Cache::rememberForever('all-cats',function (){
             return Cat::select('id','name')->orderBy('id','asc')->get();
         });
-        $big_cats=['护肤','底妆','彩妆','美发','香水','日常护理'];
 
-        view()->composer(['home', 'cats.show', 'users.show'], function ($view) use ($all_cats,$big_cats) {
-            $view->with(compact('all_cats','big_cats'));
-        });
+        view()->composer(['home', 'cats.show', 'users.show'], function ($view) use ($all_cats) {
+            $view->with(compact('all_cats'));
+        });*/
 
         //注册观察者(cat,brand,product主要为后台更新时触发)
         Cat::observe(CatObservers::class);
