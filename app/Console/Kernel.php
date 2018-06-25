@@ -70,7 +70,7 @@ class Kernel extends ConsoleKernel
             Cache::tags(['ranking', 'match'])->flush();//清空排行榜以及匹配用户的缓存
 
 
-        })->dailyAt('15:00')
+        })->dailyAt('17:00')
             ->after(function () {
                 if (Cache::has('r-p-ids')) Cache::forget('r-p-ids');//把点评入账数组归零
                 if (Cache::has('b-p-ids')) Cache::forget('b-p-ids');//把(回购)点评入账数组归零
