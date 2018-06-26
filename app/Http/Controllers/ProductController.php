@@ -27,7 +27,7 @@ class ProductController extends Controller
     {
         //缓存处理--后台修改商品后需清除缓存
         $product = Cache::rememberForever('products-' . $product_id, function () use ($product_id) {
-            return Product::find($product_id, ['id', 'cat_id', 'brand_id', 'name', 'nick_name', 'has_login_review'])
+            return Product::find($product_id, ['id', 'cat_id', 'brand_id', 'name', 'nick_name', 'rate','reviews_count','buys_count','has_login_review'])
                 ->load(['brand:id,name,common_name', 'cat:id,name', 'prices', 'colors']);
         });
 
@@ -40,8 +40,8 @@ class ProductController extends Controller
             $reviews = Cache::tags('products-' . $product_id . '-reviews')
                 ->rememberForever('products-' . $product_id . '-reviews-' . request('page', 1), function () use ($product) {
                     return $product->reviews()
-                        ->select('id', 'user_id', 'rate', 'body', 'imgs', 'buy', 'shop', 'updated_at')
-                        ->with('user:id,name,avatar,skin')
+                        ->select('id', 'user_id', 'rate', 'body', 'imgs', 'buy', 'shop', 'likes_count','hates_count','updated_at')
+                        ->with('user:id,name,avatar,skin,reviews_count')
                         ->orderByRaw('if(body="",0,1) DESC')
                         ->latest('updated_at')
                         ->orderBy('id', 'desc')

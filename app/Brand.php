@@ -24,17 +24,23 @@ class Brand extends Model
 
 
     //品牌的商品数，点评数，回购数
-    public function getProductsCountAttribute()
+    /*public function getProductsCountAttribute()
     {
         return Cache::get('p-' . $this->id . '-b',0);
-    }
-    public function getReviewsCountAttribute()
+    }*/
+    public function getReviewsCountAttribute($value)
     {
-        return Cache::get('r-' . $this->id . '-b',0);
+        return Cache::rememberForever('r-' . $this->id . '-b',function ()use($value){
+            return $value;
+        });
+        //return Cache::get('r-' . $this->id . '-b',$value);
     }
-    public function getBuysCountAttribute()
+    public function getBuysCountAttribute($value)
     {
-        return Cache::get('b-' . $this->id . '-b',0);
+        return Cache::rememberForever('b-' . $this->id . '-b',function ()use($value){
+            return $value;
+        });
+        //return Cache::get('b-' . $this->id . '-b',0);
     }
 
 

@@ -299,7 +299,7 @@
                     // 请求验证码
                     axios.post(this.requestCodeUrl, {mobile: this.phone})
                         .then(response => {
-                            console.log(response.data);
+                            // console.log(response.data);
                             if (!response.data.success) this.loginError = response.data.message;
                         });
 
@@ -326,11 +326,11 @@
                     verifyCode: this.getVerifyCode
                 })
                     .then(response => {
-                        console.log(response.data);
+                        // console.log(response.data);
                         if (response.data.login) window.location.reload();
                     })
                     .catch(errors => {
-                        console.log('错误的', errors.response.data.errors);
+                        // console.log('错误的', errors.response.data.errors);
                         this.loginError = errors.response.data.errors.verifyCode[0];
                     });
             }

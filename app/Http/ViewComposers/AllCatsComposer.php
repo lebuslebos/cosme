@@ -2,7 +2,7 @@
 
 namespace App\Http\ViewComposers;
 
-use App\Cat;
+use App\Repositories\CatRepository;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 /**
@@ -13,11 +13,11 @@ use Illuminate\View\View;
 class AllCatsComposer
 {
 
-    protected $cats;
+    protected $catRepository;
 
-    public function __construct(Cat $cats)
+    public function __construct(CatRepository $catRepository)
     {
-        $this->cats = $cats;
+        $this->catRepository = $catRepository;
     }
 
     /**
@@ -29,7 +29,7 @@ class AllCatsComposer
     public function compose(View $view)
     {
         $all_cats=Cache::rememberForever('all-cats',function (){
-            return Cat::select('id','name')->orderBy('id','asc')->get();
+            return $this->catRepository->all_cats();
         });
         $view->with(compact('all_cats'));
     }

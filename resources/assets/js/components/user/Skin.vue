@@ -81,7 +81,7 @@
                     this.initSkin = this.skins[this.newSkin];
                     axios.patch(`/users/${this.userId}/skin`, {'skin': this.newSkin})
                         .then(response => {
-                            console.log(response);
+                            // console.log(response);
                         })
                 }
             },

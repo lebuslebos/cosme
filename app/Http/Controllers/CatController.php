@@ -31,7 +31,7 @@ class CatController extends Controller
         $products = Cache::tags('cats-' . $cat_id . '-products')
             ->rememberForever('cats-' . $cat_id . '-products-' . request('page', 1), function () use ($cat) {
                 return $cat->products()
-                    ->select('id','brand_id','name','nick_name','rate')
+                    ->select('id','brand_id','name','nick_name','rate','reviews_count','buys_count')
                     ->with(['brand:id,name,common_name','prices'])
                     ->orderBy('reviews_count','desc') //此处的数字是数据库中的旧数据，页面上显示的是最新缓存数据，因此页面上排名可能不是按最新排的
                     ->orderBy('id','asc')

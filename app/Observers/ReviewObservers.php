@@ -18,22 +18,31 @@ class ReviewObservers
         //刷新购入场所分布的缓存
         if (Cache::has('sh-' . $review->product_id )) Cache::forget('sh-' . $review->product_id );
 
-        //关于商品和品牌--点评数+回购数
-        Cache::increment('r-' . $review->product_id . '-p');
+        //商品和品牌的点评数+1-->并各做持久化处理
+        Cache::increment('r-' . $review->brand_id . '-b');
+        $r_b_ids=Cache::get('r-b-ids',[]);
+        $r_b_ids[]=$review->brand_id;
+        Cache::forever('r-b-ids',$r_b_ids);
 
+        Cache::increment('r-' . $review->product_id . '-p');
         $r_p_ids=Cache::get('r-p-ids',[]);
         $r_p_ids[]=$review->product_id;
         Cache::forever('r-p-ids',$r_p_ids);
 
 
-        Cache::increment('r-' . $review->brand_id . '-b');
+
         if ($review->buy == 0) {
+            //商品和品牌的回购数+1-->并各做持久化处理
+            Cache::increment('b-' . $review->brand_id . '-b');
+            $b_b_ids=Cache::get('b-b-ids',[]);
+            $b_b_ids[]=$review->brand_id;
+            Cache::forever('b-b-ids',$b_b_ids);
+
             Cache::increment('b-' . $review->product_id . '-p');
             $b_p_ids=Cache::get('b-p-ids',[]);
             $b_p_ids[]=$review->product_id;
             Cache::forever('b-p-ids',$b_p_ids);
 
-            Cache::increment('b-' . $review->brand_id . '-b');
         }
 
 
@@ -42,9 +51,19 @@ class ReviewObservers
             //刷新肤质分布的缓存
             if (Cache::has('sk-' . $review->product_id)) Cache::forget('sk-' . $review->product_id);
 
-            Cache::increment('r-' . $review->user_id . '-u');//用户点评数+1
+            //用户点评数+1-->并各做持久化处理
+            Cache::increment('r-' . $review->user_id . '-u');
+            $r_u_ids=Cache::get('r-u-ids',[]);
+            $r_u_ids[]=$review->user_id;
+            Cache::forever('r-u-ids',$r_u_ids);
+            //用户回购数+1-->并各做持久化处理
+            if ($review->buy == 0) {
+                Cache::increment('b-' . $review->user_id . '-u');
+                $b_u_ids=Cache::get('b-u-ids',[]);
+                $b_u_ids[]=$review->user_id;
+                Cache::forever('b-u-ids',$b_u_ids);
+            }
 
-            if ($review->buy == 0) Cache::increment('b-' . $review->user_id . '-u');//用户回购数+1
 
             if ($review->body) {
 

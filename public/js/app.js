@@ -58973,7 +58973,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var data = new FormData();
                 data.append('file', blob);
                 axios.post('/users/' + _this.userId + '/avatars', data).then(function (response) {
-                    console.log(response);
+                    // console.log(response);
                 });
             }, 'image/webp', 1); // 80% compressed jpeg file
         },
@@ -61306,7 +61306,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.newName.length > 0 && this.initName !== this.newName) {
                 this.initName = this.newName;
                 axios.patch('/users/' + this.userId + '/name', { 'name': this.newName }).then(function (response) {
-                    console.log(response);
+                    // console.log(response);
                 });
             }
         },
@@ -61656,7 +61656,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.initSkin !== this.skins[this.newSkin]) {
                 this.initSkin = this.skins[this.newSkin];
                 axios.patch('/users/' + this.userId + '/skin', { 'skin': this.newSkin }).then(function (response) {
-                    console.log(response);
+                    // console.log(response);
                 });
             }
         },
@@ -62217,7 +62217,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     buy: this.buy,
                     shop: this.shop
                 }).then(function (response) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     _this.updatedAt = response.data.updated_at;
                 });
             }
@@ -62352,7 +62352,7 @@ import 'vue-croppa/dist/vue-croppa.css';*/
         beforeUpload: function beforeUpload(file) {
             this.countError = false;
             this.sizeError = false;
-            console.log('上传前');
+            // console.log('上传前');
             // console.log(file);
             if (file.size / 1024 / 1024 > this.limitSize) {
                 this.sizeError = true;
@@ -62360,36 +62360,36 @@ import 'vue-croppa/dist/vue-croppa.css';*/
             }
         },
         onProgress: function onProgress(event, file, fileList) {
-            console.log('正在上传');
+            // console.log('正在上传');
             // console.log(event, file, fileList);
         },
         onSuccess: function onSuccess(response, file, fileList) {
-            console.log('上传成功');
-            console.log(response, file, fileList);
+            // console.log('上传成功');
+            // console.log(response, file, fileList);
             if (!!response.path) this.imgs.push(response.path);
         },
         onError: function onError(err, file, fileList) {
-            console.log('上传失败啊啊啊', err);
+            // console.log('上传失败啊啊啊',err);
             this.errorMsg = '停留时间太长了，请刷新重试';
             // console.log(err, file, fileList);
         },
         beforeRemove: function beforeRemove(file, fileList) {
-            console.log('删除前');
+            // console.log('删除前');
             // console.log(file, fileList);
         },
         onRemove: function onRemove(file, fileList) {
-            console.log('删除了');
-            console.log(file);
+            // console.log('删除了');
+            // console.log(file);
             this.hideUpload = fileList.length >= this.limitCount;
             if (file.status === 'success') this.imgs.splice(this.imgs.indexOf(file.url), 1);
         },
         onChange: function onChange(file, fileList) {
-            console.log('添加或成功或失败');
+            // console.log('添加或成功或失败');
             // console.log(file, fileList);
             this.hideUpload = fileList.length >= this.limitCount;
         },
         onExceed: function onExceed(files, fileList) {
-            console.log('超出数量');
+            // console.log('超出数量');
             // console.log(files, fileList);
             this.countError = true;
         },
@@ -66241,7 +66241,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
     mounted: function mounted() {
-        console.log('okqqqq');
+        // console.log('okqqqq');
         //全部从本地获取数据
         if (this.likes !== 0 && this.$store.state.review.likeArr.includes(this.review)) {
             this.like = true;
@@ -66276,7 +66276,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.btnDisabled = true;
             //后端
             axios.post('/vote', { review: this.review, user: this.user, type: type }).then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
             });
         }
     }
@@ -67023,9 +67023,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             searching: true,
             cat: null,
             brand: null,
-            brandProductsCount: 0,
-            brandReviewsCount: 0,
-            brandBuysCount: 0,
+            // brandProductsCount: 0,
+            // brandReviewsCount: 0,
+            // brandBuysCount: 0,
             products: [],
             hide: false,
             searchWidth: '62%'
@@ -67034,7 +67034,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     watch: {
         query: function query(newQuery, oldQuery) {
-            console.log('值改变了');
+            // console.log('值改变了');
             if (newQuery.length > 0) {
                 this.searchFrame = true;
                 this.searchHint = true;
@@ -67069,27 +67069,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this2 = this;
 
             if (this.query.length > 0) {
-                console.log('开始搜索...');
+                // console.log('开始搜索...');
                 axios.get('/instant/search?search=' + this.query).then(function (response) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     if (!response.data.cat && !response.data.brand && response.data.products.length === 0) {
                         _this2.searching = false;
                     } else {
                         _this2.searchHint = false;
-                        console.log(response.data);
+                        // console.log(response.data);
                         _this2.cat = response.data.cat;
                         _this2.brand = response.data.brand;
-                        if (response.data.brand) {
-                            // this.brandProductsCount = response.data.brand_products_count;
-                            _this2.brandReviewsCount = response.data.brand_reviews_count;
-                            _this2.brandBuysCount = response.data.brand_buys_count;
-                        }
+                        /*if (response.data.brand) {
+                            this.brandProductsCount = response.data.brand_products_count;
+                            this.brandReviewsCount = response.data.brand_reviews_count;
+                            this.brandBuysCount = response.data.brand_buys_count;
+                        }*/
                         _this2.products = response.data.products;
                     }
                 }).catch(function (error) {
-                    console.log(!error);
+                    // console.log(!error);
                     if (!!error) _this2.searching = false;
-                    console.log(error.response);
+                    // console.log(error.response);
                 });
             }
         }, 500),
@@ -67682,7 +67682,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 $('input[type="tel"]:first').focus();
                 // 请求验证码
                 axios.post(this.requestCodeUrl, { mobile: this.phone }).then(function (response) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     if (!response.data.success) _this.loginError = response.data.message;
                 });
             }
@@ -67710,10 +67710,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 mobile: this.phone,
                 verifyCode: this.getVerifyCode
             }).then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
                 if (response.data.login) window.location.reload();
             }).catch(function (errors) {
-                console.log('错误的', errors.response.data.errors);
+                // console.log('错误的', errors.response.data.errors);
                 _this3.loginError = errors.response.data.errors.verifyCode[0];
             });
         }
@@ -68523,7 +68523,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (reg.test(phone)) {
 
                     axios.post(this.requestCodeUrl, { mobile: phone }).then(function (response) {
-                        console.log(response.data);
+                        // console.log(response.data);
                         if (response.data.success) {
                             _this.$emit('toCode', phone);
                         } else {
@@ -68542,7 +68542,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.countDown();
                 // 请求验证码
                 axios.post(this.requestCodeUrl, { mobile: this.phone }).then(function (response) {
-                    console.log(response.data);
+                    // console.log(response.data);
                     if (!response.data.success) _this.loginError = response.data.message;
                 });
             }
@@ -68570,10 +68570,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 mobile: this.phone,
                 verifyCode: this.getVerifyCode
             }).then(function (response) {
-                console.log(response.data);
+                // console.log(response.data);
                 if (response.data.login) window.location.reload();
             }).catch(function (errors) {
-                console.log('错误的', errors.response.data.errors);
+                // console.log('错误的', errors.response.data.errors);
                 _this3.loginError = errors.response.data.errors.verifyCode[0];
             });
         }
@@ -69235,7 +69235,7 @@ var render = function() {
                                             { staticClass: "text-brown" },
                                             [
                                               _vm._v(
-                                                _vm._s(_vm.brandReviewsCount)
+                                                _vm._s(_vm.brand.reviews_count)
                                               )
                                             ]
                                           )
@@ -69255,8 +69255,9 @@ var render = function() {
                                                     ? 0
                                                     : Math.round(
                                                         100 *
-                                                          _vm.brandBuysCount /
-                                                          _vm.brandReviewsCount
+                                                          _vm.brand.buys_count /
+                                                          _vm.brand
+                                                            .reviews_count
                                                       )
                                                 ) +
                                                 "%\n                                    "
@@ -70403,7 +70404,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             buy: this.buy,
                             shop: this.shop
                         }).then(function (response) {
-                            console.log(response.data);
+                            // console.log(response.data);
                             _this.initReviewId = response.data.reviewId;
                             _this.updatedAt = response.data.updated_at;
                         });
@@ -70416,7 +70417,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             buy: this.buy,
                             shop: this.shop
                         }).then(function (response) {
-                            console.log(response.data);
+                            // console.log(response.data);
                             _this.updatedAt = response.data.updated_at;
                         });
                     }
@@ -70430,7 +70431,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         buy: this.buy,
                         shop: this.shop
                     }).then(function (response) {
-                        console.log(response.data);
+                        // console.log(response.data);
                         _this.updatedAt = response.data.updated_at;
                     });
                 }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use function foo\func;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Scout\Searchable;
@@ -33,19 +34,28 @@ class Product extends Model
 
 
     //商品的评分，点评数，以及其中的回购数
-    public function getRateAttribute()
+    public function getRateAttribute($value)
     {
-        return Cache::get('ra-' . $this->id, 4.0);
+        return Cache::rememberForever('ra-' . $this->id, function () use ($value) {
+            return $value;
+        });
+        //return Cache::get('ra-' . $this->id, 4.0);
     }
 
-    public function getReviewsCountAttribute()
+    public function getReviewsCountAttribute($value)
     {
-        return Cache::get('r-' . $this->id . '-p', 0);
+        return Cache::rememberForever('r-' . $this->id . '-p', function () use ($value) {
+            return $value;
+        });
+        //return Cache::get('r-' . $this->id . '-p', 0);
     }
 
-    public function getBuysCountAttribute()
+    public function getBuysCountAttribute($value)
     {
-        return Cache::get('b-' . $this->id . '-p', 0);
+        return Cache::rememberForever('b-' . $this->id . '-p', function () use ($value) {
+            return $value;
+        });
+        //return Cache::get('b-' . $this->id . '-p', 0);
     }
 
 

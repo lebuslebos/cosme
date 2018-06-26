@@ -38,6 +38,8 @@ class RankingRepository
                 ->get();
         }
 
+//        Product::select('id', 'brand_id', 'name', 'rate', 'reviews_count', 'buys_count')->where([['cat_id', $cat_id], ['reviews_count', '>=', 1]])->whereRaw('100*buys_count/reviews_count < 50')->with('brand:id,name')->orderByRaw('buys_count/reviews_count ' . $type)->orderBy('reviews_count', $type)->limit($limit)->get()
+
         return $products;
     }
 

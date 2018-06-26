@@ -23,7 +23,7 @@ class ReviewController extends Controller
 
     public function __construct(RankingRepository $rankingRepository)
     {
-        $this->middleware('auth')->except(['index', 'ranking', 'vote','store_visitor']);
+        $this->middleware('auth')->except(['index', 'ranking', 'vote', 'store_visitor']);
         $this->rankingRepository = $rankingRepository;
     }
 
@@ -37,28 +37,38 @@ class ReviewController extends Controller
             'type' => ['required', Rule::in(['l', 'h'])],
         ]);
 
-        Cache::increment($request->type . '-' . $request->review);//点评的获赞数/获踩数
-        Cache::increment($request->type . '-' . $request->user . '-u');//用户的获赞数/获踩数
+        //点评的获赞数/获踩数+1-->并各做持久化处理
+        Cache::increment($request->type . '-' . $request->review);
+        $r_ids = Cache::get($request->type . '-r-ids', []);
+        $r_ids[] = $request->review;
+        Cache::forever($request->type . '-r-ids', $r_ids);
 
-        return 'ok';
+        //用户的获赞数/获踩数+1-->并各做持久化处理
+        Cache::increment($request->type . '-' . $request->user . '-u');
+        $u_ids = Cache::get($request->type . '-u-ids', []);
+        $u_ids[] = $request->user;
+        Cache::forever($request->type . '-u-ids', $r_ids);
+
+
+        //return 'ok';
     }
 
     public function index()
     {
         //设置缓存--tag:reviews
         $reviews = Cache::rememberForever('reviews', function () {
-            return Review::select('id','user_id','product_id','brand_id','rate','body','imgs','buy','shop','updated_at')
+            return Review::select('id', 'user_id', 'product_id', 'brand_id', 'rate', 'body', 'imgs', 'buy', 'shop','likes_count','hates_count', 'updated_at')
                 ->where('body', '<>', '')
-                ->with(['product:id,name', 'brand:id,name', 'user:id,name,avatar,skin'])
+                ->with(['product:id,name,rate', 'brand:id,name', 'user:id,name,avatar,skin,reviews_count'])
                 ->latest()
-                ->orderBy('id','')
+                ->orderBy('id', 'desc')
                 ->take(config('common.pre_page'))
                 ->get();
         });
 
         //随机回购ranking,并只选取点评数大于10的进行排行
         $popular_cats = Cache::rememberForever('popular-cats', function () {
-            return Cat::select('id', 'name')->whereIn('id', [1, 2, 3, 4, 5])->get();
+            return Cat::select('id', 'name')->whereIn('id', config('common.popular_cats'))->get();
         });
 
         $red_cat = $popular_cats->random();
@@ -73,7 +83,7 @@ class ReviewController extends Controller
     public function ranking(int $cat_id, Request $request)
     {
 //        return ['aa'=>$request->type];
-        $request->validate(['type'=>['required', Rule::in(['desc', 'asc'])]]);
+        $request->validate(['type' => ['required', Rule::in(['desc', 'asc'])]]);
 
         return $this->rankingRepository->cached_ranking_by_cat($cat_id, $request->type);
     }
@@ -89,7 +99,7 @@ class ReviewController extends Controller
             $constraint->upsize();
         })->encode('jpg');*/
         //图片处理---宽度变成400，自适应高度，改成webp格式
-        $handled_img=Image::make($img)->widen(400,function ($constraint){
+        $handled_img = Image::make($img)->widen(400, function ($constraint) {
             $constraint->upsize();//防止小图被拉伸
         })->encode('webp');
 
@@ -112,11 +122,11 @@ class ReviewController extends Controller
             'cat_id' => $product->cat_id,
             'brand_id' => $product->brand_id,
             'rate' => $request->rate,
-            'body'=>'',
+            'body' => '',
             'buy' => $request->buy,
             'shop' => $request->shop,
             'device' => Agent::device(),
-            'city'=>implode(array_slice(Ip::find(request()->ip()),1,2))
+            'city' => implode(array_slice(Ip::find(request()->ip()), 1, 2))
         ]);
         return ['游客' => 'ok', 'updated_at' => $review->updated_at];
     }
@@ -137,7 +147,7 @@ class ReviewController extends Controller
             'buy' => $request->buy,
             'shop' => $request->shop,
             'device' => Agent::device(),
-            'city'=>implode(array_slice(Ip::find(request()->ip()),1,2))
+            'city' => implode(array_slice(Ip::find(request()->ip()), 1, 2))
         ]);
 
         return ['reviewId' => $review->id, 'updated_at' => $review->updated_at];
@@ -166,11 +176,11 @@ class ReviewController extends Controller
         //如果回购变了
         if ($review->buy != $pre_buy) {
             //之前的buy为0的时候，说明现在改成了1（不会回购），把回购数减一。反之一样
-            if($pre_buy==0){
+            if ($pre_buy == 0) {
                 Cache::decrement('b-' . Auth::id() . '-u');
                 Cache::decrement('b-' . $product->id . '-p');
                 Cache::decrement('b-' . $product->brand_id . '-b');
-            }else{
+            } else {
                 Cache::increment('b-' . Auth::id() . '-u');
                 Cache::increment('b-' . $product->id . '-p');
                 Cache::increment('b-' . $product->brand_id . '-b');

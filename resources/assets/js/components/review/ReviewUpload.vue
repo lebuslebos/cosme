@@ -72,7 +72,7 @@
             beforeUpload(file) {
                 this.countError = false;
                 this.sizeError = false;
-                console.log('上传前');
+                // console.log('上传前');
                 // console.log(file);
                 if (file.size / 1024 / 1024 > this.limitSize) {
                     this.sizeError = true;
@@ -80,38 +80,38 @@
                 }
             },
             onProgress(event, file, fileList) {
-                console.log('正在上传');
+                // console.log('正在上传');
                 // console.log(event, file, fileList);
             },
             onSuccess(response, file, fileList) {
-                console.log('上传成功');
-                console.log(response, file, fileList);
+                // console.log('上传成功');
+                // console.log(response, file, fileList);
                 if (!!response.path) this.imgs.push(response.path)
             },
             onError(err, file, fileList) {
-                console.log('上传失败啊啊啊',err);
+                // console.log('上传失败啊啊啊',err);
                 this.errorMsg = '停留时间太长了，请刷新重试';
                 // console.log(err, file, fileList);
             },
 
             beforeRemove(file, fileList) {
-                console.log('删除前');
+                // console.log('删除前');
                 // console.log(file, fileList);
             },
             onRemove(file, fileList) {
-                console.log('删除了');
-                console.log(file);
+                // console.log('删除了');
+                // console.log(file);
                 this.hideUpload = fileList.length >= this.limitCount;
                 if (file.status === 'success') this.imgs.splice(this.imgs.indexOf(file.url), 1);
             },
 
             onChange(file, fileList) {
-                console.log('添加或成功或失败');
+                // console.log('添加或成功或失败');
                 // console.log(file, fileList);
                 this.hideUpload = fileList.length >= this.limitCount;
             },
             onExceed(files, fileList) {
-                console.log('超出数量');
+                // console.log('超出数量');
                 // console.log(files, fileList);
                 this.countError = true;
             },

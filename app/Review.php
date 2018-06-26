@@ -18,24 +18,6 @@ class Review extends Model
     //点评在create,update,delete的时候均触发商品表的updated_at更新
 //    protected $touches = ['product'];
 
-
-    /* public function getImgsAttribute($value)
-     {
-         return json_decode($value);
-     }*/
-
-    /*public function getBuyAttribute($value)
-    {
-        $buy=['会回购','不会回购','不确定'];
-        return $buy[$value];
-    }
-
-    public function getShopAttribute($value)
-    {
-        $shop=['代购','专柜','淘宝','京东','网易考拉','小红书','其他'];
-        return $shop[$value];
-    }*/
-
     public function getUpdatedAtAttribute($value)
     {
         $dt = Carbon::parse($value);
@@ -58,16 +40,21 @@ class Review extends Model
 
 
     //点评的赞数/踩数---从缓存获取
-    public function getLikesCountAttribute()
+    public function getLikesCountAttribute($value)
     {
-        return Cache::get('l-' . $this->id,0);
+        return Cache::rememberForever('l-' . $this->id, function () use ($value) {
+            return $value;
+        });
+        //return Cache::get('l-' . $this->id,0);
     }
 
-    public function getHatesCountAttribute()
+    public function getHatesCountAttribute($value)
     {
-        return Cache::get('h-' . $this->id,0);
+        return Cache::rememberForever('h-' . $this->id, function () use ($value) {
+            return $value;
+        });
+        //return Cache::get('h-' . $this->id,0);
     }
-
 
 
     public function cat()

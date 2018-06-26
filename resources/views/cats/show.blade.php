@@ -19,7 +19,7 @@
 
         {{--这个分类的商品--}}
         <div class="d-flex align-items-baseline text-muted mt-4 pt-2">
-            <div>按照点评数排序({{$products->total()}})</div>
+            <div>全部商品(按照点评数排序)({{$products->total()}})</div>
             {{--移动端--}}
             @if($is_mobile)
                 <button type="button" class="btn btn-pink rounded ml-auto"

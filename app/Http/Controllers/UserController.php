@@ -42,7 +42,7 @@ class UserController extends Controller
 
         $user = User::firstOrCreate(['mobile' => $request->mobile],
             [
-                'name' => array_random(['汀兰', '君撷', '杜若', '画玺', '德音', '雅南', '予心', '如英', '疏影', '晴岚','采苓']),
+                'name' => array_random(['汀兰', '君撷', '杜若', '画玺', '德音', '雅南', '予心', '如英', '疏影', '晴岚', '采苓']),
                 'avatar' => Storage::url('avatars/default.jpg')
             ]);
 
@@ -65,7 +65,7 @@ class UserController extends Controller
     {
 
         $user = Cache::rememberForever('users-' . $user_id, function () use ($user_id) {
-            return User::find($user_id, ['id', 'name', 'avatar', 'skin']);
+            return User::find($user_id, ['id', 'name', 'avatar', 'skin','reviews_count','buys_count','likes_count']);
         });
 //        dd($user->reviews_count);
         //用户点评若为0，则直接返回
@@ -74,8 +74,8 @@ class UserController extends Controller
         $reviews = Cache::tags('users-' . $user_id . '-reviews')
             ->rememberForever('users-' . $user_id . '-reviews-' . request('page', 1), function () use ($user) {
                 return $user->reviews()
-                    ->select('id', 'user_id', 'product_id', 'cat_id', 'brand_id', 'rate', 'body', 'imgs', 'buy', 'shop', 'updated_at')
-                    ->with(['cat:id,name', 'brand:id,name,common_name', 'product:id,name,nick_name,rate', 'product.prices'])
+                    ->select('id', 'user_id', 'product_id', 'cat_id', 'brand_id', 'rate', 'body', 'imgs', 'buy', 'shop','likes_count','hates_count', 'updated_at')
+                    ->with(['cat:id,name', 'brand:id,name,common_name', 'product:id,name,nick_name,rate,reviews_count,buys_count', 'product.prices'])
                     ->latest('updated_at')
                     ->paginate(config('common.pre_page'));
             });
@@ -85,11 +85,9 @@ class UserController extends Controller
         $cats = Cache::rememberForever('users-' . $user_id . '-c', function () use ($user) {
             return array_count_values($user->cats()->pluck('cats.name')->all());
         });
-        if (filled($cats)) {
-            //先取最大数，再取出key，key即为catname
-            $most_cat_count = max($cats);
-            $most_cat = array_random(array_keys($cats, $most_cat_count));
-        }
+        //先取最大数，再取出key，key即为catname
+        $most_cat_count = max($cats);
+        $most_cat = array_random(array_keys($cats, $most_cat_count));
 
         //用户点评最多的品牌--brands为映射数组，相同的话随机取一个，并算出占了几个
         $brands = Cache::rememberForever('users-' . $user_id . '-b', function () use ($user) {
@@ -127,7 +125,7 @@ class UserController extends Controller
                 return [];*/
             });
 
-            if(filled($matches)){
+            if (filled($matches)) {
 
                 $match_count = max($matches);//匹配到的最大次数
 

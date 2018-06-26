@@ -83,13 +83,13 @@
                                         </h5>
                                         <div class="my-1">
                                             <span class="text-muted">总点评数:</span>
-                                            <span class="text-brown">{{brandReviewsCount}}</span>
+                                            <span class="text-brown">{{brand.reviews_count}}</span>
                                             <!--<span class="text-muted ml-2">总商品数:</span>
                                             <span class="text-brown">{{brandProductsCount}}</span>-->
                                         </div>
                                         <div class="text-easy text-tiny bg-easy d-inline-block  pr-1">
                                             平均回购率：{{brand.buys_count===0 ? 0 :
-                                            Math.round(100*brandBuysCount/brandReviewsCount)}}%
+                                            Math.round(100*brand.buys_count/brand.reviews_count)}}%
                                         </div>
                                     </div>
                                 </div>
@@ -166,9 +166,9 @@
                 searching: true,
                 cat: null,
                 brand: null,
-                brandProductsCount: 0,
-                brandReviewsCount: 0,
-                brandBuysCount: 0,
+                // brandProductsCount: 0,
+                // brandReviewsCount: 0,
+                // brandBuysCount: 0,
                 products: [],
                 hide: false,
                 searchWidth: '62%',
@@ -176,7 +176,7 @@
         },
         watch: {
             query(newQuery, oldQuery) {
-                console.log('值改变了');
+                // console.log('值改变了');
                 if (newQuery.length > 0) {
                     this.searchFrame = true;
                     this.searchHint = true;
@@ -207,29 +207,29 @@
             search: _.debounce(
                 function () {
                     if (this.query.length > 0) {
-                        console.log('开始搜索...');
+                        // console.log('开始搜索...');
                         axios.get(`/instant/search?search=${this.query}`)
                             .then(response => {
-                                console.log(response.data);
+                                // console.log(response.data);
                                 if (!response.data.cat && !response.data.brand && response.data.products.length === 0) {
                                     this.searching = false;
                                 } else {
                                     this.searchHint = false;
-                                    console.log(response.data);
+                                    // console.log(response.data);
                                     this.cat = response.data.cat;
                                     this.brand = response.data.brand;
-                                    if (response.data.brand) {
-                                        // this.brandProductsCount = response.data.brand_products_count;
+                                    /*if (response.data.brand) {
+                                        this.brandProductsCount = response.data.brand_products_count;
                                         this.brandReviewsCount = response.data.brand_reviews_count;
                                         this.brandBuysCount = response.data.brand_buys_count;
-                                    }
+                                    }*/
                                     this.products = response.data.products;
                                 }
                             })
                             .catch(error => {
-                                console.log(!error);
+                                // console.log(!error);
                                 if (!!error) this.searching = false;
-                                console.log(error.response);
+                                // console.log(error.response);
                             })
                     }
                 }, 500

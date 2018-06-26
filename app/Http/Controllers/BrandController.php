@@ -25,13 +25,13 @@ class BrandController extends Controller
     public function show(int $brand_id)
     {
         $brand = Cache::rememberForever('brands-' . $brand_id, function () use ($brand_id) {
-            return Brand::find($brand_id,['id','name','common_name','country','country_id','official_website']);
+            return Brand::find($brand_id,['id','name','common_name','country','country_id','official_website','reviews_count','buys_count']);
         });
         //所有商品(带分页)--缓存处理(tag:品牌-1-商品)
         $products = Cache::tags('brands-' . $brand_id . '-products')
             ->rememberForever('brands-' . $brand_id . '-products-' . request('page', 1), function () use ($brand) {
                 return $brand->products()
-                    ->select('id','cat_id','name','nick_name','rate')
+                    ->select('id','cat_id','name','nick_name','rate','reviews_count','buys_count')
                     ->with(['cat:id,name', 'prices'])
                     ->orderBy('reviews_count', 'desc')//此处的数字是数据库中的旧数据，页面上显示的是最新缓存数据，因此页面上排名可能不是按最新排的
                     ->orderBy('id','asc')

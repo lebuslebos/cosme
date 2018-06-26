@@ -118,7 +118,7 @@
                         data.append('file', blob);
                         axios.post(`/users/${this.userId}/avatars`, data)
                             .then(response => {
-                                console.log(response);
+                                // console.log(response);
                             })
 
                     }, 'image/webp', 1

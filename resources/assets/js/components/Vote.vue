@@ -32,7 +32,7 @@
             }
         },
         mounted() {
-            console.log('okqqqq');
+            // console.log('okqqqq');
             //全部从本地获取数据
             if (this.likes !== 0 && this.$store.state.review.likeArr.includes(this.review)) {
                 this.like = true;
@@ -67,7 +67,7 @@
                 //后端
                 axios.post(`/vote`, {review: this.review,user:this.user, type: type,})
                     .then(response => {
-                        console.log(response.data);
+                        // console.log(response.data);
                     })
             },
         }

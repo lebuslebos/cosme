@@ -96,7 +96,7 @@
                     this.initName = this.newName;
                     axios.patch(`/users/${this.userId}/name`, {'name': this.newName})
                         .then(response => {
-                            console.log(response);
+                            // console.log(response);
                         })
                 }
             },

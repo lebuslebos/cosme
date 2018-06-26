@@ -26,27 +26,38 @@ class User extends Authenticatable
 
 
     //用户的点评数，以及其中的回购数
-    public function getReviewsCountAttribute()
+    public function getReviewsCountAttribute($value)
     {
-        return Cache::get('r-' . $this->id . '-u',0);
+        return Cache::rememberForever('r-' . $this->id . '-u',function ()use($value){
+            return $value;
+        });
+        //return Cache::get('r-' . $this->id . '-u',0);
     }
 
-    public function getBuysCountAttribute()
+    public function getBuysCountAttribute($value)
     {
-        return Cache::get('b-' . $this->id . '-u',0);
+        return Cache::rememberForever('b-' . $this->id . '-u',function ()use($value){
+            return $value;
+        });
+        //return Cache::get('b-' . $this->id . '-u',0);
     }
 
 
     //用户获得的赞数/踩数---从缓存获取（踩数暂不做前台展示）
-    public function getLikesCountAttribute()
+    public function getLikesCountAttribute($value)
     {
-        return Cache::get('l-' . $this->id . '-u',0);
-//        return  $value;
+        return Cache::rememberForever('l-' . $this->id. '-u', function () use ($value) {
+            return $value;
+        });
+        //return Cache::get('l-' . $this->id . '-u',0);
     }
 
-    public function getHatesCountAttribute()
+    public function getHatesCountAttribute($value)
     {
-        return Cache::get('h-' . $this->id . '-u',0);
+        return Cache::rememberForever('h-' . $this->id . '-u', function () use ($value) {
+            return $value;
+        });
+        //return Cache::get('h-' . $this->id . '-u',0);
     }
 
 
@@ -83,12 +94,12 @@ class User extends Authenticatable
     //找出对某个商品的点评--取一个
     public function my_review($product_id)
     {
-        //因新建或更新（登录用户）点评时已存入缓存。为减少查询压力，直接从缓存中取，取不出则返回空--不知道缓存会不会丢失？
-        /* $my_review = Cache::rememberForever($this->id . '-' . $product_id, function () use ($product_id) {
+        //因新建或更新（登录用户）点评时已存入缓存。为防止缓存丢失-->若缓存无数据则仍去查询
+         $my_review = Cache::rememberForever($this->id . '-' . $product_id, function () use ($product_id) {
              return Review::select('id','user_id','rate','body','imgs','buy','shop','updated_at')
                      ->where([['user_id', $this->id], ['product_id', $product_id]])->first() ?? '';
          });
-         return $my_review;*/
-        return Cache::get($this->id . '-' . $product_id,'');
+         return $my_review;
+//        return Cache::get($this->id . '-' . $product_id,'');
     }
 }

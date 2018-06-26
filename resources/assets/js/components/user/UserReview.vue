@@ -250,7 +250,7 @@
                         shop: this.shop
                     })
                         .then(response => {
-                            console.log(response.data);
+                            // console.log(response.data);
                             this.updatedAt = response.data.updated_at;
                         })
 

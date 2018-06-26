@@ -33,7 +33,7 @@
                 {{ config('app.name', '有容') }}
             </a>--}}
 
-            <app-nav app-name="{{ config('app.name', '有容') }}"
+            <app-nav app-name="{{ config('app.name') }}"
                      :is-login="@json(Auth::check())"
                      :user-id="{{Auth::id()??0}}"
                      user-name="{{optional(Auth::user())->name??''}}"

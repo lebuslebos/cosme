@@ -30,27 +30,86 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
         $schedule->call(function () {
 
-            //获取（登录+游客）的进账点评，reviews_count写入数据库
-            if (Cache::get('r-p-ids')) {
-                $r_p_ids = array_unique(Cache::get('r-p-ids'));
-                foreach ($r_p_ids as $r_p_id) {
+            //获取被点赞/点踩的进账点评，写入数据库
+            if (Cache::get('l-r-ids')) {
+                $unique_l_r_ids = array_unique(Cache::pull('l-r-ids'));
+                foreach ($unique_l_r_ids as $l_r_id) {
+                    DB::table('reviews')->where('id', $l_r_id)
+                        ->update(['likes_count' => Cache::get('l-' . $l_r_id)]);
+                }
+            }
+            if (Cache::get('h-r-ids')) {
+                $unique_h_r_ids = array_unique(Cache::pull('h-r-ids'));
+                foreach ($unique_h_r_ids as $h_r_id) {
+                    DB::table('reviews')->where('id', $h_r_id)
+                        ->update(['hates_count' => Cache::get('h-' . $h_r_id)]);
+                }
+            }
 
-                    DB::table('products')->where('id', $r_p_id)
-                        ->update(['reviews_count' => Cache::get('r-' . $r_p_id . '-p')]);
-                    //if (Cache::has('sh-' . $r_p_id)) Cache::forget('sh-' . $r_p_id);//刷新购入场所分布的缓存
+            //获取被点赞/点踩的进账用户，写入数据库
+            if (Cache::get('l-u-ids')) {
+                $unique_l_u_ids = array_unique(Cache::pull('l-u-ids'));
+                foreach ($unique_l_u_ids as $l_u_id) {
+                    DB::table('users')->where('id', $l_u_id)
+                        ->update(['likes_count' => Cache::get('l-' . $l_u_id . '-u')]);
+                }
+            }
+            if (Cache::get('h-u-ids')) {
+                $unique_h_u_ids = array_unique(Cache::pull('h-u-ids'));
+                foreach ($unique_h_u_ids as $h_u_id) {
+                    DB::table('users')->where('id', $h_u_id)
+                        ->update(['hates_count' => Cache::get('h-' . $h_u_id, '-u')]);
                 }
             }
 
 
-            //获取（登录+游客）的进账回购点评，buys_count写入数据库
-            if (Cache::get('b-p-ids')) {
-                $b_p_ids = array_unique(Cache::get('b-p-ids'));
-                foreach ($b_p_ids as $b_p_id) {
+            //获取（登录+游客）的进账点评，reviews_count写入数据库(品牌+商品+用户)
+            if (Cache::get('r-b-ids')) {
+                $unique_r_b_ids = array_unique(Cache::pull('r-b-ids'));
+                foreach ($unique_r_b_ids as $r_b_id) {
+                    DB::table('brands')->where('id', $r_b_id)
+                        ->update(['reviews_count' => Cache::get('r-' . $r_b_id . '-b')]);
+                }
+            }
+            if (Cache::get('r-p-ids')) {
+                $unique_r_p_ids = array_unique(Cache::pull('r-p-ids'));
+                foreach ($unique_r_p_ids as $r_p_id) {
+                    DB::table('products')->where('id', $r_p_id)
+                        ->update(['reviews_count' => Cache::get('r-' . $r_p_id . '-p')]);
+                }
+            }
+            if (Cache::get('r-u-ids')) {
+                $unique_r_u_ids = array_unique(Cache::pull('r-u-ids'));
+                foreach ($unique_r_u_ids as $r_u_id) {
+                    DB::table('users')->where('id', $r_u_id)
+                        ->update(['reviews_count' => Cache::get('r-' . $r_u_id . '-u')]);
+                }
+            }
 
+
+            //获取（登录+游客）的进账回购点评，buys_count写入数据库(品牌+商品+用户)
+            if (Cache::get('b-b-ids')) {
+                $unique_b_b_ids = array_unique(Cache::pull('b-b-ids'));
+                foreach ($unique_b_b_ids as $b_b_id) {
+                    DB::table('brands')->where('id', $b_b_id)
+                        ->update(['buys_count' => Cache::get('b-' . $b_b_id . '-b')]);
+                }
+            }
+            if (Cache::get('b-p-ids')) {
+                $unique_b_p_ids = array_unique(Cache::pull('b-p-ids'));
+                foreach ($unique_b_p_ids as $b_p_id) {
                     DB::table('products')->where('id', $b_p_id)
                         ->update(['buys_count' => Cache::get('b-' . $b_p_id . '-p')]);
+                }
+            }
+            if (Cache::get('b-u-ids')) {
+                $unique_b_u_ids = array_unique(Cache::pull('b-u-ids'));
+                foreach ($unique_b_u_ids as $b_u_id) {
+                    DB::table('users')->where('id', $b_u_id)
+                        ->update(['buys_count' => Cache::get('b-' . $b_u_id . '-u')]);
                 }
             }
 
@@ -58,12 +117,18 @@ class Kernel extends ConsoleKernel
             //获取（登录）进账的有内容的点评ids，循环的重新计算评分，并存入缓存新的值
             if (Cache::get('p-ids')) {
 
-                $p_ids = array_unique(Cache::get('p-ids'));
-                foreach ($p_ids as $p_id) {
-                    Cache::forever('ra-' . $p_id, round(DB::table('reviews')
+                $unique_p_ids = array_unique(Cache::pull('p-ids'));
+                foreach ($unique_p_ids as $p_id) {
+                    /*Cache::forever('ra-' . $p_id, round(DB::table('reviews')
                         ->where([['body', '<>', ''], ['product_id', $p_id]])
-                        ->avg('rate'), 1));
-                    //if (Cache::has('sk-' . $p_id)) Cache::forget('sk-' . $p_id);//刷新肤质分布的缓存
+                        ->avg('rate'), 1));*/
+                    //重新计算平均分
+                    $rate = round(DB::table('reviews')
+                        ->where([['body', '<>', ''], ['product_id', $p_id]])
+                        ->avg('rate'), 1);
+
+                    Cache::forever('ra-' . $p_id,$rate);//分数放入缓存，方便页面上的调用（因商品信息都已缓存，唯独rate等需实时）
+                    DB::table('products')->where('id', $p_id)->update(['rate' => $rate]);//同步至数据库
                 }
             }
 
@@ -72,13 +137,15 @@ class Kernel extends ConsoleKernel
 
         })->dailyAt('21:20')
             ->after(function () {
-                if (Cache::has('r-p-ids')) Cache::forget('r-p-ids');//把点评入账数组归零
-                if (Cache::has('b-p-ids')) Cache::forget('b-p-ids');//把(回购)点评入账数组归零
-                if (Cache::has('p-ids')) Cache::forget('p-ids');//把(有内容)点评入账数组归零
+                /*if (Cache::has('r-b-ids')) Cache::forget('r-b-ids');//把点评入账数组归零(品牌)
+                if (Cache::has('r-p-ids')) Cache::forget('r-p-ids');//把点评入账数组归零(商品)
+                if (Cache::has('b-b-ids')) Cache::forget('b-b-ids');//把(回购)点评入账数组归零(品牌)
+                if (Cache::has('b-p-ids')) Cache::forget('b-p-ids');//把(回购)点评入账数组归零(商品)
+
+                if (Cache::has('p-ids')) Cache::forget('p-ids');//把(有内容)点评入账数组归零*/
 
                 //把热门分类的首页排行榜+热门分类的商品页排行榜重新放入缓存
-                $popular_cats = [1, 2, 3, 4, 5];
-                foreach ($popular_cats as $popular_cat) {
+                foreach (config('common.popular_cats') as $popular_cat) {
                     Artisan::call('ranking:cache', ['cat' => $popular_cat]);
                 }
             });
