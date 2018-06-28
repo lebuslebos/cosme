@@ -57465,7 +57465,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             buys: this.$store.state.review.buys,
             buyNums: [this.buyNum, 100 - this.buyNum],
-            buyBgcolors: ['#36ac96', '#685456']
+            buyBgcolors: ['#FAACA8', '#8CA6DB']
         };
     }
 });
@@ -57794,7 +57794,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             shopNums: this.shopDatas.map(function (item) {
                 return Math.round(item * 100 / _this.reviewsCount);
             }),
-            shopBgcolors: ['#36ac96', '#1F2B58', '#AE006E', '#E96C70', '#685456']
+            shopBgcolors: ['#35c0b6', '#8CA6DB', ' #FAACA8', '#caa2c2', '#c3e1e6']
         };
     }
 });
@@ -57944,7 +57944,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             skinNums: this.skinDatas.map(function (item) {
                 return Math.ceil(item * 100 / _this.reviewsCount);
             }),
-            skinBgcolors: ['#36ac96', '#1F2B58', '#AE006E', '#E96C70', '#685456', '#FFAC00']
+            skinBgcolors: ['#d9e9e5', '#b6ddd1', '#8194c6', '#a8b3cc', '#f3caa8', '#f6e8c0']
         };
     }
 });

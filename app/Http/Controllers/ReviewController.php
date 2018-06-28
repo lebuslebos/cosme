@@ -23,7 +23,7 @@ class ReviewController extends Controller
 
     public function __construct(RankingRepository $rankingRepository)
     {
-        $this->middleware('auth')->except(['index', 'ranking', 'vote', 'store_visitor']);
+        $this->middleware('auth')->except(['index','api_index', 'ranking', 'vote', 'store_visitor']);
         $this->rankingRepository = $rankingRepository;
     }
 
@@ -79,6 +79,22 @@ class ReviewController extends Controller
 
         return view('home', compact('reviews', 'red_cat', 'red_products', 'black_cat', 'black_products'));
     }
+
+    public function api_index()
+    {
+        //设置缓存--tag:reviews
+        $reviews = Cache::rememberForever('reviews', function () {
+            return Review::select('id', 'user_id', 'product_id', 'brand_id', 'rate', 'body', 'imgs', 'buy', 'shop','likes_count','hates_count', 'updated_at')
+                ->where('body', '<>', '')
+                ->with(['product:id,name,rate', 'brand:id,name', 'user:id,name,avatar,skin,reviews_count'])
+                ->latest()
+                ->orderBy('id', 'desc')
+                ->take(config('common.pre_page'))
+                ->get();
+        });
+        return $reviews;
+    }
+
 
     public function ranking(int $cat_id, Request $request)
     {

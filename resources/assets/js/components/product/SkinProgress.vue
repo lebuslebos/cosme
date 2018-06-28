@@ -12,7 +12,7 @@
             return {
                 skins:this.$store.state.review.skins,
                 skinNums:this.skinDatas.map(item=>Math.ceil(item*100/this.reviewsCount)),
-                skinBgcolors:['#36ac96','#1F2B58','#AE006E','#E96C70','#685456','#FFAC00'],
+                skinBgcolors:['#d9e9e5','#b6ddd1','#8194c6','#a8b3cc','#f3caa8','#f6e8c0'],
             }
         },
     }

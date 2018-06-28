@@ -12,7 +12,7 @@
             return {
                 shops:this.$store.state.review.shops,
                 shopNums:this.shopDatas.map(item=>Math.round(item*100/this.reviewsCount)),
-                shopBgcolors:['#36ac96','#1F2B58','#AE006E','#E96C70','#685456'],
+                shopBgcolors:['#35c0b6','#8CA6DB',' #FAACA8','#caa2c2','#c3e1e6'],
             }
         },
 

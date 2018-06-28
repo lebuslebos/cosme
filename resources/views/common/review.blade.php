@@ -46,14 +46,9 @@
         {{--评分+回购+购买场所--}}
         <div class="d-flex align-items-center">
             <review-rate :rate="{{$review->rate}}"></review-rate>
-            {{--<div class="d-flex align-items-center mt-1 mt-md-0">--}}
             <review-buy class="ml-1 mr-2 ml-md-2" :buy="{{$review->buy}}"></review-buy>
             <review-shop class="mr-2" :shop="{{$review->shop}}"></review-shop>
             <review-date :date=@json($review->updated_at)></review-date>
-            {{--</div>--}}
-            {{--<div class="badge-easy">{{$review->updated_at}}</div>--}}
-
-            {{--<span class="badge badge-dark">买的{{$shop[$review->shop]}}的</span>--}}
         </div>
 
     </div>

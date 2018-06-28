@@ -12,7 +12,7 @@
             return {
                 buys:this.$store.state.review.buys,
                 buyNums:[this.buyNum,100-this.buyNum],
-                buyBgcolors:['#36ac96','#685456'],
+                buyBgcolors:['#FAACA8','#8CA6DB'],
             }
         },
 
