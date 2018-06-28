@@ -96,7 +96,7 @@ class User extends Authenticatable
     {
         //因新建或更新（登录用户）点评时已存入缓存。为防止缓存丢失-->若缓存无数据则仍去查询
          $my_review = Cache::rememberForever($this->id . '-' . $product_id, function () use ($product_id) {
-             return Review::select('id','user_id','rate','body','imgs','buy','shop','updated_at')
+             return Review::select('id','user_id','rate','body','imgs','buy','shop','likes_count','hates_count','updated_at')
                      ->where([['user_id', $this->id], ['product_id', $product_id]])->first() ?? '';
          });
          return $my_review;
