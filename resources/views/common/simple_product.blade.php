@@ -9,7 +9,7 @@
     {{--品牌+商品+分类--}}
     <div><a href="{{route('brands.show',[$review->brand])}}" target="_blank"
             class="text-secondary">{{$review->brand->name}}</a></div>
-    <div><a href="{{route('products.show',[$review->product])}}" target="_blank"
+    <div class="text-truncate"><a href="{{route('products.show',[$review->product])}}" target="_blank"
             class="text-main">{{$review->product->name}}</a></div>
     {{--<div><a href="{{route('cats.show',[$review->product->cat])}}"
             class="text-secondary">[{{$review->product->cat->name}}]</a></div>--}}
