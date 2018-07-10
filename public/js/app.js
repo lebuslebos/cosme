@@ -56948,7 +56948,7 @@ var index_esm = {
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
     state: {
-        upyunDomain: 'http://cosme.test.upcdn.net',
+        upyunDomain: 'https://cache-cdn.rongcosme.com',
         //国外网站的正则
         // /Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent),
         //国内网上的正则,决定用这个
