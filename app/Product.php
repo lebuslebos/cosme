@@ -17,6 +17,7 @@ class Product extends Model
 
     protected $casts = [
         'has_login_review' => 'boolean',
+//        'reviews_count'=>'integer'
     ];
 
     public function toSearchableArray()
@@ -36,25 +37,25 @@ class Product extends Model
     //商品的评分，点评数，以及其中的回购数
     public function getRateAttribute($value)
     {
-        return Cache::rememberForever('ra-' . $this->id, function () use ($value) {
+        return floatval(Cache::rememberForever('ra-' . $this->id, function () use ($value) {
             return $value;
-        });
+        }));
         //return Cache::get('ra-' . $this->id, 4.0);
     }
 
     public function getReviewsCountAttribute($value)
     {
-        return Cache::rememberForever('r-' . $this->id . '-p', function () use ($value) {
+        return intval(Cache::rememberForever('r-' . $this->id . '-p', function () use ($value) {
             return $value;
-        });
+        }));
         //return Cache::get('r-' . $this->id . '-p', 0);
     }
 
     public function getBuysCountAttribute($value)
     {
-        return Cache::rememberForever('b-' . $this->id . '-p', function () use ($value) {
+        return intval(Cache::rememberForever('b-' . $this->id . '-p', function () use ($value) {
             return $value;
-        });
+        }));
         //return Cache::get('b-' . $this->id . '-p', 0);
     }
 

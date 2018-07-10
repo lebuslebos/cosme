@@ -86,13 +86,13 @@ class ReviewController extends Controller
         $reviews = Cache::rememberForever('reviews', function () {
             return Review::select('id', 'user_id', 'product_id', 'brand_id', 'rate', 'body', 'imgs', 'buy', 'shop','likes_count','hates_count', 'updated_at')
                 ->where('body', '<>', '')
-                ->with(['product:id,name,rate', 'brand:id,name', 'user:id,name,avatar,skin,reviews_count'])
+                ->with(['product:id,name,rate,reviews_count,buys_count', 'brand:id,name', 'user:id,name,avatar,skin,reviews_count'])
                 ->latest()
                 ->orderBy('id', 'desc')
                 ->take(config('common.pre_page'))
                 ->get();
         });
-        return $reviews;
+        return compact('reviews');
     }
 
 
@@ -142,7 +142,8 @@ class ReviewController extends Controller
             'buy' => $request->buy,
             'shop' => $request->shop,
             'device' => Agent::device(),
-            'city' => implode(array_slice(Ip::find(request()->ip()), 1, 2))
+            'province'=>Ip::find(request()->ip())[1],
+            'city' => Ip::find(request()->ip())[2]
         ]);
         return ['游客' => 'ok', 'updated_at' => $review->updated_at];
     }
@@ -163,7 +164,8 @@ class ReviewController extends Controller
             'buy' => $request->buy,
             'shop' => $request->shop,
             'device' => Agent::device(),
-            'city' => implode(array_slice(Ip::find(request()->ip()), 1, 2))
+            'province'=>Ip::find(request()->ip())[1],
+            'city' => Ip::find(request()->ip())[2]
         ]);
 
         return ['reviewId' => $review->id, 'updated_at' => $review->updated_at];

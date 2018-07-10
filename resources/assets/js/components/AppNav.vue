@@ -44,8 +44,7 @@
                                 <div class="mb-2">没有搜到化妆品，原因：</div>
                                 <ul class="list-unstyled p-3 bg-light text-muted" style="line-height: 2rem">
                                     <li>1.网速有点慢</li>
-                                    <li>2.搜索的字太多了</li>
-                                    <li>3.我们还没有收录此商品</li>
+                                    <li>2.我们还没有收录此商品</li>
                                     <!--<li>4.由于篇幅原因,只展示最匹配的一个分类和一个品牌,如需更多,请按下[回车键]</li>-->
                                 </ul>
                             </div>
@@ -58,7 +57,7 @@
                             <a :href="`/cats/${cat.id}`" @mousedown.prevent target="_blank"
                                class="list-group-item list-group-item-action px-2 px-md-4">
                                 <div class="media align-items-center">
-                                    <div class="mr-2 mr-md-3 p-2" style="width: 5rem;">
+                                    <div class="product-s-size mr-md-3 p-2" >
                                         <img class="mw-100" :src="`${upyunDomain}/cats/${cat.id}.jpg!product.s`"
                                              :alt="cat.name">
                                     </div>
@@ -76,7 +75,7 @@
                             <a :href="`/brands/${brand.id}`" @mousedown.prevent target="_blank"
                                class="list-group-item list-group-item-action px-2 px-md-4">
                                 <div class="media align-items-center">
-                                    <img class="mr-2 mr-md-3 product-s-size" :src="`${upyunDomain}/brands/${brand.id}.jpg!product.s`" :alt="brand.name">
+                                    <img class="mr-md-3 product-s-size" :src="`${upyunDomain}/brands/${brand.id}.jpg!product.s`" :alt="brand.name">
                                     <div class="media-body">
                                         <h5 class="text-brown mb-0">{{brand.name}}
                                             <small class="text-main font-italic">{{brand.common_name}}</small>
@@ -101,7 +100,7 @@
                                :key="`product${product.id}`" @mousedown.prevent
                                class="list-group-item list-group-item-action px-2 px-md-4">
                                 <div class="media align-items-center">
-                                    <img class="mr-2 mr-md-3 product-s-size" :src="`${upyunDomain}/products/${product.id}.jpg!product.s`" :alt="product.name">
+                                    <img class="mr-md-3 product-s-size" :src="`${upyunDomain}/products/${product.id}.jpg!product.s`" :alt="product.name">
                                     <div class="media-body">
                                         <div><span class="text-muted">[ {{product.cat.name}} ]</span>&nbsp;
                                             <span class="text-main">{{product.brand.name}}-{{product.name}}</span>
@@ -111,7 +110,7 @@
                                             <div class="text-muted text-tiny">有{{product.reviews_count}}人用过
                                             </div>
                                         </div>
-                                        <div class="text-easy text-tiny bg-easy d-inline-block px-1">
+                                        <div class="text-easy text-tiny bg-easy d-inline-block pr-1">
                                             {{product.buys_count===0 ? 0 :
                                             Math.round(100*product.buys_count/product.reviews_count)}}%的人会再次购买
                                         </div>
@@ -178,9 +177,9 @@
             query(newQuery, oldQuery) {
                 // console.log('值改变了');
                 if (newQuery.length > 0) {
-                    this.searchFrame = true;
+                    /*this.searchFrame = true;
                     this.searchHint = true;
-                    this.searching = true;
+                    this.searching = true;*/
                     this.search();
                 } else {
                     this.searchFrame = false;
@@ -208,6 +207,9 @@
                 function () {
                     if (this.query.length > 0) {
                         // console.log('开始搜索...');
+                        this.searchFrame = true;
+                        this.searchHint = true;
+                        this.searching = true;
                         axios.get(`/instant/search?search=${this.query}`)
                             .then(response => {
                                 // console.log(response.data);
@@ -218,11 +220,6 @@
                                     // console.log(response.data);
                                     this.cat = response.data.cat;
                                     this.brand = response.data.brand;
-                                    /*if (response.data.brand) {
-                                        this.brandProductsCount = response.data.brand_products_count;
-                                        this.brandReviewsCount = response.data.brand_reviews_count;
-                                        this.brandBuysCount = response.data.brand_buys_count;
-                                    }*/
                                     this.products = response.data.products;
                                 }
                             })
@@ -246,9 +243,6 @@
             appHref() {
                 return this.currentRouteName === 'home' ? '#' : '/'
             },
-            /*appTarget() {
-                return this.currentRouteName === 'home' ? '' : ''
-            },*/
             isMobile(){
                 return this.$store.getters.isMobile;
             }

@@ -57438,7 +57438,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -57463,8 +57463,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['buyNum'],
     data: function data() {
         return {
-            buys: this.$store.state.review.buys,
-            buyNums: [this.buyNum, 100 - this.buyNum],
+            // buyNums:[this.buyNum,100-this.buyNum],
             buyBgcolors: ['#FAACA8', '#8CA6DB']
         };
     }
@@ -57505,7 +57504,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.change[data-v-12327e16]{\n    -webkit-transform: scale(1.3);\n            transform: scale(1.3);\n}\n.progress[data-v-12327e16] {\n    height: 1.6rem;\n    overflow: visible;\n}\n\n", ""]);
+exports.push([module.i, "\n.change[data-v-12327e16] {\n    -webkit-transform: scale(1.3);\n            transform: scale(1.3);\n}\n.cosme-progress[data-v-12327e16] {\n    height: 1.6rem;\n    overflow: visible;\n}\n\n", ""]);
 
 // exports
 
@@ -57516,6 +57515,7 @@ exports.push([module.i, "\n.change[data-v-12327e16]{\n    -webkit-transform: sca
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -57559,13 +57559,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
     },
 
-
+    computed: {
+        isMobile: function isMobile() {
+            return this.$store.getters.isMobile;
+        }
+    },
     methods: {
         onenter: function onenter(index) {
-            this.no = index;
+            if (!this.isMobile) this.no = index;
         },
         onleave: function onleave() {
-            this.no = null;
+            if (!this.isMobile) this.no = null;
         }
     }
 });
@@ -57581,21 +57585,21 @@ var render = function() {
   return _c("div", [
     _c(
       "div",
-      { staticClass: "progress align-items-center box-shadow" },
+      { staticClass: "cosme-progress d-flex align-items-center text-tiny" },
       _vm._l(_vm.nums, function(num, index) {
         return _c(
           "div",
           {
             key: index,
-            staticClass:
-              "progress-bar h-100 font-italic text-white hover-pointer",
+            staticClass: "progress-bar h-100 font-italic hover-pointer",
             style: { width: num + "%", backgroundColor: _vm.colors[index] },
             attrs: {
               role: "progressbar",
               "data-toggle": "tooltip",
-              "data-original-title": _vm.fromShop
-                ? _vm.$store.state.review.shopHints[index]
-                : ""
+              "data-original-title":
+                _vm.fromShop && !_vm.isMobile
+                  ? _vm.$store.state.review.shopHints[index]
+                  : ""
             },
             on: {
               mouseover: function($event) {
@@ -57611,7 +57615,7 @@ var render = function() {
                 : num >= 4 && num <= 50
                   ? _c("span", [_vm._v(_vm._s(num) + "%")])
                   : _c("span", [
-                      _vm._v(_vm._s(_vm.texts[index]) + _vm._s(num) + "%")
+                      _vm._v(_vm._s(_vm.texts[index]) + " " + _vm._s(num) + "%")
                     ])
             ])
           ]
@@ -57664,7 +57668,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("BaseProgress", {
     staticClass: "mb-3",
-    attrs: { texts: _vm.buys, nums: _vm.buyNums, colors: _vm.buyBgcolors }
+    attrs: {
+      texts: _vm.$store.state.review.buys,
+      nums: [_vm.buyNum, 100 - _vm.buyNum],
+      colors: _vm.buyBgcolors
+    }
   })
 }
 var staticRenderFns = []
@@ -57763,7 +57771,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -57785,15 +57793,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "shop-progress",
     components: { BaseProgress: __WEBPACK_IMPORTED_MODULE_0__BaseProgress___default.a },
-    props: ['shopDatas', 'reviewsCount'],
+    props: ['shopNums'],
     data: function data() {
-        var _this = this;
-
         return {
-            shops: this.$store.state.review.shops,
-            shopNums: this.shopDatas.map(function (item) {
-                return Math.round(item * 100 / _this.reviewsCount);
-            }),
             shopBgcolors: ['#35c0b6', '#8CA6DB', ' #FAACA8', '#caa2c2', '#c3e1e6']
         };
     }
@@ -57810,7 +57812,7 @@ var render = function() {
   return _c("BaseProgress", {
     staticClass: "mb-3",
     attrs: {
-      texts: _vm.shops,
+      texts: _vm.$store.state.review.shops,
       nums: _vm.shopNums,
       colors: _vm.shopBgcolors,
       fromShop: true
@@ -57913,7 +57915,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -57935,15 +57937,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "skin-progress",
     components: { BaseProgress: __WEBPACK_IMPORTED_MODULE_0__BaseProgress___default.a },
-    props: ['skinDatas', 'reviewsCount'],
+    props: ['skinNums'],
     data: function data() {
-        var _this = this;
-
         return {
-            skins: this.$store.state.review.skins,
-            skinNums: this.skinDatas.map(function (item) {
-                return Math.ceil(item * 100 / _this.reviewsCount);
-            }),
             skinBgcolors: ['#d9e9e5', '#b6ddd1', '#8194c6', '#a8b3cc', '#f3caa8', '#f6e8c0']
         };
     }
@@ -57958,7 +57954,11 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("BaseProgress", {
-    attrs: { texts: _vm.skins, nums: _vm.skinNums, colors: _vm.skinBgcolors }
+    attrs: {
+      texts: _vm.$store.state.review.skins,
+      nums: _vm.skinNums,
+      colors: _vm.skinBgcolors
+    }
   })
 }
 var staticRenderFns = []
@@ -58696,7 +58696,7 @@ var render = function() {
           ? _c(
               "div",
               {
-                staticClass: "text-easy bg-easy text-tiny d-inline-block px-1"
+                staticClass: "text-easy bg-easy text-tiny d-inline-block pr-1"
               },
               [
                 _vm._v(
@@ -58717,7 +58717,7 @@ var render = function() {
           : _c(
               "div",
               {
-                staticClass: "text-easy bg-easy text-tiny d-inline-block px-1"
+                staticClass: "text-easy bg-easy text-tiny d-inline-block pr-1"
               },
               [
                 _vm._v(
@@ -60998,7 +60998,7 @@ var render = function() {
           width: _vm.isMobile ? 62 : 119,
           height: _vm.isMobile ? 62 : 119,
           "file-size-limit": 5 * 1024 * 1024,
-          quality: 1,
+          quality: _vm.isMobile ? 7.26 : 3.78,
           "show-remove-button": false,
           "initial-image": _vm.imgSrc + "!product"
         },
@@ -67003,7 +67003,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -67036,9 +67035,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         query: function query(newQuery, oldQuery) {
             // console.log('值改变了');
             if (newQuery.length > 0) {
-                this.searchFrame = true;
+                /*this.searchFrame = true;
                 this.searchHint = true;
-                this.searching = true;
+                this.searching = true;*/
                 this.search();
             } else {
                 this.searchFrame = false;
@@ -67070,6 +67069,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (this.query.length > 0) {
                 // console.log('开始搜索...');
+                this.searchFrame = true;
+                this.searchHint = true;
+                this.searching = true;
                 axios.get('/instant/search?search=' + this.query).then(function (response) {
                     // console.log(response.data);
                     if (!response.data.cat && !response.data.brand && response.data.products.length === 0) {
@@ -67079,11 +67081,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         // console.log(response.data);
                         _this2.cat = response.data.cat;
                         _this2.brand = response.data.brand;
-                        /*if (response.data.brand) {
-                            this.brandProductsCount = response.data.brand_products_count;
-                            this.brandReviewsCount = response.data.brand_reviews_count;
-                            this.brandBuysCount = response.data.brand_buys_count;
-                        }*/
                         _this2.products = response.data.products;
                     }
                 }).catch(function (error) {
@@ -67105,10 +67102,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         appHref: function appHref() {
             return this.currentRouteName === 'home' ? '#' : '/';
         },
-
-        /*appTarget() {
-            return this.currentRouteName === 'home' ? '' : ''
-        },*/
         isMobile: function isMobile() {
             return this.$store.getters.isMobile;
         }
@@ -68309,7 +68302,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.fade-enter-active[data-v-219e1709], .fade-leave-active[data-v-219e1709] {\n  -webkit-transition: opacity .1s;\n  transition: opacity .1s;\n}\n.fade-enter[data-v-219e1709], .fade-leave-to[data-v-219e1709] {\n  opacity: 0;\n}\ninput[data-v-219e1709]:focus {\n  border-width: 2px;\n}\n.form-control[data-v-219e1709] {\n  line-height: normal;\n  /*padding: 8px 0;*/\n}\n.mobile-input .form-control[data-v-219e1709] {\n  width: 30px;\n  min-height: 30px;\n  /*line-height: 30px;*/\n  font-size: 29px;\n}\n@media only screen and (max-width: 375px) {\n.mobile-input .form-control[data-v-219e1709] {\n      width: 27px;\n      min-height: 34px;\n      /*line-height: 34px;*/\n}\n}\n@media only screen and (max-width: 320px) {\n.mobile-input .form-control[data-v-219e1709] {\n      width: 23px;\n      min-height: 30px;\n      /*line-height: 30px;*/\n}\n}\n.code-input .form-control[data-v-219e1709] {\n  width: 44px;\n  min-height: 44px;\n  font-size: 33px;\n}\n", ""]);
+exports.push([module.i, "\n.fade-enter-active[data-v-219e1709], .fade-leave-active[data-v-219e1709] {\n  -webkit-transition: opacity .1s;\n  transition: opacity .1s;\n}\n.fade-enter[data-v-219e1709], .fade-leave-to[data-v-219e1709] {\n  opacity: 0;\n}\ninput[data-v-219e1709]:focus {\n  border-width: 2px;\n}\n.form-control[data-v-219e1709] {\n  line-height: normal;\n}\n.mobile-input .form-control[data-v-219e1709] {\n  width: 30px;\n  min-height: 30px;\n  /*line-height: 30px;*/\n  font-size: 29px;\n}\n@media only screen and (max-width: 375px) {\n.mobile-input .form-control[data-v-219e1709] {\n      width: 27px;\n      min-height: 34px;\n      /*line-height: 34px;*/\n}\n}\n@media only screen and (max-width: 320px) {\n.mobile-input .form-control[data-v-219e1709] {\n      width: 23px;\n      min-height: 30px;\n      /*line-height: 30px;*/\n}\n}\n.code-input .form-control[data-v-219e1709] {\n  width: 44px;\n  min-height: 44px;\n  font-size: 33px;\n}\n", ""]);
 
 // exports
 
@@ -68320,6 +68313,8 @@ exports.push([module.i, "\n.fade-enter-active[data-v-219e1709], .fade-leave-acti
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -68614,7 +68609,7 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass: "d-flex justify-content-between w-100  px-md-5",
+          staticClass: "d-flex justify-content-between w-100",
           class: [_vm.fromMobile ? "mobile-input" : "code-input px-4"]
         },
         [
@@ -68838,7 +68833,6 @@ var render = function() {
                       "div",
                       {
                         key: "arrow",
-                        staticClass: "hover-pointer",
                         on: {
                           click: function($event) {
                             _vm.inMobile = true
@@ -68914,11 +68908,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "hover-pointer", attrs: { "data-dismiss": "modal" } },
-      [_c("i", { staticClass: "fa fa-times fa-2x" })]
-    )
+    return _c("div", { attrs: { "data-dismiss": "modal" } }, [
+      _c("i", { staticClass: "fa fa-times fa-2x" })
+    ])
   }
 ]
 render._withStripped = true
@@ -69075,10 +69067,8 @@ var render = function() {
                                     [
                                       _c("li", [_vm._v("1.网速有点慢")]),
                                       _vm._v(" "),
-                                      _c("li", [_vm._v("2.搜索的字太多了")]),
-                                      _vm._v(" "),
                                       _c("li", [
-                                        _vm._v("3.我们还没有收录此商品")
+                                        _vm._v("2.我们还没有收录此商品")
                                       ])
                                     ]
                                   )
@@ -69117,8 +69107,8 @@ var render = function() {
                                       _c(
                                         "div",
                                         {
-                                          staticClass: "mr-2 mr-md-3 p-2",
-                                          staticStyle: { width: "5rem" }
+                                          staticClass:
+                                            "product-s-size mr-md-3 p-2"
                                         },
                                         [
                                           _c("img", {
@@ -69187,8 +69177,7 @@ var render = function() {
                                     { staticClass: "media align-items-center" },
                                     [
                                       _c("img", {
-                                        staticClass:
-                                          "mr-2 mr-md-3 product-s-size",
+                                        staticClass: "mr-md-3 product-s-size",
                                         attrs: {
                                           src:
                                             _vm.upyunDomain +
@@ -69296,8 +69285,7 @@ var render = function() {
                                     { staticClass: "media align-items-center" },
                                     [
                                       _c("img", {
-                                        staticClass:
-                                          "mr-2 mr-md-3 product-s-size",
+                                        staticClass: "mr-md-3 product-s-size",
                                         attrs: {
                                           src:
                                             _vm.upyunDomain +
@@ -69374,7 +69362,7 @@ var render = function() {
                                           "div",
                                           {
                                             staticClass:
-                                              "text-easy text-tiny bg-easy d-inline-block px-1"
+                                              "text-easy text-tiny bg-easy d-inline-block pr-1"
                                           },
                                           [
                                             _vm._v(
@@ -70231,7 +70219,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "review",
     components: { ReviewRate: __WEBPACK_IMPORTED_MODULE_0__review_ReviewRate___default.a, ReviewBuy: __WEBPACK_IMPORTED_MODULE_1__review_ReviewBuy___default.a, ReviewShop: __WEBPACK_IMPORTED_MODULE_2__review_ReviewShop___default.a, ReviewDate: __WEBPACK_IMPORTED_MODULE_3__review_ReviewDate___default.a, ReviewImg: __WEBPACK_IMPORTED_MODULE_4__review_ReviewImg___default.a, Vote: __WEBPACK_IMPORTED_MODULE_6__Vote___default.a, ReviewUpload: __WEBPACK_IMPORTED_MODULE_5__review_ReviewUpload___default.a },
-    props: ['isLogin', 'productId', 'review', 'likes', 'hates', 'fromList'],
+    props: ['isLogin', 'productId', 'review', 'fromList'],
     data: function data() {
         return {
             //大组件之间的显示和隐藏
@@ -70454,7 +70442,7 @@ var render = function() {
           "div",
           {
             key: "visitorReviewed",
-            staticClass: "d-flex align-items-center rounded bg-light-brown"
+            staticClass: "d-flex align-items-center rounded border p-3"
           },
           [
             _vm.isMobile
@@ -70553,7 +70541,7 @@ var render = function() {
             "div",
             {
               key: "userReviewed",
-              staticClass: "rounded bg-light-brown",
+              staticClass: "rounded border p-3",
               on: {
                 click: function($event) {
                   if ($event.target !== $event.currentTarget) {
@@ -70741,8 +70729,8 @@ var render = function() {
                                   attrs: {
                                     review: _vm.initReviewId,
                                     user: _vm.review.user_id,
-                                    likes: _vm.likes,
-                                    hates: _vm.hates
+                                    likes: _vm.review.likes_count,
+                                    hates: _vm.review.hates_count
                                   }
                                 })
                               : _vm._e(),
@@ -70792,7 +70780,7 @@ var render = function() {
           )
         : _c(
             "div",
-            { key: "notReviewed", staticClass: "rounded bg-light-brown" },
+            { key: "notReviewed", staticClass: "rounded border p-3" },
             [
               _c("div", { staticClass: "bg-easy rounded" }, [
                 _c("span", { staticClass: "rate ml-1" }, [

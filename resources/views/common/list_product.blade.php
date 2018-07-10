@@ -48,7 +48,7 @@
                 </li>
             @endforelse
         </ul>
-        <div class="text-easy bg-easy text-tiny d-inline-block px-1 mt-1">
+        <div class="text-easy bg-easy text-tiny d-inline-block pr-1 mt-1">
             {{$product->buys_count==0 ? 0 : round(100*$product->buys_count/$product->reviews_count)}}%的人会再次购买
         </div>
 

@@ -33,53 +33,10 @@
             <div class="text-muted text-tiny">{{$match_user->skin}}皮肤</div>
 
             <div class="text-muted text-tiny">用过了{{$match_user->reviews_count}}个化妆品</div>
-            <div class="text-easy bg-easy text-tiny d-inline-block px-1">
+            <div class="text-easy bg-easy text-tiny d-inline-block pr-1">
                 匹配度{{round(100*$match_count/$user->buys_count,1)}}%
             </div>
 
         </div>
     </div>
-
-
-    {{--<ul class="list-unstyled">
-        @foreach($match_users as $match_user)
-            <li class="media py-3 border-top align-items-center">
-                --}}{{--排序皇冠图--}}{{--
-                @if($loop->iteration==1)
-                    <img src="{{asset('img/rankings/icon_ranking_s_01.png')}}" class="mr-2" alt="最匹配"
-                         title="最匹配的人">
-                @elseif($loop->iteration==2)
-                    <img src="{{asset('img/rankings/icon_ranking_s_02.png')}}" class="mr-2" alt="第二匹配"
-                         title="第二匹配的人">
-                @else
-                    <img src="{{asset('img/rankings/icon_ranking_s_03.png')}}" class="mr-2" alt="第三匹配"
-                         title="第三匹配的人">
-                @endif
-                --}}{{--用户头像--}}{{--
-                <a href="{{route('users.show',[$match_user])}}">
-                    <img class="mr-2 rounded" src="{{$match_user->avatar}}"
-                         alt="{{$match_user->name}}的头像"
-                         title="{{$match_user->name}}的头像"
-                         style="width: 5rem;">
-                </a>
-                --}}{{--用户信息--}}{{--
-                <div class="media-body">
-                    <div><a href="{{route('users.show',[$match_user])}}"
-                            class="text-main">
-                            {{$match_user->name}}
-                        </a></div>
-                    <div class="text-muted text-tiny">{{$match_user->skin}}皮肤</div>
-
-                    <div class="text-muted text-tiny">用过了{{$match_user->reviews_count}}个化妆品</div>
-                    <div class="text-easy bg-easy text-tiny d-inline-block px-1">
-                        匹配度{{round(100*($match_map[$match_user->id])/Auth::user()->buys_count,1)}}
-                        %
-                    </div>
-
-                </div>
-            </li>
-
-        @endforeach
-    </ul>--}}
-
 @endif

@@ -1,16 +1,17 @@
 <template>
     <div>
-        <div class="progress align-items-center box-shadow">
-            <div class="progress-bar h-100 font-italic text-white hover-pointer" role="progressbar"
+        <div class="cosme-progress d-flex align-items-center text-tiny">
+            <div class="progress-bar h-100 font-italic hover-pointer" role="progressbar"
                  v-for="(num,index) in nums" :key="index"
                  @mouseover="onenter(index)" @mouseout="onleave"
                  :style="{width:num+'%',backgroundColor:colors[index]}"
-                 data-toggle="tooltip" :data-original-title="fromShop ?$store.state.review.shopHints[index] : ''">
+                 data-toggle="tooltip"
+                 :data-original-title="fromShop && !isMobile ? $store.state.review.shopHints[index] : ''">
 
                 <div>
                     <span v-if="num<4"></span>
                     <span v-else-if="num>=4 && num<=50">{{num}}%</span>
-                    <span v-else>{{texts[index]}}{{num}}%</span>
+                    <span v-else>{{texts[index]}} {{num}}%</span>
                 </div>
 
             </div>
@@ -29,34 +30,39 @@
     export default {
         name: "base-progress",
         // 接受的数据为相同长度的数组，分别是文本、对应的数量、对应的颜色
-        props: ['texts', 'nums', 'colors','fromShop'],
+        props: ['texts', 'nums', 'colors', 'fromShop'],
         data() {
             return {
                 no: null,
             }
         },
-        mounted(){
+        mounted() {
             $('[data-toggle="tooltip"]').tooltip({
-                container:'body',
+                container: 'body',
             })
         },
-
+        computed:{
+            isMobile(){
+                return this.$store.getters.isMobile;
+            }
+        },
         methods: {
             onenter(index) {
-                this.no = index;
+                if(!this.isMobile)this.no = index;
             },
             onleave() {
-                this.no = null;
+                if(!this.isMobile)this.no = null;
             }
         }
     }
 </script>
 
 <style scoped>
-    .change{
+    .change {
         transform: scale(1.3);
     }
-    .progress {
+
+    .cosme-progress {
         height: 1.6rem;
         overflow: visible;
     }

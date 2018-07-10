@@ -10250,8 +10250,7 @@ button:focus {
   background: #36ac96;
 }
 
-.text-tiny,
-.progress {
+.text-tiny {
   font-size: 0.85rem;
 }
 
@@ -10265,6 +10264,10 @@ button:focus {
 
 .text-large {
   font-size: 1.2rem;
+}
+
+.text-xl {
+  font-size: 1.3rem;
 }
 
 .touch-size {
@@ -10515,9 +10518,9 @@ img:not(.double-star-size) {
     width: 8.5rem;
   }*/
 
-  .product-name {
+  /*.product-name{
     font-size: 1.38rem;
-  }
+  }*/
 
   a.text-truncate,
   .name-truncate {

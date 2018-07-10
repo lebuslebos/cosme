@@ -4,7 +4,7 @@
 
 <div class="text-center mr-3" style="width: 119px;">
     <a href="{{route('products.show',[$review->product])}}" class="d-block mb-1" target="_blank">
-        <img class="product-size" src="{{Storage::url('products')}}/{{$review->product->id}}.jpg!product" alt="{{$review->product->name}}">
+        <img class="product-size" src="{{Storage::url('products')}}/{{$review->product_id}}.jpg!product" alt="{{$review->product->name}}">
     </a>
     {{--品牌+商品+分类--}}
     <div><a href="{{route('brands.show',[$review->brand])}}" target="_blank"

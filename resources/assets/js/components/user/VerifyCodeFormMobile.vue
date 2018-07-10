@@ -9,7 +9,7 @@
             </transition>
         </div>
 
-        <div class="d-flex justify-content-between w-100  px-md-5"
+        <div class="d-flex justify-content-between w-100"
              :class="[fromMobile?'mobile-input':'code-input px-4']">
 
             <!--验证码假设为4个的情况下。循环三次，下标012有值的话显示-->
@@ -39,7 +39,8 @@
                             @click="requestCode">
                         发送验证码
                     </button>
-                    <img v-else-if="!showSendBtn" class="loading-size" :src="`${upyunDomain}/icons/loading.gif`" alt="正在玩命加载">
+                    <img v-else-if="!showSendBtn" class="loading-size" :src="`${upyunDomain}/icons/loading.gif`"
+                         alt="正在玩命加载">
                 </transition>
             </div>
         </template>
@@ -53,7 +54,8 @@
 
             <div class="mt-3" style="min-height: 2.4rem;">
                 <transition name="fade">
-                    <img v-if="getVerifyCode.length === numLength && !loginError" class="loading-size" :src="`${upyunDomain}/icons/loading.gif`" alt="正在玩命加载">
+                    <img v-if="getVerifyCode.length === numLength && !loginError" class="loading-size"
+                         :src="`${upyunDomain}/icons/loading.gif`" alt="正在玩命加载">
 
                 </transition>
             </div>
@@ -110,7 +112,7 @@
             this._setSmsInputDisplay();
         },
         computed: {
-            upyunDomain(){
+            upyunDomain() {
                 return this.$store.state.device.upyunDomain;
             },
             getVerifyCode() {
@@ -142,36 +144,36 @@
             },
             onKeyUp(e) {
                 // if(this.getVerifyCode.length!==this.numLength) {
-                    if (e.keyCode === 8) { // 删除
-                        // 用户开始删除时把错误置空
-                        if (!!this.loginError) this.loginError = '';
+                if (e.keyCode === 8) { // 删除
+                    // 用户开始删除时把错误置空
+                    if (!!this.loginError) this.loginError = '';
 
-                        if (this.position > 0) {
-                            this.position--;
-                            this.verifyCode.splice(-2, 1);
-                            this.verifyCode.unshift(null);
-                            this._setSmsInputDisplay()
-                        }
-                    } else if (e.keyCode >= 48 && e.keyCode <= 57) { // 仅可以输入数字
-                        if (this.position < this.numLength - 1) {
-                            this.position++;
-                            this.verifyCode.splice(-1, 1, String.fromCharCode(e.keyCode));
-                            this.verifyCode.shift();
-                            this.verifyCode.push(null);
-                            this._setSmsInputDisplay()
-                        } else {
-
-                            if (!this.fromMobile) {
-                                document.activeElement.blur();// iOS下隐藏键盘
-                                this.onLogin();
-                            }
-                            // this.submit()
-                        }
-                    } else {
-                        // return [e.preventDefault(),false]
-                        // e.target.value = '' // remove NaN
-                        // return false;
+                    if (this.position > 0) {
+                        this.position--;
+                        this.verifyCode.splice(-2, 1);
+                        this.verifyCode.unshift(null);
+                        this._setSmsInputDisplay()
                     }
+                } else if (e.keyCode >= 48 && e.keyCode <= 57) { // 仅可以输入数字
+                    if (this.position < this.numLength - 1) {
+                        this.position++;
+                        this.verifyCode.splice(-1, 1, String.fromCharCode(e.keyCode));
+                        this.verifyCode.shift();
+                        this.verifyCode.push(null);
+                        this._setSmsInputDisplay()
+                    } else {
+
+                        if (!this.fromMobile) {
+                            document.activeElement.blur();// iOS下隐藏键盘
+                            this.onLogin();
+                        }
+                        // this.submit()
+                    }
+                } else {
+                    // return [e.preventDefault(),false]
+                    // e.target.value = '' // remove NaN
+                    // return false;
+                }
                 /*}else{
                     if(e.keyCode!==8 || e.keyCode!==13){
                         e.preventDefault()
@@ -187,11 +189,8 @@
                     const phone = this.getVerifyCode;
 
 
-
                     /*//测试专用
                     this.$emit('toCode', phone)*/
-
-
 
 
                     // 正则验证
@@ -273,34 +272,30 @@
         border-width: 2px;
     }
 
-    .form-control{
+    .form-control {
         line-height: normal;
-        /*padding: 8px 0;*/
     }
-    .mobile-input {
-        .form-control {
-            width: 30px;
+
+    .mobile-input .form-control {
+        width: 30px;
+        min-height: 30px;
+        /*line-height: 30px;*/
+        font-size: 29px;
+        @media only screen and (max-width: 375px) {
+            width: 27px;
+            min-height: 34px;
+            /*line-height: 34px;*/
+        }
+        @media only screen and (max-width: 320px) {
+            width: 23px;
             min-height: 30px;
             /*line-height: 30px;*/
-            font-size: 29px;
-            @media only screen and (max-width: 375px) {
-                width: 27px;
-                min-height: 34px;
-                /*line-height: 34px;*/
-            }
-            @media only screen and (max-width: 320px) {
-                width: 23px;
-                min-height: 30px;
-                /*line-height: 30px;*/
-            }
         }
     }
 
-    .code-input {
-        .form-control {
-            width: 44px;
-            min-height: 44px;
-            font-size: 33px;
-        }
+    .code-input .form-control {
+        width: 44px;
+        min-height: 44px;
+        font-size: 33px;
     }
 </style>

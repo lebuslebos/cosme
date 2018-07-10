@@ -33,8 +33,7 @@
             <div>没有搜到化妆品，原因：</div>
             <ul class="list-unstyled p-3 bg-light text-muted" style="line-height: 2rem">
                 <li>1.网速有点慢</li>
-                <li>2.搜索的字太多了</li>
-                <li>3.我们还没有收录此商品</li>
+                <li>2.我们还没有收录此商品</li>
             </ul>
         @endif
 

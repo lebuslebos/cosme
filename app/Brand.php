@@ -30,16 +30,16 @@ class Brand extends Model
     }*/
     public function getReviewsCountAttribute($value)
     {
-        return Cache::rememberForever('r-' . $this->id . '-b',function ()use($value){
+        return intval(Cache::rememberForever('r-' . $this->id . '-b',function ()use($value){
             return $value;
-        });
+        }));
         //return Cache::get('r-' . $this->id . '-b',$value);
     }
     public function getBuysCountAttribute($value)
     {
-        return Cache::rememberForever('b-' . $this->id . '-b',function ()use($value){
+        return intval(Cache::rememberForever('b-' . $this->id . '-b',function ()use($value){
             return $value;
-        });
+        }));
         //return Cache::get('b-' . $this->id . '-b',0);
     }
 

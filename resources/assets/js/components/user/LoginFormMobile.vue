@@ -9,7 +9,7 @@
                     <!--左边的icon-->
                     <transition name="fade" mode="out-in">
                         <div v-if="inMobile" key="heart"><i class="fa fa-heart" style="font-size:1.4rem"></i></div>
-                        <div v-else key="arrow" class="hover-pointer" @click="inMobile=true">
+                        <div v-else key="arrow" @click="inMobile=true">
                             <i class="fa fa-arrow-left fa-2x"></i>
                         </div>
                     </transition>
@@ -22,7 +22,7 @@
                         </div>
                     </transition>
                     <!--右边的叉叉-->
-                    <div class="hover-pointer" data-dismiss="modal"><i class="fa fa-times fa-2x"></i></div>
+                    <div data-dismiss="modal"><i class="fa fa-times fa-2x"></i></div>
                 </div>
 
                 <div class="modal-body" style="height: 200px">

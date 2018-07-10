@@ -2,7 +2,7 @@
     <!--最外层的过渡，多元素之间的过渡，并不属于列表过渡-->
     <transition name="fade" mode="out-in">
         <!--已点评（游客）-->
-        <div class="d-flex align-items-center rounded bg-light-brown" v-if="visitorReviewed" key="visitorReviewed">
+        <div class="d-flex align-items-center rounded border p-3" v-if="visitorReviewed" key="visitorReviewed">
             <!--手机端-->
             <div v-if="isMobile" class="pr-2" style="height: 21px">
                 <span><i class="fa fa-check align-middle touch-size"></i></span>
@@ -33,7 +33,7 @@
 
 
         <!--已点评（登录用户）-->
-        <div v-else-if="userReviewed" key="userReviewed" class="rounded bg-light-brown"
+        <div v-else-if="userReviewed" key="userReviewed" class="rounded border p-3"
              @click.self="toggleShowReviewMobile">
             <!--已点评用户最初的内容-->
             <div class="d-flex align-items-center ">
@@ -95,8 +95,8 @@
                         <Vote v-if="!!review"
                               :review="initReviewId"
                               :user="review.user_id"
-                              :likes="likes"
-                              :hates="hates"/>
+                              :likes="review.likes_count"
+                              :hates="review.hates_count"/>
                         <div class="ml-auto" v-show="showEditBtn">
                             <button type="button" class="btn btn-easy"
                                     :class="{'btn-pc':!isMobile}" @click="editReview">
@@ -110,7 +110,7 @@
         </div>
 
         <!--未点评（包括游客和登录用户）+已登录的编辑点评-->
-        <div v-else key="notReviewed" class="rounded bg-light-brown">
+        <div v-else key="notReviewed" class="rounded border p-3">
             <!--点评打分-->
             <div class="bg-easy rounded">
                 <span class="rate ml-1">
@@ -203,7 +203,7 @@
     export default {
         name: "review",
         components: {ReviewRate, ReviewBuy, ReviewShop, ReviewDate, ReviewImg, Vote, ReviewUpload,},
-        props: ['isLogin', 'productId', 'review', 'likes', 'hates', 'fromList'],
+        props: ['isLogin', 'productId', 'review', 'fromList'],
         data() {
             return {
                 //大组件之间的显示和隐藏

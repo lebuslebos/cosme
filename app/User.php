@@ -15,30 +15,30 @@ class User extends Authenticatable
     protected $guarded = [];
     //取模型时不取这些属性的值
     protected $hidden = [
-        'mobile', 'remember_token', 'created_at', 'updated_at'
+        'mobile', 'province','city','remember_token', 'created_at', 'updated_at'
     ];
 
     public function getSkinAttribute($value)
     {
         $skin = ['中性', '干性', '混合性', '油性', '敏感性', '过敏性'];
-        return $skin[$value];
+        return $skin[intval($value)];
     }
 
 
     //用户的点评数，以及其中的回购数
     public function getReviewsCountAttribute($value)
     {
-        return Cache::rememberForever('r-' . $this->id . '-u',function ()use($value){
+        return intval(Cache::rememberForever('r-' . $this->id . '-u',function ()use($value){
             return $value;
-        });
+        }));
         //return Cache::get('r-' . $this->id . '-u',0);
     }
 
     public function getBuysCountAttribute($value)
     {
-        return Cache::rememberForever('b-' . $this->id . '-u',function ()use($value){
+        return intval(Cache::rememberForever('b-' . $this->id . '-u',function ()use($value){
             return $value;
-        });
+        }));
         //return Cache::get('b-' . $this->id . '-u',0);
     }
 
@@ -46,17 +46,17 @@ class User extends Authenticatable
     //用户获得的赞数/踩数---从缓存获取（踩数暂不做前台展示）
     public function getLikesCountAttribute($value)
     {
-        return Cache::rememberForever('l-' . $this->id. '-u', function () use ($value) {
+        return intval(Cache::rememberForever('l-' . $this->id. '-u', function () use ($value) {
             return $value;
-        });
+        }));
         //return Cache::get('l-' . $this->id . '-u',0);
     }
 
     public function getHatesCountAttribute($value)
     {
-        return Cache::rememberForever('h-' . $this->id . '-u', function () use ($value) {
+        return intval(Cache::rememberForever('h-' . $this->id . '-u', function () use ($value) {
             return $value;
-        });
+        }));
         //return Cache::get('h-' . $this->id . '-u',0);
     }
 

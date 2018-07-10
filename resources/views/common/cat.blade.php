@@ -34,7 +34,7 @@
 
         {{--<h1 class="mt-0">{{$cat->name}}</h1>--}}
         <div class="border-dotted pl-md-2 py-2">
-            <div class="text-easy bg-easy d-inline-block  px-1">包括:{{$cat->similar_name}}</div>
+            <div class="text-easy bg-easy d-inline-block  pr-1">包括:{{$cat->similar_name}}</div>
         </div>
         {{--<div class="align-self-end ml-2">这里是一些介绍这里是一些介绍这里是一些介绍</div>--}}
     </div>

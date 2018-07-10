@@ -1,5 +1,5 @@
 <template>
-    <BaseProgress :texts="buys" :nums="buyNums" :colors="buyBgcolors" class="mb-3"/>
+    <BaseProgress :texts="$store.state.review.buys" :nums="[buyNum,100-buyNum]" :colors="buyBgcolors" class="mb-3"/>
 </template>
 
 <script>
@@ -10,8 +10,7 @@
         props:['buyNum'],
         data(){
             return {
-                buys:this.$store.state.review.buys,
-                buyNums:[this.buyNum,100-this.buyNum],
+                // buyNums:[this.buyNum,100-this.buyNum],
                 buyBgcolors:['#FAACA8','#8CA6DB'],
             }
         },

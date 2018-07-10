@@ -42,17 +42,17 @@ class Review extends Model
     //点评的赞数/踩数---从缓存获取
     public function getLikesCountAttribute($value)
     {
-        return Cache::rememberForever('l-' . $this->id, function () use ($value) {
+        return intval(Cache::rememberForever('l-' . $this->id, function () use ($value) {
             return $value;
-        });
+        }));
         //return Cache::get('l-' . $this->id,0);
     }
 
     public function getHatesCountAttribute($value)
     {
-        return Cache::rememberForever('h-' . $this->id, function () use ($value) {
+        return intval(Cache::rememberForever('h-' . $this->id, function () use ($value) {
             return $value;
-        });
+        }));
         //return Cache::get('h-' . $this->id,0);
     }
 

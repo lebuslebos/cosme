@@ -7,8 +7,8 @@
                 :disable-scroll-to-zoom="disableZoom"
                 :disable-pinch-to-zoom="disableZoom"
 
-                :width="isMobile?62:119" :height="isMobile?62:119"
-                :file-size-limit="5*1024*1024" :quality="1"
+                :width="isMobile ? 62 : 119" :height="isMobile ? 62 : 119"
+                :file-size-limit="5*1024*1024" :quality="isMobile ? 7.26 : 3.78"
                 :show-remove-button="false"
                 :initial-image="imgSrc+'!product'"
                 @new-image="newImage"

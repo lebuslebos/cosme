@@ -16,13 +16,16 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('avatar')->default(Storage::url('avatars/default.jpg'));//默认为1号头像，并做缩略图处理
             $table->char('mobile',11)->unique();
             $table->unsignedTinyInteger('skin')->default(2);
+            $table->string('province')->default('');
+            $table->string('city')->default('');
             $table->unsignedInteger('reviews_count')->default(0);
             $table->unsignedInteger('buys_count')->default(0);
             $table->unsignedInteger('likes_count')->default(0);
             $table->unsignedInteger('hates_count')->default(0);
+            $table->string('openid')->default('');
+            $table->string('avatar')->default(Storage::url('avatars/default.jpg'));//默认为1号头像，并做缩略图处理
             $table->rememberToken();
             $table->timestamps();
         });

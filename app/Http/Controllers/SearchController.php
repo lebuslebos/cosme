@@ -31,11 +31,6 @@ class SearchController extends Controller
         $cat = Cat::search($request->search)->paginate(1)[0];
 
         $brand = Brand::search($request->search)->paginate(1)[0];
-        /*if($brand){
-            $brand_products_count = $brand->products_count;
-            $brand_reviews_count = $brand->reviews_count;
-            $brand_buys_count = $brand->buys_count;
-        }*/
 
         $products = Product::search($request->search)->paginate(10)
             ->load('cat:id,name', 'brand:id,name');

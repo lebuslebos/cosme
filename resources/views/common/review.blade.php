@@ -6,10 +6,10 @@
     <div class="align-self-center mr-2">
         @if(!!$review->user_id)
             <a href="{{route('users.show',[$review->user])}}" target="_blank">
-                <img src="{{$review->user->avatar}}!avatar" alt="头像" class="rounded avatar-size">
+                <img src="{{$review->user->avatar}}!avatar" alt="" class="rounded avatar-size">
             </a>
         @else
-            <img class="rounded avatar-size" src="{{$review->user->avatar}}!avatar" alt="头像">
+            <img class="rounded avatar-size" src="{{$review->user->avatar}}!avatar" alt="">
         @endif
     </div>
     <div class="media-body">
@@ -23,19 +23,19 @@
                 </div>
                 @if($review->user->reviews_count>=5 && $review->user->reviews_count<10)
                     <img class="fav-size hover-help align-self-center ml-1" src="{{Storage::url('icons/fav-5.gif')}}"
-                         alt="花" data-toggle="tooltip" data-original-title="用过5-10个化妆品">
+                         alt="" data-toggle="tooltip" data-original-title="用过5-10个化妆品">
                 @elseif($review->user->reviews_count>=10 && $review->user->reviews_count<25)
                     <img class="fav-size hover-help align-self-center ml-1" src="{{Storage::url('icons/fav-10.gif')}}"
-                         alt="花" data-toggle="tooltip" data-original-title="用过10-25个化妆品">
+                         alt="" data-toggle="tooltip" data-original-title="用过10-25个化妆品">
                 @elseif($review->user->reviews_count>=25 && $review->user->reviews_count<50)
                     <img class="fav-size hover-help align-self-center ml-1" src="{{Storage::url('icons/fav-25.gif')}}"
-                         alt="花" data-toggle="tooltip" data-original-title="用过25-50个化妆品">
+                         alt="" data-toggle="tooltip" data-original-title="用过25-50个化妆品">
                 @elseif($review->user->reviews_count>=50 && $review->user->reviews_count<100)
                     <img class="fav-size hover-help align-self-center ml-1" src="{{Storage::url('icons/fav-50.gif')}}"
-                         alt="花" data-toggle="tooltip" data-original-title="用过50-100个化妆品">
+                         alt="" data-toggle="tooltip" data-original-title="用过50-100个化妆品">
                 @elseif($review->user->reviews_count>=100)
                     <img class="fav-size hover-help align-self-center ml-1" src="{{Storage::url('icons/fav-100.gif')}}"
-                         alt="花" data-toggle="tooltip" data-original-title="用过100个以上的化妆品">
+                         alt="" data-toggle="tooltip" data-original-title="用过100个以上的化妆品">
                 @endif
                 <div class="text-muted text-tiny mx-2">{{$review->user->skin}}皮肤</div>
                 <div class="text-muted text-tiny">用过了{{$review->user->reviews_count}}个化妆品</div>

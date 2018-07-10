@@ -15,21 +15,26 @@
         {{--品牌名+国家--}}
         <div class="d-flex align-items-end border-dotted pl-md-2 pb-1 pb-md-2">
             @if(Route::currentRouteName()=='brands.show')
-                <h3 class="text-brown mb-0 mr-2 mr-md-3">{{$brand->name}}
+                <div>
+                    <span class="text-brown{{$is_phone?' text-normal':' h3 mb-0'}}">{{$brand->name}}</span>
+                    <span class="text-main font-italic{{$is_phone?'':' text-xl'}}">{{$brand->common_name}}</span>
+                </div>
+                {{--<h3 class="text-brown mb-0 mr-2 mr-md-3">{{$brand->name}}
                     <small class="text-main font-italic">{{$brand->common_name}}</small>
-                </h3>
+                </h3>--}}
             @else
                 <a href="{{route('brands.show',[$brand])}}">
-                    <h3 class="text-brown mb-0 mr-2 mr-md-3">{{$brand->name}}
-                        <small class="text-main font-italic">{{$brand->common_name}}</small>
-                    </h3>
+                    <span class="text-brown{{$is_phone?' text-normal':' h3 mb-0'}}">{{$brand->name}}</span>
+                    <span class="text-main font-italic{{$is_phone?'':' text-xl'}}">{{$brand->common_name}}</span>
                 </a>
+
             @endif
 
-            <img src="{{Storage::url('countries')}}/{{$brand->country_id}}.jpg!tiny"
-                 class="border tiny-size country-img mr-1" alt="{{$brand->country}}"
-                 style="margin-bottom: 3px">
-            <div class="text-muted">{{$brand->country}}</div>
+            <div class="ml-auto ml-md-3 mb-md-1">
+                <img src="{{Storage::url('countries')}}/{{$brand->country_id}}.jpg!tiny"
+                     class="border tiny-size country-img d-inline-block" alt="{{$brand->country}}">
+                <span class="text-muted align-text-top">{{$brand->country}}</span>
+            </div>
         </div>
         {{--品牌官网--}}
         <div class="border-dotted pl-md-2 py-2">
@@ -47,12 +52,12 @@
             <span class="text-muted">总点评数:</span>
             <span class="text-brown mr-2">{{$brand->reviews_count}}</span>
             @if(Route::currentRouteName()=='brands.show')
-            <span class="text-muted">总商品数:</span>
-            <span class="text-brown">{{$products->total()}}</span>
+                <span class="text-muted">总商品数:</span>
+                <span class="text-brown">{{$products->total()}}</span>
             @endif
         </div>
         <div class="border-dotted pl-md-2 py-2">
-            <div class="text-easy bg-easy d-inline-block px-1">
+            <div class="text-easy bg-easy d-inline-block pr-1">
                 平均回购率：{{$brand->buys_count==0 ? 0 : round(100*$brand->buys_count/$brand->reviews_count)}}%
             </div>
         </div>

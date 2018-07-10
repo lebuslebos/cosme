@@ -268,8 +268,7 @@ button:focus {
 }
 
 //文本大小;颜色;背景
-.text-tiny,
-.progress {
+.text-tiny{
   font-size: $tiny-font-size;
 }
 .text-normal{
@@ -280,6 +279,9 @@ button:focus {
 }
 .text-large{
   font-size: 1.2rem;
+}
+.text-xl{
+  font-size: 1.3rem;
 }
 .touch-size{
   font-size: 1.4rem;
@@ -529,9 +531,9 @@ img:not(.double-star-size){
   /*.product-img{
     width: 8.5rem;
   }*/
-  .product-name{
+  /*.product-name{
     font-size: 1.38rem;
-  }
+  }*/
   a.text-truncate,
   .name-truncate{
     max-width: 4rem;

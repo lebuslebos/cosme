@@ -28,7 +28,7 @@
                     <img src="{{Storage::url('icons/double-star-size.jpg')}}" class="align-text-bottom double-star-size"
                          alt="花">
                     <span class="text-muted">收获的赞同数:</span>
-                    <span class="text-brown">{{$user->reviews_count==0 ? 0 : $user->likes_count}}</span>
+                    <span class="text-brown">{{$user->likes_count}}</span>
                 </li>
                 <li class="border-dotted pl-2 py-2">
                     <img src="{{Storage::url('icons/double-star-size.jpg')}}" class="align-text-bottom double-star-size"

@@ -4,7 +4,6 @@
              :can="@json(optional(Auth::user())->can('update',$user))"
              :likes="{{$review->likes_count}}"
              :hates="{{$review->hates_count}}"
-
 ></user-review>
 
 
