@@ -67251,15 +67251,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -67269,7 +67260,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             inMobile: true,
             phone: ''
-            // shareError: ''
         };
     },
 
@@ -67502,9 +67492,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (this.start) this.countDown();
     },
     mounted: function mounted() {
-
         $('input[type="tel"]:first').focus();
-        // alert(navigator.platform)
     },
 
     computed: {

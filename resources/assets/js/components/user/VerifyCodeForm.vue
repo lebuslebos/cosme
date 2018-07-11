@@ -116,10 +116,7 @@
             if (this.start) this.countDown();
         },
         mounted() {
-
             $('input[type="tel"]:first').focus();
-            // alert(navigator.platform)
-
         },
         computed: {
             upyunDomain() {

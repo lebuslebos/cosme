@@ -29,18 +29,9 @@
 
                     <transition name="fade" mode="out-in">
 
-                        <VerifyCodeForm v-if="inMobile" key="inMobile"
-                                        :fromMobile="true"
-                                        :numLength="11"
-                                        @toCode="onToCode"
-                        />
+                        <VerifyCodeForm v-if="inMobile" key="inMobile" :fromMobile="true" :numLength="11" @toCode="onToCode"/>
 
-                        <VerifyCodeForm v-else key="inCode"
-                                        :start="true"
-                                        :phone="phone"
-
-
-                        />
+                        <VerifyCodeForm v-else key="inCode" :start="true" :phone="phone"/>
 
                     </transition>
 
@@ -60,7 +51,6 @@
             return {
                 inMobile: true,
                 phone: '',
-                // shareError: ''
             }
         },
         computed: {
@@ -73,10 +63,6 @@
                 this.phone = phone;
                 this.inMobile = false;
             },
-            /*onToMobile(loginError) {
-                this.inMobile = true;
-                this.shareError = loginError;
-            }*/
         },
         components: {VerifyCodeForm}
     }

@@ -14,7 +14,7 @@ class Brand extends Model
     //这些属性不能被批量赋值
     protected $guarded = [];
     //取模型时不取这些属性的值
-    protected $hidden = ['similar_name'];
+//    protected $hidden = ['similar_name'];--影响搜索，故去掉
 
     public function toSearchableArray()
     {

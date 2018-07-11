@@ -69,16 +69,9 @@ class ReviewObservers
 
                 //记录下有点评进账的商品
                 $p_ids = Cache::get('p-ids',[]);
-                array_push($p_ids, $review->product_id);
+                $p_ids[]=$review->product_id;
+//                array_push($p_ids, $review->product_id);
                 Cache::forever('p-ids', $p_ids);
-
-
-                //仅点评有内容时，更新商品评分，并存入缓存
-                /*Cache::forever('ra-' . $review->product_id, round(DB::table('reviews')
-                    ->where([
-                        ['body', '<>', ''],
-                        ['product_id', $review->product_id]
-                    ])->avg('rate'), 1));*/
 
                 if (Cache::has('reviews')) Cache::forget('reviews');//清空首页点评缓存
             }

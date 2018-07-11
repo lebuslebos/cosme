@@ -58,12 +58,9 @@ class ReviewController extends Controller
         //设置缓存--tag:reviews
         $reviews = Cache::rememberForever('reviews', function () {
             return Review::select('id', 'user_id', 'product_id', 'brand_id', 'rate', 'body', 'imgs', 'buy', 'shop','likes_count','hates_count', 'updated_at')
-                ->where('body', '<>', '')
-                ->with(['product:id,name,rate', 'brand:id,name', 'user:id,name,avatar,skin,reviews_count'])
-                ->latest()
-                ->orderBy('id', 'desc')
-                ->take(config('common.pre_page'))
-                ->get();
+                ->where('body', '<>', '')->with(['product:id,name,rate', 'brand:id,name', 'user:id,name,avatar,skin,reviews_count'])
+                ->latest()->orderBy('id', 'desc')
+                ->take(config('common.pre_page'))->get();
         });
 
         //随机回购ranking,并只选取点评数大于10的进行排行
