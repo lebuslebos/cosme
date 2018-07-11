@@ -1,9 +1,9 @@
 <template>
-    <div class="container d-flex align-items-center justify-content-around px-2 px-md-3 py-2 py-md-3">
+    <div class="container d-flex align-items-center justify-content-around px-2 px-md-3 nav-padding">
 
         <!--logo-->
         <transition name="logo">
-            <a class="text-main text-large d-block" :href="appHref" v-if="!hide">
+            <a class="text-main logo-size d-block" :href="appHref" v-if="!hide">
                 {{ appName }}
             </a>
         </transition>
@@ -132,10 +132,10 @@
 
         <transition name="logo">
             <!--用户昵称-->
-            <a class="text-main text-large d-block text-truncate" v-if="isLogin && !hide"
+            <a class="text-main text-big d-block text-truncate" v-if="isLogin && !hide"
                :href="`/users/${userId}`">{{ userName }}</a>
             <!--登录-->
-            <a class="text-brown text-large d-block" v-if="!isLogin && !hide" data-toggle="modal" id="login"
+            <a class="text-muted text-big d-block" v-if="!isLogin && !hide" data-toggle="modal" id="login"
                :href="isMobile?'#loginModalMobile':'#loginModal'">登录</a>
         </transition>
 

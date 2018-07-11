@@ -68894,7 +68894,7 @@ var render = function() {
     "div",
     {
       staticClass:
-        "container d-flex align-items-center justify-content-around px-2 px-md-3 py-2 py-md-3"
+        "container d-flex align-items-center justify-content-around px-2 px-md-3 nav-padding"
     },
     [
       _c("transition", { attrs: { name: "logo" } }, [
@@ -68902,7 +68902,7 @@ var render = function() {
           ? _c(
               "a",
               {
-                staticClass: "text-main text-large d-block",
+                staticClass: "text-main logo-size d-block",
                 attrs: { href: _vm.appHref }
               },
               [_vm._v("\n            " + _vm._s(_vm.appName) + "\n        ")]
@@ -69467,7 +69467,7 @@ var render = function() {
           ? _c(
               "a",
               {
-                staticClass: "text-main text-large d-block text-truncate",
+                staticClass: "text-main text-big d-block text-truncate",
                 attrs: { href: "/users/" + _vm.userId }
               },
               [_vm._v(_vm._s(_vm.userName))]
@@ -69478,7 +69478,7 @@ var render = function() {
           ? _c(
               "a",
               {
-                staticClass: "text-brown text-large d-block",
+                staticClass: "text-muted text-big d-block",
                 attrs: {
                   "data-toggle": "modal",
                   id: "login",
@@ -69704,9 +69704,9 @@ var render = function() {
     [
       _c("div", { staticClass: "d-flex align-items-baseline" }, [
         _c(
-          "h4",
+          "div",
           {
-            staticClass: "hover-help mb-0",
+            staticClass: "hover-help text-large",
             class: [_vm.rankingType ? "text-main" : "text-muted"],
             attrs: {
               "data-toggle": "tooltip",
@@ -69753,7 +69753,7 @@ var render = function() {
         "div",
         {
           staticClass:
-            "cats btn-group-toggle d-flex justify-content-center bg-light-brown mt-1 pt-3",
+            "cats btn-group-toggle d-flex justify-content-between mt-1 pt-3",
           style: { "max-height": _vm.showMore ? "18.5rem" : "3.5rem" }
         },
         _vm._l(_vm.cats, function(cat) {
@@ -69761,7 +69761,7 @@ var render = function() {
             "label",
             {
               key: cat.id,
-              staticClass: "btn btn-easy mr-3 mb-3",
+              staticClass: "btn btn-grey mr-3 mb-3",
               class: [
                 { active: _vm.initCat.id === cat.id },
                 { "btn-pc": !_vm.isMobile }

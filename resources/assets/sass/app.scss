@@ -147,6 +147,7 @@ button:focus {
 .btn-easy,
 .btn-main,
 .btn-pink,
+.btn-light-pink,
 .btn-submit-sm,
 .btn-submit,
 .btn-cancel-sm,
@@ -156,7 +157,14 @@ button:focus {
   font-size: $tiny-font-size;
   font-weight: 500;
 }
-
+.btn-grey{
+  padding: 1px 14px 2px;
+  border-radius: .25rem;
+  font-size: $tiny-font-size;
+  font-weight: 500;
+  color: $easy-color;
+  background-color:$grey-color ;
+}
 .btn-easy-lg {
   border-radius: .25rem;
   padding: 4px 14px 5px;
@@ -172,6 +180,13 @@ button:focus {
   background: $main-color;
 }
 
+.btn-light-pink{
+  color: #fff;
+  background: pink;
+}
+.btn-light-pink:hover{
+  background: $pink-color;
+}
 .btn-pink {
   color: #fff;
   background: $pink-color;
@@ -233,6 +248,9 @@ button:focus {
 .btn-pc.btn-easy.active:hover {
   background: #7dcbbd;
 }
+.btn-pc.btn-grey:hover{
+  color: $light-grey-color ;
+}
 .btn-pc.btn-submit-sm:hover,
 .btn-pc.btn-submit-sm:focus,
 .btn-pc.btn-submit:hover,
@@ -285,6 +303,9 @@ button:focus {
 }
 .touch-size{
   font-size: 1.4rem;
+}
+.logo-size{
+  font-size: 1.7rem;
 }
 
 .text-main {
@@ -465,7 +486,10 @@ img:not(.double-star-size){
 .el-upload:focus {
   border-color: $brown-color !important;
 }
-
+.nav-padding{
+  padding-top:1.2rem ;
+  padding-bottom:.5rem ;
+}
 .cat-nav {
   //padding-bottom: 2px;
   //border-bottom: 2px solid #fff;
@@ -493,6 +517,11 @@ img:not(.double-star-size){
 
 //仅pc端需要单独处理的地方(min-有小到大排)
 @media only screen and(min-width: 768px) {
+  .nav-padding{
+    padding-top:2rem ;
+    padding-bottom:2rem ;
+  }
+
   .text-md-normal{
     font-size: 1rem;
   }

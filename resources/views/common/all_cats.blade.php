@@ -1,8 +1,8 @@
 {{--所有分类--用于首页--}}
 
-<button type="button" class="btn btn-pink rounded"
+<button type="button" class="btn rounded{{$is_mobile?' btn-pink':' btn-light-pink'}}"
         data-toggle="modal"
-        data-target="#homeAllCats">查看所有分类
+        data-target="#homeAllCats">所有分类
 </button>
 <div class="modal fade" id="homeAllCats" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-slide" style="width: {{$is_mobile?'50%':'20%'}};" role="document">
@@ -16,7 +16,7 @@
                             <span class="text-main text-big">{{$big_cat}}</span>
                         </li>
                         @foreach($all_cats->where('id','>',$index*20)->where('id','<=',($index+1)*20) as $all_cat)
-                            <li class="nav-item bg-light-brown">
+                            <li class="nav-item">
                                 <a class="cat-nav d-inline-block py-2 pl-3 text-muted" target="_blank"
                                    href="{{route('cats.show',[$all_cat])}}"
                                 >{{$all_cat->name}}</a>

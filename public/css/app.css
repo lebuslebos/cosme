@@ -10142,6 +10142,7 @@ button:focus {
 .btn-easy,
 .btn-main,
 .btn-pink,
+.btn-light-pink,
 .btn-submit-sm,
 .btn-submit,
 .btn-cancel-sm,
@@ -10149,6 +10150,15 @@ button:focus {
   padding: 1px 7px 2px;
   font-size: 0.85rem;
   font-weight: 500;
+}
+
+.btn-grey {
+  padding: 1px 14px 2px;
+  border-radius: .25rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #607d8b;
+  background-color: #eee;
 }
 
 .btn-easy-lg {
@@ -10162,6 +10172,15 @@ button:focus {
 .btn-easy.active {
   color: #fff;
   background: #36ac96;
+}
+
+.btn-light-pink {
+  color: #fff;
+  background: pink;
+}
+
+.btn-light-pink:hover {
+  background: #DE6B84;
 }
 
 .btn-pink {
@@ -10219,6 +10238,10 @@ button:focus {
   background: #7dcbbd;
 }
 
+.btn-pc.btn-grey:hover {
+  color: #9c999c;
+}
+
 .btn-pc.btn-submit-sm:hover,
 .btn-pc.btn-submit-sm:focus,
 .btn-pc.btn-submit:hover,
@@ -10272,6 +10295,10 @@ button:focus {
 
 .touch-size {
   font-size: 1.4rem;
+}
+
+.logo-size {
+  font-size: 1.7rem;
 }
 
 .text-main {
@@ -10456,6 +10483,11 @@ img:not(.double-star-size) {
   border-color: #685456 !important;
 }
 
+.nav-padding {
+  padding-top: 1.2rem;
+  padding-bottom: .5rem;
+}
+
 .cat-nav {
   -webkit-transition: all 0.1s;
   transition: all 0.1s;
@@ -10476,6 +10508,11 @@ img:not(.double-star-size) {
 }
 
 @media only screen and (min-width: 768px) {
+  .nav-padding {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
   .text-md-normal {
     font-size: 1rem;
   }

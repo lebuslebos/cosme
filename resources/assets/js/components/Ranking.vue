@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="d-flex align-items-baseline">
-            <h4 class="hover-help mb-0" :class="[rankingType?'text-main':'text-muted']" data-toggle="tooltip"
+            <div class="hover-help text-large" :class="[rankingType?'text-main':'text-muted']" data-toggle="tooltip"
                 :data-original-title="rankingType?'好用排行榜 | 取拥有一定数量点评的商品，按回购率由高到低排':'差评排行榜 | 取拥有一定数量点评的商品，按不会回购率由高到低排'"
-            >{{rankingType?'红榜':'黑榜'}}</h4>
+            >{{rankingType?'红榜':'黑榜'}}</div>
             <div class="ml-auto">
                 <a href="#" @click.prevent="showMore=!showMore" >
                     <span><i class="fa fa-lg" :class="[showMore ? 'fa-minus-square' : 'fa-plus-square',{'fa-pc':!isMobile}]"></i></span>
@@ -13,8 +13,8 @@
         </div>
 
         <!--全部分类radio-->
-        <div class="cats btn-group-toggle d-flex justify-content-center bg-light-brown mt-1 pt-3" :style="{'max-height': showMore ? '18.5rem' : '3.5rem'}">
-            <label class="btn btn-easy mr-3 mb-3" :class="[{active:initCat.id===cat.id},{'btn-pc':!isMobile}]"
+        <div class="cats btn-group-toggle d-flex justify-content-between mt-1 pt-3" :style="{'max-height': showMore ? '18.5rem' : '3.5rem'}">
+            <label class="btn btn-grey mr-3 mb-3" :class="[{active:initCat.id===cat.id},{'btn-pc':!isMobile}]"
                    v-for="cat in cats" :key="cat.id">
                 <input type="radio" :value="cat" v-model="initCat"
                        @change="changeRanking">
