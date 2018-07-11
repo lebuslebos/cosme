@@ -15,7 +15,7 @@
             <li class="list-inline-item text-center mr-1 mb-2" v-for="color in colors">
 
                 <img alt="色号" class="product-s-size" data-toggle="popover" data-container="body"
-                     data-trigger="hover click"
+                     data-trigger="hover"
                      data-placement="top"
                      data-html="true"
                      :data-content="bigImg(color.id)"
