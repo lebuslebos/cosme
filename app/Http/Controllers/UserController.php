@@ -44,10 +44,10 @@ class UserController extends Controller
         }*/
 
         //上面的不要，只要下面这部分
-        /*$request->validate([
+        $request->validate([
             'mobile'     => 'required|confirm_mobile_not_change|confirm_rule:mobile_required',
             'verifyCode' => 'required|verify_code',
-        ]);*/
+        ]);
 
         $user = User::firstOrCreate(['mobile' => $request->mobile],
             [
@@ -56,7 +56,6 @@ class UserController extends Controller
                 'province' => Ip::find(request()->ip())[1],
                 'city' => Ip::find(request()->ip())[2],
             ]);
-
 
         Auth::login($user, true);
 

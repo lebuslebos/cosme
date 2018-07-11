@@ -167,18 +167,8 @@
                             document.activeElement.blur();// iOS下隐藏键盘
                             this.onLogin();
                         }
-                        // this.submit()
                     }
-                } else {
-                    // return [e.preventDefault(),false]
-                    // e.target.value = '' // remove NaN
-                    // return false;
                 }
-                /*}else{
-                    if(e.keyCode!==8 || e.keyCode!==13){
-                        e.preventDefault()
-                    }
-                }*/
             },
             // 请求验证码
             requestCode() {

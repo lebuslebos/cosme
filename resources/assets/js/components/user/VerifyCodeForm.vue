@@ -1,22 +1,3 @@
-<!--<template>
-    <div class="row" style="height: 4.5rem">
-        <label for="verifyCode" class="col-md-4 col-form-label text-md-right text-brown">验证码：</label>
-
-        <div class="col-md-6">
-            <input id="verifyCode" type="number" class="form-control" name="verifyCode"
-
-                v-validate data-vv-rules="required|digits:4" data-vv-as="验证码"
-                :class="[errors.has('verifyCode') ? 'is-invalid' : 'is-valid']"
-
-
-            >
-            <div class="invalid-feedback " v-text="errors.first('verifyCode')"></div>
-
-
-
-        </div>
-    </div>
-</template>-->
 <template>
     <!--验证码-->
     <div class="d-flex flex-column align-items-center text-center">
@@ -266,11 +247,11 @@
 
 
                     //测试专用
-                    this.$emit('toCode', phone)
+                    // this.$emit('toCode', phone)
 
 
                     // 正则验证
-                    /*const reg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
+                    const reg = /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
                     if (reg.test(phone)) {
 
                         axios.post(this.requestCodeUrl, {mobile: phone})
@@ -286,7 +267,7 @@
                     } else {
                         this.loginError = '手机号好像输错啦';
                         this.showSendBtn = true;
-                    }*/
+                    }
 
 
 
