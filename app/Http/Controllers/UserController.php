@@ -299,9 +299,20 @@ class UserController extends Controller
 
         $user = $this->userRepository->get_user($openid);
         if ($user) {
-            $path = Storage::url($request->file->store('avatars'));
-            $user->update(['avatar' => $path]);
-            return ['path'=>$path];
+            /*$path = Storage::url($request->file->store('avatars'));
+            $user->update(['avatar' => $path]);*/
+
+            $img = $request->file;
+            $path = $img->hashName('avatars');
+            //图片处理---变成450，改成jpg格式
+            $handled_img = Image::make($img)->fit(450, 450, function ($constraint) {
+                $constraint->upsize();
+            })->encode('jpg');
+
+            Storage::put($path, $handled_img);
+
+            $real_path=Storage::url($path);
+            return ['path' => $real_path];
         }
     }
 
