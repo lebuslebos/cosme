@@ -290,7 +290,7 @@ class UserController extends Controller
         //获取文件--存储文件到avatars目录下--再转化为绝对路径
         $path = Storage::url($request->file->store('avatars'));
         $user->update(['avatar' => $path]);
-        return compact('path');
+        return ['path'=>$path];
     }
 
     public function api_avatar(Request $request, string $openid)
@@ -301,7 +301,7 @@ class UserController extends Controller
         if ($user) {
             $path = Storage::url($request->file->store('avatars'));
             $user->update(['avatar' => $path]);
-            return compact('path');
+            return ['path'=>$path];
         }
     }
 
