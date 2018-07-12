@@ -310,9 +310,9 @@ class UserController extends Controller
             })->encode('jpg');
 
             Storage::put($path, $handled_img);
+            
+            $user->update(['avatar' => Storage::url($path)]);
 
-            $real_path=Storage::url($path);
-            return ['path' => $real_path];
         }
     }
 
