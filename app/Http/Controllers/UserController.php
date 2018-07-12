@@ -310,7 +310,7 @@ class UserController extends Controller
             })->encode('jpg');
 
             Storage::put($path, $handled_img);
-            
+
             $user->update(['avatar' => Storage::url($path)]);
 
         }

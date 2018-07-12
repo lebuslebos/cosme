@@ -3,7 +3,7 @@
 
         <!--logo-->
         <transition name="logo">
-            <a class="text-main logo-size d-block" :href="appHref" v-if="!hide">
+            <a class="text-main font-weight-bold logo-size d-block" :href="appHref" v-if="!hide">
                 {{ appName }}
             </a>
         </transition>

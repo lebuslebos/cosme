@@ -13,7 +13,7 @@
         </div>
 
         <!--全部分类radio-->
-        <div class="cats btn-group-toggle d-flex justify-content-between mt-1 pt-3" :style="{'max-height': showMore ? '18.5rem' : '3.5rem'}">
+        <div class="cats btn-group-toggle d-flex mt-1 pt-3" :style="{'max-height': showMore ? '18.5rem' : '3.5rem'}">
             <label class="btn btn-grey mr-3 mb-3" :class="[{active:initCat.id===cat.id},{'btn-pc':!isMobile}]"
                    v-for="cat in cats" :key="cat.id">
                 <input type="radio" :value="cat" v-model="initCat"

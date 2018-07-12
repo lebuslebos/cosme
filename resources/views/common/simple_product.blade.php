@@ -2,7 +2,7 @@
 
 {{--简易商品信息（上下分布型）--首页--}}
 
-<div class="text-center mr-3" style="width: 119px;">
+<div class="text-center mr-4" style="width: 119px;">
     <a href="{{route('products.show',[$review->product])}}" class="d-block mb-1" target="_blank">
         <img class="product-size" src="{{Storage::url('products')}}/{{$review->product_id}}.jpg!product" alt="{{$review->product->name}}">
     </a>

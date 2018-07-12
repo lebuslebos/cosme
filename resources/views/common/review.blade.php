@@ -22,23 +22,23 @@
                     </a>
                 </div>
                 @if($review->user->reviews_count>=5 && $review->user->reviews_count<10)
-                    <img class="fav-size hover-help align-self-center ml-1" src="{{Storage::url('icons/fav-5.gif')}}"
+                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3" src="{{Storage::url('icons/fav-5.gif')}}"
                          alt="" data-toggle="tooltip" data-original-title="用过5-10个化妆品">
                 @elseif($review->user->reviews_count>=10 && $review->user->reviews_count<25)
-                    <img class="fav-size hover-help align-self-center ml-1" src="{{Storage::url('icons/fav-10.gif')}}"
+                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3" src="{{Storage::url('icons/fav-10.gif')}}"
                          alt="" data-toggle="tooltip" data-original-title="用过10-25个化妆品">
                 @elseif($review->user->reviews_count>=25 && $review->user->reviews_count<50)
-                    <img class="fav-size hover-help align-self-center ml-1" src="{{Storage::url('icons/fav-25.gif')}}"
+                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3" src="{{Storage::url('icons/fav-25.gif')}}"
                          alt="" data-toggle="tooltip" data-original-title="用过25-50个化妆品">
                 @elseif($review->user->reviews_count>=50 && $review->user->reviews_count<100)
-                    <img class="fav-size hover-help align-self-center ml-1" src="{{Storage::url('icons/fav-50.gif')}}"
+                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3" src="{{Storage::url('icons/fav-50.gif')}}"
                          alt="" data-toggle="tooltip" data-original-title="用过50-100个化妆品">
                 @elseif($review->user->reviews_count>=100)
-                    <img class="fav-size hover-help align-self-center ml-1" src="{{Storage::url('icons/fav-100.gif')}}"
+                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3" src="{{Storage::url('icons/fav-100.gif')}}"
                          alt="" data-toggle="tooltip" data-original-title="用过100个以上的化妆品">
                 @endif
-                <div class="text-muted text-tiny mx-2">{{$review->user->skin}}皮肤</div>
-                <div class="text-muted text-tiny">用过了{{$review->user->reviews_count}}个化妆品</div>
+                <div class="text-muted text-tiny mx-2 mx-md-3">{{$review->user->skin}}肤质</div>
+                <div class="text-muted text-tiny">用过{{$review->user->reviews_count}}个化妆品</div>
             @else
                 <span class="text-main">{{$review->user->name}}</span>
             @endif
@@ -46,8 +46,8 @@
         {{--评分+回购+购买场所--}}
         <div class="d-flex align-items-center">
             <review-rate :rate="{{$review->rate}}"></review-rate>
-            <review-buy class="ml-1 mr-2 ml-md-2" :buy="{{$review->buy}}"></review-buy>
-            <review-shop class="mr-2" :shop="{{$review->shop}}"></review-shop>
+            <review-buy class="ml-1 mr-2 mx-md-3" :buy="{{$review->buy}}"></review-buy>
+            <review-shop class="mr-2 mr-md-3" :shop="{{$review->shop}}"></review-shop>
             <review-date :date=@json($review->updated_at)></review-date>
         </div>
 
@@ -56,7 +56,7 @@
 
 
 {{--点评的下半部分（文字点评+图片+点赞点踩）--}}
-<div class="text-brown my-2">{!!nl2br(e($review->body))!!}</div>
+<div class="text-brown review-text my-2 my-md-3">{!!nl2br(e($review->body))!!}</div>
 
 @if(filled(json_decode($review->imgs)))
     <div class="d-flex">
@@ -66,14 +66,7 @@
     </div>
 @endif
 
-<div class="d-flex align-items-center justify-content-between mt-md-auto">
-    @empty(!$review->user_id)
-        <vote :review="{{$review->id}}"
-              :user="{{$review->user_id}}"
-              :likes="{{$review->likes_count}}"
-              :hates="{{$review->hates_count}}"
-              class="pt-2"></vote>
-    @endempty
+<div class="d-flex align-items-center mt-md-auto">
 
     @if(Route::currentRouteName()=='home' && $is_phone)
         {{--手机时的商品信息--}}
@@ -83,5 +76,11 @@
                 -{{$review->product->name}}</a>
         </div>
     @endif
+
+    @empty(!$review->user_id)
+        <vote :review="{{$review->id}}" :user="{{$review->user_id}}"
+              :likes="{{$review->likes_count}}" :hates="{{$review->hates_count}}"
+              class="ml-auto pt-2"></vote>
+    @endempty
 </div>
 

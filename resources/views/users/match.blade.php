@@ -32,8 +32,8 @@
                 </a></div>
             <div class="text-muted text-tiny">{{$match_user->skin}}皮肤</div>
 
-            <div class="text-muted text-tiny">用过了{{$match_user->reviews_count}}个化妆品</div>
-            <div class="text-easy bg-easy text-tiny d-inline-block pr-1">
+            <div class="text-muted text-tiny">用过{{$match_user->reviews_count}}个化妆品</div>
+            <div class="buy-percent text-tiny">
                 匹配度{{round(100*$match_count/$user->buys_count,1)}}%
             </div>
 

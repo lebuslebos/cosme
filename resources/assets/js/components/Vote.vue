@@ -1,20 +1,23 @@
 <template>
     <div class="d-flex align-items-center">
         <!--判断是否是pc端，若是则加btn-pc（有悬停效果）-->
-        <button class="btn d-block mr-2" :disabled="btnDisabled"
-                :class="[like?'btn-main':'btn-easy',{'btn-pc':!isMobile}]"
+        <button class="btn btn-vote d-block mr-2" :disabled="btnDisabled"
+                :class="{'btn-pc':!isMobile}"
                 @click.once="vote('l')">
-            <span v-if="like"><i class="fa fa-heart"></i> 笔芯了</span>
-            <span v-else><i class="fa fa-heart-o"></i> 笔芯</span>
+            <span><i class="fa" :class="[like?'fa-heart':'fa-heart-o',{'text-pink':like}]"></i></span>
+            <span>有用</span>
+            <!--<span v-else><i class="fa "></i> 笔芯</span>-->
             <span>{{likesCount}}</span>
         </button>
 
         <!--判断是否是pc端，若是则加btn-pc（有悬停效果）-->
-        <button class="btn d-block" :disabled="btnDisabled"
-                :class="[hate?'btn-main':'btn-easy',{'btn-pc':!isMobile}]"
+        <button class="btn btn-vote d-block" :disabled="btnDisabled"
+                :class="{'btn-pc':!isMobile}"
                 @click.once="vote('h')">
-            <span v-if="hate"><i class="fa fa-wheelchair"></i> 爆炸了</span>
-            <span v-else><i class="fa fa-bolt"></i> 爆炸</span>
+            <span><i class="fa fa-bolt" :class="{'text-pink':hate}"></i></span>
+            <span>没帮助</span>
+            <!--<span v-if="hate"><i class="fa fa-wheelchair"></i> 爆炸了</span>-->
+            <!--<span v-else><i class="fa fa-bolt"></i> 爆炸</span>-->
         </button>
     </div>
 </template>
@@ -22,7 +25,7 @@
 <script>
     export default {
         name: "vote",
-        props: ['review','user', 'likes', 'hates'],
+        props: ['review', 'user', 'likes', 'hates'],
         data() {
             return {
                 like: false,
@@ -42,8 +45,8 @@
                 this.btnDisabled = true;
             }
         },
-        computed:{
-            isMobile(){
+        computed: {
+            isMobile() {
                 return this.$store.getters.isMobile;
             }
         },
@@ -65,7 +68,7 @@
                 }
                 this.btnDisabled = true;
                 //后端
-                axios.post(`/vote`, {review: this.review,user:this.user, type: type,})
+                axios.post(`/vote`, {review: this.review, user: this.user, type: type,})
                     .then(response => {
                         // console.log(response.data);
                     })

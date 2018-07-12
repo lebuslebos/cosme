@@ -40,7 +40,7 @@
                 <div class="d-flex align-items-center py-1 pl-md-2 border-dotted">
                     <product-rate :rate="{{$product->rate}}" class="text-xl"></product-rate>
 
-                    <div class="text-easy bg-easy d-inline-block pr-1 ml-1 ml-md-3">
+                    <div class="buy-percent ml-1 ml-md-3">
                         @if($is_phone)
                             <span class="text-brown">{{$product->reviews_count}}</span>人用过
                         @else

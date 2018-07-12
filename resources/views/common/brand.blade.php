@@ -57,7 +57,7 @@
             @endif
         </div>
         <div class="border-dotted pl-md-2 py-2">
-            <div class="text-easy bg-easy d-inline-block pr-1">
+            <div class="buy-percent">
                 平均回购率：{{$brand->buys_count==0 ? 0 : round(100*$brand->buys_count/$brand->reviews_count)}}%
             </div>
         </div>

@@ -58042,10 +58042,11 @@ var render = function() {
     { staticClass: "text-md-normal" },
     [
       _vm._l(_vm.rate, function(n) {
-        return _c("i", { staticClass: "fa fa-star" })
+        return _c("i", { staticClass: "fa fa-star star-margin" })
       }),
-      _vm._v(" "),
-      _c("span", { staticClass: "text-brown" }, [_vm._v(_vm._s(_vm.rate))])
+      _c("span", { staticClass: "text-brown ml-1 ml-md-0" }, [
+        _vm._v(_vm._s(_vm.rate))
+      ])
     ],
     2
   )
@@ -58625,7 +58626,7 @@ var render = function() {
           { staticClass: "text-center", staticStyle: { width: "50px" } },
           [
             _vm.index === 0
-              ? _c("h3", [_c("i", { staticClass: "fa fa-wheelchair" })])
+              ? _c("h3", [_c("i", { staticClass: "fa fa-bolt" })])
               : _vm.index === 1
                 ? _c("h3", [_c("i", { staticClass: "fa fa-frown-o" })])
                 : _vm.index === 2
@@ -58693,49 +58694,37 @@ var render = function() {
         _c("ProductRate", { attrs: { rate: _vm.product.rate } }),
         _vm._v(" "),
         _vm.type
-          ? _c(
-              "div",
-              {
-                staticClass: "text-easy bg-easy text-tiny d-inline-block pr-1"
-              },
-              [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(
-                      _vm.product.buys_count === 0
-                        ? 0
-                        : Math.round(
-                            100 *
-                              _vm.product.buys_count /
-                              _vm.product.reviews_count
-                          )
-                    ) +
-                    "%的人会再次购买\n        "
-                )
-              ]
-            )
-          : _c(
-              "div",
-              {
-                staticClass: "text-easy bg-easy text-tiny d-inline-block pr-1"
-              },
-              [
-                _vm._v(
-                  "\n            " +
-                    _vm._s(
-                      _vm.product.buys_count === 0
-                        ? 100
-                        : 100 -
-                          Math.round(
-                            100 *
-                              _vm.product.buys_count /
-                              _vm.product.reviews_count
-                          )
-                    ) +
-                    "%的人不会再次购买\n        "
-                )
-              ]
-            )
+          ? _c("div", { staticClass: "buy-percent text-tiny" }, [
+              _vm._v(
+                "\n            " +
+                  _vm._s(
+                    _vm.product.buys_count === 0
+                      ? 0
+                      : Math.round(
+                          100 *
+                            _vm.product.buys_count /
+                            _vm.product.reviews_count
+                        )
+                  ) +
+                  "%的人会再次购买\n        "
+              )
+            ])
+          : _c("div", { staticClass: "buy-percent text-tiny" }, [
+              _vm._v(
+                "\n            " +
+                  _vm._s(
+                    _vm.product.buys_count === 0
+                      ? 100
+                      : 100 -
+                        Math.round(
+                          100 *
+                            _vm.product.buys_count /
+                            _vm.product.reviews_count
+                        )
+                  ) +
+                  "%的人不会再次购买\n        "
+              )
+            ])
       ],
       1
     )
@@ -66196,7 +66185,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -66207,6 +66196,9 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -66294,11 +66286,8 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "btn d-block mr-2",
-        class: [
-          _vm.like ? "btn-main" : "btn-easy",
-          { "btn-pc": !_vm.isMobile }
-        ],
+        staticClass: "btn btn-vote d-block mr-2",
+        class: { "btn-pc": !_vm.isMobile },
         attrs: { disabled: _vm.btnDisabled },
         on: {
           "~click": function($event) {
@@ -66307,15 +66296,17 @@ var render = function() {
         }
       },
       [
-        _vm.like
-          ? _c("span", [
-              _c("i", { staticClass: "fa fa-heart" }),
-              _vm._v(" 笔芯了")
-            ])
-          : _c("span", [
-              _c("i", { staticClass: "fa fa-heart-o" }),
-              _vm._v(" 笔芯")
-            ]),
+        _c("span", [
+          _c("i", {
+            staticClass: "fa",
+            class: [
+              _vm.like ? "fa-heart" : "fa-heart-o",
+              { "text-pink": _vm.like }
+            ]
+          })
+        ]),
+        _vm._v(" "),
+        _c("span", [_vm._v("有用")]),
         _vm._v(" "),
         _c("span", [_vm._v(_vm._s(_vm.likesCount))])
       ]
@@ -66324,11 +66315,8 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "btn d-block",
-        class: [
-          _vm.hate ? "btn-main" : "btn-easy",
-          { "btn-pc": !_vm.isMobile }
-        ],
+        staticClass: "btn btn-vote d-block",
+        class: { "btn-pc": !_vm.isMobile },
         attrs: { disabled: _vm.btnDisabled },
         on: {
           "~click": function($event) {
@@ -66337,15 +66325,14 @@ var render = function() {
         }
       },
       [
-        _vm.hate
-          ? _c("span", [
-              _c("i", { staticClass: "fa fa-wheelchair" }),
-              _vm._v(" 爆炸了")
-            ])
-          : _c("span", [
-              _c("i", { staticClass: "fa fa-bolt" }),
-              _vm._v(" 爆炸")
-            ])
+        _c("span", [
+          _c("i", {
+            staticClass: "fa fa-bolt",
+            class: { "text-pink": _vm.hate }
+          })
+        ]),
+        _vm._v(" "),
+        _c("span", [_vm._v("没帮助")])
       ]
     )
   ])
@@ -68902,7 +68889,7 @@ var render = function() {
           ? _c(
               "a",
               {
-                staticClass: "text-main logo-size d-block",
+                staticClass: "text-main font-weight-bold logo-size d-block",
                 attrs: { href: _vm.appHref }
               },
               [_vm._v("\n            " + _vm._s(_vm.appName) + "\n        ")]
@@ -69752,8 +69739,7 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass:
-            "cats btn-group-toggle d-flex justify-content-between mt-1 pt-3",
+          staticClass: "cats btn-group-toggle d-flex mt-1 pt-3",
           style: { "max-height": _vm.showMore ? "18.5rem" : "3.5rem" }
         },
         _vm._l(_vm.cats, function(cat) {

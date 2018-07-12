@@ -9,19 +9,18 @@ html {
   //overscroll-behavior-y: none;
 }
 
-
-
 // Variables
 @import "variables";
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-html,body{
+html, body {
   height: 100%;
   width: 100%;
 }
-body{
+
+body {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: none;
   overflow-x: hidden;
@@ -35,7 +34,8 @@ body{
   -webkit-touch-callout: none;
   -webkit-user-select: none;*/
 }
-#app{
+
+#app {
   min-height: 100%;
 }
 
@@ -51,20 +51,24 @@ body{
 a:hover {
   text-decoration: none;
 }
-a.text-pink:hover{
+
+a.text-pink:hover {
   color: $pink-color;
 }
+
 //pc端的绿色文字型a标签的hover效果
-a.text-main:hover{
+a.text-main:hover {
   color: $easy-color;
   background: $easy-bg-color;
 }
+
 //变成main按钮的a标签去掉hover效果（移动端）
 a.btn-main:hover,
-a.back-to-top:hover{
+a.back-to-top:hover {
   color: #fff;
 }
-a.btn-easy-mobile:hover{
+
+a.btn-easy-mobile:hover {
   color: $easy-color;
 }
 
@@ -81,7 +85,7 @@ select,
 textarea {
   resize: none;
   color: $brown-color !important;
-  caret-color:$brown-color;
+  caret-color: $brown-color;
   letter-spacing: 1px;
 }
 
@@ -119,6 +123,7 @@ input.is-invalid:focus {
   -webkit-appearance: none;
   margin: 0;
 }
+
 input[type="number"] {
   -moz-appearance: textfield;
 }
@@ -130,6 +135,7 @@ button:focus {
   border-radius: 0;
   border: none !important;
 }
+
 .btn,
 button:focus {
   box-shadow: none !important;
@@ -142,11 +148,19 @@ button:focus {
 .btn[disabled]:hover {
   cursor: not-allowed;
 }
+.btn-vote:disabled,
+.btn-vote.disabled,
+.btn-vote[disabled]{
+  opacity: .85;
+}
+
+
 
 //按钮的格式
 .btn-easy,
 .btn-main,
 .btn-pink,
+.btn-vote,
 .btn-light-pink,
 .btn-submit-sm,
 .btn-submit,
@@ -157,14 +171,16 @@ button:focus {
   font-size: $tiny-font-size;
   font-weight: 500;
 }
-.btn-grey{
+
+.btn-grey {
   padding: 1px 14px 2px;
   border-radius: .25rem;
   font-size: $tiny-font-size;
   font-weight: 500;
   color: $easy-color;
-  background-color:$grey-color ;
+  background-color: $grey-color;
 }
+
 .btn-easy-lg {
   border-radius: .25rem;
   padding: 4px 14px 5px;
@@ -175,18 +191,24 @@ button:focus {
 //主按钮的颜色
 .btn-main,
   //.btn-easy:active,
-.btn-easy.active {
+.btn-easy.active,
+.btn-grey.active{
   color: #fff;
   background: $main-color;
 }
+.btn-vote{
+  color: #7f7f7f;
+}
 
-.btn-light-pink{
+.btn-light-pink {
   color: #fff;
   background: pink;
 }
-.btn-light-pink:hover{
+
+.btn-light-pink:hover {
   background: $pink-color;
 }
+
 .btn-pink {
   color: #fff;
   background: $pink-color;
@@ -194,7 +216,7 @@ button:focus {
 
 //次按钮的颜色
 .btn-easy,
-.btn-easy-mobile{
+.btn-easy-mobile {
   color: $easy-color;
   background: $easy-bg-color;
 }
@@ -224,7 +246,7 @@ button:focus {
   background: $light-brown-color;
 }
 
-.btn-easy-mobile{
+.btn-easy-mobile {
   width: 6rem;
   height: 3rem;
   line-height: 3rem;
@@ -232,31 +254,34 @@ button:focus {
   //padding: 9px 26px 9px;
 }
 
-.back-to-top{
+.back-to-top {
   background: pink;
   color: #fff;
 }
-
-
 
 //pc端的时候才有悬停效果
 .btn-pc.btn-easy:not([disabled]):hover,
 .btn-pc.btn-easy-lg:hover {
   background: #cbe7e2;
 }
+
 .btn-pc.btn-main:not([disabled]):hover,
 .btn-pc.btn-easy.active:hover {
   background: #7dcbbd;
 }
-.btn-pc.btn-grey:hover{
-  color: $light-grey-color ;
+
+.btn-pc.btn-grey:hover,
+.btn-pc.btn-vote:hover{
+  color: $light-grey-color;
 }
+
 .btn-pc.btn-submit-sm:hover,
 .btn-pc.btn-submit-sm:focus,
 .btn-pc.btn-submit:hover,
 .btn-pc.btn-submit:focus {
   background: #8c7f80;
 }
+
 .btn-pc.btn-cancel-sm:hover,
 .btn-pc.btn-cancel-sm:focus,
 .btn-pc.btn-cancel:hover,
@@ -266,12 +291,10 @@ button:focus {
 
 //@media only screen and(min-width: 768px) {
 
-
-
 //徽章
 .badge-main, .badge-easy {
   font-size: $tiny-font-size;
-  padding: 1px 7px;
+  padding: 1px 10px;
   border-radius: .25rem;
 }
 
@@ -286,46 +309,56 @@ button:focus {
 }
 
 //文本大小;颜色;背景
-.text-tiny{
+.text-tiny {
   font-size: $tiny-font-size;
 }
-.text-normal{
+
+.text-normal {
   font-size: 1rem;
 }
+
 .text-big {
   font-size: 1.1rem;
 }
-.text-large{
+
+.text-large {
   font-size: 1.2rem;
 }
-.text-xl{
+
+.text-xl {
   font-size: 1.3rem;
 }
-.touch-size{
+
+.touch-size {
   font-size: 1.4rem;
 }
-.logo-size{
+
+.logo-size {
   font-size: 1.7rem;
 }
 
 .text-main {
   color: $main-color;
-  font-weight: bold;
-}
-.text-brown {
-  color: $brown-color;
-  font-weight: 500;
-}
-.text-pink{
-  color: pink;
 }
 
-.bg-light-brown {
-  background: $light-brown-color;
+.text-brown {
+  color: $brown-color;
+}
+
+.text-pink {
+  color: pink;
 }
 
 .text-easy {
   color: $easy-color;
+}
+
+.review-text {
+  line-height: 1.8;
+}
+
+.bg-light-brown {
+  background: $light-brown-color;
 }
 
 .bg-easy {
@@ -337,9 +370,10 @@ button:focus {
 .fa-times,
 .fa-arrow-left,
 .fa-minus-square,
-.fa-plus-square{
+.fa-plus-square {
   color: pink
 }
+
 .fa-shopping-bag,
 .fa-check,
 .fa-edit,
@@ -347,13 +381,9 @@ button:focus {
 .fa-pc.fa-times:hover,
 .fa-pc.fa-arrow-left:hover,
 .fa-pc.fa-minus-square:hover,
-.fa-pc.fa-plus-square:hover{
+.fa-pc.fa-plus-square:hover {
   color: $pink-color;
 }
-
-
-
-
 
 //边框--若最终决定只用1px的话 则删去一个
 .border-main {
@@ -364,15 +394,13 @@ button:focus {
   border-bottom: 1px dotted #bdb8ad
 }
 
-
 .hover-pointer {
   cursor: pointer;
 }
+
 .hover-help {
   cursor: help;
 }
-
-
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
@@ -382,10 +410,7 @@ button:focus {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .175)
 }
 
-/*#rankingModal.fade{
-  opacity: 1;
-  transition: none;
-}*/
+
 body.modal-open {
   position: fixed;
 }
@@ -416,13 +441,11 @@ body.modal-open {
   //border: none;
   border-radius: 0;
 }
-.popover-body{
+
+.popover-body {
   padding: 1px;
   //min-width: 200px;
 }
-
-
-
 
 //到时候可以截成13rem大小的商品图，就可以去掉这个样式
 /*.product-img{
@@ -430,54 +453,64 @@ body.modal-open {
 }*/
 //此处为固定图片宽高的类（方便预留空间），应根据图片大小来定
 
-img:not(.double-star-size){
+img:not(.double-star-size) {
   display: block;
 }
-.fav-size{
+
+.fav-size {
   width: 10px;
   height: 10px;
 }
-.double-star-size{
+
+.double-star-size {
   width: 17px;
   height: 17px;
 }
-.tiny-size{
+
+.tiny-size {
   width: 22px;
   height: 19px;
 }
-.loading-size{
+
+.loading-size {
   width: 25px;
   height: 25px;
 }
-.avatar-size{
+
+.avatar-size {
   width: 40px;
   height: 40px;
 }
-.color-size{
+
+.color-size {
   width: 49px;
   height: 49px;
 }
-.crown-size{
+
+.crown-size {
   width: 50px;
   height: 30px;
 }
-.product-s-size{
+
+.product-s-size {
   width: 70px;
   height: 70px;
 }
-.review-size{
+
+.review-size {
   width: 94px;
   height: 94px;
 }
-.product-size{
+
+.product-size {
   width: 119px;
   height: 119px;
 }
-.product-l-size{
+
+.product-l-size {
   width: 182px;
   height: 182px;
 }
-
 
 
 
@@ -486,22 +519,30 @@ img:not(.double-star-size){
 .el-upload:focus {
   border-color: $brown-color !important;
 }
-.nav-padding{
-  padding-top:1.2rem ;
-  padding-bottom:.5rem ;
+
+.nav-padding {
+  padding-top: 1.2rem;
+  padding-bottom: .5rem;
+}
+.buy-percent{
+  color: $easy-color;
+  background: $easy-bg-color;
+  display: inline-block;
+  padding: 0 .5rem;
+  border-radius: 3px;
 }
 .cat-nav {
   //padding-bottom: 2px;
   //border-bottom: 2px solid #fff;
-  transition: all 0.1s ;
+  transition: all 0.1s;
 }
+
 .cat-nav.active {
   //background-color: $main-color;
   color: $main-color !important;
   font-weight: bold;
   //border-bottom-color: $main-color;
 }
-
 
 .page-item.active .page-link {
   background-color: $main-color;
@@ -512,39 +553,37 @@ img:not(.double-star-size){
   color: $main-color;
 }
 
-
-
-
 //仅pc端需要单独处理的地方(min-有小到大排)
 @media only screen and(min-width: 768px) {
-  .nav-padding{
-    padding-top:2rem ;
-    padding-bottom:2rem ;
+  .nav-padding {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
   }
-
-  .text-md-normal{
+  .star-margin {
+    margin-right: .25rem;
+  }
+  .text-md-normal {
     font-size: 1rem;
   }
-  .shop-hint-pc{
+  .shop-hint-pc {
     padding-left: 4.3rem;
   }
 
-  .cat-nav:hover{
+  .cat-nav:hover {
     font-weight: bold;
     color: $main-color !important;
-    transform:  translate(0,-2px) scale(1.3);
+    transform: translate(0, -2px) scale(1.3);
   }
-  a.text-truncate{
+  a.text-truncate {
     max-width: 8rem;
   }
-  .min-height-pc{
+  .min-height-pc {
     min-height: 184px;
   }
-  .back-to-top:hover{
+  .back-to-top:hover {
     background: $pink-color;
   }
 }
-
 
 //仅手机端需要单独处理的地方(max-由大到小排)
 //ui处理--当屏幕小于md的时候执行以下css
@@ -557,36 +596,28 @@ img:not(.double-star-size){
   input[type=tel] {
     font-size: 16px;
   }
-  /*.product-img{
-    width: 8.5rem;
-  }*/
-  /*.product-name{
-    font-size: 1.38rem;
-  }*/
   a.text-truncate,
-  .name-truncate{
+  .name-truncate {
     max-width: 4rem;
   }
-  .reviewed-icon{
+  .reviewed-icon {
     padding-right: 1rem;
   }
-
 }
+
 //ui处理--当屏幕小于320px以下（iphone5）
 @media only screen and(max-width: 320px) {
-  .modal-dialog-slide{
+  .modal-dialog-slide {
     width: 85%;
   }
-  .btn-margin-mobile{
+  .btn-margin-mobile {
     margin-bottom: .5rem !important;
   }
-  .country-img{
+  .country-img {
     display: none;
   }
-  .reviewed-icon{
+  .reviewed-icon {
     padding-right: .5rem;
   }
 }
-/*em{
-  background-color: $main-color;
-}*/
+

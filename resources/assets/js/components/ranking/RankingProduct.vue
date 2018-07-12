@@ -8,7 +8,7 @@
             <h5 v-else class="text-center text-main font-weight-normal" style="width: 50px;">{{index+1}}</h5>
         </div>
         <div v-else class="text-center" style="width: 50px;">
-            <h3 v-if="index===0"><i class="fa fa-wheelchair"></i></h3>
+            <h3 v-if="index===0"><i class="fa fa-bolt"></i></h3>
             <h3 v-else-if="index===1"><i class="fa fa-frown-o"></i></h3>
             <h3 v-else-if="index===2"><i class="fa fa-meh-o"></i></h3>
             <h5 v-else>{{index+1}}</h5>
@@ -35,10 +35,10 @@
             <!--评分-->
             <ProductRate :rate="product.rate"/>
             <!--回购率-->
-            <div class="text-easy bg-easy text-tiny d-inline-block pr-1" v-if="type">
+            <div class="buy-percent text-tiny" v-if="type">
                 {{product.buys_count===0 ? 0 : Math.round(100*product.buys_count/product.reviews_count)}}%的人会再次购买
             </div>
-            <div class="text-easy bg-easy text-tiny d-inline-block pr-1" v-else>
+            <div class="buy-percent text-tiny" v-else>
                 {{product.buys_count===0 ? 100 : 100-Math.round(100*product.buys_count/product.reviews_count)}}%的人不会再次购买
             </div>
         </div>
