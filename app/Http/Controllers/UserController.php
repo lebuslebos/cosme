@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 use Toplan\Sms\Facades\SmsManager;
 use GuzzleHttp\Client;
 use WXBizDataCrypt;
@@ -294,13 +295,21 @@ class UserController extends Controller
 
     public function api_avatar(Request $request, string $openid)
     {
-        $request->validate(['file' => 'required|image|max:5120']);
+        $request->validate(['file' => 'required|image|max:3120']);
 
         $user = $this->userRepository->get_user($openid);
         if ($user) {
-            $path = Storage::url($request->file->store('avatars'));
-            $user->update(['avatar' => $path]);
-            return compact('path');
+
+            $img = $request->file;
+            $path = $img->hashName('avatars');
+            //图片处理---裁剪为450*450，改成webp格式
+            $handled_img = Image::make($img)->fit(450, 450, function ($constraint) {
+                $constraint->upsize();//防止小图被拉伸
+            })->encode('webp');
+
+            Storage::put($path, $handled_img);
+
+            return ['path' => Storage::url($path)];
         }
     }
 
