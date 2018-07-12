@@ -121,7 +121,7 @@
                                 // console.log(response);
                             })
 
-                    }, 'image/webp', 1
+                    }, 'image/jpeg', 1
                 ); // 80% compressed jpeg file
             },
             onFileTypeMismatch(file) {

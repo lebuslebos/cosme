@@ -283,14 +283,14 @@ class UserController extends Controller
      */
     public function avatar(Request $request, User $user)
     {
-        $request->validate(['file' => 'required|mimetypes:image/webp|max:5120|dimensions:max_width=500,max_height=500']);
+        $request->validate(['file' => 'required|image|max:5120|dimensions:max_width=500,max_height=500']);
 
         $this->authorize('update', $user);
 
         //获取文件--存储文件到avatars目录下--再转化为绝对路径
         $path = Storage::url($request->file->store('avatars'));
         $user->update(['avatar' => $path]);
-        return ['path' => $path];
+        return compact('path');
     }
 
     public function api_avatar(Request $request, string $openid)
@@ -299,17 +299,9 @@ class UserController extends Controller
 
         $user = $this->userRepository->get_user($openid);
         if ($user) {
-
-            $img = $request->file;
-            $path = $img->hashName('avatars');
-            //图片处理---裁剪为450*450，改成webp格式
-            $handled_img = Image::make($img)->fit(450, 450, function ($constraint) {
-                $constraint->upsize();//防止小图被拉伸
-            })->encode('webp');
-
-            Storage::put($path, $handled_img);
-
-            return ['path' => Storage::url($path)];
+            $path = Storage::url($request->file->store('avatars'));
+            $user->update(['avatar' => $path]);
+            return compact('path');
         }
     }
 
@@ -344,7 +336,6 @@ class UserController extends Controller
         $this->authorize('update', $user);
 
         $user->update(['skin' => $request->skin]);
-//        return ['aa'=>'ok'];
     }
 
     public function api_skin_update(Request $request, string $openid)

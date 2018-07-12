@@ -111,10 +111,10 @@ class ReviewController extends Controller
         /*$handled_img = Image::make($img)->fit(400, 400, function ($constraint) {
             $constraint->upsize();
         })->encode('jpg');*/
-        //图片处理---宽度变成400，自适应高度，改成webp格式
-        $handled_img = Image::make($img)->widen(400, function ($constraint) {
+        //图片处理---宽度变成450，自适应高度，改成jpg格式
+        $handled_img = Image::make($img)->widen(450, function ($constraint) {
             $constraint->upsize();//防止小图被拉伸
-        })->encode('webp');
+        })->encode('jpg');
 
         Storage::put($path, $handled_img);
 

@@ -58975,7 +58975,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 axios.post('/users/' + _this.userId + '/avatars', data).then(function (response) {
                     // console.log(response);
                 });
-            }, 'image/webp', 1); // 80% compressed jpeg file
+            }, 'image/jpeg', 1); // 80% compressed jpeg file
         },
         onFileTypeMismatch: function onFileTypeMismatch(file) {
             this.hintColor = '#dc3545';
