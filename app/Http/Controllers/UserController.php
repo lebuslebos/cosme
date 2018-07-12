@@ -295,7 +295,7 @@ class UserController extends Controller
 
     public function api_avatar(Request $request, string $openid)
     {
-        $request->validate(['file' => 'required|image|max:3120']);
+        $request->validate(['file' => 'required|image|max:5120']);
 
         $user = $this->userRepository->get_user($openid);
         if ($user) {
