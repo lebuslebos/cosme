@@ -10048,6 +10048,11 @@ a.text-main:hover {
   background: #eaf5f3;
 }
 
+a.text-main.logo-size:hover {
+  color: #36ac96;
+  background-color: inherit;
+}
+
 a.btn-main:hover,
 a.back-to-top:hover {
   color: #fff;
@@ -10255,6 +10260,10 @@ button:focus {
   color: #9c999c;
 }
 
+.btn-pc.btn-grey.active:hover {
+  color: #fff;
+}
+
 .btn-pc.btn-submit-sm:hover,
 .btn-pc.btn-submit-sm:focus,
 .btn-pc.btn-submit:hover,
@@ -10331,7 +10340,7 @@ button:focus {
 }
 
 .review-text {
-  line-height: 1.8;
+  line-height: 1.8rem;
 }
 
 .bg-light-brown {

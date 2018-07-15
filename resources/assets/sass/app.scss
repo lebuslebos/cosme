@@ -61,6 +61,10 @@ a.text-main:hover {
   color: $easy-color;
   background: $easy-bg-color;
 }
+a.text-main.logo-size:hover{
+  color: $main-color;
+  background-color: inherit;
+}
 
 //变成main按钮的a标签去掉hover效果（移动端）
 a.btn-main:hover,
@@ -274,6 +278,9 @@ button:focus {
 .btn-pc.btn-vote:hover{
   color: $light-grey-color;
 }
+.btn-pc.btn-grey.active:hover{
+  color: #fff;
+}
 
 .btn-pc.btn-submit-sm:hover,
 .btn-pc.btn-submit-sm:focus,
@@ -354,7 +361,7 @@ button:focus {
 }
 
 .review-text {
-  line-height: 1.8;
+  line-height: 1.8rem;
 }
 
 .bg-light-brown {

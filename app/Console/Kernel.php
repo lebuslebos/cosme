@@ -134,20 +134,21 @@ class Kernel extends ConsoleKernel
 
             Cache::tags(['ranking', 'match'])->flush();//清空排行榜以及匹配用户的缓存
 
+            Cache::forget('hot-brands');//清空热门品牌的缓存（微信端)）
 
-        })->dailyAt('21:20')
+
+
+        })->dailyAt('3:00')
             ->after(function () {
-                /*if (Cache::has('r-b-ids')) Cache::forget('r-b-ids');//把点评入账数组归零(品牌)
-                if (Cache::has('r-p-ids')) Cache::forget('r-p-ids');//把点评入账数组归零(商品)
-                if (Cache::has('b-b-ids')) Cache::forget('b-b-ids');//把(回购)点评入账数组归零(品牌)
-                if (Cache::has('b-p-ids')) Cache::forget('b-p-ids');//把(回购)点评入账数组归零(商品)
-
-                if (Cache::has('p-ids')) Cache::forget('p-ids');//把(有内容)点评入账数组归零*/
 
                 //把热门分类的首页排行榜+热门分类的商品页排行榜重新放入缓存
                 foreach (config('common.popular_cats') as $popular_cat) {
                     Artisan::call('ranking:cache', ['cat' => $popular_cat]);
                 }
+
+                //热门品牌放入缓存（微信端）
+                $hot_brands=DB::table('brands')->select('id','name')->orderBy('reviews_count','desc')->orderBy('id','asc')->take(8)->get();
+                Cache::forever('hot-brands',$hot_brands);
             });
 
 

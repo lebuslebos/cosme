@@ -28,9 +28,8 @@ class AllCatsComposer
      */
     public function compose(View $view)
     {
-        $all_cats=Cache::rememberForever('all-cats',function (){
-            return $this->catRepository->all_cats();
-        });
+        $all_cats=$this->catRepository->all_cats();
+
         $view->with(compact('all_cats'));
     }
 

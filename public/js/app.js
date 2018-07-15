@@ -66823,7 +66823,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.position-relative[data-v-51ce9b39] {\n    -webkit-transition: all .1s;\n    transition: all .1s;\n}\n.position-absolute[data-v-51ce9b39] {\n    z-index: 1200;\n}\n.fade-enter-active[data-v-51ce9b39], .fade-leave-active[data-v-51ce9b39] {\n    -webkit-transition: opacity .1s;\n    transition: opacity .1s;\n}\n.fade-enter[data-v-51ce9b39], .fade-leave-to[data-v-51ce9b39] {\n    opacity: 0;\n}\n.logo-enter-active[data-v-51ce9b39] {\n    -webkit-transition: opacity .1s;\n    transition: opacity .1s;\n}\n.logo-enter[data-v-51ce9b39] {\n    opacity: 0;\n}\n\n", ""]);
+exports.push([module.i, "\n.position-relative[data-v-51ce9b39] {\n    -webkit-transition: all .2s;\n    transition: all .2s;\n}\n.position-absolute[data-v-51ce9b39] {\n    z-index: 1200;\n}\n.fade-enter-active[data-v-51ce9b39], .fade-leave-active[data-v-51ce9b39] {\n    -webkit-transition: opacity .1s;\n    transition: opacity .1s;\n}\n.fade-enter[data-v-51ce9b39], .fade-leave-to[data-v-51ce9b39] {\n    opacity: 0;\n}\n.logo-enter-active[data-v-51ce9b39] {\n    -webkit-transition: opacity .1s;\n    transition: opacity .1s;\n}\n.logo-enter[data-v-51ce9b39] {\n    opacity: 0;\n}\n\n", ""]);
 
 // exports
 

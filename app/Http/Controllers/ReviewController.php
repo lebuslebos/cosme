@@ -7,6 +7,7 @@ use App\Http\Requests\StoreImgRequest;
 use App\Http\Requests\StoreReviewRequest;
 use App\Product;
 use App\Repositories\RankingRepository;
+use App\Repositories\ReviewRepository;
 use App\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,11 +21,13 @@ use Zhuzhichao\IpLocationZh\Ip;
 class ReviewController extends Controller
 {
     protected $rankingRepository;
+    protected $reviewRepository;
 
-    public function __construct(RankingRepository $rankingRepository)
+    public function __construct(RankingRepository $rankingRepository,ReviewRepository $reviewRepository)
     {
         $this->middleware('auth')->except(['index','api_index', 'ranking', 'vote', 'store_visitor']);
         $this->rankingRepository = $rankingRepository;
+        $this->reviewRepository=$reviewRepository;
     }
 
 
@@ -55,13 +58,7 @@ class ReviewController extends Controller
 
     public function index()
     {
-        //设置缓存--tag:reviews
-        $reviews = Cache::rememberForever('reviews', function () {
-            return Review::select('id', 'user_id', 'product_id', 'brand_id', 'rate', 'body', 'imgs', 'buy', 'shop','likes_count','hates_count', 'updated_at')
-                ->where('body', '<>', '')->with(['product:id,name,rate', 'brand:id,name', 'user:id,name,avatar,skin,reviews_count'])
-                ->latest()->orderBy('id', 'desc')
-                ->take(config('common.pre_page'))->get();
-        });
+        $reviews =$this->reviewRepository->index();
 
         //随机回购ranking,并只选取点评数大于10的进行排行
         $popular_cats = Cache::rememberForever('popular-cats', function () {
@@ -79,16 +76,7 @@ class ReviewController extends Controller
 
     public function api_index()
     {
-        //设置缓存--tag:reviews
-        $reviews = Cache::rememberForever('reviews', function () {
-            return Review::select('id', 'user_id', 'product_id', 'brand_id', 'rate', 'body', 'imgs', 'buy', 'shop','likes_count','hates_count', 'updated_at')
-                ->where('body', '<>', '')
-                ->with(['product:id,name,rate,reviews_count,buys_count', 'brand:id,name', 'user:id,name,avatar,skin,reviews_count'])
-                ->latest()
-                ->orderBy('id', 'desc')
-                ->take(config('common.pre_page'))
-                ->get();
-        });
+        $reviews = $this->reviewRepository->index();
         return compact('reviews');
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Brand;
+use App\Repositories\BrandRepository;
 use App\Repositories\RankingRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
@@ -10,38 +11,28 @@ use Illuminate\Support\Facades\Cache;
 class BrandController extends Controller
 {
     protected $rankingRepository;
+    protected $brandRepository;
 
-    public function __construct(RankingRepository $rankingRepository)
+    public function __construct(RankingRepository $rankingRepository, BrandRepository $brandRepository)
     {
         $this->rankingRepository = $rankingRepository;
+        $this->brandRepository = $brandRepository;
     }
 
     public function index()
     {
-        $brands=Brand::paginate(50);
-        return view('b',compact('brands'));
+        $brands = Brand::paginate(50);
+        return view('b', compact('brands'));
     }
 
     public function show(int $brand_id)
     {
-        $brand = Cache::rememberForever('brands-' . $brand_id, function () use ($brand_id) {
-            return Brand::find($brand_id,['id','name','common_name','country','country_id','official_website','reviews_count','buys_count']);
-        });
-        //所有商品(带分页)--缓存处理(tag:品牌-1-商品)
-        $products = Cache::tags('brands-' . $brand_id . '-products')
-            ->rememberForever('brands-' . $brand_id . '-products-' . request('page', 1), function () use ($brand) {
-                return $brand->products()
-                    ->select('id','cat_id','name','nick_name','rate','reviews_count','buys_count')
-                    ->with(['cat:id,name', 'prices'])
-                    ->orderBy('reviews_count', 'desc')//此处的数字是数据库中的旧数据，页面上显示的是最新缓存数据，因此页面上排名可能不是按最新排的
-                    ->orderBy('id','asc')
-                    ->paginate(config('common.pre_page'));
-            });
+        $brand = $this->brandRepository->brand($brand_id);
 
-//        $brand->products()->with(['cat:id,name'])->orderBy('reviews_count', 'desc');
+        //所有商品(带分页)--缓存处理(tag:品牌-1-商品)
+        $products = $this->brandRepository->products($brand_id,$brand);
 
         $red_products = $this->rankingRepository->cached_ranking_by_brand($brand_id, 'desc');
-
         $black_products = $this->rankingRepository->cached_ranking_by_brand($brand_id, 'asc');
 
         return view('brands.show', compact('brand', 'products', 'red_products', 'black_products'));
@@ -49,26 +40,38 @@ class BrandController extends Controller
 
     public function api_show(int $brand_id)
     {
-        $brand = Cache::rememberForever('brands-' . $brand_id, function () use ($brand_id) {
-            return Brand::find($brand_id,['id','name','common_name','country','country_id','official_website','reviews_count','buys_count']);
-        });
-        //所有商品(带分页)--缓存处理(tag:品牌-1-商品)
-        $products = Cache::tags('brands-' . $brand_id . '-products')
-            ->rememberForever('brands-' . $brand_id . '-products-' . request('page', 1), function () use ($brand) {
-                return $brand->products()
-                    ->select('id','cat_id','name','nick_name','rate','reviews_count','buys_count')
-                    ->with(['cat:id,name', 'prices'])
-                    ->orderBy('reviews_count', 'desc')//此处的数字是数据库中的旧数据，页面上显示的是最新缓存数据，因此页面上排名可能不是按最新排的
-                    ->orderBy('id','asc')
-                    ->paginate(config('common.pre_page_mobile'));
-            });
+        $brand = $brand = $this->brandRepository->brand($brand_id);
 
-//        $brand->products()->with(['cat:id,name'])->orderBy('reviews_count', 'desc');
-
-        //$red_products = $this->rankingRepository->cached_ranking_by_brand($brand_id, 'desc');
-
-        //$black_products = $this->rankingRepository->cached_ranking_by_brand($brand_id, 'asc');
+        $products = $this->brandRepository->products($brand_id,$brand);
 
         return compact('brand', 'products');
+    }
+
+    public function api_hot()
+    {
+        $hot_brands = Cache::rememberForever('hot-brands', function () {
+            return Brand::select('id', 'name')->orderBy('reviews_count', 'desc')->orderBy('buys_count', 'desc')->orderBy('id', 'asc')->take(8)->get();
+        });
+        return compact('hot_brands');
+    }
+
+    public function api_index()
+    {
+        $country_ids = [2,3,5,10,1];
+
+        $us_brands = $this->brandRepository->country_brands('us', $country_ids[0]);
+        $jp_brands = $this->brandRepository->country_brands('jp', $country_ids[1]);
+        $fr_brands = $this->brandRepository->country_brands('fr', $country_ids[2]);
+        $kr_brands = $this->brandRepository->country_brands('kr', $country_ids[3]);
+        $cn_brands = $this->brandRepository->country_brands('cn', $country_ids[4]);
+
+        $other_brands = Cache::rememberForever('other-brands', function () use ($country_ids) {
+            return Brand::select('id', 'name')->whereNotIn('country_id', $country_ids)
+                ->orderBy('reviews_count', 'desc')->orderBy('buys_count', 'desc')->orderBy('id', 'asc')
+                ->get();
+        });
+
+        return compact('us_brands','jp_brands','fr_brands','kr_brands','cn_brands','other_brands');
+
     }
 }
