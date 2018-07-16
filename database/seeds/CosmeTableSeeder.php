@@ -14,7 +14,7 @@ class CosmeTableSeeder extends Seeder
      */
     public function run()
     {
-        //新增品牌-->放入new_brands
+        /*//新增品牌-->放入new_brands
         $c = [
             1 => '中国', 2 => '美国', 3 => '日本', 4 => '英国', 5 => '法国', 6 => '意大利',
             7 => '德国', 8 => '澳大利亚', 9 => '俄罗斯', 10 => '韩国', 11 => '加拿大', 12 => '瑞士',
@@ -66,9 +66,10 @@ class CosmeTableSeeder extends Seeder
                 'common_name'=>$new_product[3],
                 'nick_name'=>$new_product[4]
             ]);
-        }
+        }*/
 
         //新增价格
+        $records = ['product_id', 'volume', 'price'];
         $new_prices=[
             [2135,'',53],
             [2136,'5只',22],
@@ -83,13 +84,12 @@ class CosmeTableSeeder extends Seeder
             [2147,'300ml',42],
             [2148,'',49],
         ];
-        foreach ($new_prices as $new_price){
-            Price::create([
-                'product_id'=>$new_price[0],
-                'volume'=>$new_price[1],
-                'price'=>$new_price[2]
-            ]);
+        $prices = [];
+        foreach ($new_prices as $data) {
+            $prices[] = array_combine($records, $data);
         }
+        DB::table('prices')->insert($prices);
+
 
     }
 }
