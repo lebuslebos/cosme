@@ -19,6 +19,13 @@ class CatRepository
         });
     }
 
+    public function popular_cats()
+    {
+        return Cache::rememberForever('popular-cats', function () {
+            return Cat::select('id', 'name')->whereIn('id', config('common.popular_cats'))->orderBy('id')->get();
+        });
+    }
+
     public function cat(int $cat_id)
     {
         return Cache::rememberForever('cats-' . $cat_id, function () use ($cat_id) {

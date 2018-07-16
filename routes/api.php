@@ -29,11 +29,11 @@ Route::get('search', 'SearchController@instant_search');
 Route::get('products/{product_id}','ProductController@api_show');
 
 Route::get('brands/{brand_id}','BrandController@api_show');
-Route::get('hot_brands','BrandController@api_hot');
 Route::get('brands','BrandController@api_index');
 
 
 Route::get('cats/{cat_id}','CatController@api_show');
+Route::get('user_cats','CatController@user_index');
 Route::get('cats','CatController@api_index');
 
 

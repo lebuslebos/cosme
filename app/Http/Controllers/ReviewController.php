@@ -6,6 +6,7 @@ use App\Cat;
 use App\Http\Requests\StoreImgRequest;
 use App\Http\Requests\StoreReviewRequest;
 use App\Product;
+use App\Repositories\CatRepository;
 use App\Repositories\RankingRepository;
 use App\Repositories\ReviewRepository;
 use App\Review;
@@ -22,12 +23,14 @@ class ReviewController extends Controller
 {
     protected $rankingRepository;
     protected $reviewRepository;
+    protected $catRepository;
 
-    public function __construct(RankingRepository $rankingRepository,ReviewRepository $reviewRepository)
+    public function __construct(RankingRepository $rankingRepository,ReviewRepository $reviewRepository,CatRepository $catRepository)
     {
         $this->middleware('auth')->except(['index','api_index', 'ranking', 'vote', 'store_visitor']);
         $this->rankingRepository = $rankingRepository;
         $this->reviewRepository=$reviewRepository;
+        $this->catRepository=$catRepository;
     }
 
 
@@ -61,9 +64,7 @@ class ReviewController extends Controller
         $reviews =$this->reviewRepository->index();
 
         //随机回购ranking,并只选取点评数大于10的进行排行
-        $popular_cats = Cache::rememberForever('popular-cats', function () {
-            return Cat::select('id', 'name')->whereIn('id', config('common.popular_cats'))->get();
-        });
+        $popular_cats = $this->catRepository->popular_cats();
 
         $red_cat = $popular_cats->random();
         $red_products = $this->rankingRepository->cached_ranking_by_cat($red_cat->id, 'desc');

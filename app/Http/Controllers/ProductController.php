@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Repositories\ProductRepository;
 use App\Repositories\RankingRepository;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 
 class ProductController extends Controller
 {
@@ -44,7 +41,7 @@ class ProductController extends Controller
 
             //肤质分布--映射--缓存处理
             if ($product->has_login_review) $skin_datas = $this->productRepository->skin_datas($product_id, $product);
-            
+
         }
         return view('products.show', compact('product', 'cat', 'shop_datas', 'skin_datas', 'reviews', 'red_products'));
     }

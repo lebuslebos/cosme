@@ -12,14 +12,6 @@ use Illuminate\Support\Facades\Cache;
  */
 class BrandRepository
 {
-    public function country_brands(string $country,int $country_id)
-    {
-        return Cache::rememberForever($country . '-brands', function () use($country_id){
-            return Brand::select('id', 'name')->where('country_id',$country_id )
-                ->orderBy('reviews_count', 'desc')->orderBy('buys_count', 'desc')->orderBy('id', 'asc')
-                ->get();
-        });
-    }
 
     public function brand(int $brand_id)
     {
