@@ -62061,6 +62061,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -62076,6 +62116,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['productId', 'review', 'likes', 'hates', 'can'],
     data: function data() {
         return {
+            deleteReview: false,
             showEditBtn: false, //显示编辑按钮
             showForm: false,
 
@@ -62171,6 +62212,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // 编辑点评
         edit: function edit() {
             this.showForm = true;
+        },
+
+        //删除点评
+        onDelete: function onDelete() {
+            // $(`#deleteReview${this.review.id}`).modal('dispose');
+            this.deleteReview = true;
+            console.log(this.review.id);
+            axios.delete('/reviews/' + this.review.id).then(function (response) {
+                console.log(response.data.a);
+            });
         },
 
         // 取消编辑
@@ -66355,379 +66406,564 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
-    !_vm.showForm
-      ? _c(
-          "div",
-          {
-            staticClass: "rounded bg-light-brown py-3 px-4",
-            on: { mouseover: _vm.enterReview, mouseout: _vm.leaveReview }
-          },
-          [
-            _c(
+  return _c(
+    "div",
+    [
+      _c("transition", { attrs: { name: "only-fade" } }, [
+        !_vm.deleteReview
+          ? _c(
               "div",
-              { staticClass: "d-flex align-items-center" },
               [
-                _c("ReviewRate", {
-                  staticClass: "text-normal",
-                  attrs: { rate: _vm.initRate }
-                }),
-                _vm._v(" "),
-                _c("ReviewBuy", {
-                  staticClass: "mx-2",
-                  attrs: { buy: _vm.initBuy }
-                }),
-                _vm._v(" "),
-                _c("ReviewShop", {
-                  staticClass: "mr-2",
-                  attrs: { shop: _vm.initShop }
-                }),
-                _vm._v(" "),
-                _c(
-                  "transition",
-                  { attrs: { name: "only-fade" } },
-                  [
-                    Object.keys(_vm.updatedAt).length > 0
-                      ? _c("ReviewDate", { attrs: { date: _vm.updatedAt } })
-                      : _vm._e()
-                  ],
-                  1
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "text-brown my-2" }, [
-              _vm._v(_vm._s(_vm.initBody))
-            ]),
-            _vm._v(" "),
-            _vm.initImgs.length > 0
-              ? _c(
-                  "div",
-                  { staticClass: "d-flex" },
-                  _vm._l(_vm.initImgs, function(initImg, index) {
-                    return _c("ReviewImg", {
-                      key: index,
-                      staticClass: "mr-2 mb-2",
-                      attrs: { img: initImg }
-                    })
-                  })
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "d-flex align-items-center pt-1" },
-              [
-                _c("Vote", {
-                  attrs: {
-                    review: _vm.review.id,
-                    user: _vm.review.user_id,
-                    likes: _vm.likes,
-                    hates: _vm.hates
-                  }
-                }),
-                _vm._v(" "),
-                _vm.can
-                  ? [
-                      _c(
+                _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
+                  !_vm.showForm
+                    ? _c(
                         "div",
                         {
-                          directives: [
-                            {
-                              name: "show",
-                              rawName: "v-show",
-                              value: _vm.showEditBtn,
-                              expression: "showEditBtn"
-                            }
-                          ],
-                          staticClass: "ml-auto"
+                          staticClass: "rounded bg-light-brown py-3 px-4",
+                          on: {
+                            mouseover: _vm.enterReview,
+                            mouseout: _vm.leaveReview
+                          }
                         },
                         [
                           _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-easy",
-                              class: { "btn-pc": !_vm.isMobile },
-                              attrs: { type: "button" },
-                              on: { click: _vm.edit }
-                            },
+                            "div",
+                            { staticClass: "d-flex align-items-center" },
                             [
-                              _c("i", { staticClass: "fa fa-pencil-square-o" }),
-                              _vm._v(
-                                "\n                        改一下\n                    "
+                              _c("ReviewRate", {
+                                staticClass: "text-normal",
+                                attrs: { rate: _vm.initRate }
+                              }),
+                              _vm._v(" "),
+                              _c("ReviewBuy", {
+                                staticClass: "mx-2",
+                                attrs: { buy: _vm.initBuy }
+                              }),
+                              _vm._v(" "),
+                              _c("ReviewShop", {
+                                staticClass: "mr-2",
+                                attrs: { shop: _vm.initShop }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "transition",
+                                { attrs: { name: "only-fade" } },
+                                [
+                                  Object.keys(_vm.updatedAt).length > 0
+                                    ? _c("ReviewDate", {
+                                        attrs: { date: _vm.updatedAt }
+                                      })
+                                    : _vm._e()
+                                ],
+                                1
                               )
-                            ]
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "text-brown my-2" }, [
+                            _vm._v(_vm._s(_vm.initBody))
+                          ]),
+                          _vm._v(" "),
+                          _vm.initImgs.length > 0
+                            ? _c(
+                                "div",
+                                { staticClass: "d-flex" },
+                                _vm._l(_vm.initImgs, function(initImg, index) {
+                                  return _c("ReviewImg", {
+                                    key: index,
+                                    staticClass: "mr-2 mb-2",
+                                    attrs: { img: initImg }
+                                  })
+                                })
+                              )
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "d-flex align-items-center pt-1" },
+                            [
+                              _c("Vote", {
+                                attrs: {
+                                  review: _vm.review.id,
+                                  user: _vm.review.user_id,
+                                  likes: _vm.likes,
+                                  hates: _vm.hates
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm.can
+                                ? [
+                                    _c(
+                                      "div",
+                                      {
+                                        directives: [
+                                          {
+                                            name: "show",
+                                            rawName: "v-show",
+                                            value: _vm.showEditBtn,
+                                            expression: "showEditBtn"
+                                          }
+                                        ],
+                                        staticClass: "ml-auto"
+                                      },
+                                      [
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-easy mr-3",
+                                            class: { "btn-pc": !_vm.isMobile },
+                                            attrs: {
+                                              type: "button",
+                                              "data-toggle": "modal",
+                                              "data-target":
+                                                "#deleteReview" + _vm.review.id
+                                            }
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass: "fa trash-o"
+                                            }),
+                                            _vm._v(
+                                              "\n                                    删掉\n                                "
+                                            )
+                                          ]
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "button",
+                                          {
+                                            staticClass: "btn btn-easy",
+                                            class: { "btn-pc": !_vm.isMobile },
+                                            attrs: { type: "button" },
+                                            on: { click: _vm.edit }
+                                          },
+                                          [
+                                            _c("i", {
+                                              staticClass:
+                                                "fa fa-pencil-square-o"
+                                            }),
+                                            _vm._v(
+                                              "\n                                    改一下\n                                "
+                                            )
+                                          ]
+                                        )
+                                      ]
+                                    )
+                                  ]
+                                : _vm._e()
+                            ],
+                            2
                           )
                         ]
                       )
-                    ]
-                  : _vm._e()
-              ],
-              2
-            )
-          ]
-        )
-      : _vm.can && _vm.showForm
-        ? _c(
-            "form",
-            { staticClass: "rounded bg-light-brown py-3 px-4" },
-            [
-              _c("div", { staticClass: "bg-easy rounded" }, [
-                _c("span", { staticClass: "rate ml-1" }, [
-                  _c(
-                    "span",
-                    { staticClass: "hover-pointer" },
-                    _vm._l(7, function(n) {
-                      return _c("i", {
-                        staticClass: "fa fa-star px-1",
-                        class: { "change-color": n <= _vm.hoverRate },
-                        on: {
-                          mouseenter: function($event) {
-                            _vm.onEnter(n)
-                          },
-                          mouseleave: _vm.onLeave,
-                          click: function($event) {
-                            _vm.setRate(n)
-                          }
-                        }
-                      })
-                    })
-                  ),
-                  _vm._v(" "),
-                  _c("span", {
-                    staticClass: "change-color",
-                    domProps: { textContent: _vm._s(_vm.hoverRate) }
-                  }),
-                  _vm._v(" \n            ")
-                ]),
-                _vm._v(" "),
-                _c("span", {
-                  staticClass: "text-easy",
-                  domProps: { textContent: _vm._s(_vm.rateHint) }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "d-md-flex align-items-md-center my-3" },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "text-muted text-tiny mb-2 mb-md-0" },
-                    [_vm._v("会回购吗：")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "btn-group-toggle" },
-                    _vm._l(_vm.buyTexts, function(buyText, index) {
-                      return _c(
-                        "label",
-                        {
-                          key: index,
-                          staticClass: "btn btn-easy mr-2",
-                          class: [
-                            { active: _vm.buy === index },
-                            { "btn-pc": !_vm.isMobile }
-                          ]
-                        },
-                        [
-                          _c("input", {
-                            directives: [
+                    : _vm.can && _vm.showForm
+                      ? _c(
+                          "form",
+                          { staticClass: "rounded bg-light-brown py-3 px-4" },
+                          [
+                            _c("div", { staticClass: "bg-easy rounded" }, [
+                              _c("span", { staticClass: "rate ml-1" }, [
+                                _c(
+                                  "span",
+                                  { staticClass: "hover-pointer" },
+                                  _vm._l(7, function(n) {
+                                    return _c("i", {
+                                      staticClass: "fa fa-star px-1",
+                                      class: {
+                                        "change-color": n <= _vm.hoverRate
+                                      },
+                                      on: {
+                                        mouseenter: function($event) {
+                                          _vm.onEnter(n)
+                                        },
+                                        mouseleave: _vm.onLeave,
+                                        click: function($event) {
+                                          _vm.setRate(n)
+                                        }
+                                      }
+                                    })
+                                  })
+                                ),
+                                _vm._v(" "),
+                                _c("span", {
+                                  staticClass: "change-color",
+                                  domProps: {
+                                    textContent: _vm._s(_vm.hoverRate)
+                                  }
+                                }),
+                                _vm._v(" \n            ")
+                              ]),
+                              _vm._v(" "),
+                              _c("span", {
+                                staticClass: "text-easy",
+                                domProps: { textContent: _vm._s(_vm.rateHint) }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "div",
                               {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.buy,
-                                expression: "buy"
-                              }
-                            ],
-                            attrs: { type: "radio" },
-                            domProps: {
-                              value: index,
-                              checked: _vm._q(_vm.buy, index)
-                            },
-                            on: {
-                              change: function($event) {
-                                _vm.buy = index
-                              }
-                            }
-                          }),
-                          _vm._v(_vm._s(buyText) + "\n                ")
-                        ]
-                      )
-                    })
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "d-md-flex align-items-md-center mb-1" },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "text-muted text-tiny mb-2 mb-md-0" },
-                    [_vm._v("在哪买的：")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "btn-group-toggle" },
-                    _vm._l(_vm.shopTexts, function(shopText, index) {
-                      return _c(
-                        "label",
-                        {
-                          key: index,
-                          staticClass: "btn btn-easy mr-2 btn-margin-mobile",
-                          class: [
-                            { active: _vm.shop === index },
-                            { "btn-pc": !_vm.isMobile }
-                          ],
-                          on: {
-                            mouseover: function($event) {
-                              _vm.enterShop(index)
-                            },
-                            mouseout: _vm.leaveShop
-                          }
-                        },
-                        [
-                          _c("input", {
-                            directives: [
+                                staticClass:
+                                  "d-md-flex align-items-md-center my-3"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "text-muted text-tiny mb-2 mb-md-0"
+                                  },
+                                  [_vm._v("会回购吗：")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "btn-group-toggle" },
+                                  _vm._l(_vm.buyTexts, function(
+                                    buyText,
+                                    index
+                                  ) {
+                                    return _c(
+                                      "label",
+                                      {
+                                        key: index,
+                                        staticClass: "btn btn-easy mr-2",
+                                        class: [
+                                          { active: _vm.buy === index },
+                                          { "btn-pc": !_vm.isMobile }
+                                        ]
+                                      },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.buy,
+                                              expression: "buy"
+                                            }
+                                          ],
+                                          attrs: { type: "radio" },
+                                          domProps: {
+                                            value: index,
+                                            checked: _vm._q(_vm.buy, index)
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              _vm.buy = index
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(
+                                          _vm._s(buyText) +
+                                            "\n                            "
+                                        )
+                                      ]
+                                    )
+                                  })
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
                               {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.shop,
-                                expression: "shop"
-                              }
-                            ],
-                            attrs: { type: "radio" },
-                            domProps: {
-                              value: index,
-                              checked: _vm._q(_vm.shop, index)
-                            },
-                            on: {
-                              change: function($event) {
-                                _vm.shop = index
-                              }
-                            }
-                          }),
-                          _vm._v(_vm._s(shopText) + "\n                ")
-                        ]
-                      )
-                    })
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "shop-hint-pc text-muted text-tiny mb-3" },
-                [
-                  _c("span", [_c("i", { staticClass: "fa fa-shopping-bag" })]),
-                  _vm._v(" "),
-                  _c("span", [_vm._v(_vm._s(_vm.shopHint))])
-                ]
-              ),
-              _vm._v(" "),
-              _c("div", [
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.body,
-                      expression: "body"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  style: { height: _vm.textareaHeight + "px" },
-                  attrs: { placeholder: "随便写点", name: "body", rows: "3" },
-                  domProps: { value: _vm.body },
-                  on: {
-                    focus: function($event) {
-                      _vm.textareaHeight = 132.5
-                    },
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.body = $event.target.value
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "text-right text-tiny mt-1" }, [
-                  _vm.bodyError
-                    ? _c(
-                        "div",
-                        { staticClass: "text-danger font-weight-bold" },
-                        [
-                          _c("span", [
-                            _vm._v(
-                              "超过了" +
-                                _vm._s(_vm.body.length - _vm.maxBodyLength) +
-                                "个字"
+                                staticClass:
+                                  "d-md-flex align-items-md-center mb-1"
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  {
+                                    staticClass:
+                                      "text-muted text-tiny mb-2 mb-md-0"
+                                  },
+                                  [_vm._v("在哪买的：")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "div",
+                                  { staticClass: "btn-group-toggle" },
+                                  _vm._l(_vm.shopTexts, function(
+                                    shopText,
+                                    index
+                                  ) {
+                                    return _c(
+                                      "label",
+                                      {
+                                        key: index,
+                                        staticClass:
+                                          "btn btn-easy mr-2 btn-margin-mobile",
+                                        class: [
+                                          { active: _vm.shop === index },
+                                          { "btn-pc": !_vm.isMobile }
+                                        ],
+                                        on: {
+                                          mouseover: function($event) {
+                                            _vm.enterShop(index)
+                                          },
+                                          mouseout: _vm.leaveShop
+                                        }
+                                      },
+                                      [
+                                        _c("input", {
+                                          directives: [
+                                            {
+                                              name: "model",
+                                              rawName: "v-model",
+                                              value: _vm.shop,
+                                              expression: "shop"
+                                            }
+                                          ],
+                                          attrs: { type: "radio" },
+                                          domProps: {
+                                            value: index,
+                                            checked: _vm._q(_vm.shop, index)
+                                          },
+                                          on: {
+                                            change: function($event) {
+                                              _vm.shop = index
+                                            }
+                                          }
+                                        }),
+                                        _vm._v(
+                                          _vm._s(shopText) +
+                                            "\n                            "
+                                        )
+                                      ]
+                                    )
+                                  })
+                                )
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "shop-hint-pc text-muted text-tiny mb-3"
+                              },
+                              [
+                                _c("span", [
+                                  _c("i", { staticClass: "fa fa-shopping-bag" })
+                                ]),
+                                _vm._v(" "),
+                                _c("span", [_vm._v(_vm._s(_vm.shopHint))])
+                              ]
+                            ),
+                            _vm._v(" "),
+                            _c("div", [
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.body,
+                                    expression: "body"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                style: { height: _vm.textareaHeight + "px" },
+                                attrs: {
+                                  placeholder: "随便写点",
+                                  name: "body",
+                                  rows: "3"
+                                },
+                                domProps: { value: _vm.body },
+                                on: {
+                                  focus: function($event) {
+                                    _vm.textareaHeight = 132.5
+                                  },
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.body = $event.target.value
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "text-right text-tiny mt-1" },
+                                [
+                                  _vm.bodyError
+                                    ? _c(
+                                        "div",
+                                        {
+                                          staticClass:
+                                            "text-danger font-weight-bold"
+                                        },
+                                        [
+                                          _c("span", [
+                                            _vm._v(
+                                              "超过了" +
+                                                _vm._s(
+                                                  _vm.body.length -
+                                                    _vm.maxBodyLength
+                                                ) +
+                                                "个字"
+                                            )
+                                          ])
+                                        ]
+                                      )
+                                    : _c("div", { staticClass: "text-main" }, [
+                                        _c("span", [
+                                          _vm._v(
+                                            _vm._s(_vm.body.length) +
+                                              "/" +
+                                              _vm._s(_vm.maxBodyLength)
+                                          )
+                                        ])
+                                      ])
+                                ]
+                              )
+                            ]),
+                            _vm._v(" "),
+                            _c("ReviewUpload", { attrs: { imgs: _vm.imgs } }),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              {
+                                staticClass:
+                                  "d-flex align-items-center justify-content-end pt-2 pt-md-0"
+                              },
+                              [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-cancel d-block mr-3",
+                                    class: { "btn-pc": !_vm.isMobile },
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.cancel }
+                                  },
+                                  [_vm._v("取消\n                        ")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-submit d-block",
+                                    class: { "btn-pc": !_vm.isMobile },
+                                    attrs: { type: "submit" },
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        return _vm.onSubmit($event)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("写好了\n                        ")]
+                                )
+                              ]
                             )
-                          ])
-                        ]
-                      )
-                    : _c("div", { staticClass: "text-main" }, [
-                        _c("span", [
-                          _vm._v(
-                            _vm._s(_vm.body.length) +
-                              "/" +
-                              _vm._s(_vm.maxBodyLength)
-                          )
-                        ])
-                      ])
+                          ],
+                          1
+                        )
+                      : _vm._e()
                 ])
-              ]),
-              _vm._v(" "),
-              _c("ReviewUpload", { attrs: { imgs: _vm.imgs } }),
-              _vm._v(" "),
+              ],
+              1
+            )
+          : _vm._e()
+      ]),
+      _vm._v(" "),
+      _vm.can
+        ? _c(
+            "div",
+            {
+              staticClass: "modal fade",
+              attrs: {
+                id: "deleteReview" + _vm.review.id,
+                tabindex: "-1",
+                role: "dialog"
+              }
+            },
+            [
               _c(
                 "div",
                 {
-                  staticClass:
-                    "d-flex align-items-center justify-content-end pt-2 pt-md-0"
+                  staticClass: "modal-dialog modal-dialog-centered",
+                  attrs: { role: "document" }
                 },
                 [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-cancel d-block mr-3",
-                      class: { "btn-pc": !_vm.isMobile },
-                      attrs: { type: "button" },
-                      on: { click: _vm.cancel }
-                    },
-                    [_vm._v("取消\n            ")]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-submit d-block",
-                      class: { "btn-pc": !_vm.isMobile },
-                      attrs: { type: "submit" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          return _vm.onSubmit($event)
-                        }
-                      }
-                    },
-                    [_vm._v("写好了\n            ")]
-                  )
+                  _c("div", { staticClass: "modal-content" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "modal-body text-main text-big font-weight-bold"
+                      },
+                      [
+                        _vm._v(
+                          "\n                    确认删除这条点评吗？\n                "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-footer" }, [
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-secondary",
+                          attrs: { type: "button", "data-dismiss": "modal" }
+                        },
+                        [_vm._v("不删\n                    ")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "button", "data-dismiss": "modal" },
+                          on: { click: _vm.onDelete }
+                        },
+                        [_vm._v("删掉\n                    ")]
+                      )
+                    ])
+                  ])
                 ]
               )
-            ],
-            1
+            ]
           )
         : _vm._e()
-  ])
+    ],
+    1
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "div",
+        {
+          staticClass: "text-muted modal-title",
+          attrs: { id: "exampleModalLongTitle" }
+        },
+        [
+          _vm._v(
+            "\n                        我是手滑党救星\n                    "
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_c("span", [_vm._v("×")])]
+      )
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

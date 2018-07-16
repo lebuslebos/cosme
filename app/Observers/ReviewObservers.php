@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Repositories\ReviewRepository;
 use App\Review;
 use Illuminate\Support\Facades\Cache;
 
@@ -12,6 +13,14 @@ use Illuminate\Support\Facades\Cache;
  */
 class ReviewObservers
 {
+
+    protected $reviewRepository;
+
+    public function __construct(ReviewRepository $reviewRepository)
+    {
+        $this->reviewRepository=$reviewRepository;
+    }
+
     //游客点评+登录用户新建点评（2种）
     public function created(Review $review)
     {
@@ -64,24 +73,22 @@ class ReviewObservers
                 Cache::forever('b-u-ids',$b_u_ids);
             }
 
-
             if ($review->body) {
 
                 //记录下有点评进账的商品
                 $p_ids = Cache::get('p-ids',[]);
                 $p_ids[]=$review->product_id;
-//                array_push($p_ids, $review->product_id);
                 Cache::forever('p-ids', $p_ids);
 
-                if (Cache::has('reviews')) Cache::forget('reviews');//清空首页点评缓存
+                //if (Cache::has('reviews')) Cache::forget('reviews');//清空首页点评缓存
+                //直接覆盖首页点评缓存
+                $reviews=$this->reviewRepository->reviews();
+                Cache::forever('reviews',$reviews);
             }
-
 
             //清空个人页最多分类和品牌的缓存
             if (Cache::has('users-' . $review->user_id . '-b')) Cache::forget('users-' . $review->user_id . '-b');
             if (Cache::has('users-' . $review->user_id . '-c')) Cache::forget('users-' . $review->user_id . '-c');
-
-
         }
     }
 
@@ -100,12 +107,53 @@ class ReviewObservers
 
         //登录用户新建+修改点评时
         if ($review->user_id) {
-
             //user-product--我的点评缓存起来(问题待解决：存入全部review进缓存，没办法选单独列进去，因only方法返回的是数组)
             Cache::forever($review->user_id . '-' . $review->product_id, $review);
 
             Cache::tags('users-' . $review->user_id . '-reviews')->flush();//清空个人页所有点评的缓存
-
         }
+    }
+
+    //登录用户删除点评
+    public function deleted(Review $review)
+    {
+        //刷新肤质分布的缓存
+        if (Cache::has('sk-' . $review->product_id)) Cache::forget('sk-' . $review->product_id);
+
+        //用户点评数-1-->并各做持久化处理
+        Cache::decrement('r-' . $review->user_id . '-u');
+        $r_u_ids=Cache::get('r-u-ids',[]);
+        $r_u_ids[]=$review->user_id;
+        Cache::forever('r-u-ids',$r_u_ids);
+        //用户回购数-1-->并各做持久化处理
+        if ($review->buy == 0) {
+            Cache::decrement('b-' . $review->user_id . '-u');
+            $b_u_ids=Cache::get('b-u-ids',[]);
+            $b_u_ids[]=$review->user_id;
+            Cache::forever('b-u-ids',$b_u_ids);
+        }
+
+        if ($review->body) {
+
+            //记录下有点评进账的商品
+            $p_ids = Cache::get('p-ids',[]);
+            $p_ids[]=$review->product_id;
+            Cache::forever('p-ids', $p_ids);
+
+            if (Cache::has('reviews')) Cache::forget('reviews');//清空首页点评缓存--和create不一样是因为：用户删除的点评不一定在首页，所有不覆盖缓存，直接清空
+        }
+
+        //清空个人页最多分类和品牌的缓存
+        if (Cache::has('users-' . $review->user_id . '-b')) Cache::forget('users-' . $review->user_id . '-b');
+        if (Cache::has('users-' . $review->user_id . '-c')) Cache::forget('users-' . $review->user_id . '-c');
+
+
+        Cache::tags('products-' . $review->product_id . '-reviews')->flush();//清空商品页所有点评的缓存
+
+
+        //user-product--我的点评删除
+        Cache::forget($review->user_id . '-' . $review->product_id);
+
+        Cache::tags('users-' . $review->user_id . '-reviews')->flush();//清空个人页所有点评的缓存
     }
 }

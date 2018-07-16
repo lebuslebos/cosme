@@ -10396,9 +10396,9 @@ button:focus {
           box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.175);
 }
 
-body.modal-open {
+/*body.modal-open {
   position: fixed;
-}
+}*/
 
 .modal {
   overscroll-behavior-y: contain;

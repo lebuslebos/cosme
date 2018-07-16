@@ -194,4 +194,13 @@ class ReviewController extends Controller
         return ['aa' => '更新点评', 'updated_at' => $review->updated_at];
     }
 
+    public function destroy(Review $review)
+    {
+        $this->authorize('update', $review);
+
+        $review->delete();
+
+        return ['a'=>'ok'];
+    }
+
 }

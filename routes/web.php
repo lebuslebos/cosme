@@ -38,6 +38,8 @@ Route::resource('products/{product}/reviews', 'ReviewController')->except(['crea
 //上传图片到云服务器
 Route::post('reviews/imgs', 'ReviewController@img_store')->name('img.store');
 
+//删除点评，与上述传图路由冲突，遂放下面
+Route::delete('reviews/{review}','ReviewController@destroy');
 
 //点评点赞点踩
 Route::post('vote', 'ReviewController@vote');

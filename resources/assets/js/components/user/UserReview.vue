@@ -1,46 +1,55 @@
 <template>
-    <!--最外层的过渡，多元素之间的过渡，并不属于列表过渡-->
-    <transition name="fade" mode="out-in">
-        <!--展示点评-->
-        <div v-if="!showForm" class="rounded bg-light-brown py-3 px-4"
-             @mouseover="enterReview" @mouseout="leaveReview">
+    <div>
+        <transition name="only-fade">
+            <div v-if="!deleteReview">
+                <!--最外层的过渡，多元素之间的过渡，并不属于列表过渡-->
+                <transition name="fade" mode="out-in">
+                    <!--展示点评-->
+                    <div v-if="!showForm" class="rounded bg-light-brown py-3 px-4"
+                         @mouseover="enterReview" @mouseout="leaveReview">
 
-            <!--点评上部--评分、回购。购入地、时间-->
-            <div class="d-flex align-items-center">
-                <ReviewRate class="text-normal" :rate="initRate"/>
-                <ReviewBuy class="mx-2" :buy="initBuy"/>
-                <ReviewShop class="mr-2" :shop="initShop"/>
-                <transition name="only-fade">
-                    <ReviewDate :date="updatedAt" v-if="Object.keys(updatedAt).length>0"/>
-                </transition>
-            </div>
-            <!--文字点评-->
-            <div class="text-brown my-2">{{initBody}}</div>
-            <!--图片点评-->
-            <div v-if="initImgs.length>0" class="d-flex">
-                <ReviewImg v-for="(initImg,index) in initImgs" :key="index" :img="initImg" class="mr-2 mb-2"/>
-            </div>
-            <!--点赞点踩+修改-->
-            <div class="d-flex align-items-center pt-1">
-                <Vote :review="review.id"
-                      :user="review.user_id"
-                      :likes="likes" :hates="hates"/>
-                <template v-if="can">
-                    <div class="ml-auto" v-show="showEditBtn">
-                        <button type="button" class="btn btn-easy"
-                                :class="{'btn-pc':!isMobile}" @click="edit">
-                            <i class="fa fa-pencil-square-o"></i>
-                            改一下
-                        </button>
+                        <!--点评上部--评分、回购。购入地、时间-->
+                        <div class="d-flex align-items-center">
+                            <ReviewRate class="text-normal" :rate="initRate"/>
+                            <ReviewBuy class="mx-2" :buy="initBuy"/>
+                            <ReviewShop class="mr-2" :shop="initShop"/>
+                            <transition name="only-fade">
+                                <ReviewDate :date="updatedAt" v-if="Object.keys(updatedAt).length>0"/>
+                            </transition>
+                        </div>
+                        <!--文字点评-->
+                        <div class="text-brown my-2">{{initBody}}</div>
+                        <!--图片点评-->
+                        <div v-if="initImgs.length>0" class="d-flex">
+                            <ReviewImg v-for="(initImg,index) in initImgs" :key="index" :img="initImg"
+                                       class="mr-2 mb-2"/>
+                        </div>
+                        <!--点赞点踩+修改-->
+                        <div class="d-flex align-items-center pt-1">
+                            <Vote :review="review.id"
+                                  :user="review.user_id"
+                                  :likes="likes" :hates="hates"/>
+                            <template v-if="can">
+                                <div class="ml-auto" v-show="showEditBtn">
+                                    <button type="button" class="btn btn-easy mr-3" data-toggle="modal"
+                                            :data-target="`#deleteReview${review.id}`" :class="{'btn-pc':!isMobile}">
+                                        <i class="fa trash-o"></i>
+                                        删掉
+                                    </button>
+                                    <button type="button" class="btn btn-easy"
+                                            :class="{'btn-pc':!isMobile}" @click="edit">
+                                        <i class="fa fa-pencil-square-o"></i>
+                                        改一下
+                                    </button>
+                                </div>
+                            </template>
+                        </div>
                     </div>
-                </template>
-            </div>
-        </div>
 
-        <!--编辑点评-->
-        <form v-else-if="can && showForm" class="rounded bg-light-brown py-3 px-4">
-            <!--点评打分-->
-            <div class="bg-easy rounded">
+                    <!--编辑点评-->
+                    <form v-else-if="can && showForm" class="rounded bg-light-brown py-3 px-4">
+                        <!--点评打分-->
+                        <div class="bg-easy rounded">
                 <span class="rate ml-1">
                     <span class="hover-pointer">
                     <i class="fa fa-star px-1" v-for="n in 7" :class="{'change-color':n<=hoverRate}"
@@ -49,67 +58,98 @@
                     </span>
                     <span class="change-color" v-text="hoverRate"></span>&nbsp;
                 </span>
-                <span v-text="rateHint" class="text-easy"></span>
-            </div>
-            <!--是否回购-->
-            <div class="d-md-flex align-items-md-center my-3">
-                <div class="text-muted text-tiny mb-2 mb-md-0">会回购吗：</div>
-                <div class="btn-group-toggle">
-                    <label class="btn btn-easy mr-2"
-                           :class="[{active:buy===index},{'btn-pc':!isMobile}]"
-                           v-for="(buyText,index) in buyTexts" :key="index">
-                        <input type="radio" :value="index" v-model="buy">{{buyText}}
-                    </label>
-                </div>
-            </div>
-            <!--购入场所-->
-            <div class="d-md-flex align-items-md-center mb-1">
-                <div class="text-muted text-tiny mb-2 mb-md-0">在哪买的：</div>
-                <div class="btn-group-toggle">
-                    <label class="btn btn-easy mr-2 btn-margin-mobile"
-                           :class="[{active:shop===index},{'btn-pc':!isMobile}]"
-                           v-for="(shopText,index) in shopTexts" :key="index"
-                           @mouseover="enterShop(index)" @mouseout="leaveShop"
-                    >
-                        <input type="radio" :value="index" v-model="shop">{{shopText}}
-                    </label>
-                </div>
-            </div>
-            <div class="shop-hint-pc text-muted text-tiny mb-3">
-                <span><i class="fa fa-shopping-bag"></i></span>
-                <span>{{shopHint}}</span>
-            </div>
+                            <span v-text="rateHint" class="text-easy"></span>
+                        </div>
+                        <!--是否回购-->
+                        <div class="d-md-flex align-items-md-center my-3">
+                            <div class="text-muted text-tiny mb-2 mb-md-0">会回购吗：</div>
+                            <div class="btn-group-toggle">
+                                <label class="btn btn-easy mr-2"
+                                       :class="[{active:buy===index},{'btn-pc':!isMobile}]"
+                                       v-for="(buyText,index) in buyTexts" :key="index">
+                                    <input type="radio" :value="index" v-model="buy">{{buyText}}
+                                </label>
+                            </div>
+                        </div>
+                        <!--购入场所-->
+                        <div class="d-md-flex align-items-md-center mb-1">
+                            <div class="text-muted text-tiny mb-2 mb-md-0">在哪买的：</div>
+                            <div class="btn-group-toggle">
+                                <label class="btn btn-easy mr-2 btn-margin-mobile"
+                                       :class="[{active:shop===index},{'btn-pc':!isMobile}]"
+                                       v-for="(shopText,index) in shopTexts" :key="index"
+                                       @mouseover="enterShop(index)" @mouseout="leaveShop"
+                                >
+                                    <input type="radio" :value="index" v-model="shop">{{shopText}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="shop-hint-pc text-muted text-tiny mb-3">
+                            <span><i class="fa fa-shopping-bag"></i></span>
+                            <span>{{shopHint}}</span>
+                        </div>
 
 
-            <!--文字点评-->
-            <div>
+                        <!--文字点评-->
+                        <div>
                 <textarea class="form-control" placeholder="随便写点" name="body"
                           v-model="body" rows="3" @focus="textareaHeight=132.5"
                           :style="{height:textareaHeight+'px'}"
                 ></textarea>
-                <div class="text-right text-tiny mt-1">
-                    <div class="text-danger font-weight-bold" v-if="bodyError">
-                        <span>超过了{{body.length-maxBodyLength}}个字</span>
+                            <div class="text-right text-tiny mt-1">
+                                <div class="text-danger font-weight-bold" v-if="bodyError">
+                                    <span>超过了{{body.length-maxBodyLength}}个字</span>
+                                </div>
+                                <div class="text-main" v-else>
+                                    <span>{{body.length}}/{{maxBodyLength}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--上传图片-->
+                        <ReviewUpload :imgs="imgs"/>
+
+                        <!--提交+取消-->
+                        <div class="d-flex align-items-center justify-content-end pt-2 pt-md-0">
+                            <button class="btn btn-cancel d-block mr-3" :class="{'btn-pc':!isMobile}"
+                                    type="button" @click="cancel">取消
+                            </button>
+                            <button class="btn btn-submit d-block" :class="{'btn-pc':!isMobile}"
+                                    type="submit" @click.prevent="onSubmit">写好了
+                            </button>
+                        </div>
+                    </form>
+                </transition>
+            </div>
+        </transition>
+
+        <!--删除确认框-->
+        <div v-if="can" class="modal fade" :id="`deleteReview${review.id}`" tabindex="-1"
+             role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="text-muted modal-title" id="exampleModalLongTitle">
+                            我是手滑党救星
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                        </button>
                     </div>
-                    <div class="text-main" v-else>
-                        <span>{{body.length}}/{{maxBodyLength}}</span>
+                    <div class="modal-body text-main text-big font-weight-bold">
+                        确认删除这条点评吗？
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                                data-dismiss="modal">不删
+                        </button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" @click="onDelete">删掉
+                        </button>
                     </div>
                 </div>
             </div>
-            <!--上传图片-->
-            <ReviewUpload :imgs="imgs"/>
+        </div>
+    </div>
 
-            <!--提交+取消-->
-            <div class="d-flex align-items-center justify-content-end pt-2 pt-md-0">
-                <button class="btn btn-cancel d-block mr-3" :class="{'btn-pc':!isMobile}"
-                        type="button" @click="cancel">取消
-                </button>
-                <button class="btn btn-submit d-block" :class="{'btn-pc':!isMobile}"
-                        type="submit" @click.prevent="onSubmit">写好了
-                </button>
-            </div>
-        </form>
-    </transition>
 </template>
 
 <script>
@@ -127,6 +167,7 @@
         props: ['productId', 'review', 'likes', 'hates', 'can'],
         data() {
             return {
+                deleteReview: false,
                 showEditBtn: false,//显示编辑按钮
                 showForm: false,
 
@@ -217,6 +258,16 @@
             // 编辑点评
             edit() {
                 this.showForm = true;
+            },
+            //删除点评
+            onDelete() {
+                // $(`#deleteReview${this.review.id}`).modal('dispose');
+                this.deleteReview = true;
+                console.log(this.review.id);
+                axios.delete(`/reviews/${this.review.id}`)
+                    .then(response => {
+                        console.log(response.data.a);
+                    })
             },
             // 取消编辑
             cancel() {
