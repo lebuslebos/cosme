@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\Repositories\ProductRepository;
 use App\Repositories\RankingRepository;
+use App\Repositories\UserRepository;
 
 class ProductController extends Controller
 {
     protected $rankingRepository;
     protected $productRepository;
+    protected $userRepository;
 
-    public function __construct(RankingRepository $rankingRepository, ProductRepository $productRepository)
+    public function __construct(RankingRepository $rankingRepository, ProductRepository $productRepository, UserRepository $userRepository)
     {
         $this->rankingRepository = $rankingRepository;
         $this->productRepository = $productRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function index()
@@ -63,7 +66,25 @@ class ProductController extends Controller
             //肤质分布--映射--缓存处理
             if ($product->has_login_review) $skin_datas = $this->productRepository->skin_datas($product_id, $product);
         }
-        return compact('product', 'buy_datas', 'shop_datas', 'skin_datas', 'reviews');
+
+        if ($openid = request('openid')) {
+            $my_review=$this->review($product_id,$openid);
+        }
+
+        return compact('product', 'buy_datas', 'shop_datas', 'skin_datas', 'my_review','reviews');
+    }
+
+    public function api_my_review(int $product_id)
+    {
+        $my_review=$this->review($product_id,request('openid'));
+        return compact('my_review');
+    }
+
+    public function review(int $product_id,string $openid)
+    {
+        $user = $this->userRepository->get_user($openid);
+        $my_review = optional($user)->my_review($product_id);
+        return $my_review;
     }
 
 

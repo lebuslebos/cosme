@@ -272,8 +272,9 @@ class UserController extends Controller
 
             Storage::put($path, $handled_img);
 
-            $user->update(['avatar' => Storage::url($path)]);
-
+            $path=Storage::url($path);
+            $user->update(['avatar' => $path]);
+            return compact('path');
         }
     }
 

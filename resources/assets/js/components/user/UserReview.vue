@@ -33,7 +33,7 @@
                                 <div class="ml-auto" v-show="showEditBtn">
                                     <button type="button" class="btn btn-easy mr-3" data-toggle="modal"
                                             :data-target="`#deleteReview${review.id}`" :class="{'btn-pc':!isMobile}">
-                                        <i class="fa trash-o"></i>
+                                        <i class="fa fa-trash-o"></i>
                                         删掉
                                     </button>
                                     <button type="button" class="btn btn-easy"

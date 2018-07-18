@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Cat;
-use App\Http\Requests\StoreImgRequest;
 use App\Http\Requests\StoreReviewRequest;
 use App\Product;
 use App\Repositories\CatRepository;
 use App\Repositories\RankingRepository;
 use App\Repositories\ReviewRepository;
+use App\Repositories\UserRepository;
 use App\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
-use Intervention\Image\Facades\Image;
 use Jenssegers\Agent\Facades\Agent;
 use Zhuzhichao\IpLocationZh\Ip;
 
@@ -24,13 +21,15 @@ class ReviewController extends Controller
     protected $rankingRepository;
     protected $reviewRepository;
     protected $catRepository;
+    protected $userRepository;
 
-    public function __construct(RankingRepository $rankingRepository,ReviewRepository $reviewRepository,CatRepository $catRepository)
+    public function __construct(RankingRepository $rankingRepository, ReviewRepository $reviewRepository, CatRepository $catRepository, UserRepository $userRepository)
     {
-        $this->middleware('auth')->except(['index','api_index', 'ranking', 'vote', 'store_visitor']);
+        $this->middleware('auth')->except(['index', 'api_index', 'api_img_store', 'api_store', 'ranking', 'vote', 'store_visitor']);
         $this->rankingRepository = $rankingRepository;
-        $this->reviewRepository=$reviewRepository;
-        $this->catRepository=$catRepository;
+        $this->reviewRepository = $reviewRepository;
+        $this->catRepository = $catRepository;
+        $this->userRepository = $userRepository;
     }
 
 
@@ -54,14 +53,12 @@ class ReviewController extends Controller
         $u_ids = Cache::get($request->type . '-u-ids', []);
         $u_ids[] = $request->user;
         Cache::forever($request->type . '-u-ids', $r_ids);
-
-
         //return 'ok';
     }
 
     public function index()
     {
-        $reviews =$this->reviewRepository->index();
+        $reviews = $this->reviewRepository->index();
 
         //随机回购ranking,并只选取点评数大于10的进行排行
         $popular_cats = $this->catRepository->popular_cats();
@@ -90,26 +87,6 @@ class ReviewController extends Controller
         return $this->rankingRepository->cached_ranking_by_cat($cat_id, $request->type);
     }
 
-    public function img_store(StoreImgRequest $request)
-    {
-        //获取文件--存储文件到reviews/img目录下--再转化为绝对路径
-//        $path=Storage::url($request->file->store('reviews/imgs'));
-
-        $img = $request->file;
-        $path = $img->hashName('reviews');
-        /*$handled_img = Image::make($img)->fit(400, 400, function ($constraint) {
-            $constraint->upsize();
-        })->encode('jpg');*/
-        //图片处理---宽度变成450，自适应高度，改成jpg格式
-        $handled_img = Image::make($img)->widen(450, function ($constraint) {
-            $constraint->upsize();//防止小图被拉伸
-        })->encode('jpg');
-
-        Storage::put($path, $handled_img);
-
-        return ['path' => Storage::url($path)];
-    }
-
     public function store_visitor(Request $request, Product $product)
     {
         $request->validate([
@@ -118,7 +95,6 @@ class ReviewController extends Controller
             'shop' => 'required|in:0,1,2,3,4'
         ]);
 
-//        $cat_id=$product->cat->id;
         $review = Review::create([
             'product_id' => $product->id,
             'cat_id' => $product->cat_id,
@@ -128,34 +104,47 @@ class ReviewController extends Controller
             'buy' => $request->buy,
             'shop' => $request->shop,
             'device' => Agent::device(),
-            'province'=>Ip::find(request()->ip())[1],
+            'province' => Ip::find(request()->ip())[1],
             'city' => Ip::find(request()->ip())[2]
         ]);
         return ['游客' => 'ok', 'updated_at' => $review->updated_at];
     }
 
+
+    //pc上传点评图片
+    public function img_store(Request $request)
+    {
+        return $this->reviewRepository->img($request);
+    }
+    //pc点评
     public function store(StoreReviewRequest $request, Product $product)
     {
-
-        if (!$product->has_login_review) $product->update(['has_login_review' => true]);//若此商品之前从未有过登录用户的点评，则把字段改为true
-
-        $review = Review::create([
-            'user_id' => Auth::id(),
-            'product_id' => $product->id,
-            'cat_id' => $product->cat_id,
-            'brand_id' => $product->brand_id,
-            'rate' => $request->rate,
-            'body' => request('body', ''),
-            'imgs' => json_encode(request('imgs')),
-            'buy' => $request->buy,
-            'shop' => $request->shop,
-            'device' => Agent::device(),
-            'province'=>Ip::find(request()->ip())[1],
-            'city' => Ip::find(request()->ip())[2]
-        ]);
+        $review = $this->reviewRepository->store($request, $product, Auth::id());
 
         return ['reviewId' => $review->id, 'updated_at' => $review->updated_at];
     }
+
+    //微信上传点评图片
+    public function api_img_store(Request $request)
+    {
+        $user = $this->userRepository->get_user(request('openid'));
+        if ($user) {
+            return $this->reviewRepository->img($request);
+        }
+    }
+    //微信点评
+    public function api_store(StoreReviewRequest $request, Product $product)
+    {
+        $user = $this->userRepository->get_user($request->openid);
+
+        if ($user) {
+
+            $review=$this->reviewRepository->store($request,$product,$user->id);
+
+            return $review;
+        }
+    }
+
 
     public function update(StoreReviewRequest $request, Product $product, Review $review)
     {
@@ -200,7 +189,7 @@ class ReviewController extends Controller
 
         $review->delete();
 
-        return ['a'=>'ok'];
+        return ['a' => 'ok'];
     }
 
 }

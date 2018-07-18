@@ -25,6 +25,7 @@ class RankingRepository
                 ->with('brand:id,name')//预加载brand
                 ->orderByRaw('buys_count/reviews_count ' . $type)//按回购数倒序or顺序排
                 ->orderBy('reviews_count', $type)
+                ->orderBy('rate',$type)
                 ->limit($limit)//取几个，默认5个
                 ->get();
         } else {
@@ -34,6 +35,7 @@ class RankingRepository
                 ->with('brand:id,name')//预加载brand
                 ->orderByRaw('buys_count/reviews_count ' . $type)//按回购数倒序or顺序排
                 ->orderBy('reviews_count', $type)
+                ->orderBy('rate',$type)
                 ->limit($limit)//取几个，默认5个
                 ->get();
         }
@@ -66,6 +68,7 @@ class RankingRepository
                 ->with('cat:id,name')
                 ->orderByRaw('buys_count/reviews_count ' . $type)
                 ->orderBy('reviews_count', $type)
+                ->orderBy('rate',$type)
                 ->limit($limit)
                 ->get();
         }else{
@@ -75,6 +78,7 @@ class RankingRepository
                 ->with('cat:id,name')
                 ->orderByRaw('buys_count/reviews_count ' . $type)
                 ->orderBy('reviews_count', $type)
+                ->orderBy('rate',$type)
                 ->limit($limit)
                 ->get();
         }
