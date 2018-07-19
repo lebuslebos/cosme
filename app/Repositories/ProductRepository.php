@@ -26,7 +26,7 @@ class ProductRepository
             ->rememberForever('products-' . $product_id . '-reviews-' . request('page', 1), function () use ($product) {
                 return $product->reviews()
                     ->select('id', 'user_id', 'rate', 'body', 'imgs', 'buy', 'shop', 'likes_count', 'hates_count', 'updated_at')
-                    ->with('user:id,name,avatar,skin,reviews_count')
+                    ->with('user:id,name,avatar,skin,reviews_count,openid')
                     ->orderByRaw('if(body="",0,1) DESC')
                     ->latest('updated_at')
                     ->orderBy('id', 'desc')

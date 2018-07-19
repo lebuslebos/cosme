@@ -30,7 +30,7 @@ class ReviewRepository
     {
         return Review::select('id', 'user_id', 'product_id', 'brand_id', 'rate', 'body', 'imgs', 'buy', 'shop', 'likes_count', 'hates_count', 'updated_at')
             ->where('body', '<>', '')
-            ->with(['product:id,name,rate,reviews_count,buys_count', 'brand:id,name', 'user:id,name,avatar,skin,reviews_count'])
+            ->with(['product:id,name,rate,reviews_count,buys_count', 'brand:id,name', 'user:id,name,avatar,skin,reviews_count,openid'])
             ->latest()
             ->orderBy('id', 'desc')
             ->take(config('common.pre_page'))
@@ -76,6 +76,39 @@ class ReviewRepository
             'province' => Ip::find(request()->ip())[1],
             'city' => Ip::find(request()->ip())[2]
         ]);
+        return $review;
+    }
+
+    public function update(StoreReviewRequest $request, Product $product, Review $review,int $user_id)
+    {
+        $pre_buy = $review->buy;
+
+        $review->update([
+            'rate' => $request->rate,
+            'buy' => $request->buy,
+            'shop' => $request->shop,
+            'body' => request('body', ''),
+            'imgs' => json_encode(request('imgs')),
+        ]);
+        //如果评分变了--且两次至少一次有内容，才重新算一遍----忽略评分没变，内容由空变有/由有变空时总评分也会变的情况，留做下一次新建点评时重新计算
+        /*if ($review->rate != $pre_rate && ($pre_body || $review->body)) {
+            Cache::forever('ra-' . $product->id, round($product->reviews()
+                ->where('body', '<>', '')->avg('rate'), 1));//商品评分更新,并存入缓存
+        }*/
+        //如果回购变了
+        if ($review->buy != $pre_buy) {
+            //之前的buy为0的时候，说明现在改成了1（不会回购），把回购数减一。反之一样
+            if ($pre_buy == 0) {
+                Cache::decrement('b-' . $user_id . '-u');
+                Cache::decrement('b-' . $product->id . '-p');
+                Cache::decrement('b-' . $product->brand_id . '-b');
+            } else {
+                Cache::increment('b-' . $user_id . '-u');
+                Cache::increment('b-' . $product->id . '-p');
+                Cache::increment('b-' . $product->brand_id . '-b');
+            }
+        }
+
         return $review;
     }
 }

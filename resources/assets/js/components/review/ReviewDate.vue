@@ -11,7 +11,6 @@
         data(){
             return {
                 solars:this.$store.state.review.solars,
-                // solarHints:this.$store.state.review.solarHints,
             }
         },
         mounted(){

@@ -1,7 +1,7 @@
 {{--商品列表（单个商品）--品牌页列表，分类页列表，搜索页列表，个人页--}}
 
 {{--商品-->左边为图，右边为信息--}}
-<div class="media align-items-center mb-2">
+<div class="media align-items-center">
 
     {{--商品的左边部分--}}
     <a href="{{route('products.show',[$product])}}" target="{{Route::currentRouteName()=='users.show'?'_blank':''}}">

@@ -24,6 +24,7 @@ Route::get('users/{openid}','UserController@api_show');
 Route::post('users/{openid}/avatars', 'UserController@api_avatar');
 Route::put('users/{openid}/name', 'UserController@api_name_update');
 Route::put('users/{openid}/skin', 'UserController@api_skin_update');
+Route::get('other_users/{user_id}','UserController@api_other_show');
 
 Route::get('search', 'SearchController@instant_search');
 
@@ -39,7 +40,8 @@ Route::get('products/{product_id}/review','ProductController@api_my_review');
 
 Route::post('reviews/imgs', 'ReviewController@api_img_store');
 Route::post('products/{product}/reviews','ReviewController@api_store');
-Route::patch('products/{product}/reviews/{review}','ReviewController@api_update');
+Route::put('products/{product}/reviews/{review}','ReviewController@api_update');
+Route::delete('reviews/{review}','ReviewController@api_destroy');
 
 
 //Route::get('test',function(){

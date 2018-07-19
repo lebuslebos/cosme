@@ -25,7 +25,8 @@ class ReviewController extends Controller
 
     public function __construct(RankingRepository $rankingRepository, ReviewRepository $reviewRepository, CatRepository $catRepository, UserRepository $userRepository)
     {
-        $this->middleware('auth')->except(['index', 'api_index', 'api_img_store', 'api_store', 'ranking', 'vote', 'store_visitor']);
+        $this->middleware('auth')
+            ->except(['index', 'api_index', 'api_img_store', 'api_store', 'api_update', 'api_destroy', 'ranking', 'vote', 'store_visitor']);
         $this->rankingRepository = $rankingRepository;
         $this->reviewRepository = $reviewRepository;
         $this->catRepository = $catRepository;
@@ -116,6 +117,7 @@ class ReviewController extends Controller
     {
         return $this->reviewRepository->img($request);
     }
+
     //pc点评
     public function store(StoreReviewRequest $request, Product $product)
     {
@@ -132,16 +134,16 @@ class ReviewController extends Controller
             return $this->reviewRepository->img($request);
         }
     }
+
     //微信点评
     public function api_store(StoreReviewRequest $request, Product $product)
     {
-        $user = $this->userRepository->get_user($request->openid);
 
-        if ($user) {
+        if ($user = $this->userRepository->get_user(request('openid'))) {
 
-            $review=$this->reviewRepository->store($request,$product,$user->id);
+            $this->reviewRepository->store($request, $product, $user->id);
 
-            return $review;
+            return ['submitted' => 1];
         }
     }
 
@@ -150,37 +152,19 @@ class ReviewController extends Controller
     {
         $this->authorize('update', $review);
 
-        $pre_buy = $review->buy;
+        $review = $this->reviewRepository->update($request, $product, $review, Auth::id());
 
-        $review->update([
-            'rate' => $request->rate,
-            'body' => request('body', ''),
-            'imgs' => json_encode(request('imgs')),
-            'buy' => $request->buy,
-            'shop' => $request->shop,
-        ]);
+        return ['updated_at' => $review->updated_at];
+    }
 
-        //如果评分变了--且两次至少一次有内容，才重新算一遍----忽略评分没变，内容由空变有/由有变空时总评分也会变的情况，留做下一次新建点评时重新计算
-        /*if ($review->rate != $pre_rate && ($pre_body || $review->body)) {
-            Cache::forever('ra-' . $product->id, round($product->reviews()
-                ->where('body', '<>', '')->avg('rate'), 1));//商品评分更新,并存入缓存
-        }*/
+    public function api_update(StoreReviewRequest $request, Product $product, Review $review)
+    {
 
-        //如果回购变了
-        if ($review->buy != $pre_buy) {
-            //之前的buy为0的时候，说明现在改成了1（不会回购），把回购数减一。反之一样
-            if ($pre_buy == 0) {
-                Cache::decrement('b-' . Auth::id() . '-u');
-                Cache::decrement('b-' . $product->id . '-p');
-                Cache::decrement('b-' . $product->brand_id . '-b');
-            } else {
-                Cache::increment('b-' . Auth::id() . '-u');
-                Cache::increment('b-' . $product->id . '-p');
-                Cache::increment('b-' . $product->brand_id . '-b');
-            }
+        if ($user = $this->userRepository->get_user(request('openid'))) {
+
+            $this->reviewRepository->update($request, $product, $review, $user->id);
+            return ['submitted' => 1];
         }
-//        session()->flash('message','更新成功');
-        return ['aa' => '更新点评', 'updated_at' => $review->updated_at];
     }
 
     public function destroy(Review $review)
@@ -190,6 +174,16 @@ class ReviewController extends Controller
         $review->delete();
 
         return ['a' => 'ok'];
+    }
+
+    public function api_destroy(Review $review)
+    {
+        if ($user = $this->userRepository->get_user(request('openid'))) {
+
+            $review->delete();
+
+            return ['deleted'=>1];
+        }
     }
 
 }

@@ -238,6 +238,11 @@ class UserController extends Controller
 
         if ($user) return $this->userRepository->wx_user($user, $openid);
     }
+    //看别人的页面
+    public function api_other_show(int $user_id)
+    {
+
+    }
 
     /**
      * 修改头像（pc+微信）

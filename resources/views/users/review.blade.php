@@ -2,8 +2,8 @@
 
 <user-review :product-id="{{$review->product_id}}" :review="{{$review}}"
              :can="@json(optional(Auth::user())->can('update',$user))"
-             :likes="{{$review->likes_count}}"
-             :hates="{{$review->hates_count}}"
+             :likes="{{$review->likes_count}}" :hates="{{$review->hates_count}}"
+             class="mt-2"
 ></user-review>
 
 

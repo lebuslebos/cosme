@@ -32,7 +32,8 @@
             @foreach($products as $product)
                 <li class="py-3 border-top">
                     @include('common.list_product',['brand'=>$product->brand])
-                    @include('common.list_review')
+                    {{--因数据库查询压力过大，故暂停--}}
+                    {{--@include('common.list_review')--}}
                 </li>
             @endforeach
         </ul>
