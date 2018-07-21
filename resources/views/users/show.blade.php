@@ -87,7 +87,7 @@
         @if($user->reviews_count>0)
             <ul class="list-unstyled mt-1 mt-md-2">
                 @foreach($reviews as $review)
-                    <li class="border-top pb-4 pt-2">
+                    <li class="border-top pb-4 pt-3">
                         @include('common.list_product',['product'=>$review->product,'cat'=>$review->cat,'brand'=>$review->brand])
                         @include('users.review')
                     </li>

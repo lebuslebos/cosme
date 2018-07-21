@@ -27,14 +27,10 @@
 <body>
 <div id="app" class="d-flex flex-column">
     <nav class="">
-
         <app-nav app-name="{{ config('app.name') }}" :is-login="@json(Auth::check())" :user-id="{{Auth::id()??0}}"
                  user-name="{{optional(Auth::user())->name??''}}" init-query="{{request('search')}}"
                  current-route-name="{{Route::currentRouteName()}}"></app-nav>
     </nav>
-
-    {{--    @include('common.message')--}}
-    {{--    @includeWhen(session()->has('message'),'common.message')--}}
 
     {{--原来padding为7rem--}}
     <main class="container p-3 p-md-4">
@@ -49,8 +45,6 @@
     <footer class="mt-auto">
         @include('common.footer')
     </footer>
-
-
 </div>
 </body>
 </html>

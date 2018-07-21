@@ -77,7 +77,7 @@ class UserRepository
     {
         return Cache::tags('match-' . $user_id)->rememberForever('match-user-' . $user_id, function () use ($matches, $match_count) {
             $match_id = array_random(array_keys($matches, $match_count));//选其中一个匹配用户
-            return User::find($match_id, ['id', 'name', 'avatar', 'skin']);
+            return User::find($match_id, ['id', 'name', 'avatar', 'skin','reviews_count']);
         });
     }
 

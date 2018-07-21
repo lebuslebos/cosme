@@ -10030,7 +10030,7 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);*/
 }
 
-.d-flex:not(#app) {
+.d-flex:not(#app):not(.phone-product) {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
@@ -10041,6 +10041,10 @@ a:hover {
 
 a.text-pink:hover {
   color: #DE6B84;
+}
+
+a.phone-product:hover {
+  background-color: #ececec;
 }
 
 a.text-main:hover {
@@ -10589,6 +10593,15 @@ img:not(.double-star-size) {
 
   .reviewed-icon {
     padding-right: 1rem;
+  }
+
+  .badge-main,
+  .badge-easy {
+    padding: 1px 4px;
+  }
+
+  .ml-47 {
+    margin-left: 47px;
   }
 }
 

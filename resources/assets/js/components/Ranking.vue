@@ -7,7 +7,7 @@
             <div class="ml-auto">
                 <a href="#" @click.prevent="showMore=!showMore" >
                     <span><i class="fa fa-lg" :class="[showMore ? 'fa-minus-square' : 'fa-plus-square',{'fa-pc':!isMobile}]"></i></span>
-                    <span class="ml-1 text-secondary text-tiny">展开全部</span>
+                    <span class="ml-1 text-secondary text-tiny">{{showMore ? '收起全部':'展开全部'}}</span>
                 </a>
             </div>
         </div>

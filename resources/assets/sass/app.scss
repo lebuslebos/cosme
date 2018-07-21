@@ -44,7 +44,7 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);*/
 }
 
-.d-flex:not(#app) {
+.d-flex:not(#app):not(.phone-product) {
   flex-wrap: wrap;
 }
 
@@ -56,12 +56,17 @@ a.text-pink:hover {
   color: $pink-color;
 }
 
+a.phone-product:hover {
+  background-color: #ececec;
+}
+
 //pc端的绿色文字型a标签的hover效果
 a.text-main:hover {
   color: $easy-color;
   background: $easy-bg-color;
 }
-a.text-main.logo-size:hover{
+
+a.text-main.logo-size:hover {
   color: $main-color;
   background-color: inherit;
 }
@@ -152,13 +157,12 @@ button:focus {
 .btn[disabled]:hover {
   cursor: not-allowed;
 }
+
 .btn-vote:disabled,
 .btn-vote.disabled,
-.btn-vote[disabled]{
+.btn-vote[disabled] {
   opacity: .85;
 }
-
-
 
 //按钮的格式
 .btn-easy,
@@ -196,11 +200,12 @@ button:focus {
 .btn-main,
   //.btn-easy:active,
 .btn-easy.active,
-.btn-grey.active{
+.btn-grey.active {
   color: #fff;
   background: $main-color;
 }
-.btn-vote{
+
+.btn-vote {
   color: #7f7f7f;
 }
 
@@ -275,10 +280,11 @@ button:focus {
 }
 
 .btn-pc.btn-grey:hover,
-.btn-pc.btn-vote:hover{
+.btn-pc.btn-vote:hover {
   color: $light-grey-color;
 }
-.btn-pc.btn-grey.active:hover{
+
+.btn-pc.btn-grey.active:hover {
   color: #fff;
 }
 
@@ -417,7 +423,6 @@ button:focus {
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, .175)
 }
 
-
 /*body.modal-open {
   position: fixed;
 }*/
@@ -519,9 +524,6 @@ img:not(.double-star-size) {
   height: 182px;
 }
 
-
-
-
 .el-upload--picture-card:hover,
 .el-upload:focus {
   border-color: $brown-color !important;
@@ -531,13 +533,15 @@ img:not(.double-star-size) {
   padding-top: 1.2rem;
   padding-bottom: .5rem;
 }
-.buy-percent{
+
+.buy-percent {
   color: $easy-color;
   background: $easy-bg-color;
   display: inline-block;
   padding: 0 .5rem;
   border-radius: 3px;
 }
+
 .cat-nav {
   //padding-bottom: 2px;
   //border-bottom: 2px solid #fff;
@@ -609,6 +613,12 @@ img:not(.double-star-size) {
   }
   .reviewed-icon {
     padding-right: 1rem;
+  }
+  .badge-main, .badge-easy{
+    padding: 1px 4px;
+  }
+  .ml-47{
+    margin-left: 47px;
   }
 }
 

@@ -1,6 +1,7 @@
 export default {
     state: {
         upyunDomain:'https://cache-cdn.rongcosme.com',
+        // appUrl:'https://rongcosme.com',
         //国外网站的正则
         // /Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent),
         //国内网上的正则,决定用这个

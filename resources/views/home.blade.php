@@ -32,7 +32,7 @@
         </div>
         <ul class="list-unstyled mt-2">
             @foreach($reviews as $review)
-                <li class="media py-3 border-top">
+                <li class="media py-4 py-md-3 border-top">
 
                     {{--商品简易信息,只有电脑和平板端才显示--}}
                     @if(!$is_phone)

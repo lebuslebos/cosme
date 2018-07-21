@@ -56949,6 +56949,7 @@ var index_esm = {
 /* harmony default export */ __webpack_exports__["a"] = ({
     state: {
         upyunDomain: 'https://cache-cdn.rongcosme.com',
+        // appUrl:'https://rongcosme.com',
         //国外网站的正则
         // /Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent),
         //国内网上的正则,决定用这个
@@ -58039,7 +58040,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "text-md-normal" },
+    { staticClass: "text-normal" },
     [
       _vm._l(_vm.rate, function(n) {
         return _c("i", { staticClass: "fa fa-star star-margin" })
@@ -58614,7 +58615,7 @@ var render = function() {
                 : _c(
                     "h5",
                     {
-                      staticClass: "text-center text-main font-weight-normal",
+                      staticClass: "text-center text-main",
                       staticStyle: { width: "50px" }
                     },
                     [_vm._v(_vm._s(_vm.index + 1))]
@@ -67244,9 +67245,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             searching: true,
             cat: null,
             brand: null,
-            // brandProductsCount: 0,
-            // brandReviewsCount: 0,
-            // brandBuysCount: 0,
             products: [],
             hide: false,
             searchWidth: '62%'
@@ -69964,7 +69962,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("span", { staticClass: "ml-1 text-secondary text-tiny" }, [
-                _vm._v("展开全部")
+                _vm._v(_vm._s(_vm.showMore ? "收起全部" : "展开全部"))
               ])
             ]
           )

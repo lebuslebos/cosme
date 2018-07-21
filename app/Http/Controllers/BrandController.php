@@ -44,7 +44,10 @@ class BrandController extends Controller
 
         $products = $this->brandRepository->products($brand_id, $brand);
 
-        return compact('brand', 'products');
+        $red_products = $this->rankingRepository->cached_ranking_by_brand($brand_id, 'desc');
+        $black_products = $this->rankingRepository->cached_ranking_by_brand($brand_id, 'asc');
+
+        return compact('brand', 'products', 'red_products', 'black_products');
     }
 
     public function api_index()

@@ -5,7 +5,7 @@
             <img v-if="index===0" :src="upyunDomain+'/icons/crown1.jpg!crown'" class="crown-size" alt="第一">
             <img v-else-if="index===1" :src="upyunDomain+'/icons/crown2.jpg!crown'" class="crown-size" alt="第二">
             <img v-else-if="index===2" :src="upyunDomain+'/icons/crown3.jpg!crown'" class="crown-size" alt="第三">
-            <h5 v-else class="text-center text-main font-weight-normal" style="width: 50px;">{{index+1}}</h5>
+            <h5 v-else class="text-center text-main" style="width: 50px;">{{index+1}}</h5>
         </div>
         <div v-else class="text-center" style="width: 50px;">
             <h3 v-if="index===0"><i class="fa fa-bolt"></i></h3>

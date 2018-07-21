@@ -165,9 +165,6 @@
                 searching: true,
                 cat: null,
                 brand: null,
-                // brandProductsCount: 0,
-                // brandReviewsCount: 0,
-                // brandBuysCount: 0,
                 products: [],
                 hide: false,
                 searchWidth: '62%',
@@ -245,7 +242,10 @@
             },
             isMobile(){
                 return this.$store.getters.isMobile;
-            }
+            },
+            /*inAuth(){
+                return location.href.indexOf('users/')
+            }*/
         }
     }
 </script>

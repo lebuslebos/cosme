@@ -22,19 +22,24 @@
                     </a>
                 </div>
                 @if($review->user->reviews_count>=5 && $review->user->reviews_count<10)
-                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3" src="{{Storage::url('icons/fav-5.gif')}}"
+                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3"
+                         src="{{Storage::url('icons/fav-5.gif')}}"
                          alt="" data-toggle="tooltip" data-original-title="用过5-10个化妆品">
                 @elseif($review->user->reviews_count>=10 && $review->user->reviews_count<25)
-                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3" src="{{Storage::url('icons/fav-10.gif')}}"
+                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3"
+                         src="{{Storage::url('icons/fav-10.gif')}}"
                          alt="" data-toggle="tooltip" data-original-title="用过10-25个化妆品">
                 @elseif($review->user->reviews_count>=25 && $review->user->reviews_count<50)
-                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3" src="{{Storage::url('icons/fav-25.gif')}}"
+                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3"
+                         src="{{Storage::url('icons/fav-25.gif')}}"
                          alt="" data-toggle="tooltip" data-original-title="用过25-50个化妆品">
                 @elseif($review->user->reviews_count>=50 && $review->user->reviews_count<100)
-                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3" src="{{Storage::url('icons/fav-50.gif')}}"
+                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3"
+                         src="{{Storage::url('icons/fav-50.gif')}}"
                          alt="" data-toggle="tooltip" data-original-title="用过50-100个化妆品">
                 @elseif($review->user->reviews_count>=100)
-                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3" src="{{Storage::url('icons/fav-100.gif')}}"
+                    <img class="fav-size hover-help align-self-center ml-1 ml-md-3"
+                         src="{{Storage::url('icons/fav-100.gif')}}"
                          alt="" data-toggle="tooltip" data-original-title="用过100个以上的化妆品">
                 @endif
                 <div class="text-muted text-tiny mx-2 mx-md-3">{{$review->user->skin}}肤质</div>
@@ -56,26 +61,26 @@
 
 
 {{--点评的下半部分（文字点评+图片+点赞点踩）--}}
-<div class="text-brown review-text my-2 my-md-3">{!!nl2br(e($review->body))!!}</div>
+<div class="ml-47 text-brown review-text my-2 my-md-3">{!!nl2br(e($review->body))!!}</div>
 
 @if(filled(json_decode($review->imgs)))
-    <div class="d-flex">
+    <div class="d-flex ml-47">
         @foreach(json_decode($review->imgs) as $img)
             <review-img img="{{$img}}" class="mb-2 mr-2"></review-img>
         @endforeach
     </div>
 @endif
 
-<div class="d-flex align-items-center mt-md-auto">
+<div class="d-flex mt-md-auto">
 
-    @if(Route::currentRouteName()=='home' && $is_phone)
-        {{--手机时的商品信息--}}
+    {{--@if(Route::currentRouteName()=='home' && $is_phone)
+        --}}{{--手机时的商品信息--}}{{--
         <div class="pt-2">
             <a class="btn btn-main rounded"
                href="{{route('products.show',[$review->product])}}">{{$review->brand->name}}
                 -{{$review->product->name}}</a>
         </div>
-    @endif
+    @endif--}}
 
     @empty(!$review->user_id)
         <vote :review="{{$review->id}}" :user="{{$review->user_id}}"
@@ -84,3 +89,17 @@
     @endempty
 </div>
 
+{{--手机时的商品信息--}}
+@if(Route::currentRouteName()=='home' && $is_phone)
+    <a href="{{route('products.show',[$review->product])}}" class="phone-product ml-47 d-flex align-items-center bg-light py-2 pl-1 mt-3">
+        <img class="product-s-size mr-2" src="{{Storage::url('products')}}/{{$review->product_id}}.jpg!product.s" alt="{{$review->product->name}}">
+        <div>
+            <div class="text-muted">{{$review->brand->name}}</div>
+            <div class="text-main">{{$review->product->name}}</div>
+            <div><product-rate :rate="{{$review->product->rate}}"></product-rate></div>
+            <div class="text-muted">
+                <span>有{{$review->product->reviews_count}}人用过 其中{{$review->product->buys_count==0 ? 0 : round(100*$review->product->buys_count/$review->product->reviews_count)}}%的人会再次购买</span>
+            </div>
+        </div>
+    </a>
+@endif

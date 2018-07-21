@@ -32,7 +32,6 @@ class CatController extends Controller
         $products = $this->catRepository->products($cat_id, $cat);
 
         $red_products = $this->rankingRepository->cached_ranking_by_cat($cat_id, 'desc');
-
         $black_products = $this->rankingRepository->cached_ranking_by_cat($cat_id, 'asc');
 
         return view('cats.show', compact('cat', 'products', 'red_products', 'black_products'));
@@ -44,7 +43,10 @@ class CatController extends Controller
 
         $products = $this->catRepository->products($cat_id, $cat);
 
-        return compact('cat', 'products');
+        $red_products = $this->rankingRepository->cached_ranking_by_cat($cat_id, 'desc');
+        $black_products = $this->rankingRepository->cached_ranking_by_cat($cat_id, 'asc');
+
+        return compact('cat', 'products', 'red_products', 'black_products');
     }
 
 

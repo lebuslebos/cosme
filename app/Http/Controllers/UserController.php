@@ -24,8 +24,8 @@ class UserController extends Controller
 
     public function __construct(UserRepository $userRepository)
     {
-        $this->middleware('guest')->only(['showLoginForm', 'login']);
-        $this->middleware('auth')->only(['avatar', 'name_update', 'skin_update']);
+        $this->middleware('guest')->only(['login']);
+        $this->middleware('auth')->only(['avatar', 'name_update', 'skin_update','logout']);
         $this->userRepository = $userRepository;
     }
 
