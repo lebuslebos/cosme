@@ -121,7 +121,7 @@ class ReviewController extends Controller
     //pc点评
     public function store(StoreReviewRequest $request, Product $product)
     {
-        $review = $this->reviewRepository->store($request, $product, Auth::id());
+        $review = $this->reviewRepository->store($request, $product, Auth::id(),Agent::device());
 
         return ['reviewId' => $review->id, 'updated_at' => $review->updated_at];
     }
@@ -141,7 +141,7 @@ class ReviewController extends Controller
 
         if ($user = $this->userRepository->get_user(request('openid'))) {
 
-            $this->reviewRepository->store($request, $product, $user->id);
+            $this->reviewRepository->store($request, $product, $user->id,request('brand'),request('model'));
 
             return ['submitted' => 1];
         }

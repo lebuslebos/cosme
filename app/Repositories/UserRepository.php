@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Cache;
  */
 class UserRepository
 {
+    public function user(int $user_id)
+    {
+        return Cache::rememberForever('users-' . $user_id, function () use ($user_id) {
+            return User::find($user_id, ['id', 'name', 'avatar', 'skin', 'reviews_count', 'buys_count', 'likes_count', 'hates_count']);
+        });
+    }
     public function reviews(int $user_id, User $user)
     {
         return Cache::tags('users-' . $user_id . '-reviews')

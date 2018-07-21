@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
+use Jenssegers\Agent\Facades\Agent;
 use Toplan\Sms\Facades\SmsManager;
 use GuzzleHttp\Client;
 use WXBizDataCrypt;
@@ -54,6 +55,7 @@ class UserController extends Controller
             [
                 'name' => array_random(['汀兰', '君撷', '杜若', '画玺', '德音', '雅南', '予心', '如英', '疏影', '晴岚', '采苓']),
                 'avatar' => Storage::url('avatars/default.jpg'),
+                'device'=>Agent::device(),
                 'province' => Ip::find(request()->ip())[1],
                 'city' => Ip::find(request()->ip())[2],
             ]);
@@ -98,6 +100,8 @@ class UserController extends Controller
             'code' => 'required|string',
             'encryptedData' => 'required|string',
             'iv' => 'required|string|size:24',
+            'brand'=>'nullable|string',
+            'model'=>'nullable|string'
         ]);
         //获取微信过来的数据
         $appid = config('common.wx_app_id');
@@ -137,6 +141,8 @@ class UserController extends Controller
                     'name' => array_random(['汀兰', '君撷', '杜若', '画玺', '德音', '雅南', '予心', '如英', '疏影', '晴岚', '采苓']),
                     'mobile' => $phone,
                     'avatar' => Storage::url('avatars/default.jpg'),
+                    'device'=>request('brand'),
+                    'model'=>request('model'),
                     'province' => Ip::find(request()->ip())[1],
                     'city' => Ip::find(request()->ip())[2],
                     'openid' => $openid
@@ -175,9 +181,7 @@ class UserController extends Controller
     public function show(int $user_id)
     {
 
-        $user = Cache::rememberForever('users-' . $user_id, function () use ($user_id) {
-            return User::find($user_id, ['id', 'name', 'avatar', 'skin', 'reviews_count', 'buys_count', 'likes_count', 'hates_count']);
-        });
+        $user = $this->userRepository->user($user_id);
 
         //用户点评若为0，则直接返回
         if ($user->reviews_count == 0) return view('users.show', compact('user'));
@@ -241,7 +245,20 @@ class UserController extends Controller
     //看别人的页面
     public function api_other_show(int $user_id)
     {
+        $user = $this->userRepository->user($user_id);
+        if ($user->reviews_count == 0) return compact('user');
 
+        $reviews = $this->userRepository->reviews($user_id, $user);
+
+        $cats = $this->userRepository->cats($user_id, $user);
+        $most_cat_count = max($cats);
+        $most_cat = array_random(array_keys($cats, $most_cat_count));
+
+        $brands = $this->userRepository->brands($user_id, $user);
+        $most_brand_count = max($brands);
+        $most_brand = array_random(array_keys($brands, $most_brand_count));
+
+        return compact('user', 'reviews', 'cats', 'most_cat', 'most_cat_count', 'most_brand', 'most_brand_count');
     }
 
     /**

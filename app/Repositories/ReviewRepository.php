@@ -33,7 +33,7 @@ class ReviewRepository
             ->with(['product:id,name,rate,reviews_count,buys_count', 'brand:id,name', 'user:id,name,avatar,skin,reviews_count,openid'])
             ->latest()
             ->orderBy('id', 'desc')
-            ->take(config('common.pre_page'))
+            ->take(config('common.pre_page_index'))
             ->get();
     }
 
@@ -58,7 +58,7 @@ class ReviewRepository
         return ['path' => Storage::url($path)];
     }
 
-    public function store(StoreReviewRequest $request, Product $product, int $user_id)
+    public function store(StoreReviewRequest $request, Product $product, int $user_id,string $device,string $model='')
     {
         if (!$product->has_login_review) $product->update(['has_login_review' => true]);//若此商品之前从未有过登录用户的点评，则把字段改为true
 
@@ -72,7 +72,8 @@ class ReviewRepository
             'shop' => $request->shop,
             'body' => request('body', ''),
             'imgs' => json_encode(request('imgs')),
-            'device' => Agent::device(),
+            'device' => $device,
+            'model'=>$model,
             'province' => Ip::find(request()->ip())[1],
             'city' => Ip::find(request()->ip())[2]
         ]);

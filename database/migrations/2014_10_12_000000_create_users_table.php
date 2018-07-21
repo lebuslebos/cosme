@@ -18,6 +18,8 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->char('mobile',11)->unique();
             $table->unsignedTinyInteger('skin')->default(2);
+            $table->string('device')->default('');
+            $table->string('model')->default('');
             $table->string('province')->default('');
             $table->string('city')->default('');
             $table->unsignedInteger('reviews_count')->default(0);

@@ -25,6 +25,7 @@ class CreateReviewsTable extends Migration
             $table->unsignedInteger('likes_count')->default(0);
             $table->unsignedInteger('hates_count')->default(0);
             $table->string('device')->default('');
+            $table->string('model')->default('');
             $table->string('province')->default('');
             $table->string('city')->default('');
             $table->text('body')->nullable();

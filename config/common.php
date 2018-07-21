@@ -3,7 +3,8 @@
 return [
     'ranking_updated_at' => 3,
 
-    'pre_page'=>50,
+    'pre_page'=>25,
+    'pre_page_index'=>40,
 
 //    'pre_page_mobile'=>20,
 
