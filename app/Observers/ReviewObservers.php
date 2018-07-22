@@ -102,7 +102,7 @@ class ReviewObservers
 
                 //记录下有点评进账的商品
                 $p_ids = Cache::get('p-ids', []);
-                $p_ids[] = $review->product_id;
+                $p_ids[] = $product_id;
                 Cache::forever('p-ids', $p_ids);
 
                 //直接覆盖首页点评缓存
@@ -186,7 +186,7 @@ class ReviewObservers
 
             //记录下有点评进账的商品
             $p_ids = Cache::get('p-ids', []);
-            $p_ids[] = $review->product_id;
+            $p_ids[] = $product_id;
             Cache::forever('p-ids', $p_ids);
 
             //直接覆盖首页点评缓存
@@ -195,13 +195,13 @@ class ReviewObservers
         }
 
         //清空个人页最多分类和品牌的缓存
-        Cache::forget('users-' . $review->user_id . '-b');
-        Cache::forget('users-' . $review->user_id . '-c');
+        Cache::forget('users-' . $user_id . '-b');
+        Cache::forget('users-' . $user_id . '-c');
 
-        Cache::tags('products-' . $review->product_id . '-reviews')->flush();//清空商品页所有点评的缓存
-        Cache::tags('users-' . $review->user_id . '-reviews')->flush();//清空个人页所有点评的缓存
+        Cache::tags('products-' . $product_id . '-reviews')->flush();//清空商品页所有点评的缓存
+        Cache::tags('users-' . $user_id . '-reviews')->flush();//清空个人页所有点评的缓存
 
         //user-product--我的点评删除
-        Cache::forget($review->user_id . '-' . $review->product_id);
+        Cache::forget($user_id . '-' . $product_id);
     }
 }

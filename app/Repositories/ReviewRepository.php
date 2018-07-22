@@ -85,6 +85,7 @@ class ReviewRepository
     {
         $pre_buy = $review->buy;
         $pre_shop=$review->shop;
+        $pre_body=$review->body;
         $product_id = $review->product_id;
         $brand_id = $review->brand_id;
 
@@ -116,6 +117,13 @@ class ReviewRepository
         }
         //如果购入场所变了--刷新购入场所分布的缓存
         if($review->shop != $pre_shop) Cache::forget('sh-' . $product_id);
+
+        if($review->body=='' xor $pre_body==''){
+            //算入进账商品，定时任务重新计算评分
+            $p_ids = Cache::get('p-ids', []);
+            $p_ids[] = $product_id;
+            Cache::forever('p-ids', $p_ids);
+        }
 
         /*if ($review->buy != $pre_buy) {
             //之前的buy为0的时候，说明现在改成了1（不会回购），把回购数减一。反之一样
