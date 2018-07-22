@@ -33,13 +33,15 @@ Route::get('ranking/{cat}', 'ReviewController@ranking');
 
 //游客简易点评
 Route::post('products/{product}/reviews/visitor', 'ReviewController@store_visitor');
-//点评全家桶
-Route::resource('products/{product}/reviews', 'ReviewController')->only(['store','update']);
 //上传图片到云服务器
 Route::post('reviews/imgs', 'ReviewController@img_store')->name('img.store');
-
-//删除点评，与上述传图路由冲突，遂放下面
+//新建点评
+Route::post('products/{product}/reviews', 'ReviewController@store');
+//更新点评
+Route::patch('reviews/{review}', 'ReviewController@update');
+//删除点评
 Route::delete('reviews/{review}','ReviewController@destroy');
+
 
 //点评点赞点踩
 Route::post('vote', 'ReviewController@vote');

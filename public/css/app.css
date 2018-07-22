@@ -10035,6 +10035,10 @@ body {
       flex-wrap: wrap;
 }
 
+a:visited:not(.back-to-top):not(.logo-size):not(.user-name) {
+  color: #571B8B;
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -10339,6 +10343,10 @@ button:focus {
   color: pink;
 }
 
+.text-dark-pink {
+  color: #DE6B84;
+}
+
 .text-easy {
   color: #607d8b;
 }
@@ -10517,6 +10525,14 @@ img:not(.double-star-size) {
   display: inline-block;
   padding: 0 .5rem;
   border-radius: 3px;
+}
+
+.nothing {
+  color: #6c757d;
+  background-color: #f8f9fa;
+  text-align: center;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .cat-nav {

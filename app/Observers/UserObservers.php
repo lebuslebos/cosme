@@ -16,9 +16,8 @@ class UserObservers
     public function updated(User $user)
     {
 
-        if (Cache::has('users-' . $user->id)) Cache::forget('users-' . $user->id);//刷新个人页的个人信息的缓存
-        if(Cache::has($user->openid)) Cache::forget($user->openid);//刷新微信个人页的个人信息的缓存
-//        Cache::tags('products-' . $product_id . '-reviews')
+        Cache::forget('users-' . $user->id);//刷新个人页的个人信息的缓存
+        Cache::forget($user->openid);//刷新微信个人页的个人信息的缓存
 
         //刷新她点评过的所有商品下面的点评的缓存+肤质分布的缓存
         if ($user->reviews_count > 0) {
@@ -29,7 +28,6 @@ class UserObservers
                 if(Cache::has('sk-'.$product_id))Cache::forget('sk-'.$product_id);
             }
         }
-
 
     }
 

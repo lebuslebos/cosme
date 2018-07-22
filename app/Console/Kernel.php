@@ -67,7 +67,7 @@ class Kernel extends ConsoleKernel
 
 
             //获取（登录+游客）的进账点评，reviews_count写入数据库(品牌+商品+用户)
-            if (Cache::get('r-b-ids')) {
+            /*if (Cache::get('r-b-ids')) {
                 $unique_r_b_ids = array_unique(Cache::pull('r-b-ids'));
                 foreach ($unique_r_b_ids as $r_b_id) {
                     DB::table('brands')->where('id', $r_b_id)
@@ -87,11 +87,10 @@ class Kernel extends ConsoleKernel
                     DB::table('users')->where('id', $r_u_id)
                         ->update(['reviews_count' => Cache::get('r-' . $r_u_id . '-u')]);
                 }
-            }
-
+            }*/
 
             //获取（登录+游客）的进账回购点评，buys_count写入数据库(品牌+商品+用户)
-            if (Cache::get('b-b-ids')) {
+            /*if (Cache::get('b-b-ids')) {
                 $unique_b_b_ids = array_unique(Cache::pull('b-b-ids'));
                 foreach ($unique_b_b_ids as $b_b_id) {
                     DB::table('brands')->where('id', $b_b_id)
@@ -111,8 +110,7 @@ class Kernel extends ConsoleKernel
                     DB::table('users')->where('id', $b_u_id)
                         ->update(['buys_count' => Cache::get('b-' . $b_u_id . '-u')]);
                 }
-            }
-
+            }*/
 
             //获取（登录）进账的有内容的点评ids，循环的重新计算评分，并存入缓存新的值
             if (Cache::get('p-ids')) {
@@ -137,7 +135,6 @@ class Kernel extends ConsoleKernel
             Cache::forget('hot-brands');//清空热门品牌的缓存（微信端)）
 
 
-
         })->dailyAt('3:00')
             ->after(function () {
 
@@ -150,7 +147,6 @@ class Kernel extends ConsoleKernel
                 $hot_brands=DB::table('brands')->select('id','name')->orderBy('reviews_count','desc')->orderBy('id','asc')->take(8)->get();
                 Cache::forever('hot-brands',$hot_brands);
             });
-
 
     }
 

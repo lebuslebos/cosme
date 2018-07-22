@@ -7,6 +7,7 @@ use App\Product;
 use App\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use Jenssegers\Agent\Facades\Agent;
@@ -80,9 +81,12 @@ class ReviewRepository
         return $review;
     }
 
-    public function update(StoreReviewRequest $request, Product $product, Review $review,int $user_id)
+    public function update(StoreReviewRequest $request, Review $review,int $user_id)
     {
         $pre_buy = $review->buy;
+        $pre_shop=$review->shop;
+        $product_id = $review->product_id;
+        $brand_id = $review->brand_id;
 
         $review->update([
             'rate' => $request->rate,
@@ -96,8 +100,24 @@ class ReviewRepository
             Cache::forever('ra-' . $product->id, round($product->reviews()
                 ->where('body', '<>', '')->avg('rate'), 1));//商品评分更新,并存入缓存
         }*/
+
         //如果回购变了
-        if ($review->buy != $pre_buy) {
+        if ($review->buy != $pre_buy){
+            //之前的buy为0的时候，说明现在改成了1（不会回购），把回购数减一。反之一样
+            if ($pre_buy == 0) {
+                DB::table('products')->where('id', $product_id)->decrement('buys_count');
+                DB::table('brands')->where('id', $brand_id)->decrement('buys_count');
+                DB::table('users')->where('id', $user_id)->decrement('buys_count');
+            }else{
+                DB::table('products')->where('id', $product_id)->increment('buys_count');
+                DB::table('brands')->where('id', $brand_id)->increment('buys_count');
+                DB::table('users')->where('id', $user_id)->increment('buys_count');
+            }
+        }
+        //如果购入场所变了--刷新购入场所分布的缓存
+        if($review->shop != $pre_shop) Cache::forget('sh-' . $product_id);
+
+        /*if ($review->buy != $pre_buy) {
             //之前的buy为0的时候，说明现在改成了1（不会回购），把回购数减一。反之一样
             if ($pre_buy == 0) {
                 Cache::decrement('b-' . $user_id . '-u');
@@ -108,8 +128,8 @@ class ReviewRepository
                 Cache::increment('b-' . $product->id . '-p');
                 Cache::increment('b-' . $product->brand_id . '-b');
             }
-        }
+        }*/
 
-        return $review;
+        return $review->updated_at;
     }
 }

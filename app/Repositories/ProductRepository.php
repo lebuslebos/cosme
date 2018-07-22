@@ -22,7 +22,7 @@ class ProductRepository
 
     public function reviews(int $product_id, Product $product)
     {
-        return Cache::tags('products-' . $product_id . '-reviews')
+        return Cache::tags(['p-reviews','products-' . $product_id . '-reviews'])
             ->rememberForever('products-' . $product_id . '-reviews-' . request('page', 1), function () use ($product) {
                 return $product->reviews()
                     ->select('id', 'user_id', 'rate', 'body', 'imgs', 'buy', 'shop', 'likes_count', 'hates_count', 'updated_at')

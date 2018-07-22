@@ -48,8 +48,6 @@
         </ul>
 
         {{--<div class="d-flex justify-content-center pt-5">{{$reviews->links()}}</div>--}}
-
-
     </div>
 
 

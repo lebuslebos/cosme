@@ -10,10 +10,10 @@
     ( {{date('Y年n月j日')}}凌晨{{config('common.ranking_updated_at')}}点更新 )
 </div>
 @if($user->buys_count==0)
-    <div class="text-muted bg-light text-center py-5">至少有一篇会回购的点评才能匹配</div>
+    <div class="nothing">至少有一篇会回购的点评才能匹配</div>
 @elseif(empty($match_count))
     {{--未匹配到和我相同的用户，我用的好商品别人还都没用过或者别人都不觉得好。请试着多写几篇用的好的商品的点评（会回购商品点评）--}}
-    <div class="text-muted bg-light text-center py-5">我用过的化妆品都比较小众，未能匹配</div>
+    <div class="nothing">我用过的化妆品都比较小众，未能匹配</div>
 @else
     <div class="media py-3 mb-3 align-items-center">
         {{--皇冠图--}}

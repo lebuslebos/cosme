@@ -2,11 +2,13 @@
     <div>
         <div class="d-flex align-items-baseline">
             <div class="hover-help text-large" :class="[rankingType?'text-main':'text-muted']" data-toggle="tooltip"
-                :data-original-title="rankingType?'好用排行榜 | 取拥有一定数量点评的商品，按回购率由高到低排':'差评排行榜 | 取拥有一定数量点评的商品，按不会回购率由高到低排'"
-            >{{rankingType?'红榜':'黑榜'}}</div>
+                 :data-original-title="rankingType?'好用排行榜 | 取拥有一定数量点评的商品，按回购率由高到低排':'差评排行榜 | 取拥有一定数量点评的商品，按不会回购率由高到低排'"
+            >{{rankingType?'红榜':'黑榜'}}
+            </div>
             <div class="ml-auto">
-                <a href="#" @click.prevent="showMore=!showMore" >
-                    <span><i class="fa fa-lg" :class="[showMore ? 'fa-minus-square' : 'fa-plus-square',{'fa-pc':!isMobile}]"></i></span>
+                <a href="#" @click.prevent="showMore=!showMore">
+                    <span><i class="fa fa-lg"
+                             :class="[showMore ? 'fa-minus-square' : 'fa-plus-square',{'fa-pc':!isMobile}]"></i></span>
                     <span class="ml-1 text-secondary text-tiny">{{showMore ? '收起全部':'展开全部'}}</span>
                 </a>
             </div>
@@ -33,13 +35,18 @@
 
 
         <transition name="fade" mode="out-in">
-            <ul class="list-unstyled" v-if="showRanking">
-                <RankingProduct v-for="(product,index) in initProducts" :key="product.id"
-                                :index="index" :product="product" :cat="initCat" :brand="product.brand"
-                                :type="rankingType"
-                />
-            </ul>
-            <div v-else class="p-3">
+            <div v-if="showRanking" key="ranking">
+                <ul v-if="initProducts.length>0" class="list-unstyled">
+                    <RankingProduct v-for="(product,index) in initProducts" :key="product.id"
+                                    :index="index" :product="product" :cat="initCat" :brand="product.brand"
+                                    :type="rankingType"/>
+                </ul>
+                <div v-else class="nothing border-top">
+                    <span>暂无榜单</span>
+                    <a :href="`/cats/${initCat.id}`" class="text-main"><i class="fa fa-pencil-square-o"></i>去点评</a>
+                </div>
+            </div>
+            <div v-else class="border-top py-5" key="loading">
                 <img class="loading-size mx-auto" :src="`${upyunDomain}/icons/loading.gif`" alt="正在玩命加载">
             </div>
         </transition>
@@ -64,7 +71,7 @@
         methods: {
             changeRanking() {
                 this.showRanking = false;
-                const type=this.rankingType?'desc':'asc';
+                const type = this.rankingType ? 'desc' : 'asc';
                 axios.get(`/ranking/${this.initCat.id}?type=${type}`)
                     .then(response => {
                         // console.log(response.data);
@@ -73,11 +80,11 @@
                     })
             }
         },
-        computed:{
-            upyunDomain(){
+        computed: {
+            upyunDomain() {
                 return this.$store.state.device.upyunDomain;
             },
-            isMobile(){
+            isMobile() {
                 return this.$store.getters.isMobile;
             }
         }

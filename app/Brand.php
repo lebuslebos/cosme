@@ -28,20 +28,18 @@ class Brand extends Model
     {
         return Cache::get('p-' . $this->id . '-b',0);
     }*/
-    public function getReviewsCountAttribute($value)
+    /*public function getReviewsCountAttribute($value)
     {
         return intval(Cache::rememberForever('r-' . $this->id . '-b',function ()use($value){
             return $value;
         }));
-        //return Cache::get('r-' . $this->id . '-b',$value);
     }
     public function getBuysCountAttribute($value)
     {
         return intval(Cache::rememberForever('b-' . $this->id . '-b',function ()use($value){
             return $value;
         }));
-        //return Cache::get('b-' . $this->id . '-b',0);
-    }
+    }*/
 
 
 

@@ -101,9 +101,9 @@ class ReviewController extends Controller
             'cat_id' => $product->cat_id,
             'brand_id' => $product->brand_id,
             'rate' => $request->rate,
-            'body' => '',
             'buy' => $request->buy,
             'shop' => $request->shop,
+            'body' => '',
             'device' => Agent::device(),
             'province' => Ip::find(request()->ip())[1],
             'city' => Ip::find(request()->ip())[2]
@@ -148,21 +148,21 @@ class ReviewController extends Controller
     }
 
 
-    public function update(StoreReviewRequest $request, Product $product, Review $review)
+    public function update(StoreReviewRequest $request, Review $review)
     {
         $this->authorize('update', $review);
 
-        $review = $this->reviewRepository->update($request, $product, $review, Auth::id());
+        $updated_at = $this->reviewRepository->update($request, $review, Auth::id());
 
-        return ['updated_at' => $review->updated_at];
+        return ['updated_at' => $updated_at];
     }
 
-    public function api_update(StoreReviewRequest $request, Product $product, Review $review)
+    public function api_update(StoreReviewRequest $request, Review $review)
     {
 
         if ($user = $this->userRepository->get_user(request('openid'))) {
 
-            $this->reviewRepository->update($request, $product, $review, $user->id);
+            $this->reviewRepository->update($request, $review, $user->id);
             return ['submitted' => 1];
         }
     }

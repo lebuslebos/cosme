@@ -69687,7 +69687,8 @@ var render = function() {
           ? _c(
               "a",
               {
-                staticClass: "text-main text-big d-block text-truncate",
+                staticClass:
+                  "text-main text-big d-block text-truncate user-name",
                 attrs: { href: "/users/" + _vm.userId }
               },
               [_vm._v(_vm._s(_vm.userName))]
@@ -69872,6 +69873,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -69935,7 +69943,7 @@ var render = function() {
                 : "差评排行榜 | 取拥有一定数量点评的商品，按不会回购率由高到低排"
             }
           },
-          [_vm._v(_vm._s(_vm.rankingType ? "红榜" : "黑榜"))]
+          [_vm._v(_vm._s(_vm.rankingType ? "红榜" : "黑榜") + "\n        ")]
         ),
         _vm._v(" "),
         _c("div", { staticClass: "ml-auto" }, [
@@ -70042,23 +70050,41 @@ var render = function() {
       _vm._v(" "),
       _c("transition", { attrs: { name: "fade", mode: "out-in" } }, [
         _vm.showRanking
-          ? _c(
-              "ul",
-              { staticClass: "list-unstyled" },
-              _vm._l(_vm.initProducts, function(product, index) {
-                return _c("RankingProduct", {
-                  key: product.id,
-                  attrs: {
-                    index: index,
-                    product: product,
-                    cat: _vm.initCat,
-                    brand: product.brand,
-                    type: _vm.rankingType
-                  }
-                })
-              })
-            )
-          : _c("div", { staticClass: "p-3" }, [
+          ? _c("div", { key: "ranking" }, [
+              _vm.initProducts.length > 0
+                ? _c(
+                    "ul",
+                    { staticClass: "list-unstyled" },
+                    _vm._l(_vm.initProducts, function(product, index) {
+                      return _c("RankingProduct", {
+                        key: product.id,
+                        attrs: {
+                          index: index,
+                          product: product,
+                          cat: _vm.initCat,
+                          brand: product.brand,
+                          type: _vm.rankingType
+                        }
+                      })
+                    })
+                  )
+                : _c("div", { staticClass: "nothing border-top" }, [
+                    _c("span", [_vm._v("暂无榜单")]),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "text-main",
+                        attrs: { href: "/cats/" + _vm.initCat.id }
+                      },
+                      [
+                        _c("i", { staticClass: "fa fa-pencil-square-o" }),
+                        _vm._v("去点评")
+                      ]
+                    )
+                  ])
+            ])
+          : _c("div", { key: "loading", staticClass: "border-top py-5" }, [
               _c("img", {
                 staticClass: "loading-size mx-auto",
                 attrs: {
@@ -70405,7 +70431,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             visitorReviewed: !this.isLogin && this.$store.state.review.reviewedProductArr.includes(this.productId),
             userReviewed: !!this.review,
 
-            reviewedBtn: '点评过啦', //已点评后的按钮
+            reviewedBtn: '我的点评', //已点评后的按钮
             showReview: false, //展示点评
             showEditBtn: this.$store.getters.isMobile, //显示编辑按钮
             showForm: false, //展示表单，用于新建点评和编辑点评
@@ -70466,13 +70492,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         toggleShowReview: function toggleShowReview() {
             this.showReview = !this.showReview;
-            this.reviewedBtn = this.showReview ? '正在欣赏' : '点评过啦';
+            this.reviewedBtn = this.showReview ? '正在欣赏' : '我的点评';
         },
         enterReviewedBtn: function enterReviewedBtn() {
             this.reviewedBtn = this.showReview ? '收起点评' : '查看点评';
         },
         leaveReviewedBtn: function leaveReviewedBtn() {
-            this.reviewedBtn = this.showReview ? '正在欣赏' : '点评过啦';
+            this.reviewedBtn = this.showReview ? '正在欣赏' : '我的点评';
         },
 
 
@@ -70577,7 +70603,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         });
                     } else {
                         //其余为更新点评
-                        axios.patch('/products/' + this.productId + '/reviews/' + this.initReviewId, {
+                        axios.patch('/reviews/' + this.initReviewId, {
                             rate: this.rate,
                             body: this.body,
                             imgs: this.imgs,
@@ -70648,7 +70674,7 @@ var render = function() {
                       staticStyle: { cursor: "default" },
                       attrs: { type: "button" }
                     },
-                    [_vm._v("点评过啦\n            ")]
+                    [_vm._v("我的点评\n            ")]
                   )
                 ]),
             _vm._v(" "),

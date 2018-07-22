@@ -43,12 +43,11 @@ class Product extends Model
         //return Cache::get('ra-' . $this->id, 4.0);
     }
 
-    public function getReviewsCountAttribute($value)
+    /*public function getReviewsCountAttribute($value)
     {
         return intval(Cache::rememberForever('r-' . $this->id . '-p', function () use ($value) {
             return $value;
         }));
-        //return Cache::get('r-' . $this->id . '-p', 0);
     }
 
     public function getBuysCountAttribute($value)
@@ -56,8 +55,7 @@ class Product extends Model
         return intval(Cache::rememberForever('b-' . $this->id . '-p', function () use ($value) {
             return $value;
         }));
-        //return Cache::get('b-' . $this->id . '-p', 0);
-    }
+    }*/
 
 
     public function brand()

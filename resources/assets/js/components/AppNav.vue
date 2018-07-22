@@ -132,7 +132,7 @@
 
         <transition name="logo">
             <!--用户昵称-->
-            <a class="text-main text-big d-block text-truncate" v-if="isLogin && !hide"
+            <a class="text-main text-big d-block text-truncate user-name" v-if="isLogin && !hide"
                :href="`/users/${userId}`">{{ userName }}</a>
             <!--登录-->
             <a class="text-muted text-big d-block" v-if="!isLogin && !hide" data-toggle="modal" id="login"

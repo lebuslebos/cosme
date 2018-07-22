@@ -15,8 +15,12 @@
 </div>
 
 <ul class="list-unstyled">
-    @foreach($red_products as $index=>$red_product)
-        <ranking-product :index="{{$index}}" :product="{{$red_product}}" :cat="{{$cat}}"
-                         :brand="{{$red_product->brand}}" :type="true" :current-product-id="{{$product->id}}"></ranking-product>
-    @endforeach
+    @forelse($red_products as $index=>$red_product)
+        <ranking-product :index="{{$index}}" :product="{{$red_product}}" :cat="{{$cat}}" :brand="{{$red_product->brand}}" :type="true" :current-product-id="{{$product->id}}"></ranking-product>
+    @empty
+        <li class="border-top nothing">
+            <span>暂无榜单</span>
+            <a href="{{route('cats.show',[$cat])}}" class="text-main"><i class="fa fa-pencil-square-o"></i>去点评</a>
+        </li>
+    @endforelse
 </ul>

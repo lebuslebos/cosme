@@ -22,7 +22,7 @@ class BrandRepository
 
     public function products(int $brand_id,Brand $brand)
     {
-        return Cache::tags('brands-' . $brand_id . '-products')
+        return Cache::tags(['b-products','brands-' . $brand_id . '-products'])
             ->rememberForever('brands-' . $brand_id . '-products-' . request('page', 1), function () use ($brand) {
                 return $brand->products()
                     ->select('id', 'cat_id', 'name', 'nick_name', 'rate', 'reviews_count', 'buys_count')

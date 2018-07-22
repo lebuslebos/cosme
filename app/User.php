@@ -26,12 +26,11 @@ class User extends Authenticatable
 
 
     //用户的点评数，以及其中的回购数
-    public function getReviewsCountAttribute($value)
+    /*public function getReviewsCountAttribute($value)
     {
         return intval(Cache::rememberForever('r-' . $this->id . '-u',function ()use($value){
             return $value;
         }));
-        //return Cache::get('r-' . $this->id . '-u',0);
     }
 
     public function getBuysCountAttribute($value)
@@ -39,8 +38,7 @@ class User extends Authenticatable
         return intval(Cache::rememberForever('b-' . $this->id . '-u',function ()use($value){
             return $value;
         }));
-        //return Cache::get('b-' . $this->id . '-u',0);
-    }
+    }*/
 
 
     //用户获得的赞数/踩数---从缓存获取（踩数暂不做前台展示）

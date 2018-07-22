@@ -35,7 +35,7 @@ class CatRepository
 
     public function products(int $cat_id,Cat $cat)
     {
-        return Cache::tags('cats-' . $cat_id . '-products')
+        return Cache::tags(['c-products','cats-' . $cat_id . '-products'])
             ->rememberForever('cats-' . $cat_id . '-products-' . request('page', 1), function () use ($cat) {
                 return $cat->products()
                     ->select('id','brand_id','name','nick_name','rate','reviews_count','buys_count')

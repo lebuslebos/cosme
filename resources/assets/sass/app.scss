@@ -48,6 +48,10 @@ body {
   flex-wrap: wrap;
 }
 
+a:visited:not(.back-to-top):not(.logo-size):not(.user-name){
+  color: #571B8B;
+  //color: #63008C;
+}
 a:hover {
   text-decoration: none;
 }
@@ -361,6 +365,9 @@ button:focus {
 .text-pink {
   color: pink;
 }
+.text-dark-pink{
+  color: $pink-color;
+}
 
 .text-easy {
   color: $easy-color;
@@ -540,6 +547,14 @@ img:not(.double-star-size) {
   display: inline-block;
   padding: 0 .5rem;
   border-radius: 3px;
+}
+.nothing{
+  //text-muted bg-light text-center py-5
+  color: #6c757d;
+  background-color:#f8f9fa;
+  text-align: center;
+  padding-top:3rem ;
+  padding-bottom:3rem ;
 }
 
 .cat-nav {

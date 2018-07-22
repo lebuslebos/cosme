@@ -21,7 +21,7 @@ class UserRepository
     }
     public function reviews(int $user_id, User $user)
     {
-        return Cache::tags('users-' . $user_id . '-reviews')
+        return Cache::tags(['u-reviews','users-' . $user_id . '-reviews'])
             ->rememberForever('users-' . $user_id . '-reviews-' . request('page', 1), function () use ($user) {
                 return $user->reviews()
                     ->select('id', 'user_id', 'product_id', 'cat_id', 'brand_id', 'rate', 'body', 'imgs', 'buy', 'shop', 'likes_count', 'hates_count', 'updated_at')

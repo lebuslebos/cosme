@@ -12,10 +12,12 @@
     </span>
 </div>
 <ul class="list-unstyled">
-    @foreach($red_products as $index=>$product)
+    @forelse($red_products as $index=>$product)
         <ranking-product :index="{{$index}}" :product="{{$product}}" :cat="{{$cat}}"
                          :brand="{{$product->brand}}" :type="true" in="cat"></ranking-product>
-    @endforeach
+    @empty
+        <li class="border-top nothing">暂无榜单</li>
+    @endforelse
 </ul>
 
 {{--此分类不会回购品排行榜(黑榜)（按回购率排，取10个以上点评作为基数）--}}
@@ -30,8 +32,10 @@
     </span>
 </div>
 <ul class="list-unstyled">
-    @foreach($black_products as $index=>$product)
+    @forelse($black_products as $index=>$product)
         <ranking-product :index="{{$index}}" :product="{{$product}}" :cat="{{$cat}}"
                          :brand="{{$product->brand}}" :type="false" in="cat"></ranking-product>
-    @endforeach
+    @empty
+        <li class="border-top nothing">暂无榜单</li>
+    @endforelse
 </ul>

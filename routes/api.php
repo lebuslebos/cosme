@@ -40,7 +40,7 @@ Route::get('products/{product_id}/review','ProductController@api_my_review');
 
 Route::post('reviews/imgs', 'ReviewController@api_img_store');
 Route::post('products/{product}/reviews','ReviewController@api_store');
-Route::put('products/{product}/reviews/{review}','ReviewController@api_update');
+Route::put('reviews/{review}','ReviewController@api_update');
 Route::delete('reviews/{review}','ReviewController@api_destroy');
 
 

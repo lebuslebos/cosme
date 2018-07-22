@@ -11,7 +11,7 @@
             <div v-else class="mr-4">
                 <button type="button" class="btn" style="cursor: default"
                         :class="[!!fromList ? 'btn-easy' : 'btn-easy-lg',{'text-big':!!fromList}]"
-                >点评过啦
+                >我的点评
                 </button>
             </div>
             <!--点评简易内容-->
@@ -210,7 +210,7 @@
                 visitorReviewed: !this.isLogin && this.$store.state.review.reviewedProductArr.includes(this.productId),
                 userReviewed: !!this.review,
 
-                reviewedBtn: '点评过啦',//已点评后的按钮
+                reviewedBtn: '我的点评',//已点评后的按钮
                 showReview: false,//展示点评
                 showEditBtn: this.$store.getters.isMobile,//显示编辑按钮
                 showForm: false,//展示表单，用于新建点评和编辑点评
@@ -269,13 +269,13 @@
             },
             toggleShowReview() {
                 this.showReview = !this.showReview;
-                this.reviewedBtn = this.showReview ? '正在欣赏' : '点评过啦';
+                this.reviewedBtn = this.showReview ? '正在欣赏' : '我的点评';
             },
             enterReviewedBtn() {
                 this.reviewedBtn = this.showReview ? '收起点评' : '查看点评';
             },
             leaveReviewedBtn() {
-                this.reviewedBtn = this.showReview ? '正在欣赏' : '点评过啦';
+                this.reviewedBtn = this.showReview ? '正在欣赏' : '我的点评';
             },
 
             //修改点评按钮是否滑动出现（仅用户已登录且看到的是自己点评的时候）
@@ -373,7 +373,7 @@
                                 })
                         } else {
                             //其余为更新点评
-                            axios.patch(`/products/${this.productId}/reviews/${this.initReviewId}`, {
+                            axios.patch(`/reviews/${this.initReviewId}`, {
                                 rate: this.rate,
                                 body: this.body,
                                 imgs: this.imgs,
