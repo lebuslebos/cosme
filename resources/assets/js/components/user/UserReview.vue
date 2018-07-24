@@ -293,7 +293,7 @@
                     this.initShop = this.shop;
 
                     //更新点评
-                    axios.patch(`/products/${this.productId}/reviews/${this.review.id}`, {
+                    axios.patch(`/reviews/${this.review.id}`, {
                         rate: this.rate,
                         body: this.body,
                         imgs: this.imgs,
