@@ -39,7 +39,7 @@
                             @click="requestCode">
                         发送验证码
                     </button>
-                    <img v-else-if="!showSendBtn" class="loading-size" :src="`${upyunDomain}/icons/loading.gif`"
+                    <img v-else-if="!showSendBtn" class="loading-size" :src="`${storageUrl}/icons/loading.gif`"
                          alt="正在玩命加载">
                 </transition>
             </div>
@@ -55,7 +55,7 @@
             <div class="mt-3" style="min-height: 2.4rem;">
                 <transition name="fade">
                     <img v-if="getVerifyCode.length === numLength && !loginError" class="loading-size"
-                         :src="`${upyunDomain}/icons/loading.gif`" alt="正在玩命加载">
+                         :src="`${storageUrl}/icons/loading.gif`" alt="正在玩命加载">
 
                 </transition>
             </div>
@@ -112,8 +112,8 @@
             this._setSmsInputDisplay();
         },
         computed: {
-            upyunDomain() {
-                return this.$store.state.device.upyunDomain;
+            storageUrl() {
+                return this.$store.state.device.storageUrl;
             },
             getVerifyCode() {
                 return this.verifyCode.join('');

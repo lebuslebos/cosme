@@ -135,8 +135,7 @@
                     @foreach($all_cats as $cat)
                         <li class="list-inline-item text-center mr-1 mb-2">
                             <a href="{{route('cats.show',[$cat])}}">
-                                {{--此处需用!product.s处理--}}
-                                <img src="{{Storage::url('cats/H-')}}{{$cat->id}}.jpg!product.s"
+                                <img src="{{Storage::url('cats/H-')}}{{$cat->id}}.jpg"
                                      alt="未点亮的{{$cat->name}}" class="product-s-size">
                                 <div class="text-muted text-tiny">
                                     <div>{{$cat->name}}</div>
@@ -152,8 +151,7 @@
                                 <a href="{{route('cats.show',[$cat])}}">
                                     {{--备份--}}
                                     {{--<img src="{{asset("img/cats/cat_light_$cat->id.gif")}}" alt="点亮的{{$cat->name}}"--}}
-                                    {{--此处需用!product.s处理--}}
-                                    <img src="{{Storage::url('cats')}}/{{$cat->id}}.jpg!product.s"
+                                    <img src="{{Storage::url('cats')}}/{{$cat->id}}.jpg"
                                          alt="点亮的{{$cat->name}}"
                                          class="product-s-size">
                                     <div class="text-brown text-tiny">
@@ -163,8 +161,7 @@
                                 </a>
                             @else
                                 <a href="{{route('cats.show',[$cat])}}">
-                                    {{--此处需用!product.s处理--}}
-                                    <img src="{{Storage::url('cats/H-')}}{{$cat->id}}.jpg!product.s"
+                                    <img src="{{Storage::url('cats/H-')}}{{$cat->id}}.jpg"
                                          alt="未点亮的{{$cat->name}}" class="product-s-size">
                                     <div class="text-muted text-tiny">
                                         <div>{{$cat->name}}</div>

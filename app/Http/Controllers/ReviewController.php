@@ -141,7 +141,7 @@ class ReviewController extends Controller
 
         if ($user = $this->userRepository->get_user(request('openid'))) {
 
-            $this->reviewRepository->store($request, $product, $user->id,request('brand'),request('model'));
+            $this->reviewRepository->store($request, $product, $user->id,request('brand'),request('model'),request('openid'));
 
             return ['submitted' => 1];
         }
@@ -162,7 +162,7 @@ class ReviewController extends Controller
 
         if ($user = $this->userRepository->get_user(request('openid'))) {
 
-            $this->reviewRepository->update($request, $review, $user->id);
+            $this->reviewRepository->update($request, $review, $user->id,request('openid'));
             return ['submitted' => 1];
         }
     }

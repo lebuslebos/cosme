@@ -3,7 +3,7 @@
         <!--刚开始显示的-->
         <!--<div class="text-main mr-2">肤质:</div>-->
         <div>
-            <img :src="`${$store.state.device.upyunDomain}/icons/double-star-size.jpg`" class="mb-1 mr-1 double-star-size" alt="花">
+            <img :src="`${$store.state.device.storageUrl}/icons/double-star-size.jpg`" class="mb-1 mr-1 double-star-size" alt="花">
         </div>
 
         <div v-if="showSkin" class="text-brown" :class="{'hover-pointer':this.can}"

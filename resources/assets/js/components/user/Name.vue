@@ -3,7 +3,7 @@
         <!--刚开始显示的-->
         <!--<div class="text-main mr-2">昵称:</div>-->
         <img v-if="reviewsCount>=5" class="fav-size hover-help mx-1" style="margin-top: 5px;"
-             :src="`${$store.state.device.upyunDomain}/icons/fav-${fav}.gif`" alt="花"
+             :src="`${$store.state.device.storageUrl}/icons/fav-${fav}.gif`" alt="花"
              data-toggle="tooltip" :data-original-title="`用过${fav}个以上的化妆品`">
 
         <div v-if="showName" class="text-main" :class="{'hover-pointer':this.can}"

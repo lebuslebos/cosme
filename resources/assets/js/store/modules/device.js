@@ -1,6 +1,6 @@
 export default {
     state: {
-        upyunDomain:'https://cache-cdn.rongcosme.com',
+        storageUrl:'https://cache-cdn.rongcosme.com',
         // appUrl:'https://rongcosme.com',
         //国外网站的正则
         // /Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent),

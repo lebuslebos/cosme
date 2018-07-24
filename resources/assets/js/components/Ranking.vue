@@ -47,7 +47,7 @@
                 </div>
             </div>
             <div v-else class="border-top py-5" key="loading">
-                <img class="loading-size mx-auto" :src="`${upyunDomain}/icons/loading.gif`" alt="正在玩命加载">
+                <img class="loading-size mx-auto" :src="`${storageUrl}/icons/loading.gif`" alt="正在玩命加载">
             </div>
         </transition>
     </div>
@@ -81,8 +81,8 @@
             }
         },
         computed: {
-            upyunDomain() {
-                return this.$store.state.device.upyunDomain;
+            storageUrl() {
+                return this.$store.state.device.storageUrl;
             },
             isMobile() {
                 return this.$store.getters.isMobile;

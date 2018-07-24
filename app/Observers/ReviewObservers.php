@@ -41,7 +41,7 @@ class ReviewObservers
         $r_p_ids[]=$review->product_id;
         Cache::forever('r-p-ids',$r_p_ids);*/
 
-        //商品和品牌的点评数,回购数 +1--直接查询数据库
+        //商品和品牌的点评数,回购数 +1--直接查询数据库。因数量变化，（商品，品牌）的本身缓存也得刷掉
         if ($review->buy == 0) {
             DB::table('products')->where('id', $product_id)->update([
                 'reviews_count' => DB::raw('reviews_count + 1'),
@@ -55,6 +55,8 @@ class ReviewObservers
             DB::table('products')->where('id', $product_id)->increment('reviews_count');
             DB::table('brands')->where('id', $brand_id)->increment('reviews_count');
         }
+        Cache::forget('products-' . $product_id);//刷新商品页
+        Cache::forget('brands-' . $brand_id);//刷新品牌页
 
         /*if ($review->buy == 0) {
             //商品和品牌的回购数+1-->并各做持久化处理
@@ -75,7 +77,7 @@ class ReviewObservers
 
             Cache::forget('sk-' . $product_id);//刷新肤质分布的缓存
 
-            //用户点评数,回购数+1 --直接查询数据库
+            //用户点评数,回购数+1 --直接查询数据库。因数量变化，（用户，微信用户）的本身缓存也得刷掉
             if ($review->buy == 0) {
                 DB::table('users')->where('id', $user_id)->update([
                     'reviews_count' => DB::raw('reviews_count + 1'),
@@ -84,6 +86,8 @@ class ReviewObservers
             } else {
                 DB::table('users')->where('id', $user_id)->increment('reviews_count');
             }
+            Cache::forget('users-' . $user_id);//刷新个人页
+            if($openid=$review->openid) Cache::forget($openid);//刷新微信个人页
 
             //用户点评数+1-->并各做持久化处理
             /*Cache::increment('r-' . $review->user_id . '-u');
@@ -145,11 +149,12 @@ class ReviewObservers
         $product_id = $review->product_id;
         $brand_id = $review->brand_id;
         $user_id=$review->user_id;
+        $openid=$review->openid;
 
         Cache::forget('sh-' . $product_id);//刷新购入场所分布的缓存
         Cache::forget('sk-' . $product_id);//刷新肤质分布的缓存
 
-        //商品和品牌的点评数,回购数-1 ; 用户点评数,回购数-1 --直接查询数据库
+        //商品和品牌的点评数,回购数-1 ; 用户点评数,回购数-1 --直接查询数据库。因数量变化，4大部分（商品，品牌，用户，微信用户）的本身缓存也得刷掉
         if ($review->buy == 0) {
             DB::table('products')->where('id', $product_id)->update([
                 'reviews_count' => DB::raw('reviews_count - 1'),
@@ -168,6 +173,10 @@ class ReviewObservers
             DB::table('brands')->where('id', $brand_id)->decrement('reviews_count');
             DB::table('users')->where('id', $user_id)->decrement('reviews_count');
         }
+        Cache::forget('products-' . $product_id);//刷新商品页
+        Cache::forget('brands-' . $brand_id);//刷新品牌页
+        Cache::forget('users-' . $user_id);//刷新个人页
+        if($openid) Cache::forget($openid);//刷新微信个人页
 
         //用户点评数-1-->并各做持久化处理
         /*Cache::decrement('r-' . $review->user_id . '-u');
@@ -197,6 +206,7 @@ class ReviewObservers
         //清空个人页最多分类和品牌的缓存
         Cache::forget('users-' . $user_id . '-b');
         Cache::forget('users-' . $user_id . '-c');
+
 
         Cache::tags('products-' . $product_id . '-reviews')->flush();//清空商品页所有点评的缓存
         Cache::tags('users-' . $user_id . '-reviews')->flush();//清空个人页所有点评的缓存

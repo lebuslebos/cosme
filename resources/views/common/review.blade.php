@@ -6,10 +6,10 @@
     <div class="align-self-center mr-2">
         @if(!!$review->user_id)
             <a href="{{route('users.show',[$review->user])}}" target="_blank">
-                <img src="{{$review->user->avatar}}!avatar" alt="" class="rounded avatar-size">
+                <img src="{{$review->user->avatar}}" alt="" class="rounded avatar-size">
             </a>
         @else
-            <img class="rounded avatar-size" src="{{$review->user->avatar}}!avatar" alt="">
+            <img class="rounded avatar-size" src="{{$review->user->avatar}}" alt="">
         @endif
     </div>
     <div class="media-body">

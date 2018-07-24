@@ -19,7 +19,7 @@
                      data-placement="top"
                      data-html="true"
                      :data-content="bigImg(color.id)"
-                     :src="`${upyunDomain}/colors/${color.id}.jpg!product.s`"
+                     :src="`${storageUrl}/colors/${color.id}.jpg!product.s`"
                 >
 
                 <!--<ReviewImg :img="color.img" from="!color"/>-->
@@ -48,8 +48,8 @@
             })
         },
         computed:{
-            upyunDomain(){
-                return this.$store.state.device.upyunDomain;
+            storageUrl(){
+                return this.$store.state.device.storageUrl;
             },
             isMobile(){
                 return this.$store.getters.isMobile;
@@ -58,7 +58,7 @@
         },
         methods: {
             bigImg(id) {
-                return `<img src="${this.upyunDomain}/colors/${id}.jpg!product.l"  alt="这里原本是一张大图">`
+                return `<img src="${this.storageUrl}/colors/${id}.jpg!product.l"  alt="这里原本是一张大图">`
             }
         }
 

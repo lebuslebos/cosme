@@ -37,7 +37,7 @@
                     <div class="list-group-item" v-if="searchHint" key="ing">
                         <transition name="fade" mode="out-in">
                             <div v-if="searching" key="searching">
-                                <img class="mx-auto loading-size" :src="`${upyunDomain}/icons/loading.gif`" alt="正在玩命找...">
+                                <img class="mx-auto loading-size" :src="`${storageUrl}/icons/loading.gif`" alt="正在玩命找...">
                                 <!--<div>正在搜索(这时候静静等待是最快出结果的)...</div>-->
                             </div>
                             <div v-else key="findnoting">
@@ -58,7 +58,7 @@
                                class="list-group-item list-group-item-action px-2 px-md-4">
                                 <div class="media align-items-center">
                                     <div class="product-s-size mr-md-3 p-2" >
-                                        <img class="mw-100" :src="`${upyunDomain}/cats/${cat.id}.jpg!product.s`"
+                                        <img class="product-s-size" :src="`${storageUrl}/cats/${cat.id}.jpg`"
                                              :alt="cat.name">
                                     </div>
                                     <div class="media-body">
@@ -75,7 +75,7 @@
                             <a :href="`/brands/${brand.id}`" @mousedown.prevent target="_blank"
                                class="list-group-item list-group-item-action px-2 px-md-4">
                                 <div class="media align-items-center">
-                                    <img class="mr-md-3 product-s-size" :src="`${upyunDomain}/brands/${brand.id}.jpg!product.s`" :alt="brand.name">
+                                    <img class="mr-md-3 product-s-size" :src="`${storageUrl}/brands/${brand.id}.jpg!product.s`" :alt="brand.name">
                                     <div class="media-body">
                                         <h5 class="text-brown mb-0">{{brand.name}}
                                             <small class="text-main font-italic">{{brand.common_name}}</small>
@@ -100,7 +100,7 @@
                                :key="`product${product.id}`" @mousedown.prevent
                                class="list-group-item list-group-item-action px-2 px-md-4">
                                 <div class="media align-items-center">
-                                    <img class="mr-md-3 product-s-size" :src="`${upyunDomain}/products/${product.id}.jpg!product.s`" :alt="product.name">
+                                    <img class="mr-md-3 product-s-size" :src="`${storageUrl}/products/${product.id}.jpg!product.s`" :alt="product.name">
                                     <div class="media-body">
                                         <div><span class="text-muted">[ {{product.cat.name}} ]</span>&nbsp;
                                             <span class="text-main">{{product.brand.name}}-{{product.name}}</span>
@@ -235,8 +235,8 @@
             }
         },
         computed: {
-            upyunDomain(){
-                return this.$store.state.device.upyunDomain;
+            storageUrl(){
+                return this.$store.state.device.storageUrl;
             },
             appHref() {
                 return this.currentRouteName === 'home' ? '#' : '/'

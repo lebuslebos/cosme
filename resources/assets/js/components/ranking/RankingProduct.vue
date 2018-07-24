@@ -2,9 +2,9 @@
     <li class="media py-3 border-top align-items-center">
         <!--排序数字-->
         <div v-if="type">
-            <img v-if="index===0" :src="upyunDomain+'/icons/crown1.jpg!crown'" class="crown-size" alt="第一">
-            <img v-else-if="index===1" :src="upyunDomain+'/icons/crown2.jpg!crown'" class="crown-size" alt="第二">
-            <img v-else-if="index===2" :src="upyunDomain+'/icons/crown3.jpg!crown'" class="crown-size" alt="第三">
+            <img v-if="index===0" :src="storageUrl+'/icons/crown1.jpg'" class="crown-size" alt="第一">
+            <img v-else-if="index===1" :src="storageUrl+'/icons/crown2.jpg'" class="crown-size" alt="第二">
+            <img v-else-if="index===2" :src="storageUrl+'/icons/crown3.jpg'" class="crown-size" alt="第三">
             <h5 v-else class="text-center text-main" style="width: 50px;">{{index+1}}</h5>
         </div>
         <div v-else class="text-center" style="width: 50px;">
@@ -15,7 +15,7 @@
         </div>
         <!--商品图片-->
         <a :href="productHref" :target="productTarget">
-            <img :src="`${upyunDomain}/products/${product.id}.jpg!product.s`" class="product-s-size" :alt="product.name">
+            <img :src="`${storageUrl}/products/${product.id}.jpg!product.s`" class="product-s-size" :alt="product.name">
         </a>
         <!--商品信息-->
         <div class="media-body">
@@ -53,8 +53,8 @@
         props: ['index', 'product', 'cat', 'brand', 'type', 'in', 'currentProductId'],
         components: {ProductRate},
         computed: {
-            upyunDomain(){
-                return this.$store.state.device.upyunDomain;
+            storageUrl(){
+                return this.$store.state.device.storageUrl;
             },
             catHref() {
                 return this.in === 'cat' ? '#app' : `/cats/${this.cat.id}`

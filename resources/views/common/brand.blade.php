@@ -31,7 +31,7 @@
             @endif
 
             <div class="ml-auto ml-md-3 mb-md-1">
-                <img src="{{Storage::url('countries')}}/{{$brand->country_id}}.jpg!tiny"
+                <img src="{{Storage::url('countries')}}/{{$brand->country_id}}.jpg"
                      class="border tiny-size country-img d-inline-block" alt="{{$brand->country}}">
                 <span class="text-muted align-text-top">{{$brand->country}}</span>
             </div>

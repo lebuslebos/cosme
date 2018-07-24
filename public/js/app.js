@@ -56948,7 +56948,7 @@ var index_esm = {
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
     state: {
-        upyunDomain: 'https://cache-cdn.rongcosme.com',
+        storageUrl: 'https://cache-cdn.rongcosme.com',
         // appUrl:'https://rongcosme.com',
         //国外网站的正则
         // /Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent),
@@ -57249,8 +57249,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     computed: {
-        upyunDomain: function upyunDomain() {
-            return this.$store.state.device.upyunDomain;
+        storageUrl: function storageUrl() {
+            return this.$store.state.device.storageUrl;
         },
         isMobile: function isMobile() {
             return this.$store.getters.isMobile;
@@ -57258,7 +57258,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         bigImg: function bigImg(id) {
-            return '<img src="' + this.upyunDomain + '/colors/' + id + '.jpg!product.l"  alt="\u8FD9\u91CC\u539F\u672C\u662F\u4E00\u5F20\u5927\u56FE">';
+            return '<img src="' + this.storageUrl + '/colors/' + id + '.jpg!product.l"  alt="\u8FD9\u91CC\u539F\u672C\u662F\u4E00\u5F20\u5927\u56FE">';
         }
     }
 
@@ -57330,7 +57330,7 @@ var render = function() {
                 "data-placement": "top",
                 "data-html": "true",
                 "data-content": _vm.bigImg(color.id),
-                src: _vm.upyunDomain + "/colors/" + color.id + ".jpg!product.s"
+                src: _vm.storageUrl + "/colors/" + color.id + ".jpg!product.s"
               }
             }),
             _vm._v(" "),
@@ -58553,8 +58553,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['index', 'product', 'cat', 'brand', 'type', 'in', 'currentProductId'],
     components: { ProductRate: __WEBPACK_IMPORTED_MODULE_0__product_ProductRate___default.a },
     computed: {
-        upyunDomain: function upyunDomain() {
-            return this.$store.state.device.upyunDomain;
+        storageUrl: function storageUrl() {
+            return this.$store.state.device.storageUrl;
         },
         catHref: function catHref() {
             return this.in === 'cat' ? '#app' : '/cats/' + this.cat.id;
@@ -58592,7 +58592,7 @@ var render = function() {
             ? _c("img", {
                 staticClass: "crown-size",
                 attrs: {
-                  src: _vm.upyunDomain + "/icons/crown1.jpg!crown",
+                  src: _vm.storageUrl + "/icons/crown1.jpg",
                   alt: "第一"
                 }
               })
@@ -58600,7 +58600,7 @@ var render = function() {
               ? _c("img", {
                   staticClass: "crown-size",
                   attrs: {
-                    src: _vm.upyunDomain + "/icons/crown2.jpg!crown",
+                    src: _vm.storageUrl + "/icons/crown2.jpg",
                     alt: "第二"
                   }
                 })
@@ -58608,7 +58608,7 @@ var render = function() {
                 ? _c("img", {
                     staticClass: "crown-size",
                     attrs: {
-                      src: _vm.upyunDomain + "/icons/crown3.jpg!crown",
+                      src: _vm.storageUrl + "/icons/crown3.jpg",
                       alt: "第三"
                     }
                   })
@@ -58640,7 +58640,7 @@ var render = function() {
         staticClass: "product-s-size",
         attrs: {
           src:
-            _vm.upyunDomain + "/products/" + _vm.product.id + ".jpg!product.s",
+            _vm.storageUrl + "/products/" + _vm.product.id + ".jpg!product.s",
           alt: _vm.product.name
         }
       })
@@ -61328,7 +61328,7 @@ var render = function() {
             staticStyle: { "margin-top": "5px" },
             attrs: {
               src:
-                _vm.$store.state.device.upyunDomain +
+                _vm.$store.state.device.storageUrl +
                 "/icons/fav-" +
                 _vm.fav +
                 ".gif",
@@ -61677,7 +61677,7 @@ var render = function() {
           staticClass: "mb-1 mr-1 double-star-size",
           attrs: {
             src:
-              _vm.$store.state.device.upyunDomain +
+              _vm.$store.state.device.storageUrl +
               "/icons/double-star-size.jpg",
             alt: "花"
           }
@@ -67317,8 +67317,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     computed: {
-        upyunDomain: function upyunDomain() {
-            return this.$store.state.device.upyunDomain;
+        storageUrl: function storageUrl() {
+            return this.$store.state.device.storageUrl;
         },
         appHref: function appHref() {
             return this.currentRouteName === 'home' ? '#' : '/';
@@ -67717,8 +67717,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     computed: {
-        upyunDomain: function upyunDomain() {
-            return this.$store.state.device.upyunDomain;
+        storageUrl: function storageUrl() {
+            return this.$store.state.device.storageUrl;
         },
         getVerifyCode: function getVerifyCode() {
             return this.verifyCode.join('');
@@ -68045,7 +68045,7 @@ var render = function() {
                       ? _c("img", {
                           staticClass: "loading-size",
                           attrs: {
-                            src: _vm.upyunDomain + "/icons/loading.gif",
+                            src: _vm.storageUrl + "/icons/loading.gif",
                             alt: "正在玩命加载"
                           }
                         })
@@ -68081,7 +68081,7 @@ var render = function() {
                     ? _c("img", {
                         staticClass: "loading-size",
                         attrs: {
-                          src: _vm.upyunDomain + "/icons/loading.gif",
+                          src: _vm.storageUrl + "/icons/loading.gif",
                           alt: "正在玩命加载"
                         }
                       })
@@ -68619,8 +68619,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
 
     computed: {
-        upyunDomain: function upyunDomain() {
-            return this.$store.state.device.upyunDomain;
+        storageUrl: function storageUrl() {
+            return this.$store.state.device.storageUrl;
         },
         getVerifyCode: function getVerifyCode() {
             return this.verifyCode.join('');
@@ -68908,7 +68908,7 @@ var render = function() {
                       ? _c("img", {
                           staticClass: "loading-size",
                           attrs: {
-                            src: _vm.upyunDomain + "/icons/loading.gif",
+                            src: _vm.storageUrl + "/icons/loading.gif",
                             alt: "正在玩命加载"
                           }
                         })
@@ -68943,7 +68943,7 @@ var render = function() {
                     ? _c("img", {
                         staticClass: "loading-size",
                         attrs: {
-                          src: _vm.upyunDomain + "/icons/loading.gif",
+                          src: _vm.storageUrl + "/icons/loading.gif",
                           alt: "正在玩命加载"
                         }
                       })
@@ -69228,7 +69228,7 @@ var render = function() {
                                     staticClass: "mx-auto loading-size",
                                     attrs: {
                                       src:
-                                        _vm.upyunDomain + "/icons/loading.gif",
+                                        _vm.storageUrl + "/icons/loading.gif",
                                       alt: "正在玩命找..."
                                     }
                                   })
@@ -69293,13 +69293,13 @@ var render = function() {
                                         },
                                         [
                                           _c("img", {
-                                            staticClass: "mw-100",
+                                            staticClass: "product-s-size",
                                             attrs: {
                                               src:
-                                                _vm.upyunDomain +
+                                                _vm.storageUrl +
                                                 "/cats/" +
                                                 _vm.cat.id +
-                                                ".jpg!product.s",
+                                                ".jpg",
                                               alt: _vm.cat.name
                                             }
                                           })
@@ -69361,7 +69361,7 @@ var render = function() {
                                         staticClass: "mr-md-3 product-s-size",
                                         attrs: {
                                           src:
-                                            _vm.upyunDomain +
+                                            _vm.storageUrl +
                                             "/brands/" +
                                             _vm.brand.id +
                                             ".jpg!product.s",
@@ -69469,7 +69469,7 @@ var render = function() {
                                         staticClass: "mr-md-3 product-s-size",
                                         attrs: {
                                           src:
-                                            _vm.upyunDomain +
+                                            _vm.storageUrl +
                                             "/products/" +
                                             product.id +
                                             ".jpg!product.s",
@@ -69911,8 +69911,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     computed: {
-        upyunDomain: function upyunDomain() {
-            return this.$store.state.device.upyunDomain;
+        storageUrl: function storageUrl() {
+            return this.$store.state.device.storageUrl;
         },
         isMobile: function isMobile() {
             return this.$store.getters.isMobile;
@@ -70089,7 +70089,7 @@ var render = function() {
               _c("img", {
                 staticClass: "loading-size mx-auto",
                 attrs: {
-                  src: _vm.upyunDomain + "/icons/loading.gif",
+                  src: _vm.storageUrl + "/icons/loading.gif",
                   alt: "正在玩命加载"
                 }
               })

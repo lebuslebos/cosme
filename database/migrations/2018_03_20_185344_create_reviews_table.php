@@ -30,6 +30,7 @@ class CreateReviewsTable extends Migration
             $table->string('city')->default('');
             $table->text('body')->nullable();
             $table->string('imgs',1024)->default('[]');
+            $table->string('openid')->default('');
             $table->timestamps();
             $table->unique(['user_id', 'product_id']);
         });
