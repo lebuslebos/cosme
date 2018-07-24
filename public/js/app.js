@@ -67294,14 +67294,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 this.searching = true;
                 axios.get('/instant/search?search=' + this.query).then(function (response) {
                     // console.log(response.data);
-                    if (!response.data.cat && !response.data.brand && response.data.products.length === 0) {
+                    var data = response.data;
+                    if (!data.cat && !data.brand && data.products.length === 0) {
                         _this2.searching = false;
                     } else {
                         _this2.searchHint = false;
                         // console.log(response.data);
-                        _this2.cat = response.data.cat;
-                        _this2.brand = response.data.brand;
-                        _this2.products = response.data.products;
+                        _this2.cat = data.cat;
+                        _this2.brand = data.brand;
+                        _this2.products = data.products;
                     }
                 }).catch(function (error) {
                     // console.log(!error);

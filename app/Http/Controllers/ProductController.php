@@ -59,19 +59,27 @@ class ProductController extends Controller
 
             $will_buy = round(100 * $product->buys_count / $product->reviews_count);
             $buy_datas = [$will_buy, 100 - $will_buy];
+            /*$most_buy_count = max($buy_datas);//先取最大数，再取出index
+            $most_buy = array_random(array_keys($buy_datas, $most_buy_count));*/
 
             //购入场所分布--映射--缓存处理
             $shop_datas = $this->productRepository->shop_datas($product_id, $product);
+            $most_shop_count = max($shop_datas);//先取最大数，再取出index
+            $most_shop = array_random(array_keys($shop_datas, $most_shop_count));
 
             //肤质分布--映射--缓存处理
-            if ($product->has_login_review) $skin_datas = $this->productRepository->skin_datas($product_id, $product);
+            if ($product->has_login_review){
+                $skin_datas = $this->productRepository->skin_datas($product_id, $product);
+                $most_skin_count = max($skin_datas);//先取最大数，再取出index
+                $most_skin = array_random(array_keys($skin_datas, $most_skin_count));
+            }
         }
 
         if ($openid = request('openid')) {
             $my_review=$this->review($product_id,$openid);
         }
 
-        return compact('product', 'buy_datas', 'shop_datas', 'skin_datas', 'my_review','reviews');
+        return compact('product', 'buy_datas','shop_datas','most_shop_count','most_shop', 'skin_datas', 'most_skin_count','most_skin','my_review','reviews');
     }
 
     public function api_my_review(int $product_id)

@@ -8,7 +8,7 @@ Cache::forget('reviews');*/
 
 
 /*foreach (User::find(1)->products->pluck('id')->all() as $p_id) {
-    $rate = round(DB::table('reviews')->where([['body', '<>', ''], ['product_id', $p_id]])->avg('rate'), 1);
+    $rate = round(DB::table('reviews')->where('product_id', $p_id)->avg('rate'), 1);
     Cache::forever('ra-' . $p_id,$rate);
     DB::table('products')->where('id', $p_id)->update(['rate' => $rate]);
 }*/

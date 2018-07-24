@@ -210,14 +210,15 @@
                         axios.get(`/instant/search?search=${this.query}`)
                             .then(response => {
                                 // console.log(response.data);
-                                if (!response.data.cat && !response.data.brand && response.data.products.length === 0) {
+                                const data=response.data;
+                                if (!data.cat && !data.brand && data.products.length === 0) {
                                     this.searching = false;
                                 } else {
                                     this.searchHint = false;
                                     // console.log(response.data);
-                                    this.cat = response.data.cat;
-                                    this.brand = response.data.brand;
-                                    this.products = response.data.products;
+                                    this.cat = data.cat;
+                                    this.brand = data.brand;
+                                    this.products = data.products;
                                 }
                             })
                             .catch(error => {
