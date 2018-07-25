@@ -22,7 +22,7 @@ class Product extends Model
 
     public function toSearchableArray()
     {
-        $arr = array_only($this->toArray(), ['name', 'common_name', 'nick_name', 'id']);
+        $arr = array_only($this->toArray(), ['id','name', 'common_name', 'nick_name', 'rate','reviews_count','buys_count']);
 
         $brand = $this->brand;
         $arr['brand'] = $brand->name . ',' . $brand->common_name . ',' . $brand->country . ',' . $brand->official_website . ',' . $brand->similar_name;

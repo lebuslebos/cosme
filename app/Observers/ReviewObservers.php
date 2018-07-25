@@ -87,7 +87,7 @@ class ReviewObservers
                 DB::table('users')->where('id', $user_id)->increment('reviews_count');
             }
             Cache::forget('users-' . $user_id);//刷新个人页
-            if($openid=$review->openid) Cache::forget($openid);//刷新微信个人页
+            if($openid=$review->user->openid) Cache::forget($openid);//刷新微信个人页
 
             //用户点评数+1-->并各做持久化处理
             /*Cache::increment('r-' . $review->user_id . '-u');
@@ -149,7 +149,6 @@ class ReviewObservers
         $product_id = $review->product_id;
         $brand_id = $review->brand_id;
         $user_id=$review->user_id;
-        $openid=$review->openid;
 
         Cache::forget('sh-' . $product_id);//刷新购入场所分布的缓存
         Cache::forget('sk-' . $product_id);//刷新肤质分布的缓存
@@ -176,7 +175,7 @@ class ReviewObservers
         Cache::forget('products-' . $product_id);//刷新商品页
         Cache::forget('brands-' . $brand_id);//刷新品牌页
         Cache::forget('users-' . $user_id);//刷新个人页
-        if($openid) Cache::forget($openid);//刷新微信个人页
+        if($openid=$review->user->openid) Cache::forget($openid);//刷新微信个人页
 
         //用户点评数-1-->并各做持久化处理
         /*Cache::decrement('r-' . $review->user_id . '-u');

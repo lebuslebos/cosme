@@ -162,7 +162,7 @@ class ReviewController extends Controller
 
         if ($user = $this->userRepository->get_user(request('openid'))) {
 
-            $this->reviewRepository->update($request, $review, $user->id,request('openid'));
+            $this->reviewRepository->update($request, $review, $user->id);
             return ['submitted' => 1];
         }
     }

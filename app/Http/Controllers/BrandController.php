@@ -65,7 +65,7 @@ class BrandController extends Controller
             foreach (config('common.big_brands') as $big_brand) {
                 $country_brands[] = $all_brands->where('country_id', $big_brand);
             }
-            $country_brands[] = $all_brands->whereNotIn('id',config('common.big_brands'));
+            $country_brands[] = $all_brands->whereNotIn('country_id',config('common.big_brands'));
             return $country_brands;
         });
 

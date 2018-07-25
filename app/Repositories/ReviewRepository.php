@@ -82,12 +82,12 @@ class ReviewRepository
         return $review;
     }
 
-    public function update(StoreReviewRequest $request, Review $review,int $user_id,string $openid='')
+    public function update(StoreReviewRequest $request, Review $review,int $user_id)
     {
         $pre_buy = $review->buy;
         $pre_shop=$review->shop;
         $pre_body=$review->body;
-        $now_openid=$openid ? $openid : $review->openid ;
+//        $now_openid=$openid ? $openid : $review->openid ;
 
         $product_id = $review->product_id;
         $brand_id = $review->brand_id;
@@ -98,7 +98,7 @@ class ReviewRepository
             'shop' => $request->shop,
             'body' => request('body', ''),
             'imgs' => json_encode(request('imgs')),
-            'openid'=>$now_openid
+//            'openid'=>$now_openid
         ]);
         //如果评分变了--且两次至少一次有内容，才重新算一遍----忽略评分没变，内容由空变有/由有变空时总评分也会变的情况，留做下一次新建点评时重新计算
         /*if ($review->rate != $pre_rate && ($pre_body || $review->body)) {
