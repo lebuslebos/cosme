@@ -2,11 +2,11 @@
 <div class="media align-items-center">
     {{--品牌图片--}}
     @if(Route::currentRouteName()=='brands.show')
-        <img class="mr-md-3 product-size" src="{{Storage::url('brands')}}/{{$brand->id}}.jpg!product"
+        <img class="mr-md-3 product-size" src="{{Storage::url('brands')}}/{{$brand->id}}.jpg!brand"
              alt="{{$brand->name}}">
     @else
         <a href="{{route('brands.show',[$brand])}}">
-            <img class="mr-md-1 product-size" src="{{Storage::url('brands')}}/{{$brand->id}}.jpg!product"
+            <img class="mr-md-1 product-size" src="{{Storage::url('brands')}}/{{$brand->id}}.jpg!brand"
                  alt="{{$brand->name}}">
         </a>
     @endif

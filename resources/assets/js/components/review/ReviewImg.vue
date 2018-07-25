@@ -4,7 +4,7 @@
          data-placement="auto"
          data-html="true"
          :data-content="bigImg"
-         :src="`${img}!review`"
+         :src="`${img}!cosme`"
     >
 </template>
 

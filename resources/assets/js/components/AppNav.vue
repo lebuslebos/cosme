@@ -75,7 +75,7 @@
                             <a :href="`/brands/${brand.id}`" @mousedown.prevent target="_blank"
                                class="list-group-item list-group-item-action px-2 px-md-4">
                                 <div class="media align-items-center">
-                                    <img class="mr-md-3 product-s-size" :src="`${storageUrl}/brands/${brand.id}.jpg!product.s`" :alt="brand.name">
+                                    <img class="mr-md-3 product-s-size" :src="`${storageUrl}/brands/${brand.id}.jpg!brand`" :alt="brand.name">
                                     <div class="media-body">
                                         <h5 class="text-brown mb-0">{{brand.name}}
                                             <small class="text-main font-italic">{{brand.common_name}}</small>
@@ -100,7 +100,7 @@
                                :key="`product${product.id}`" @mousedown.prevent
                                class="list-group-item list-group-item-action px-2 px-md-4">
                                 <div class="media align-items-center">
-                                    <img class="mr-md-3 product-s-size" :src="`${storageUrl}/products/${product.id}.jpg!product.s`" :alt="product.name">
+                                    <img class="mr-md-3 product-s-size" :src="`${storageUrl}/products/${product.id}.jpg!cosme`" :alt="product.name">
                                     <div class="media-body">
                                         <div><span class="text-muted">[ {{product.cat.name}} ]</span>&nbsp;
                                             <span class="text-main">{{product.brand.name}}-{{product.name}}</span>

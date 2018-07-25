@@ -7,10 +7,10 @@
         <div class="media align-items-center mb-3 mb-md-0">
             {{--商品的左边部分（移动端和pc端图片大小不一样）--}}
             @if($is_phone)
-                <img src="{{Storage::url('products')}}/{{$product->id}}.jpg!product" class="product-size"
+                <img src="{{Storage::url('products')}}/{{$product->id}}.jpg!cosme" class="product-size"
                      alt="{{$product->name}}">
             @else
-                <img class="mr-3 product-l-size" src="{{Storage::url('products')}}/{{$product->id}}.jpg!product.l"
+                <img class="mr-3 product-l-size" src="{{Storage::url('products')}}/{{$product->id}}.jpg!cosme"
                      alt="{{$product->name}}">
             @endif
             {{--商品的右边部分--}}

@@ -57258,7 +57258,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     methods: {
         bigImg: function bigImg(id) {
-            return '<img src="' + this.storageUrl + '/colors/' + id + '.jpg!product.l"  alt="\u8FD9\u91CC\u539F\u672C\u662F\u4E00\u5F20\u5927\u56FE">';
+            return '<img class="product-l-size" src="' + this.storageUrl + '/colors/' + id + '.jpg!cosme"  alt="\u8FD9\u91CC\u539F\u672C\u662F\u4E00\u5F20\u5927\u56FE">';
         }
     }
 
@@ -57330,7 +57330,7 @@ var render = function() {
                 "data-placement": "top",
                 "data-html": "true",
                 "data-content": _vm.bigImg(color.id),
-                src: _vm.storageUrl + "/colors/" + color.id + ".jpg!product.s"
+                src: _vm.storageUrl + "/colors/" + color.id + ".jpg!cosme"
               }
             }),
             _vm._v(" "),
@@ -58436,7 +58436,7 @@ var render = function() {
       "data-placement": "auto",
       "data-html": "true",
       "data-content": _vm.bigImg,
-      src: _vm.img + "!review"
+      src: _vm.img + "!cosme"
     }
   })
 }
@@ -58639,8 +58639,7 @@ var render = function() {
       _c("img", {
         staticClass: "product-s-size",
         attrs: {
-          src:
-            _vm.storageUrl + "/products/" + _vm.product.id + ".jpg!product.s",
+          src: _vm.storageUrl + "/products/" + _vm.product.id + ".jpg!cosme",
           alt: _vm.product.name
         }
       })
@@ -60989,7 +60988,7 @@ var render = function() {
           "file-size-limit": 5 * 1024 * 1024,
           quality: _vm.isMobile ? 7.26 : 3.78,
           "show-remove-button": false,
-          "initial-image": _vm.imgSrc + "!product"
+          "initial-image": _vm.imgSrc + "!cosme"
         },
         on: {
           "new-image": _vm.newImage,
@@ -69364,7 +69363,7 @@ var render = function() {
                                             _vm.storageUrl +
                                             "/brands/" +
                                             _vm.brand.id +
-                                            ".jpg!product.s",
+                                            ".jpg!brand",
                                           alt: _vm.brand.name
                                         }
                                       }),
@@ -69472,7 +69471,7 @@ var render = function() {
                                             _vm.storageUrl +
                                             "/products/" +
                                             product.id +
-                                            ".jpg!product.s",
+                                            ".jpg!cosme",
                                           alt: product.name
                                         }
                                       }),

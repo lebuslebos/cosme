@@ -92,7 +92,7 @@
 {{--手机时的商品信息--}}
 @if(Route::currentRouteName()=='home' && $is_phone)
     <a href="{{route('products.show',[$review->product])}}" class="phone-product ml-47 d-flex align-items-center bg-light py-2 pl-1 mt-3">
-        <img class="product-s-size mr-2" src="{{Storage::url('products')}}/{{$review->product_id}}.jpg!product.s" alt="{{$review->product->name}}">
+        <img class="product-s-size mr-2" src="{{Storage::url('products')}}/{{$review->product_id}}.jpg!cosme" alt="{{$review->product->name}}">
         <div>
             <div class="text-muted">{{$review->brand->name}}</div>
             <div class="text-main">{{$review->product->name}}</div>

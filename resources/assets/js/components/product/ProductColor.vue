@@ -19,7 +19,7 @@
                      data-placement="top"
                      data-html="true"
                      :data-content="bigImg(color.id)"
-                     :src="`${storageUrl}/colors/${color.id}.jpg!product.s`"
+                     :src="`${storageUrl}/colors/${color.id}.jpg!cosme`"
                 >
 
                 <!--<ReviewImg :img="color.img" from="!color"/>-->
@@ -58,7 +58,7 @@
         },
         methods: {
             bigImg(id) {
-                return `<img src="${this.storageUrl}/colors/${id}.jpg!product.l"  alt="这里原本是一张大图">`
+                return `<img class="product-l-size" src="${this.storageUrl}/colors/${id}.jpg!cosme"  alt="这里原本是一张大图">`
             }
         }
 

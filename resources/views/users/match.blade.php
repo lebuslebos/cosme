@@ -21,7 +21,7 @@
 
         {{--用户头像--}}
         <a href="{{route('users.show',[$match_user])}}" target="_blank">
-            <img class="mr-2 rounded product-s-size" src="{{$match_user->avatar}}!product.s" alt="{{$match_user->name}}">
+            <img class="mr-2 rounded product-s-size" src="{{$match_user->avatar}}!cosme" alt="{{$match_user->name}}">
         </a>
         {{--用户信息--}}
         <div class="media-body">

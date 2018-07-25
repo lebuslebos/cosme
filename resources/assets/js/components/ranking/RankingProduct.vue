@@ -15,7 +15,7 @@
         </div>
         <!--商品图片-->
         <a :href="productHref" :target="productTarget">
-            <img :src="`${storageUrl}/products/${product.id}.jpg!product.s`" class="product-s-size" :alt="product.name">
+            <img :src="`${storageUrl}/products/${product.id}.jpg!cosme`" class="product-s-size" :alt="product.name">
         </a>
         <!--商品信息-->
         <div class="media-body">
