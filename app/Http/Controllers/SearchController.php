@@ -32,7 +32,7 @@ class SearchController extends Controller
 
         $brand = Brand::search($request->search)->paginate(1)[0];
 
-        $products = Product::search($request->search)->paginate(10)
+        $products = Product::search($request->search)->paginate(20)
             ->load('cat:id,name', 'brand:id,name');
 
         return compact('cat', 'brand', 'products');
