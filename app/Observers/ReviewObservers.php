@@ -52,8 +52,8 @@ class ReviewObservers
                 'buys_count' => DB::raw('buys_count + 1'),
             ]);
         } else {
-            $review->product()->increment('reviews_count');
-            $review->brand()->increment('reviews_count');
+            $review->product()->update(['reviews_count' => DB::raw('reviews_count + 1')]);
+            $review->brand()->update(['reviews_count' => DB::raw('reviews_count + 1')]);
         }
 
         /*if ($review->buy == 0) {
@@ -153,8 +153,8 @@ class ReviewObservers
                 'buys_count' => DB::raw('buys_count - 1'),
             ]);
         } else {
-            $review->product()->decrement('reviews_count');
-            $review->brand()->decrement('reviews_count');
+            $review->product()->update(['reviews_count' => DB::raw('reviews_count - 1')]);
+            $review->brand()->update(['reviews_count' => DB::raw('reviews_count - 1')]);
             DB::table('users')->where('id', $user_id)->decrement('reviews_count');
         }
         Cache::forget('users-' . $user_id);//刷新个人页

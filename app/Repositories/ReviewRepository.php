@@ -32,10 +32,8 @@ class ReviewRepository
         return Review::select('id', 'user_id', 'product_id', 'brand_id', 'rate', 'body', 'imgs', 'buy', 'shop', 'likes_count', 'hates_count', 'updated_at')
             ->where('body', '<>', '')
             ->with(['product:id,name,rate,reviews_count,buys_count', 'brand:id,name', 'user:id,name,avatar,skin,reviews_count,openid'])
-            ->latest()
-            ->orderBy('id', 'desc')
-            ->take(config('common.pre_page_index'))
-            ->get();
+            ->latest()->orderBy('id', 'desc')
+            ->take(config('common.pre_page_index'))->get();
     }
 
     public function img(Request $request)
@@ -129,12 +127,12 @@ class ReviewRepository
         if ($review->buy != $pre_buy){
             //之前的buy为0的时候，说明现在改成了1（不会回购），把回购数减一。反之一样。因回购数变化，（商品，品牌）的本身缓存也得刷掉
             if ($pre_buy == 0) {
-                $review->product()->decrement('buys_count');
-                $review->brand()->decrement('buys_count');
+                $review->product()->update(['buys_count' => DB::raw('buys_count - 1')]);
+                $review->brand()->update(['buys_count' => DB::raw('buys_count - 1')]);
                 DB::table('users')->where('id', $user_id)->decrement('buys_count');
             }else{
-                $review->product()->increment('buys_count');
-                $review->brand()->increment('buys_count');
+                $review->product()->update(['buys_count' => DB::raw('buys_count + 1')]);
+                $review->brand()->update(['buys_count' => DB::raw('buys_count + 1')]);
                 DB::table('users')->where('id', $user_id)->increment('buys_count');
             }
         }

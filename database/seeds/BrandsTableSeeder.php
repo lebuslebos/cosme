@@ -78,7 +78,7 @@ class BrandsTableSeeder extends Seeder
             ['SUQQU', '', '', 3, $c[3], 'www.suqqu.com'],
             ['莱珀妮', 'La prairie', '', 12, $c[12], 'www.laprairie.com.cn'],
             ['傲丽', 'Covermark', '', 3, $c[3], 'www.covermarkchina.com'],
-            ['奥碧虹', 'ALBION', '奥尔滨，奥比虹', 3, $c[3], 'www.albion-cosmetics.cn'],
+            ['奥碧虹', 'ALBION', '奥尔滨，奥比虹', 3, $c[3], 'http://www.albion-cosmetics.cn/cn'],
             ['THREE ', '', '', 3, $c[3], ''],
             ['银座', 'THE GINZA', '', 3, $c[3], ''],
             ['梦妆', 'Mamonde', '', 10, $c[10], 'www.mamonde.com'],
