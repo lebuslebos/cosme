@@ -160,17 +160,6 @@ class ReviewRepository
 
     public function destroy(Review $review)
     {
-        if ($review->body) {
-
-            //记录下有点评进账的商品
-            $p_ids = Cache::get('p-ids', []);
-            $p_ids[] = $review->product_id;
-            Cache::forever('p-ids', $p_ids);
-
-            //直接覆盖首页点评缓存
-            $reviews = $this->reviews();
-            Cache::forever('reviews', $reviews);
-        }
 
         $review->delete();
 

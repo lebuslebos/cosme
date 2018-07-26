@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Repositories\ReviewRepository;
 use App\Review;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
@@ -14,12 +15,12 @@ use Illuminate\Support\Facades\DB;
 class ReviewObservers
 {
 
-    /*protected $reviewRepository;
+    protected $reviewRepository;
 
     public function __construct(ReviewRepository $reviewRepository)
     {
         $this->reviewRepository = $reviewRepository;
-    }*/
+    }
 
     //游客点评+登录用户新建点评（2种）
     public function created(Review $review)
@@ -161,6 +162,17 @@ class ReviewObservers
         if($openid=$review->user->openid) Cache::forget($openid);//刷新微信个人页
 
 
+        if ($review->body) {
+
+            //记录下有点评进账的商品
+            $p_ids = Cache::get('p-ids', []);
+            $p_ids[] = $review->product_id;
+            Cache::forever('p-ids', $p_ids);
+
+            //直接覆盖首页点评缓存
+            $reviews = $this->reviewRepository->reviews();
+            Cache::forever('reviews', $reviews);
+        }
 
         //用户点评数-1-->并各做持久化处理
         /*Cache::decrement('r-' . $review->user_id . '-u');
