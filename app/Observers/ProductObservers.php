@@ -19,7 +19,7 @@ class ProductObservers
     //has_login_review字段被更新时，刷新商品本身的缓存
     public function updated(Product $product)
     {
-        if(Cache::has('products-' . $product->id)) Cache::forget('products-' . $product->id);//更新商品缓存
+        Cache::forget('products-' . $product->id);//更新商品缓存
     }
 
     public function saved(Product $product)

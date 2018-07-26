@@ -3,7 +3,11 @@
 Route::get('/p', 'ProductController@index');
 Route::get('/b', 'BrandController@index');
 
-
+/*Route::get('test',function(){
+    $review=\App\Review::find(17);
+    $review->product()->increment('reviews_count');
+    return 'ok';
+});*/
 
 //首页
 Route::get('/', 'ReviewController@index')->name('home');

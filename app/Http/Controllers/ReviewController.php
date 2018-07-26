@@ -171,7 +171,7 @@ class ReviewController extends Controller
     {
         $this->authorize('update', $review);
 
-        $review->delete();
+        $this->reviewRepository->destroy($review);
 
         return ['a' => 'ok'];
     }
@@ -180,7 +180,7 @@ class ReviewController extends Controller
     {
         if ($user = $this->userRepository->get_user(request('openid'))) {
 
-            $review->delete();
+            $this->reviewRepository->destroy($review);
 
             return ['deleted'=>1];
         }

@@ -25,7 +25,7 @@ class UserObservers
     {
 
         Cache::forget('users-' . $user->id);//刷新个人页的个人信息的缓存
-        Cache::forget($user->openid);//刷新微信个人页的个人信息的缓存
+        if ($openid = $user->openid) Cache::forget($openid);//刷新微信个人页的个人信息的缓存
 
         //直接覆盖首页点评缓存
         $reviews = $this->reviewRepository->reviews();
@@ -37,7 +37,7 @@ class UserObservers
             $product_ids = DB::table('reviews')->where('user_id', $user->id)->pluck('product_id')->all();
             foreach ($product_ids as $product_id) {
                 Cache::tags('products-' . $product_id . '-reviews')->flush();
-                if(Cache::has('sk-'.$product_id))Cache::forget('sk-'.$product_id);
+                if (Cache::has('sk-' . $product_id)) Cache::forget('sk-' . $product_id);
             }
         }
 

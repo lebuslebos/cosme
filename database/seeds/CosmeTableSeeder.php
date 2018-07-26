@@ -36,6 +36,7 @@ class CosmeTableSeeder extends Seeder
                 'official_website' => $new_brand[5]
             ]);
         }
+        Cache::forget('country-brands');
 
         //新增商品
         $new_products=[

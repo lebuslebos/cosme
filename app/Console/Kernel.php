@@ -132,7 +132,20 @@ class Kernel extends ConsoleKernel
 
             Cache::tags(['ranking', 'match'])->flush();//清空排行榜以及匹配用户的缓存
 
-            Cache::forget('hot-brands');//清空热门品牌的缓存（微信端)）
+//            Cache::forget('hot-brands');//清空热门品牌的缓存（微信端)）
+
+            //热门品牌+国家分组品牌放入缓存（微信端）
+            $hot_brands=DB::table('brands')->select('id','name')->orderBy('reviews_count','desc')->orderBy('id','asc')->take(8)->get();
+            Cache::forever('hot-brands',$hot_brands);
+
+            $country_brands = [];
+            foreach (config('common.big_brands') as $big_brand) {
+                $country_brands[] = DB::table('brands')->select('id', 'name','country_id')->where('country_id', $big_brand)
+                    ->orderBy('reviews_count', 'desc')->orderBy('buys_count', 'desc')->orderBy('id', 'asc')->get();
+            }
+            $country_brands[] = DB::table('brands')->whereNotIn('country_id',config('common.big_brands'));
+            Cache::forever('country-brands',$country_brands);
+
 
 
         })->dailyAt('3:00')
@@ -143,9 +156,7 @@ class Kernel extends ConsoleKernel
                     Artisan::call('ranking:cache', ['cat' => $popular_cat]);
                 }
 
-                //热门品牌放入缓存（微信端）
-                $hot_brands=DB::table('brands')->select('id','name')->orderBy('reviews_count','desc')->orderBy('id','asc')->take(8)->get();
-                Cache::forever('hot-brands',$hot_brands);
+
             });
 
     }

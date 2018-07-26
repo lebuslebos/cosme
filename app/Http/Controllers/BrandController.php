@@ -57,15 +57,20 @@ class BrandController extends Controller
         });
 
 
-        $all_brands = Cache::rememberForever('all-brands', function () {
+       /* $all_brands = Cache::rememberForever('all-brands', function () {
             return Brand::select('id', 'name','country_id')->get();
-        });
-        $country_brands = Cache::rememberForever('country-brands', function () use ($all_brands) {
+        });*/
+
+        $country_brands = Cache::rememberForever('country-brands', function () {
+
+//            $all_brands=Brand::select('id', 'name','country_id')->get();
+
             $country_brands = [];
             foreach (config('common.big_brands') as $big_brand) {
-                $country_brands[] = $all_brands->where('country_id', $big_brand);
+                $country_brands[] = Brand::select('id', 'name','country_id')->where('country_id', $big_brand)
+                    ->orderBy('reviews_count', 'desc')->orderBy('buys_count', 'desc')->orderBy('id', 'asc')->get();
             }
-            $country_brands[] = $all_brands->whereNotIn('country_id',config('common.big_brands'));
+            $country_brands[] = Brand::whereNotIn('country_id',config('common.big_brands'));
             return $country_brands;
         });
 

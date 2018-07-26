@@ -61,7 +61,8 @@ class ReviewRepository
 
     public function store(StoreReviewRequest $request, Product $product, int $user_id,string $device,string $model='',string $openid='')
     {
-        if (!$product->has_login_review) $product->update(['has_login_review' => true]);//若此商品之前从未有过登录用户的点评，则把字段改为true
+        //若此商品之前从未有过登录用户的点评，则把字段改为true--因新建点评时总是会触发商品的update和save观察者，故不处理缓存
+        if (!$product->has_login_review) DB::table('products')->update(['has_login_review' => true]);
 
         $review = Review::create([
             'user_id' => $user_id,
@@ -79,11 +80,23 @@ class ReviewRepository
             'city' => Ip::find(request()->ip())[2],
             'openid'=>$openid
         ]);
+
+        if ($review->body) {
+            //记录下有点评进账的商品
+            $p_ids = Cache::get('p-ids', []);
+            $p_ids[] = $product->id;
+            Cache::forever('p-ids', $p_ids);
+
+            //直接覆盖首页点评缓存
+            $reviews = $this->reviews();
+            Cache::forever('reviews', $reviews);
+        }
         return $review;
     }
 
     public function update(StoreReviewRequest $request, Review $review,int $user_id)
     {
+        $pre_rate=$review->rate;
         $pre_buy = $review->buy;
         $pre_shop=$review->shop;
         $pre_body=$review->body;
@@ -100,37 +113,37 @@ class ReviewRepository
             'imgs' => json_encode(request('imgs')),
 //            'openid'=>$now_openid
         ]);
-        //如果评分变了--且两次至少一次有内容，才重新算一遍----忽略评分没变，内容由空变有/由有变空时总评分也会变的情况，留做下一次新建点评时重新计算
+        //如果评分变了，且两次至少一次有内容，才重新算一遍   +   评分没变，内容由空变有/由有变空时总评分也会变的情况
         /*if ($review->rate != $pre_rate && ($pre_body || $review->body)) {
             Cache::forever('ra-' . $product->id, round($product->reviews()
                 ->where('body', '<>', '')->avg('rate'), 1));//商品评分更新,并存入缓存
         }*/
-
-        //如果回购变了
-        if ($review->buy != $pre_buy){
-            //之前的buy为0的时候，说明现在改成了1（不会回购），把回购数减一。反之一样。因回购数变化，（商品，品牌）的本身缓存也得刷掉
-            if ($pre_buy == 0) {
-                DB::table('products')->where('id', $product_id)->decrement('buys_count');
-                DB::table('brands')->where('id', $brand_id)->decrement('buys_count');
-                DB::table('users')->where('id', $user_id)->decrement('buys_count');
-            }else{
-                DB::table('products')->where('id', $product_id)->increment('buys_count');
-                DB::table('brands')->where('id', $brand_id)->increment('buys_count');
-                DB::table('users')->where('id', $user_id)->increment('buys_count');
-            }
-            Cache::forget('products-' . $product_id);//刷新商品页
-            Cache::forget('brands-' . $brand_id);//刷新品牌页
-        }
-        //如果购入场所变了--刷新购入场所分布的缓存
-        if($review->shop != $pre_shop) Cache::forget('sh-' . $product_id);
-
-        if($review->body=='' xor $pre_body==''){
+        if (($review->rate != $pre_rate && ($pre_body || $review->body)) || (!$review->body xor !$pre_body)) {
             //算入进账商品，定时任务重新计算评分
             $p_ids = Cache::get('p-ids', []);
             $p_ids[] = $product_id;
             Cache::forever('p-ids', $p_ids);
         }
 
+        //如果回购变了
+        if ($review->buy != $pre_buy){
+            //之前的buy为0的时候，说明现在改成了1（不会回购），把回购数减一。反之一样。因回购数变化，（商品，品牌）的本身缓存也得刷掉
+            if ($pre_buy == 0) {
+                $review->product()->decrement('buys_count');
+                $review->brand()->decrement('buys_count');
+                DB::table('users')->where('id', $user_id)->decrement('buys_count');
+            }else{
+                $review->product()->increment('buys_count');
+                $review->brand()->increment('buys_count');
+                DB::table('users')->where('id', $user_id)->increment('buys_count');
+            }
+        }
+        //如果购入场所变了--刷新购入场所分布的缓存
+        if($review->shop != $pre_shop) Cache::forget('sh-' . $product_id);
+
+        //直接覆盖首页点评缓存
+        $reviews = $this->reviews();
+        Cache::forever('reviews', $reviews);
         /*if ($review->buy != $pre_buy) {
             //之前的buy为0的时候，说明现在改成了1（不会回购），把回购数减一。反之一样
             if ($pre_buy == 0) {
@@ -145,5 +158,23 @@ class ReviewRepository
         }*/
 
         return $review->updated_at;
+    }
+
+    public function destroy(Review $review)
+    {
+        if ($review->body) {
+
+            //记录下有点评进账的商品
+            $p_ids = Cache::get('p-ids', []);
+            $p_ids[] = $review->product_id;
+            Cache::forever('p-ids', $p_ids);
+
+            //直接覆盖首页点评缓存
+            $reviews = $this->reviews();
+            Cache::forever('reviews', $reviews);
+        }
+
+        $review->delete();
+
     }
 }
