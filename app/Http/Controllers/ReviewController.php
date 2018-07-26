@@ -53,7 +53,7 @@ class ReviewController extends Controller
         Cache::increment($request->type . '-' . $request->user . '-u');
         $u_ids = Cache::get($request->type . '-u-ids', []);
         $u_ids[] = $request->user;
-        Cache::forever($request->type . '-u-ids', $r_ids);
+        Cache::forever($request->type . '-u-ids', $u_ids);
         //return 'ok';
     }
 
