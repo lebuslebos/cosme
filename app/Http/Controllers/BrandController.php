@@ -70,7 +70,7 @@ class BrandController extends Controller
                 $country_brands[] = Brand::select('id', 'name','country_id')->where('country_id', $big_brand)
                     ->orderBy('reviews_count', 'desc')->orderBy('buys_count', 'desc')->orderBy('id', 'asc')->get();
             }
-            $country_brands[] = Brand::whereNotIn('country_id',config('common.big_brands'));
+            $country_brands[] = Brand::whereNotIn('country_id',config('common.big_brands'))->get();
             return $country_brands;
         });
 
