@@ -1,6 +1,8 @@
 <?php
 
 return [
+    'url'=>'https://rongcosme.com/',
+
     'ranking_updated_at' => 3,
 
     'pre_page'=>25,
