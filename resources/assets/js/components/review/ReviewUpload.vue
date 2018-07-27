@@ -8,7 +8,7 @@
             <span class="text-danger" v-text="errorMsg"></span>
         </div>
 
-        <el-upload multiple list-type="picture-card" accept="image/*" :headers="headers" :limit="limitCount"
+        <el-upload list-type="picture-card" accept="image/*" :headers="headers" :limit="limitCount"
                    :class="{hide:hideUpload}" :file-list="fileList" action="/reviews/imgs"
 
                    :before-upload="beforeUpload"
@@ -35,13 +35,9 @@
 </template>
 
 <script>
-    /*import Croppa from 'vue-croppa'
-    import 'vue-croppa/dist/vue-croppa.css';*/
     import 'element-ui/lib/theme-chalk/index.css';
     import Upload from 'element-ui/lib/upload'
     import Dialog from 'element-ui/lib/dialog'
-
-
     export default {
         name: "review-upload-form",
         props: ['imgs'],
@@ -84,8 +80,8 @@
                 // console.log(event, file, fileList);
             },
             onSuccess(response, file, fileList) {
-                // console.log('上传成功');
-                // console.log(response, file, fileList);
+                console.log('上传成功');
+                console.log(response, file, fileList);
                 if (!!response.path) this.imgs.push(response.path)
             },
             onError(err, file, fileList) {

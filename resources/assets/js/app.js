@@ -56,8 +56,6 @@ import Ranking from './components/Ranking'
 import Review from './components/Review'
 import Vote from './components/Vote'
 
-import Test from './components/Test'
-
 const app = new Vue({
     el: '#app',
     components:{
@@ -67,7 +65,6 @@ const app = new Vue({
         ReviewRate, ReviewBuy, ReviewShop,ReviewDate,ReviewImg, Vote,
         Avatar,Name,Skin,UserReview,
         Ranking,RankingProduct,
-        Test
     },
     store
 });

@@ -124,7 +124,7 @@
             @endif
         @endif
 
-        <div class="pt-5">
+        <div class="">
             <div class="mb-2 text-muted hover-help d-inline-block" data-toggle="tooltip"
                  data-original-title="此分类一旦有点评则点亮">
                 点评徽章
