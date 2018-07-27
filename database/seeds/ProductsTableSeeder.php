@@ -2166,6 +2166,7 @@ class ProductsTableSeeder extends Seeder
             [351,7,'99%济州岛清新芦荟胶','Jeju Fresh Aloe Soothing Gel',''],
             [351,1,'茶树卸妆水','Healing Tea Garden Tea Tree Cleansing Water',''],
             [351,45,'双头气垫蜡笔唇膏','',''],
+            [12,7,'姜黄蔓越莓籽活力亮采面膜','Turmeric & Cranberry Seed Energizing Radiance',''],
 
 
 //            [,,'','',''],

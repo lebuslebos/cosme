@@ -52,10 +52,11 @@ class ProductRepository
         return Cache::rememberForever('sk-' . $product_id, function () use ($product) {
 
             $skins = array_count_values($product->users()->pluck('users.skin')->all());
+            $skin_count=array_sum($skins);
             $skin_datas = [];
 
             for ($i = 0; $i < 6; $i++) {
-                $skin_datas[$i] = empty($skins[$i]) ? 0 : ceil(100*$skins[$i]/$product->reviews_count);
+                $skin_datas[$i] = empty($skins[$i]) ? 0 : ceil(100*$skins[$i]/$skin_count);
             }
             return $skin_datas;
         });

@@ -250,6 +250,7 @@ class UserController extends Controller
 
         $reviews = $this->userRepository->reviews($user_id, $user);
         $reviews->withPath(config('common.url').'api/other_users/'.$user_id);
+//        $reviews->withPath('other_users/'.$user_id);
 
         $cats = $this->userRepository->cats($user_id, $user);
         $most_cat_count = max($cats);

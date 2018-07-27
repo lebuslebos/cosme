@@ -60,7 +60,12 @@ class ReviewRepository
     public function store(StoreReviewRequest $request, Product $product, int $user_id,string $device,string $model='',string $openid='')
     {
         //若此商品之前从未有过登录用户的点评，则把字段改为true--因新建点评时总是会触发商品的update和save观察者，故不处理缓存
-        if (!$product->has_login_review) DB::table('products')->update(['has_login_review' => true]);
+        if (!$product->has_login_review) DB::table('products')->where('id',$product->id)->update(['has_login_review' => true]);
+
+
+        /*$a=Review::whereNotNull('user_id')->pluck('product_id')->all();
+        DB::table('products')->whereNotIn('id',$a)->update(['has_login_review' => false]);*/
+
 
         $review = Review::create([
             'user_id' => $user_id,

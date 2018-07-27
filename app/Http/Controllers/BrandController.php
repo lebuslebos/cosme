@@ -44,6 +44,7 @@ class BrandController extends Controller
 
         $products = $this->brandRepository->products($brand_id, $brand);
         $products->withPath(config('common.url').'api/brands/'.$brand_id);
+//        $products->withPath('brands/'.$brand_id);
 
         $red_products = $this->rankingRepository->cached_ranking_by_brand($brand_id, 'desc');
         $black_products = $this->rankingRepository->cached_ranking_by_brand($brand_id, 'asc');
