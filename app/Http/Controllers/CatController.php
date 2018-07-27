@@ -42,6 +42,7 @@ class CatController extends Controller
         $cat = $this->catRepository->cat($cat_id);
 
         $products = $this->catRepository->products($cat_id, $cat);
+        $products->withPath(config('common.url').'api/cats/'.$cat_id);
 
         $red_products = $this->rankingRepository->cached_ranking_by_cat($cat_id, 'desc');
         $black_products = $this->rankingRepository->cached_ranking_by_cat($cat_id, 'asc');
