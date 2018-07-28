@@ -8,7 +8,7 @@
                 :disable-pinch-to-zoom="disableZoom"
 
                 :width="isMobile ? 62 : 119" :height="isMobile ? 62 : 119"
-                :file-size-limit="5*1024*1024" :quality="isMobile ? 7.26 : 3.78"
+                :file-size-limit="5*1024*1024" :quality="isMobile ? 16 : 8.4"
                 :show-remove-button="false"
                 :initial-image="imgSrc+'!cosme'"
                 @new-image="newImage"
@@ -121,7 +121,7 @@
                                 // console.log(response);
                             })
 
-                    }, 'image/jpeg', 1
+                    }, 'image/jpeg', 0.8
                 ); // 80% compressed jpeg file
             },
             onFileTypeMismatch(file) {

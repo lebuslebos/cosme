@@ -268,7 +268,7 @@ class UserController extends Controller
      */
     public function avatar(Request $request, User $user)
     {
-        $request->validate(['file' => 'required|image|max:5120|dimensions:max_width=500,max_height=500']);
+        $request->validate(['file' => 'required|image|max:5120']);
 
         $this->authorize('update', $user);
 
@@ -289,8 +289,8 @@ class UserController extends Controller
 
             $img = $request->file;
             $path = $img->hashName('avatars');
-            //图片处理---变成450，改成jpg格式
-            $handled_img = Image::make($img)->fit(450, 450, function ($constraint) {
+            //图片处理---变成1000，改成jpg格式
+            $handled_img = Image::make($img)->fit(1000, 1000, function ($constraint) {
                 $constraint->upsize();
             })->encode('jpg');
 

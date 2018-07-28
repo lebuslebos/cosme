@@ -103,7 +103,8 @@ class CosmeTableSeeder extends Seeder
         //  [用户id，商品id，分类id，品牌id，评分，回购，购入场所，点评内容，点评图片]
         $new_reviews = [
 //          [12,800,4,61,6,0,2,'好用',['https://cache-cdn.rongcosme.com/reviews/111.jpeg','']]
-            [12,330,45,19,7,0,0,'官网购入的 圆管46号钟情，带有刻字服务，超有纪念意义，记得提前预定哦。46号完全不挑肤色，是一款元气蜜桃粉橘色，滋润、显白又肥肠少女~~ 上嘴还有治愈泡泡糖香味，简直就是约会斩男必备！爱哭~',['https://cache-cdn.rongcosme.com/reviews/E5AA66909E450C9285CAA30C2D3C484B.png','https://cache-cdn.rongcosme.com/reviews/IMG_2805.JPG']],
+//            [12,330,45,19,7,0,0,'官网购入的 圆管46号钟情，带有刻字服务，超有纪念意义，记得提前预定哦。46号完全不挑肤色，是一款元气蜜桃粉橘色，滋润、显白又肥肠少女~~ 上嘴还有治愈泡泡糖香味，简直就是约会斩男必备！爱哭~',['https://cache-cdn.rongcosme.com/reviews/E5AA66909E450C9285CAA30C2D3C484B.png','https://cache-cdn.rongcosme.com/reviews/IMG_2805.JPG']],
+            [12,49,45,3,7,0,1,'Armani红管丝绒唇釉入了两款：#500 和 #504——\n#500：这个色号太难买了，曾经还纠结到底买500还是501，介于皮肤偏白就买了500，果然没买错，丝绒豆沙色炒鸡温油又气质，各种场合都适用，使用率很高。\n#504：504是一位博主推荐的，玫红色调非常正，可以把皮肤称得超白，骚货色。\n总结：阿玛尼这个丝绒系列肥肠建议入，不显唇纹，哑光妆效却不干，一点点晕开的雾面渐变色也很美妙，买买买！',['https://cache-cdn.rongcosme.com/reviews/IMG_2837.JPG','https://cache-cdn.rongcosme.com/reviews/IMG_2821(20180728-190242).jpg']],
         ];
         $this->create_reviews($new_reviews);
 
