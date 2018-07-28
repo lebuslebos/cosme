@@ -32,7 +32,7 @@ class ReviewRepository
         return Review::select('id', 'user_id', 'product_id', 'brand_id', 'rate', 'body', 'imgs', 'buy', 'shop', 'likes_count', 'hates_count', 'updated_at')
             ->where('body', '<>', '')
             ->with(['product:id,name,rate,reviews_count,buys_count', 'brand:id,name', 'user:id,name,avatar,skin,reviews_count,openid'])
-            ->latest()->orderBy('id', 'desc')
+            ->latest('updated_at')->orderBy('id', 'desc')
             ->take(config('common.pre_page_index'))->get();
     }
 
