@@ -1,6 +1,6 @@
 <template>
     <img alt="点评图片" class="review-size" data-toggle="popover"  data-container="body"
-         data-trigger="hover click"
+         data-trigger="hover"
          data-placement="auto"
          data-html="true"
          :data-content="bigImg"
