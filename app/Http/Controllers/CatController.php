@@ -30,6 +30,7 @@ class CatController extends Controller
 
         //所有商品(带分页)--缓存处理(tag:分类-1-商品)
         $products = $this->catRepository->products($cat_id, $cat);
+        $products->withPath(request()->url());
 
         $red_products = $this->rankingRepository->cached_ranking_by_cat($cat_id, 'desc');
         $black_products = $this->rankingRepository->cached_ranking_by_cat($cat_id, 'asc');

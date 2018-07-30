@@ -31,6 +31,7 @@ class BrandController extends Controller
 
         //所有商品(带分页)--缓存处理(tag:品牌-1-商品)
         $products = $this->brandRepository->products($brand_id, $brand);
+        $products->withPath(request()->url());
 
         $red_products = $this->rankingRepository->cached_ranking_by_brand($brand_id, 'desc');
         $black_products = $this->rankingRepository->cached_ranking_by_brand($brand_id, 'asc');

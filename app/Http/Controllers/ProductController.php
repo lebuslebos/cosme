@@ -38,6 +38,7 @@ class ProductController extends Controller
         if ($product->reviews_count > 0) {
             //所有点评(带分页)--缓存处理(tag:商品-1-点评)
             $reviews = $this->productRepository->reviews($product_id, $product);
+            $reviews->withPath(request()->url());
 
             //购入场所分布--映射--缓存处理
             $shop_datas = $this->productRepository->shop_datas($product_id, $product);
