@@ -2,7 +2,7 @@
     <!--最外层的过渡，多元素之间的过渡，并不属于列表过渡-->
     <transition name="fade" mode="out-in">
         <!--已点评（游客）-->
-        <div class="d-flex align-items-center rounded border p-3" v-if="visitorReviewed" key="visitorReviewed">
+        <div class="d-flex align-items-center rounded border p-3 p-md-4" v-if="visitorReviewed" key="visitorReviewed">
             <!--手机端-->
             <div v-if="isMobile" class="pr-2" style="height: 21px">
                 <span><i class="fa fa-check align-middle touch-size"></i></span>
@@ -33,7 +33,7 @@
 
 
         <!--已点评（登录用户）-->
-        <div v-else-if="userReviewed" key="userReviewed" class="rounded border p-3"
+        <div v-else-if="userReviewed" key="userReviewed" class="rounded border p-3 p-md-4"
              @click.self="toggleShowReviewMobile">
             <!--已点评用户最初的内容-->
             <div class="d-flex align-items-center ">
@@ -85,13 +85,13 @@
                         </transition>
                     </div>
                     <!--文字点评-->
-                    <div class="text-brown my-2">{{initBody}}</div>
+                    <div class="text-brown review-text my-2 my-md-3">{{initBody}}</div>
                     <!--图片点评-->
                     <div v-if="initImgs.length>0" class="d-flex">
                         <ReviewImg v-for="(initImg,index) in initImgs" :key="index" :img="initImg" class="mr-2 mb-2"/>
                     </div>
                     <!--点赞点踩+修改-->
-                    <div class="d-flex align-items-center pt-1">
+                    <div class="d-flex align-items-center pt-2">
                         <Vote v-if="!!review"
                               :review="initReviewId"
                               :user="review.user_id"
@@ -110,7 +110,7 @@
         </div>
 
         <!--未点评（包括游客和登录用户）+已登录的编辑点评-->
-        <div v-else key="notReviewed" class="rounded border p-3">
+        <div v-else key="notReviewed" class="rounded border p-3 p-md-4">
             <!--点评打分-->
             <div class="bg-easy rounded">
                 <span class="rate ml-1">

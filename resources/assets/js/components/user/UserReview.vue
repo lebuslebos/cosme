@@ -5,7 +5,7 @@
                 <!--最外层的过渡，多元素之间的过渡，并不属于列表过渡-->
                 <transition name="fade" mode="out-in">
                     <!--展示点评-->
-                    <div v-if="!showForm" class="rounded bg-light-brown py-3 px-4"
+                    <div v-if="!showForm" class="rounded bg-light-brown p-4"
                          @mouseover="enterReview" @mouseout="leaveReview">
 
                         <!--点评上部--评分、回购。购入地、时间-->
@@ -18,14 +18,14 @@
                             </transition>
                         </div>
                         <!--文字点评-->
-                        <div class="text-brown my-2">{{initBody}}</div>
+                        <div class="text-brown review-text my-2 my-md-3">{{initBody}}</div>
                         <!--图片点评-->
                         <div v-if="initImgs.length>0" class="d-flex">
                             <ReviewImg v-for="(initImg,index) in initImgs" :key="index" :img="initImg"
                                        class="mr-2 mb-2"/>
                         </div>
                         <!--点赞点踩+修改-->
-                        <div class="d-flex align-items-center pt-1">
+                        <div class="d-flex align-items-center pt-2">
                             <Vote :review="review.id"
                                   :user="review.user_id"
                                   :likes="likes" :hates="hates"/>

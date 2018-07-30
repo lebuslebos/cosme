@@ -6,7 +6,7 @@
     <div class="align-self-center mr-2">
         @if(!!$review->user_id)
             <a href="{{route('users.show',[$review->user])}}" target="_blank">
-                <img src="{{$review->user->avatar}}" alt="" class="rounded avatar-size">
+                <img src="{{$review->user->avatar}}!brand" alt="" class="rounded avatar-size">
             </a>
         @else
             <img class="rounded avatar-size" src="{{$review->user->avatar}}" alt="">
@@ -61,10 +61,10 @@
 
 
 {{--点评的下半部分（文字点评+图片+点赞点踩）--}}
-<div class="ml-47 text-brown review-text my-2 my-md-3">{!!nl2br(e($review->body))!!}</div>
+<div class="text-brown review-text my-2 my-md-3{{Route::currentRouteName()=='products.show' || $is_phone ? ' ml-47' : ''}}">{!!nl2br(e($review->body))!!}</div>
 
 @if(filled(json_decode($review->imgs)))
-    <div class="d-flex ml-47">
+    <div class="d-flex {{Route::currentRouteName()=='products.show' || $is_phone ? ' ml-47' : ''}}">
         @foreach(json_decode($review->imgs) as $img)
             <review-img img="{{$img}}" class="mb-2 mr-2"></review-img>
         @endforeach

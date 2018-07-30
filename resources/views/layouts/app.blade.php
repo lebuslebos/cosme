@@ -18,6 +18,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}?t=20180729" defer></script>
+    {{--<script src="{{Storage::url('cosme/app.js')}}" defer></script>--}}
+
 
     <!-- Fonts -->
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
@@ -25,8 +27,11 @@
     <link rel="shortcut icon" href="{{asset('favicon.ico')}}"/>
     <link rel="bookmark" href="{{asset('favicon.ico')}}"/>
 
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}?t=20180729" rel="stylesheet">
+    {{--<link href="{{Storage::url('cosme/app.css')}}" rel="stylesheet">--}}
+
 </head>
 <body>
 <div id="app" class="d-flex flex-column">

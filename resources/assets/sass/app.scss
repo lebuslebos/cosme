@@ -578,6 +578,9 @@ img:not(.double-star-size) {
 .page-link {
   color: $main-color;
 }
+.ml-47{
+  margin-left: 47px;
+}
 
 //仅pc端需要单独处理的地方(min-有小到大排)
 @media only screen and(min-width: 768px) {
@@ -632,9 +635,9 @@ img:not(.double-star-size) {
   .badge-main, .badge-easy{
     padding: 1px 4px;
   }
-  .ml-47{
+  /*.ml-47{
     margin-left: 47px;
-  }
+  }*/
 }
 
 //ui处理--当屏幕小于320px以下（iphone5）
