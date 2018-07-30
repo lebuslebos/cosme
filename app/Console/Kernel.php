@@ -125,6 +125,7 @@ class Kernel extends ConsoleKernel
                         ->where([['body', '<>', ''], ['product_id', $p_id]])
                         ->avg('rate'), 1);
 
+                    if(!$rate)$rate=4.0;
                     Cache::forever('ra-' . $p_id,$rate);//分数放入缓存，方便页面上的调用（因商品信息都已缓存，唯独rate等需实时）
                     DB::table('products')->where('id', $p_id)->update(['rate' => $rate]);//同步至数据库
                 }
