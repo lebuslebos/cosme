@@ -1,7 +1,7 @@
 <?php
 
-Route::get('/p', 'ProductController@index');
-Route::get('/b', 'BrandController@index');
+/*Route::get('/p', 'ProductController@index');
+Route::get('/b', 'BrandController@index');*/
 
 /*Route::get('test',function(){
     $review=\App\Review::find(17);
@@ -11,6 +11,7 @@ Route::get('/b', 'BrandController@index');
 
 //首页
 Route::get('/', 'ReviewController@index')->name('home');
+Route::get('commit','SearchController@commit')->name('commit');
 //分类页
 Route::resource('cats', 'CatController')->only(['show']);
 //品牌页+所有品牌页

@@ -37,4 +37,12 @@ class SearchController extends Controller
 
         return compact('cat', 'brand', 'products');
     }
+
+
+
+    //版本更新记录
+    public function commit()
+    {
+        return view('commit');
+    }
 }

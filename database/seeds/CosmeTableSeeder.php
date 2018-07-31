@@ -49,35 +49,41 @@ class CosmeTableSeeder extends Seeder
     public function run()
     {
         //新增品牌-->[品牌名，品牌英文名，品牌类似名，国家id，国家名，官方网站]
-        /*$c = [
+        $c = [
             1 => '中国', 2 => '美国', 3 => '日本', 4 => '英国', 5 => '法国', 6 => '意大利',
             7 => '德国', 8 => '澳大利亚', 9 => '俄罗斯', 10 => '韩国', 11 => '加拿大', 12 => '瑞士',
             13 => '中国台湾', 14 => '匈牙利', 15 => '瑞典', 16 => '荷兰', 17 => '以色列', 18 => '新西兰', 19 => '中国香港', 20 => '西班牙', 21 => '泰国',
         ];
         $new_brands = [
-            ['参天制药', 'Santen', '', 3, $c[3], 'www.santen-china.cn'],
+            ['伊藤良品', '', '贝德氏', 1, $c[1], ''],
         ];
-        $this->create_brands($new_brands);*/
+        $this->create_brands($new_brands);
+
+
 
 
         //新增商品-->[品牌id，分类id，名字，英文名，昵称]
-        /*$new_products=[
-            [348,103,'FX NEO眼药水','',''],
+        $new_products=[
+            [361,10,'棉签-尖头型','',''],
         ];
-        $this->create_products($new_products);*/
+        $this->create_products($new_products);
+
+
 
 
         //新增价格-->[商品id，容量，价格]
-        /*$new_prices=[
-            [2135,'',53],
+        $new_prices=[
+            [2158,'500ml',59],
         ];
-        $this->create_prices($new_prices);*/
+        $this->create_prices($new_prices);
+
+
 
         //新建点评-->
         //  [用户id，商品id，分类id，品牌id，评分，回购，购入场所，点评内容，点评图片]
-//          [12,800,4,61,6,0,2,'好用',['https://cache-cdn.rongcosme.com/reviews/111.jpeg','']]
+        //  [12,800,4,61,6,0,2,'好用',['https://cache-cdn.rongcosme.com/reviews/111.jpeg','']]
         $new_reviews = [
-//            [13, 23, 22, 1, 6, 0, 3, '买的00色号，适合黄皮。质地水润，延展度好，上脸有光泽感，遮瑕一般。', ['https://cache-cdn.rongcosme.com/reviews/TCU4APa6sXi8Lo9OqWcvBIyvtwRUC99EYwWiRgRT.jpeg', 'https://cache-cdn.rongcosme.com/reviews/XUUE6vrcbNRmqkrSYbj9WnL3Rls9lzNJZxZdKgN7.jpeg']],
+            [14,2169,10,361,6,0,2,'随便买的棉签没想到很好用，它一头尖一头圆，尖的那头可以擦掉蹭到眼皮的睫毛膏或画歪的眼线，粗的那头可以用来晕染嘴唇，手残党必备咔咔~！',['https://cache-cdn.rongcosme.com/reviews/0e2S8VbsVmI9D5PYLzWELpEQ2hcSC93Bo9tgOP7n.jpeg','https://cache-cdn.rongcosme.com/reviews/k2FbKkecTIUivxuuJEt1WTg8J5vIHfj5jIbP6sUY.jpeg','https://cache-cdn.rongcosme.com/reviews/GfYZcRQHZrh1LilmA4YPjhAP51eAPJzzYWHOhXxc.jpeg']],
         ];
         $this->create_reviews($new_reviews);
     }

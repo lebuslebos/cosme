@@ -22,8 +22,8 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with(['cat:id,name', 'brand:id,name,common_name', 'prices'])->paginate(100);
-        return view('p', compact('products'));
+        /*$products = Product::with(['cat:id,name', 'brand:id,name,common_name', 'prices'])->paginate(100);
+        return view('p', compact('products'));*/
     }
 
     public function show(int $product_id)

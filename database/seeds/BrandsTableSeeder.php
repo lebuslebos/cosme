@@ -369,6 +369,18 @@ class BrandsTableSeeder extends Seeder
             ['贝印', 'KAI', '', 3, $c[3], 'www.kai-china.com'],
             ['柳屋', 'Yanagiya', '', 3, $c[3], ''],
             ['得鲜', 'the Saem', '', 10, $c[10], ''],
+            ['Sleek', '', '', 4, $c[4], ''],
+            ['霏丝佳', 'PHYSIOGEL', '施泰福', 2, $c[2], ''],
+            ['碧缇丝', 'Batiste', '', 3, $c[3], ''],
+            ['佳洁士', 'Crest', '', 2, $c[2], 'www.crest.com.cn'],
+            ['Pure vivi', '', '', 3, $c[3], ''],
+            ['瞬时美肌', 'Clear Last', '', 3, $c[3], ''],
+            ['smile cosmetique', '', '', 3, $c[3], ''],
+            ['爱丽思', 'IRIS', '', 3, $c[3], ''],
+            ['小泉成器', 'KOIZUMI', '', 3, $c[3], ''],
+            ['伊藤良品', '', '贝德氏', 1, $c[1], ''],
+
+
 
 
             //['', '', '',2, $c[2], ''],

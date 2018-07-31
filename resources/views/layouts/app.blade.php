@@ -17,7 +17,7 @@
     <meta name="keywords" content="化妆品，美妆，排名，点评，cosme，护肤 ，彩妆，化妆教程，口红，美白，祛痘，祛斑">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}?t=20180730" defer></script>
+    <script src="{{ asset('js/app.js') }}?t=20180801" defer></script>
     {{--<script src="{{Storage::url('cosme/app.js')}}" defer></script>--}}
 
 
@@ -29,7 +29,7 @@
 
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}?t=20180730" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}?t=20180801" rel="stylesheet">
     {{--<link href="{{Storage::url('cosme/app.css')}}" rel="stylesheet">--}}
 
 </head>
