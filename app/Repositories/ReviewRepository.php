@@ -84,7 +84,7 @@ class ReviewRepository
             'openid'=>$openid
         ]);
 
-        if ($review->body) {
+        if (request('body')) {
             //记录下有点评进账的商品
             $p_ids = Cache::get('p-ids', []);
             $p_ids[] = $product->id;

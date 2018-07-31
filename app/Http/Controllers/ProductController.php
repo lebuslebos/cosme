@@ -57,7 +57,14 @@ class ProductController extends Controller
         if ($product->reviews_count > 0) {
             //所有点评(带分页)--缓存处理(tag:商品-1-点评)
             $reviews = $this->productRepository->reviews($product_id, $product);
-            $reviews->withPath('products/'.$product_id);
+
+
+
+//            $reviews->withPath('products/'.$product_id);
+            $reviews->withPath(request()->url());
+
+
+
 
             $will_buy = round(100 * $product->buys_count / $product->reviews_count);
             $buy_datas = [$will_buy, 100 - $will_buy];
