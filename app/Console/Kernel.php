@@ -160,6 +160,14 @@ class Kernel extends ConsoleKernel
 
             });
 
+
+        //因新建，更新（回购变），删除点评皆触发商品的数量变化，故用户点评的此商品在个人页都需要刷新（否则商品列表的回购和点评数不对）
+        $schedule->call(function (){
+
+            Cache::tags('u-reviews')->flush();
+
+        })->dailyAt('4:00');
+
     }
 
     /**

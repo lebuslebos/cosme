@@ -86,7 +86,7 @@ class ReviewObservers
                 DB::table('users')->where('id', $user_id)->increment('reviews_count');
             }
             Cache::forget('users-' . $user_id);//刷新个人页
-            if($openid=$review->user->openid) Cache::forget($openid);//刷新微信个人页
+            if ($openid = $review->user->openid) Cache::forget($openid);//刷新微信个人页
 
 
             //用户点评数+1-->并各做持久化处理
@@ -120,7 +120,7 @@ class ReviewObservers
         Cache::tags('products-' . $review->product_id . '-reviews')->flush();//清空商品页所有点评的缓存
 
         //登录用户新建+修改点评时
-        if ($user_id=$review->user_id) {
+        if ($user_id = $review->user_id) {
             //user-product--我的点评缓存起来(问题待解决：存入全部review进缓存，没办法选单独列进去，因only方法返回的是数组)
             Cache::forever($user_id . '-' . $review->product_id, $review);
 
@@ -133,7 +133,7 @@ class ReviewObservers
     public function deleted(Review $review)
     {
         $product_id = $review->product_id;
-        $user_id=$review->user_id;
+        $user_id = $review->user_id;
 
         Cache::forget('sh-' . $product_id);//刷新购入场所分布的缓存
         Cache::forget('sk-' . $product_id);//刷新肤质分布的缓存
@@ -159,7 +159,7 @@ class ReviewObservers
             DB::table('users')->where('id', $user_id)->decrement('reviews_count');
         }
         Cache::forget('users-' . $user_id);//刷新个人页
-        if($openid=$review->user->openid) Cache::forget($openid);//刷新微信个人页
+        if ($openid = $review->user->openid) Cache::forget($openid);//刷新微信个人页
 
 
         if ($review->body) {
@@ -169,10 +169,10 @@ class ReviewObservers
             $p_ids[] = $review->product_id;
             Cache::forever('p-ids', $p_ids);
 
-            //直接覆盖首页点评缓存
-            $reviews = $this->reviewRepository->reviews();
-            Cache::forever('reviews', $reviews);
         }
+        //直接覆盖首页点评缓存
+        $reviews = $this->reviewRepository->reviews();
+        Cache::forever('reviews', $reviews);
 
         //用户点评数-1-->并各做持久化处理
         /*Cache::decrement('r-' . $review->user_id . '-u');
