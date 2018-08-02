@@ -42,6 +42,7 @@ Route::post('reviews/imgs', 'ReviewController@api_img_store');
 Route::post('products/{product}/reviews','ReviewController@api_store');
 Route::put('reviews/{review}','ReviewController@api_update');
 Route::delete('reviews/{review}','ReviewController@api_destroy');
+Route::post('vote', 'ReviewController@vote');
 
 
 //Route::get('test',function(){

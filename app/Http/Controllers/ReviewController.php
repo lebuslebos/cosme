@@ -57,6 +57,11 @@ class ReviewController extends Controller
         //return 'ok';
     }
 
+    public function api_vote(Request $request)
+    {
+
+    }
+
     public function index()
     {
         $reviews = $this->reviewRepository->index();

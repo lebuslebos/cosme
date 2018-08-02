@@ -55,6 +55,7 @@ import AppNav from './components/AppNav'
 import Ranking from './components/Ranking'
 import Review from './components/Review'
 import Vote from './components/Vote'
+import Qrcode from './components/Qrcode'
 
 const app = new Vue({
     el: '#app',
@@ -65,6 +66,7 @@ const app = new Vue({
         ReviewRate, ReviewBuy, ReviewShop,ReviewDate,ReviewImg, Vote,
         Avatar,Name,Skin,UserReview,
         Ranking,RankingProduct,
+        Qrcode
     },
     store
 });

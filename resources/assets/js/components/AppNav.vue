@@ -7,7 +7,7 @@
                 <a class="text-main font-weight-bold logo-size d-block" :href="appHref" v-if="!hide">
                     {{ appName }}
                 </a>
-                <a href="/commit" class="ml-2 text-main" target="_blank">Beta 1.0.5</a>
+                <a v-if="!isMobile" href="/commit" class="ml-2 text-main" target="_blank">Beta 1.0.5</a>
             </div>
         </transition>
 

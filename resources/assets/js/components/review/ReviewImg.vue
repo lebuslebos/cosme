@@ -1,5 +1,5 @@
 <template>
-    <img alt="点评图片" class="review-size" data-toggle="popover"  data-container="body"
+    <img alt="点评图片" class="review-size hover-pointer" data-toggle="review-popover"  data-container="body"
          data-trigger="hover"
          data-placement="auto"
          data-html="true"
@@ -14,8 +14,8 @@
         props: ['img'],
         mounted() {
             // 因为是嵌套在里面的组件，需重新定义
-            $('[data-toggle="popover"]').popover({
-                delay: {'show': 300, 'hide': 100},
+            $('[data-toggle="review-popover"]').popover({
+                delay: {'show': 200, 'hide': 100},
                 template:'<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body" style="min-width:402px;min-height: 300px"></div></div>'
             })
         },

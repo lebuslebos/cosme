@@ -48,10 +48,9 @@ body {
   flex-wrap: wrap;
 }
 
-a:visited:not(.back-to-top):not(.logo-size):not(.user-name){
+/*a:visited:not(.back-to-top):not(.logo-size):not(.user-name){
   color: #571B8B;
-  //color: #63008C;
-}
+}*/
 a:hover {
   text-decoration: none;
 }
@@ -457,13 +456,11 @@ button:focus {
 
 .popover {
   max-width: none;
-  //border: none;
   border-radius: 0;
 }
 
 .popover-body {
   padding: 1px;
-  //min-width: 200px;
 }
 
 //到时候可以截成13rem大小的商品图，就可以去掉这个样式

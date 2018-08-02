@@ -83,7 +83,8 @@ class CosmeTableSeeder extends Seeder
         //  [用户id，商品id，分类id，品牌id，评分，回购，购入场所，点评内容，点评图片]
         //  [12,800,4,61,6,0,2,'好用',['https://cache-cdn.rongcosme.com/reviews/111.jpeg','']]
         $new_reviews = [
-            [14,2169,10,361,6,0,2,'随便买的棉签没想到很好用，它一头尖一头圆，尖的那头可以擦掉蹭到眼皮的睫毛膏或画歪的眼线，粗的那头可以用来晕染嘴唇，手残党必备咔咔~！',['https://cache-cdn.rongcosme.com/reviews/0e2S8VbsVmI9D5PYLzWELpEQ2hcSC93Bo9tgOP7n.jpeg','https://cache-cdn.rongcosme.com/reviews/k2FbKkecTIUivxuuJEt1WTg8J5vIHfj5jIbP6sUY.jpeg','https://cache-cdn.rongcosme.com/reviews/GfYZcRQHZrh1LilmA4YPjhAP51eAPJzzYWHOhXxc.jpeg']],
+            [14,234,45,13,6,0,0,'04号橘红色，是我最喜欢的唇膏之一，什么妆容都适用，不挑肤色，也不挑唇部状况，可以缓解干燥脱皮。素颜也可以使用，上班族学生党必备。',['https://cache-cdn.rongcosme.com/reviews/TmSEali90vEyluscOLC3NkpSsk5wlhM3u2vYEAFa.jpeg']],
+            [15,2154,4,353,6,0,4,'皮肤屏障受损医生推荐的护肤品之一，这瓶是面霜，质地较为厚重，很适合冬天用，足够保湿。它也适合当妆前乳，能打造光泽肌。',['https://cache-cdn.rongcosme.com/reviews/EnOYwnOg1V3qDdYIW46ZaDcF56sXWsjfzJ4d7U6U.jpeg']],
         ];
         $this->create_reviews($new_reviews);
     }

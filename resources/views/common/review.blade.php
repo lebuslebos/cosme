@@ -71,34 +71,30 @@
     </div>
 @endif
 
-<div class="d-flex mt-md-auto">
-
-    {{--@if(Route::currentRouteName()=='home' && $is_phone)
-        --}}{{--手机时的商品信息--}}{{--
-        <div class="pt-2">
-            <a class="btn btn-main rounded"
-               href="{{route('products.show',[$review->product])}}">{{$review->brand->name}}
-                -{{$review->product->name}}</a>
-        </div>
-    @endif--}}
-
-    @empty(!$review->user_id)
+@empty(!$review->user_id)
+    <div class="d-flex mt-md-auto">
         <vote :review="{{$review->id}}" :user="{{$review->user_id}}"
               :likes="{{$review->likes_count}}" :hates="{{$review->hates_count}}"
               class="ml-auto pt-2"></vote>
-    @endempty
-</div>
+    </div>
+@endempty
 
 {{--手机时的商品信息--}}
 @if(Route::currentRouteName()=='home' && $is_phone)
-    <a href="{{route('products.show',[$review->product])}}" class="phone-product ml-47 d-flex align-items-center bg-light py-2 pl-1 mt-3">
-        <img class="product-s-size mr-2" src="{{Storage::url('products')}}/{{$review->product_id}}.jpg!cosme" alt="{{$review->product->name}}">
+    <a href="{{route('products.show',[$review->product])}}"
+       class="phone-product ml-47 d-flex align-items-center bg-light py-2 pl-1 mt-3">
+        <img class="product-s-size mr-2" src="{{Storage::url('products')}}/{{$review->product_id}}.jpg!cosme"
+             alt="{{$review->product->name}}">
         <div>
             <div class="text-muted">{{$review->brand->name}}</div>
             <div class="text-main">{{$review->product->name}}</div>
-            <div><product-rate :rate="{{$review->product->rate}}"></product-rate></div>
+            <div>
+                <product-rate :rate="{{$review->product->rate}}"></product-rate>
+            </div>
             <div class="text-muted">
-                <span>有{{$review->product->reviews_count}}人用过 其中{{$review->product->buys_count==0 ? 0 : round(100*$review->product->buys_count/$review->product->reviews_count)}}%的人会再次购买</span>
+                <span>有{{$review->product->reviews_count}}
+                    人用过 其中{{$review->product->buys_count==0 ? 0 : round(100*$review->product->buys_count/$review->product->reviews_count)}}
+                    %的人会再次购买</span>
             </div>
         </div>
     </a>
