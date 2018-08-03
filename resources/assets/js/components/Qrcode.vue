@@ -1,8 +1,8 @@
 <template>
-    <div class="border-left border-right border-top text-center hover-pointer bg-white py-1"
+    <div class="border-left border-right border-top text-center hover-pointer bg-white pb-1 pt-2"
          data-toggle="qrcode-popover" data-container="body" data-trigger="hover" data-placement="left"
          data-html="true" :data-content="bigImg">
-        <i class="fa fa-qrcode fa-2x align-text-top text-main"></i>
+        <i class="fa fa-qrcode fa-2x align-top text-main"></i>
     </div>
 </template>
 

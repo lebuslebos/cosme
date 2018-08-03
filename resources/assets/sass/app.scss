@@ -457,6 +457,10 @@ button:focus {
 .popover {
   max-width: none;
   border-radius: 0;
+  -webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) ;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) ;
+  /*-webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;*/
 }
 
 .popover-body {

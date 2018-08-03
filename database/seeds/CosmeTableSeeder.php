@@ -83,8 +83,8 @@ class CosmeTableSeeder extends Seeder
         //  [用户id，商品id，分类id，品牌id，评分，回购，购入场所，点评内容，点评图片]
         //  [12,800,4,61,6,0,2,'好用',['https://cache-cdn.rongcosme.com/reviews/111.jpeg','']]
         $new_reviews = [
-            [14,234,45,13,6,0,0,'04号橘红色，是我最喜欢的唇膏之一，什么妆容都适用，不挑肤色，也不挑唇部状况，可以缓解干燥脱皮。素颜也可以使用，上班族学生党必备。',['https://cache-cdn.rongcosme.com/reviews/TmSEali90vEyluscOLC3NkpSsk5wlhM3u2vYEAFa.jpeg']],
             [15,2154,4,353,6,0,4,'皮肤屏障受损医生推荐的护肤品之一，这瓶是面霜，质地较为厚重，很适合冬天用，足够保湿。它也适合当妆前乳，能打造光泽肌。',['https://cache-cdn.rongcosme.com/reviews/EnOYwnOg1V3qDdYIW46ZaDcF56sXWsjfzJ4d7U6U.jpeg']],
+            [14,234,45,13,6,0,0,'04号橘红色，是我最喜欢的唇膏之一，什么妆容都适用，不挑肤色，也不挑唇部状况，可以缓解干燥脱皮。素颜也可以使用，上班族学生党必备。',['https://cache-cdn.rongcosme.com/reviews/TmSEali90vEyluscOLC3NkpSsk5wlhM3u2vYEAFa.jpeg']],
         ];
         $this->create_reviews($new_reviews);
     }

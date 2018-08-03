@@ -112,22 +112,27 @@ class Kernel extends ConsoleKernel
                 }
             }*/
 
-            //获取（登录）进账的有内容的点评ids，循环的重新计算评分，并存入缓存新的值
             if (Cache::get('p-ids')) {
+
 
                 $unique_p_ids = array_unique(Cache::pull('p-ids'));
                 foreach ($unique_p_ids as $p_id) {
                     /*Cache::forever('ra-' . $p_id, round(DB::table('reviews')
                         ->where([['body', '<>', ''], ['product_id', $p_id]])
                         ->avg('rate'), 1));*/
+                    //获取（登录）进账的有内容的点评ids，循环的重新计算评分，并存入缓存新的值
                     //重新计算平均分
                     $rate = round(DB::table('reviews')
                         ->where([['body', '<>', ''], ['product_id', $p_id]])
                         ->avg('rate'), 1);
 
-                    if(!$rate)$rate=4.0;
-                    Cache::forever('ra-' . $p_id,$rate);//分数放入缓存，方便页面上的调用（因商品信息都已缓存，唯独rate等需实时）
+                    if (!$rate) $rate = 4.0;
+                    Cache::forever('ra-' . $p_id, $rate);//分数放入缓存，方便页面上的调用（因商品信息都已缓存，唯独rate等需实时）
                     DB::table('products')->where('id', $p_id)->update(['rate' => $rate]);//同步至数据库
+
+
+                    //刷新今日入账的所有商品下面的点评的缓存-->修改商品下面点评里面的用户的点评数（即：用过了多少个化妆品）
+                    Cache::tags('products-' . $p_id . '-reviews')->flush();
                 }
             }
 
@@ -136,17 +141,16 @@ class Kernel extends ConsoleKernel
 //            Cache::forget('hot-brands');//清空热门品牌的缓存（微信端)）
 
             //热门品牌+国家分组品牌放入缓存（微信端）
-            $hot_brands=DB::table('brands')->select('id','name')->orderBy('reviews_count','desc')->orderBy('id','asc')->take(8)->get();
-            Cache::forever('hot-brands',$hot_brands);
+            $hot_brands = DB::table('brands')->select('id', 'name')->orderBy('reviews_count', 'desc')->orderBy('id', 'asc')->take(8)->get();
+            Cache::forever('hot-brands', $hot_brands);
 
             $country_brands = [];
             foreach (config('common.big_brands') as $big_brand) {
-                $country_brands[] = DB::table('brands')->select('id', 'name','country_id')->where('country_id', $big_brand)
+                $country_brands[] = DB::table('brands')->select('id', 'name', 'country_id')->where('country_id', $big_brand)
                     ->orderBy('reviews_count', 'desc')->orderBy('buys_count', 'desc')->orderBy('id', 'asc')->get();
             }
-            $country_brands[] = DB::table('brands')->whereNotIn('country_id',config('common.big_brands'));
-            Cache::forever('country-brands',$country_brands);
-
+            $country_brands[] = DB::table('brands')->whereNotIn('country_id', config('common.big_brands'));
+            Cache::forever('country-brands', $country_brands);
 
 
         })->dailyAt('3:00')
@@ -162,7 +166,7 @@ class Kernel extends ConsoleKernel
 
 
         //因新建，更新（回购变），删除点评皆触发商品的数量变化，故用户点评的此商品在个人页都需要刷新（否则商品列表的回购和点评数不对）
-        $schedule->call(function (){
+        $schedule->call(function () {
 
             Cache::tags('u-reviews')->flush();
 
