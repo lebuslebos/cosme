@@ -81,7 +81,14 @@ class ReviewController extends Controller
     public function api_index()
     {
         $reviews = $this->reviewRepository->index();
-        return compact('reviews');
+
+        $recent_products=Cache::rememberForever('recent-products',function (){
+            return Product::select('id','brand_id', 'name','nick_name')->whereIn('id',config('common.recent_products'))
+                ->with('brand:id,name')->get();
+        });
+        $recent_products=$recent_products->random(6);
+
+        return compact('reviews','recent_products');
     }
 
 

@@ -52,10 +52,10 @@ class CosmeTableSeeder extends Seeder
         $c = [
             1 => '中国', 2 => '美国', 3 => '日本', 4 => '英国', 5 => '法国', 6 => '意大利',
             7 => '德国', 8 => '澳大利亚', 9 => '俄罗斯', 10 => '韩国', 11 => '加拿大', 12 => '瑞士',
-            13 => '中国台湾', 14 => '匈牙利', 15 => '瑞典', 16 => '荷兰', 17 => '以色列', 18 => '新西兰', 19 => '中国香港', 20 => '西班牙', 21 => '泰国',
+            13 => '中国台湾', 14 => '匈牙利', 15 => '瑞典', 16 => '荷兰', 17 => '以色列', 18 => '新西兰', 19 => '中国香港', 20 => '西班牙', 21 => '泰国',22=>'捷克'
         ];
         $new_brands = [
-            ['伊藤良品', '', '贝德氏', 1, $c[1], ''],
+            ['黛玛蔻', 'Dermacol', '', 22 , $c[22], ''],
         ];
         $this->create_brands($new_brands);
 
@@ -64,7 +64,7 @@ class CosmeTableSeeder extends Seeder
 
         //新增商品-->[品牌id，分类id，名字，英文名，昵称]
         $new_products=[
-            [361,10,'棉签-尖头型','',''],
+            [370,23,'强力遮瑕膏','',''],
         ];
         $this->create_products($new_products);
 
@@ -73,7 +73,7 @@ class CosmeTableSeeder extends Seeder
 
         //新增价格-->[商品id，容量，价格]
         $new_prices=[
-            [2158,'500ml',59],
+            [2181,'',380],
         ];
         $this->create_prices($new_prices);
 
@@ -83,8 +83,7 @@ class CosmeTableSeeder extends Seeder
         //  [用户id，商品id，分类id，品牌id，评分，回购，购入场所，点评内容，点评图片]
         //  [12,800,4,61,6,0,2,'好用',['https://cache-cdn.rongcosme.com/reviews/111.jpeg','']]
         $new_reviews = [
-            [15,2154,4,353,6,0,4,'皮肤屏障受损医生推荐的护肤品之一，这瓶是面霜，质地较为厚重，很适合冬天用，足够保湿。它也适合当妆前乳，能打造光泽肌。',['https://cache-cdn.rongcosme.com/reviews/EnOYwnOg1V3qDdYIW46ZaDcF56sXWsjfzJ4d7U6U.jpeg']],
-            [14,234,45,13,6,0,0,'04号橘红色，是我最喜欢的唇膏之一，什么妆容都适用，不挑肤色，也不挑唇部状况，可以缓解干燥脱皮。素颜也可以使用，上班族学生党必备。',['https://cache-cdn.rongcosme.com/reviews/TmSEali90vEyluscOLC3NkpSsk5wlhM3u2vYEAFa.jpeg']],
+            [16,700,5,50,7,0,0,'太好闻了，很滋润，干皮可以闭眼入。化妆再也不卡粉，初抗老首选。',['https://cache-cdn.rongcosme.com/reviews/bGmpWx6SnInPJZExv0lkFXKGsETbEs5loyoXPN8h.jpeg']],
         ];
         $this->create_reviews($new_reviews);
     }

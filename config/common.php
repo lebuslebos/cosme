@@ -3,6 +3,8 @@
 return [
     'url'=>'https://rongcosme.com/',
 
+    'recent_products'=>[2170,372,2172,2174,341,2175,1705,2179,2180,2181,950,2182,2185,2188,444,2190],
+
     'ranking_updated_at' => 3,
 
     'pre_page'=>25,

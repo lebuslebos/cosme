@@ -6,6 +6,17 @@
 <div class="col-12">
     <h3>版本历史记录</h3>
     <ul class="list-unstyled review-text">
+
+        <li class="border-top py-3">
+            <div><span class="text-main text-big mr-3">Beta 1.0.7</span><span class="text-muted text-tiny">2018.8.5</span></div>
+            <ol class="text-brown pl-3">
+                <li>新增了1个国家</li>
+                <li>新增了9个品牌</li>
+                <li>新增了21个商品</li>
+                <li>新增了实时热门商品风向标功能（仅小程序）</li>
+            </ol>
+        </li>
+
         <li class="border-top py-3">
             <div><span class="text-main text-big mr-3">Beta 1.0.6</span><span class="text-muted text-tiny">2018.8.2</span></div>
             <ol class="text-brown pl-3">

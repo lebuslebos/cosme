@@ -18,7 +18,7 @@
     <meta name="keywords" content="化妆品，美妆，排名，点评，cosme，护肤 ，彩妆，化妆教程，口红，美白，祛痘，祛斑">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}?t=20180803" defer></script>
+    <script src="{{ asset('js/app.js') }}?t=20180805" defer></script>
 {{--<script src="{{Storage::url('cosme/app.js')}}" defer></script>--}}
 
 
@@ -30,7 +30,7 @@
 
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}?t=20180803" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}?t=20180805" rel="stylesheet">
     {{--<link href="{{Storage::url('cosme/app.css')}}" rel="stylesheet">--}}
 
 </head>
@@ -39,7 +39,7 @@
     <nav class="">
         <app-nav app-name="{{ config('app.name') }}" :is-login="@json(Auth::check())" :user-id="{{Auth::id()??0}}"
                  user-name="{{optional(Auth::user())->name??''}}" init-query="{{request('search')}}"
-                 current-route-name="{{Route::currentRouteName()}}"></app-nav>
+                 current-route-name="{{Route::currentRouteName()}}" version="Beta 1.0.6"></app-nav>
     </nav>
 
     {{--原来padding为7rem--}}

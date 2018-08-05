@@ -379,6 +379,15 @@ class BrandsTableSeeder extends Seeder
             ['爱丽思', 'IRIS', '', 3, $c[3], ''],
             ['小泉成器', 'KOIZUMI', '', 3, $c[3], ''],
             ['伊藤良品', '', '贝德氏', 1, $c[1], ''],
+            ['Kevyn Aucoin', '', '', 2, $c[2], ''],
+            ['IT Cosmetics', '', '', 2, $c[2], ''],
+            ['eyeme', '', '', 10, $c[10], ''],
+            ['格莱魅', 'GLAMGLOW', '', 2, $c[2], ''],
+            ['MUA MAKEUP ACADEMY', '', '', 4, $c[4], ''],
+            ['ESPIE ROUGE', '', '', 3, $c[3], ''],
+            ['Catrice', '', '', 7, $c[7], ''],
+            ['L.A.Girl', '', '', 2, $c[2], ''],
+            ['黛玛蔻', 'Dermacol', '', 22 , $c[22], ''],
 
 
 

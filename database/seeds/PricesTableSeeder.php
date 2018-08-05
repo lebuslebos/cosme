@@ -1389,6 +1389,7 @@ class PricesTableSeeder extends Seeder
             [2149,'100ml',380],
             [2157,'14对',179],
             [2158,'500ml',59],
+            [2181,'',380],
 
 
 

@@ -18,6 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });*/
 
 Route::get('/','ReviewController@api_index');
+//Route::get('recent','ReviewController@recent');
 
 Route::post('login','UserController@api_login');
 Route::get('users/{openid}','UserController@api_show');
