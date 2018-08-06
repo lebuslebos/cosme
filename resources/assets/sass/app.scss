@@ -44,7 +44,7 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);*/
 }
 
-.d-flex:not(#app):not(.phone-product) {
+.d-flex:not(#app):not(.phone-product):not(.cosme-progress) {
   flex-wrap: wrap;
 }
 

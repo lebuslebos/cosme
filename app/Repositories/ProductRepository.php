@@ -41,7 +41,7 @@ class ProductRepository
             $shops = array_count_values($product->reviews()->pluck('shop')->all());
             $shop_datas = [];
             for ($i = 0; $i < 5; $i++) {
-                $shop_datas[$i] = empty($shops[$i]) ? 0 : floor(100 * $shops[$i] / $product->reviews_count);
+                $shop_datas[$i] = empty($shops[$i]) ? 0 : ceil(100 * $shops[$i] / $product->reviews_count);
             }
             return $shop_datas;
         });
@@ -56,7 +56,7 @@ class ProductRepository
             $skin_datas = [];
 
             for ($i = 0; $i < 6; $i++) {
-                $skin_datas[$i] = empty($skins[$i]) ? 0 : floor(100*$skins[$i]/$skin_count);
+                $skin_datas[$i] = empty($skins[$i]) ? 0 : ceil(100*$skins[$i]/$skin_count);
             }
             return $skin_datas;
         });
