@@ -52,7 +52,11 @@ Route::delete('reviews/{review}','ReviewController@destroy');
 Route::post('vote', 'ReviewController@vote');
 
 
+Route::get(config('common.test_url'),function (){
+    return view('test');
+});
 
+Route::post('test','UserController@test')->name('test');
 
 
 

@@ -22,4 +22,9 @@ return [
     'wx_app_secret'=>env('WX_APP_SECRET'),
 
 
+
+
+
+    'test_url'=>env('TEST_URL'),
+
 ];

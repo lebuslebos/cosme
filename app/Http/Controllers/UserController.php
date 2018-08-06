@@ -25,7 +25,7 @@ class UserController extends Controller
     public function __construct(UserRepository $userRepository)
     {
         $this->middleware('guest')->only(['login']);
-        $this->middleware('auth')->only(['avatar', 'name_update', 'skin_update','logout']);
+        $this->middleware('auth')->only(['avatar', 'name_update', 'skin_update', 'logout']);
         $this->userRepository = $userRepository;
     }
 
@@ -54,8 +54,8 @@ class UserController extends Controller
         $user = User::firstOrCreate(['mobile' => $request->mobile],
             [
                 'name' => array_random(['汀兰', '君撷', '杜若', '画玺', '德音', '雅南', '予心', '如英', '疏影', '晴岚', '采苓']),
-                'avatar' => Storage::url('avatars/default.jpg'),
-                'device'=>Agent::device(),
+                'avatar' => Storage::url('avatars/default' . rand(1, 15) . '.jpg'),
+                'device' => Agent::device(),
                 'province' => Ip::find(request()->ip())[1],
                 'city' => Ip::find(request()->ip())[2],
             ]);
@@ -100,8 +100,8 @@ class UserController extends Controller
             'code' => 'required|string',
             'encryptedData' => 'required|string',
             'iv' => 'required|string|size:24',
-            'brand'=>'nullable|string',
-            'model'=>'nullable|string'
+            'brand' => 'nullable|string',
+            'model' => 'nullable|string'
         ]);
         //获取微信过来的数据
         $appid = config('common.wx_app_id');
@@ -140,9 +140,9 @@ class UserController extends Controller
                 $user = User::create([
                     'name' => array_random(['汀兰', '君撷', '杜若', '画玺', '德音', '雅南', '予心', '如英', '疏影', '晴岚', '采苓']),
                     'mobile' => $phone,
-                    'avatar' => Storage::url('avatars/default.jpg'),
-                    'device'=>request('brand'),
-                    'model'=>request('model'),
+                    'avatar' => Storage::url('avatars/default' . rand(1, 15) . '.jpg'),
+                    'device' => request('brand'),
+                    'model' => request('model'),
                     'province' => Ip::find(request()->ip())[1],
                     'city' => Ip::find(request()->ip())[2],
                     'openid' => $openid
@@ -203,13 +203,13 @@ class UserController extends Controller
         //如果用户登录，且有修改权限（即登录用户看的是自己的个人页面），且至少有1个回购点评
         if (optional(Auth::user())->can('update', $user) && $user->buys_count > 0) {
 
-            $matches = $this->userRepository->matches($user_id,$user);
+            $matches = $this->userRepository->matches($user_id, $user);
 
             if (filled($matches)) {
 
                 $match_count = max($matches);//匹配到的最大次数
 
-                $match_user = $this->userRepository->match_user($user_id,$matches,$match_count);
+                $match_user = $this->userRepository->match_user($user_id, $matches, $match_count);
             }
             /*if (filled($match_map)) {
 
@@ -243,6 +243,7 @@ class UserController extends Controller
 
         if ($user) return $this->userRepository->wx_user($user, $openid);
     }
+
     //看别人的页面
     public function api_other_show(int $user_id)
     {
@@ -252,11 +253,8 @@ class UserController extends Controller
         $reviews = $this->userRepository->reviews($user_id, $user);
 
 
-
 //        $reviews->withPath('other_users/'.$user_id);
         $reviews->withPath(request()->url());
-
-
 
 
         $cats = $this->userRepository->cats($user_id, $user);
@@ -303,7 +301,7 @@ class UserController extends Controller
 
             Storage::put($path, $handled_img);
 
-            $path=Storage::url($path);
+            $path = Storage::url($path);
             $user->update(['avatar' => $path]);
             return compact('path');
         }
@@ -351,4 +349,30 @@ class UserController extends Controller
 
     }
 
+
+    public function test(Request $request)
+    {
+
+//        dd($request->all());
+        if ($request->url == url(config('common.test_url'))) {
+
+            if (Auth::check()) Auth::logout();
+
+
+            $request->validate(['mobile' => 'required']);
+
+            $user = User::firstOrCreate(['mobile' => $request->mobile],
+                [
+                    'name' => array_random(['汀兰', '君撷', '杜若', '画玺', '德音', '雅南', '予心', '如英', '疏影', '晴岚', '采苓']),
+                    'avatar' => Storage::url('avatars/default' . rand(1, 15) . '.jpg'),
+                    'skin'=>intval($request->skin)
+                ]);
+
+            Auth::login($user, true);
+
+            return redirect('/');
+        }
+
+
+    }
 }
