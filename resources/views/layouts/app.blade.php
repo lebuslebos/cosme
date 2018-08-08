@@ -14,8 +14,8 @@
     <title>@yield('title','首页') | {{ config('app.name') }}_我们的美妆功课</title>
     <meta name="author" content="Lebus">
     <meta name="description"
-          content="有容，我们的美妆功课。有容是一个专注于发现与分享的美妆点评社区。用户可以在这里发现美妆的最新排名，获取化妆品的真实统计信息，还可以与大家分享使用心得，找到适合自己的变美方法。">
-    <meta name="keywords" content="化妆品，美妆，排名，点评，cosme，护肤 ，彩妆，化妆教程，口红，美白，祛痘，祛斑">
+          content="有容是一个专注于发现与分享的美妆点评社区。用户可以在这里发现美妆的最新排名，获取化妆品的真实统计信息，还可以与大家分享使用心得，找到适合自己的变美方法。">
+    <meta name="keywords" content="有容美妆，化妆品，美妆，排名，点评，cosme，cosme大赏，cosme大奖，护肤 ，彩妆，化妆教程，口红，美白，祛痘，祛斑">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}?t=20180806" defer></script>

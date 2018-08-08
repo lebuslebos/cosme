@@ -92,9 +92,7 @@
                 <product-rate :rate="{{$review->product->rate}}"></product-rate>
             </div>
             <div class="text-muted">
-                <span>有{{$review->product->reviews_count}}
-                    人用过 其中{{$review->product->buys_count==0 ? 0 : round(100*$review->product->buys_count/$review->product->reviews_count)}}
-                    %的人会再次购买</span>
+                <span>有{{$review->product->reviews_count}}人用过 其中{{$review->product->buys_count==0 ? 0 : round(100*$review->product->buys_count/$review->product->reviews_count)}}%的人会再次购买</span>
             </div>
         </div>
     </a>

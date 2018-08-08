@@ -2208,7 +2208,15 @@ class ProductsTableSeeder extends Seeder
             [369,46,'单色腮红','Just Blushing Powder',''],
             [369,45,'奢华唇膏','Luxury Creme Lipstick',''],
             [370,23,'强力遮瑕膏','',''],
-
+            [5,6,'柔皙轻透防晒素颜乳SPF50+/PA4+','','小白管'],
+            [155,24,'贵族丝缎蕾丝蜜粉','LADURÉE Face Powder',''],
+            [59,5,'鱼子精华紧颜液','Skin Caviar Liquid Lift','反重力精华'],
+            [371,42,'晶缎光漾眼影','Glossy Rich Eyes',''],
+            [1,22,'晶致润耀粉霜','Beauté Le Fond De Teint The Foundation',''],
+            [61,4,'INFINESSE WHITE美白渗透乳','INFINESSE WHITE WHITENING PUMP MILK',''],
+            [30,21,'轻润净透空气CC霜SPF50+/PA4+','',''],
+            [371,46,'纯真唇颊彩','Lip & Cheek Cream',''],
+            [371,45,'蕾丝哑光滋润丝绒唇膏','Creamy Lipstick',''],
 
 
 //            [,,'','',''],

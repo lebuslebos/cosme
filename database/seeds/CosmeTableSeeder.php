@@ -8,44 +8,6 @@ use Illuminate\Database\Seeder;
 
 class CosmeTableSeeder extends Seeder
 {
-    public function create_brands(array $new_brands)
-    {
-        foreach ($new_brands as $new_brand) {
-            Brand::create([
-                'name' => $new_brand[0],
-                'common_name' => $new_brand[1],
-                'similar_name' => $new_brand[2],
-                'country_id' => $new_brand[3],
-                'country' => $new_brand[4],
-                'official_website' => $new_brand[5]
-            ]);
-        }
-        Cache::forget('country-brands');
-    }
-
-    public function create_products(array $new_products)
-    {
-        foreach ($new_products as $new_product) {
-            Product::create([
-                'brand_id' => $new_product[0],
-                'cat_id' => $new_product[1],
-                'name' => $new_product[2],
-                'common_name' => $new_product[3],
-                'nick_name' => $new_product[4]
-            ]);
-        }
-    }
-
-    public function create_prices(array $new_prices)
-    {
-        $records = ['product_id', 'volume', 'price'];
-        $prices = [];
-        foreach ($new_prices as $data) {
-            $prices[] = array_combine($records, $data);
-        }
-        DB::table('prices')->insert($prices);
-    }
-
     public function run()
     {
         //新增品牌-->[品牌名，品牌英文名，品牌类似名，国家id，国家名，官方网站]
@@ -55,27 +17,40 @@ class CosmeTableSeeder extends Seeder
             13 => '中国台湾', 14 => '匈牙利', 15 => '瑞典', 16 => '荷兰', 17 => '以色列', 18 => '新西兰', 19 => '中国香港', 20 => '西班牙', 21 => '泰国',22=>'捷克'
         ];
         $new_brands = [
-            ['黛玛蔻', 'Dermacol', '', 22 , $c[22], ''],
+            ['Visee', '', '', 3 , $c[3], ''],
         ];
-        $this->create_brands($new_brands);
+        foreach ($new_brands as $new_brand) {
+            Brand::create(['name' => $new_brand[0], 'common_name' => $new_brand[1], 'similar_name' => $new_brand[2], 'country_id' => $new_brand[3], 'country' => $new_brand[4], 'official_website' => $new_brand[5]]);
+        }
+        Cache::forget('country-brands');
+
+
 
 
 
 
         //新增商品-->[品牌id，分类id，名字，英文名，昵称]
         $new_products=[
-            [370,23,'强力遮瑕膏','',''],
+            [371,46,'纯真唇颊彩','Lip & Cheek Cream',''],
+            [371,45,'蕾丝哑光滋润丝绒唇膏','Creamy Lipstick',''],
         ];
-        $this->create_products($new_products);
+        foreach ($new_products as $new_product) {
+            Product::create(['brand_id' => $new_product[0], 'cat_id' => $new_product[1], 'name' => $new_product[2], 'common_name' => $new_product[3], 'nick_name' => $new_product[4]]);
+        }
 
 
 
 
         //新增价格-->[商品id，容量，价格]
         $new_prices=[
-            [2181,'',380],
+            [2197,'30g',680],
         ];
-        $this->create_prices($new_prices);
+        $records = ['product_id', 'volume', 'price'];
+        $prices = [];
+        foreach ($new_prices as $data) {$prices[] = array_combine($records, $data);}
+        DB::table('prices')->insert($prices);
+
+
 
 
 

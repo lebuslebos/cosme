@@ -388,6 +388,7 @@ class BrandsTableSeeder extends Seeder
             ['Catrice', '', '', 7, $c[7], ''],
             ['L.A.Girl', '', '', 2, $c[2], ''],
             ['黛玛蔻', 'Dermacol', '', 22 , $c[22], ''],
+            ['Visee', '', '', 3 , $c[3], ''],
 
 
 
