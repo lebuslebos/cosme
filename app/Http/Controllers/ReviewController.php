@@ -44,7 +44,7 @@ class ReviewController extends Controller
         ]);
 
         //点评的获赞数/获踩数+1-->并各做持久化处理
-        Cache::increment($request->type . '-' . $request->review,rand(3,9);
+        Cache::increment($request->type . '-' . $request->review,rand(3,9));
         $r_ids = Cache::get($request->type . '-r-ids', []);
         $r_ids[] = $request->review;
         Cache::forever($request->type . '-r-ids', $r_ids);
