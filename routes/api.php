@@ -18,7 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });*/
 
 Route::get('/','ReviewController@api_index');
-//Route::get('recent','ReviewController@recent');
+Route::get('negative','ProductController@negative');
+Route::get('recent','ProductController@recent');
 
 Route::post('login','UserController@api_login');
 Route::get('users/{openid}','UserController@api_show');
@@ -30,11 +31,11 @@ Route::get('other_users/{user_id}','UserController@api_other_show');
 Route::get('search', 'SearchController@instant_search');
 
 Route::get('brands/{brand_id}','BrandController@api_show');
-Route::get('brands','BrandController@api_index');
+//Route::get('brands','BrandController@api_index');
 
 Route::get('cats/{cat_id}','CatController@api_show');
 Route::get('user_cats','CatController@user_index');
-Route::get('cats','CatController@api_index');
+//Route::get('cats','CatController@api_index');
 
 Route::get('products/{product_id}','ProductController@api_show');
 Route::get('products/{product_id}/review','ProductController@api_my_review');

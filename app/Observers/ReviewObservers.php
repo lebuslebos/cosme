@@ -25,6 +25,8 @@ class ReviewObservers
     //游客点评+登录用户新建点评（2种）
     public function created(Review $review)
     {
+        Cache::forget('r-count');//清空全部点评数的缓存
+
         $product_id = $review->product_id;
 
         Cache::forget('sh-' . $product_id);//刷新购入场所分布的缓存
@@ -102,6 +104,8 @@ class ReviewObservers
                 Cache::forever('b-u-ids', $b_u_ids);
             }*/
 
+
+
             //清空个人页最多分类和品牌的缓存
             Cache::forget('users-' . $user_id . '-b');
             Cache::forget('users-' . $user_id . '-c');
@@ -132,6 +136,8 @@ class ReviewObservers
     //登录用户删除点评
     public function deleted(Review $review)
     {
+        Cache::forget('r-count');//清空全部点评数的缓存
+
         $product_id = $review->product_id;
         $user_id = $review->user_id;
 

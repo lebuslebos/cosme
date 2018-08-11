@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Brand;
 use App\Http\Requests\StoreReviewRequest;
 use App\Product;
 use App\Repositories\CatRepository;
+use App\Repositories\ProductRepository;
 use App\Repositories\RankingRepository;
 use App\Repositories\ReviewRepository;
 use App\Repositories\UserRepository;
@@ -20,15 +22,17 @@ class ReviewController extends Controller
 {
     protected $rankingRepository;
     protected $reviewRepository;
+    protected $productRepository;
     protected $catRepository;
     protected $userRepository;
 
-    public function __construct(RankingRepository $rankingRepository, ReviewRepository $reviewRepository, CatRepository $catRepository, UserRepository $userRepository)
+    public function __construct(RankingRepository $rankingRepository, ReviewRepository $reviewRepository, ProductRepository $productRepository, CatRepository $catRepository, UserRepository $userRepository)
     {
         $this->middleware('auth')
             ->except(['index', 'api_index', 'api_img_store', 'api_store', 'api_update', 'api_destroy', 'ranking', 'vote', 'store_visitor']);
         $this->rankingRepository = $rankingRepository;
         $this->reviewRepository = $reviewRepository;
+        $this->productRepository = $productRepository;
         $this->catRepository = $catRepository;
         $this->userRepository = $userRepository;
     }
@@ -43,14 +47,15 @@ class ReviewController extends Controller
             'type' => ['required', Rule::in(['l', 'h'])],
         ]);
 
+        $rand_vote=rand(3, 9);
         //点评的获赞数/获踩数+1-->并各做持久化处理
-        Cache::increment($request->type . '-' . $request->review,rand(3,9));
+        Cache::increment($request->type . '-' . $request->review, $rand_vote);
         $r_ids = Cache::get($request->type . '-r-ids', []);
         $r_ids[] = $request->review;
         Cache::forever($request->type . '-r-ids', $r_ids);
 
         //用户的获赞数/获踩数+1-->并各做持久化处理
-        Cache::increment($request->type . '-' . $request->user . '-u');
+        Cache::increment($request->type . '-' . $request->user . '-u',$rand_vote);
         $u_ids = Cache::get($request->type . '-u-ids', []);
         $u_ids[] = $request->user;
         Cache::forever($request->type . '-u-ids', $u_ids);
@@ -82,13 +87,27 @@ class ReviewController extends Controller
     {
         $reviews = $this->reviewRepository->index();
 
-        $recent_products=Cache::rememberForever('recent-products',function (){
-            return Product::select('id','brand_id', 'name','nick_name')->whereIn('id',config('common.recent_products'))
-                ->with('brand:id,name')->get();
-        });
-        $recent_products=$recent_products->random(6);
+        $b_count=intval(Cache::rememberForever('b-count',function (){
+            return Brand::count();
+        }));
+        $p_count=intval(Cache::rememberForever('p-count',function (){
+            return Product::count();
+        }));
+        $r_count=intval(Cache::rememberForever('r-count',function (){
+            return Review::count();
+        }));
 
-        return compact('reviews','recent_products');
+        //争议差评商品
+        $simple_negative_products = Cache::tags('negative')->rememberForever('simple-negative-products', function () {
+            return $this->productRepository->simple(config('common.negative_products'),'asc');
+        });
+
+        $simple_recent_products=Cache::tags('recent')->rememberForever('simple-recent-products', function () {
+            return $this->productRepository->simple(config('common.recent_products'),'desc');
+        });
+
+
+        return compact('reviews','simple_negative_products','simple_recent_products','b_count','p_count','r_count');
     }
 
 
@@ -133,7 +152,7 @@ class ReviewController extends Controller
     //pc点评
     public function store(StoreReviewRequest $request, Product $product)
     {
-        $review = $this->reviewRepository->store($request, $product, Auth::id(),Agent::device());
+        $review = $this->reviewRepository->store($request, $product, Auth::id(), Agent::device());
 
         return ['reviewId' => $review->id, 'updated_at' => $review->updated_at];
     }
@@ -153,7 +172,7 @@ class ReviewController extends Controller
 
         if ($user = $this->userRepository->get_user(request('openid'))) {
 
-            $this->reviewRepository->store($request, $product, $user->id,request('brand'),request('model'),request('openid'));
+            $this->reviewRepository->store($request, $product, $user->id, request('brand'), request('model'), request('openid'));
 
             return ['submitted' => 1];
         }
@@ -194,7 +213,7 @@ class ReviewController extends Controller
 
             $this->reviewRepository->destroy($review);
 
-            return ['deleted'=>1];
+            return ['deleted' => 1];
         }
     }
 

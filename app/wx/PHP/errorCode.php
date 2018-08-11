@@ -17,6 +17,7 @@ class ErrorCode
 	public static $IllegalAesKey = -41001;
 	public static $IllegalIv = -41002;
 	public static $IllegalBuffer = -41003;
+	public static $IllegalBuffer2 = -410033;//自己后来加的这行
 	public static $DecodeBase64Error = -41004;
 }
 

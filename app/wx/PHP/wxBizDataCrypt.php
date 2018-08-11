@@ -59,7 +59,7 @@ class WXBizDataCrypt
 		}
 		if( $dataObj->watermark->appid != $this->appid )
 		{
-			return ErrorCode::$IllegalBuffer;
+			return ErrorCode::$IllegalBuffer2;//自己后来加的这行
 		}
 		$data = $result;
 		return ErrorCode::$OK;

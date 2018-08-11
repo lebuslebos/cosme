@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Cache;
  */
 class BrandObservers
 {
+    public function created(Brand $brand)
+    {
+        Cache::forget('b-count');//清空全部商品数的缓存
+    }
     public function updated(Brand $brand)
     {
         Cache::forget('brands-' . $brand->id);//更新品牌缓存
@@ -28,6 +32,8 @@ class BrandObservers
 
     public function deleted(Brand $brand)
     {
+        Cache::forget('b-count');//清空全部商品数的缓存
+
         if (Cache::has('brands-' . $brand->id)) Cache::forget('brands-' . $brand->id);//更新品牌缓存
 //        if (Cache::has('all-brands')) Cache::forget('all-brands');//更新全部品牌缓存
         Cache::forget('country-brands');//更新按国家分类的全部品牌缓存

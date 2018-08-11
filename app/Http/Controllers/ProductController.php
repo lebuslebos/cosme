@@ -6,6 +6,7 @@ use App\Product;
 use App\Repositories\ProductRepository;
 use App\Repositories\RankingRepository;
 use App\Repositories\UserRepository;
+use Illuminate\Support\Facades\Cache;
 
 class ProductController extends Controller
 {
@@ -24,6 +25,19 @@ class ProductController extends Controller
     {
         /*$products = Product::with(['cat:id,name', 'brand:id,name,common_name', 'prices'])->paginate(100);
         return view('p', compact('products'));*/
+    }
+
+    public function negative()
+    {
+        $negative_products=$this->productRepository->negative_products();
+
+        return compact('negative_products');
+    }
+    public function recent()
+    {
+        $recent_products=$this->productRepository->recent_products();
+
+        return compact('recent_products');
     }
 
     public function show(int $product_id)
