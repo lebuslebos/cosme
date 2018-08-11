@@ -7,6 +7,16 @@
     <h3>版本历史记录</h3>
     <ul class="list-unstyled review-text">
 
+
+
+        <li class="border-top py-3">
+            <div><span class="text-main text-big mr-3">Beta 1.0.8</span><span class="text-muted text-tiny">2018.8.11</span></div>
+            <ol class="text-brown pl-3">
+                <li>新增了高踩雷商品功能（仅小程序）</li>
+                <li>新增了高关注商品功能（仅小程序）</li>
+                <li>删掉了一些不常用的功能（仅小程序）</li>
+            </ol>
+        </li>
         <li class="border-top py-3">
             <div><span class="text-main text-big mr-3">Beta 1.0.7</span><span class="text-muted text-tiny">2018.8.5</span></div>
             <ol class="text-brown pl-3">

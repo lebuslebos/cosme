@@ -39,7 +39,7 @@
     <nav class="">
         <app-nav app-name="{{ config('app.name') }}" :is-login="@json(Auth::check())" :user-id="{{Auth::id()??0}}"
                  user-name="{{optional(Auth::user())->name??''}}" init-query="{{request('search')}}"
-                 current-route-name="{{Route::currentRouteName()}}" version="Beta 1.0.7"></app-nav>
+                 current-route-name="{{Route::currentRouteName()}}" version="Beta 1.0.8"></app-nav>
     </nav>
 
     {{--原来padding为7rem--}}
