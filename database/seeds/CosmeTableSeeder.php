@@ -17,12 +17,12 @@ class CosmeTableSeeder extends Seeder
             13 => '中国台湾', 14 => '匈牙利', 15 => '瑞典', 16 => '荷兰', 17 => '以色列', 18 => '新西兰', 19 => '中国香港', 20 => '西班牙', 21 => '泰国',22=>'捷克'
         ];
         $new_brands = [
-            ['Visee', '', '', 3 , $c[3], ''],
+            ['好莱坞的秘密', 'CINEMA SECRETS', '', 13, $c[13], ''],
         ];
         foreach ($new_brands as $new_brand) {
             Brand::create(['name' => $new_brand[0], 'common_name' => $new_brand[1], 'similar_name' => $new_brand[2], 'country_id' => $new_brand[3], 'country' => $new_brand[4], 'official_website' => $new_brand[5]]);
         }
-        Cache::forget('country-brands');
+//        Cache::forget('country-brands');
 
 
 
@@ -31,8 +31,7 @@ class CosmeTableSeeder extends Seeder
 
         //新增商品-->[品牌id，分类id，名字，英文名，昵称]
         $new_products=[
-            [371,46,'纯真唇颊彩','Lip & Cheek Cream',''],
-            [371,45,'蕾丝哑光滋润丝绒唇膏','Creamy Lipstick',''],
+            [403,42,'五色合一遮瑕盘','Ultimate Corrector 5-IN-1 Pro Palette',''],
         ];
         foreach ($new_products as $new_product) {
             Product::create(['brand_id' => $new_product[0], 'cat_id' => $new_product[1], 'name' => $new_product[2], 'common_name' => $new_product[3], 'nick_name' => $new_product[4]]);
@@ -43,7 +42,7 @@ class CosmeTableSeeder extends Seeder
 
         //新增价格-->[商品id，容量，价格]
         $new_prices=[
-            [2197,'30g',680],
+            [2391,'',22],
         ];
         $records = ['product_id', 'volume', 'price'];
         $prices = [];

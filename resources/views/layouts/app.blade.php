@@ -18,11 +18,10 @@
     <meta name="keywords" content="有容美妆，化妆品，美妆，排名，点评，cosme，cosme大赏，cosme大奖，护肤 ，彩妆，化妆教程，口红，美白，祛痘，祛斑">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}?t=20180812" defer></script>
-{{--<script src="{{Storage::url('cosme/app.js')}}" defer></script>--}}
+    <script src="{{ asset('js/app.js') }}?t=20180813" defer></script>
 
 
-<!-- Fonts -->
+    <!-- Fonts -->
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
     {{--<link rel="icon" type="image/png" sizes="16x16" href="{{Storage::url('icons/logo.jpg')}}!avatar">--}}
     <link rel="shortcut icon" href="{{asset('favicon.ico')}}"/>
@@ -30,8 +29,7 @@
 
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}?t=20180812" rel="stylesheet">
-    {{--<link href="{{Storage::url('cosme/app.css')}}" rel="stylesheet">--}}
+    <link href="{{ asset('css/app.css') }}?t=20180813" rel="stylesheet">
 
 </head>
 <body>

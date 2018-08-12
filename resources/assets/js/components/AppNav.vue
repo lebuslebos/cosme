@@ -61,7 +61,7 @@
                             <a :href="`/cats/${cat.id}`" @mousedown.prevent target="_blank"
                                class="list-group-item list-group-item-action px-2 px-md-4">
                                 <div class="media align-items-center">
-                                    <div class="product-s-size mr-md-3 p-2">
+                                    <div class="product-s-size mr-md-3">
                                         <img class="product-s-size" :src="`${storageUrl}/cats/${cat.id}.jpg`"
                                              :alt="cat.name">
                                     </div>
