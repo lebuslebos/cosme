@@ -328,7 +328,7 @@ class ProductsTableSeeder extends Seeder
             [18,24,'流光美肌轻透蜜粉','Light Reflecting Loose Setting Powder',''],
             [18,45,'丝绒雾感唇膏笔','Velvet Matte Lip Pencil',''],
             [18,45,'敢耀唇膏','Audacious Lipstick','纵欲惹火口红'],
-            [18,23,'亮采柔滑遮瑕膏','Radiant Creamy Concealer','妆点甜心遮瑕蜜'],
+            [18,23,'妆点甜心遮瑕霜','Soft Matte Complete Concealer',''],
             [18,46,'腮红','Blush',''],
             [18,42,'双色眼影','Duo Eyeshadow',''],
             [18,42,'眼影底霜','Pro-Prime Smudge Proof Eyeshadow Base',''],
