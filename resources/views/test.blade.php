@@ -15,7 +15,7 @@
                 <select class="form-control w-100" name="skin">
                     <option value="0">中性</option>
                     <option value="1">干性</option>
-                    <option value="2">混合性</option>
+                    <option value="2" selected="selected">混合性</option>
                     <option value="3">油性</option>
                     <option value="4">敏感性</option>
                     <option value="5">过敏性</option>
