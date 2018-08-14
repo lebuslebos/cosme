@@ -18,7 +18,7 @@
     <meta name="keywords" content="有容美妆，化妆品，美妆，排名，点评，cosme，cosme大赏，cosme大奖，护肤 ，彩妆，化妆教程，口红，美白，祛痘，祛斑">
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}?t=20180813" defer></script>
+    <script src="{{ asset('js/app.js') }}?t=20180814" defer></script>
 
 
     <!-- Fonts -->
@@ -29,7 +29,7 @@
 
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}?t=20180813" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}?t=20180814" rel="stylesheet">
 
 </head>
 <body>
