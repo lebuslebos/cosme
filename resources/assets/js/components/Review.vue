@@ -74,7 +74,7 @@
             </div>-->
             <!--展示点评-->
             <transition-group name="fade" tag="div">
-                <div v-if="showReview" :key="productId" @mouseover="enterReview" @mouseout="leaveReview">
+                <div v-if="showReview" :key="productId">
                     <!--点评上部--评分、回购。购入地、时间-->
                     <div class="d-flex align-items-center pt-3">
                         <ReviewRate class="text-normal" :rate="initRate"/>
@@ -91,7 +91,7 @@
                         <ReviewImg v-for="(initImg,index) in initImgs" :key="index" :img="initImg" class="mr-2 mb-2"/>
                     </div>
                     <!--点赞点踩+修改-->
-                    <div class="d-flex align-items-center pt-2">
+                    <!--<div class="d-flex align-items-center pt-2">
                         <Vote v-if="!!review"
                               :review="initReviewId"
                               :user="review.user_id"
@@ -104,7 +104,7 @@
                                 改一下
                             </button>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </transition-group>
         </div>
@@ -198,11 +198,11 @@
     import ReviewDate from './review/ReviewDate'
     import ReviewImg from './review/ReviewImg'
     import ReviewUpload from './review/ReviewUpload'
-    import Vote from './Vote'
+    // import Vote from './Vote'
 
     export default {
         name: "review",
-        components: {ReviewRate, ReviewBuy, ReviewShop, ReviewDate, ReviewImg, Vote, ReviewUpload,},
+        components: {ReviewRate, ReviewBuy, ReviewShop, ReviewDate, ReviewImg, ReviewUpload,},
         props: ['isLogin', 'productId', 'review', 'fromList'],
         data() {
             return {
@@ -212,7 +212,7 @@
 
                 reviewedBtn: '我的点评',//已点评后的按钮
                 showReview: false,//展示点评
-                showEditBtn: this.$store.getters.isMobile,//显示编辑按钮
+                // showEditBtn: this.$store.getters.isMobile,//显示编辑按钮
                 showForm: false,//展示表单，用于新建点评和编辑点评
 
                 //用户提交后前端直接展示的数据
@@ -279,12 +279,12 @@
             },
 
             //修改点评按钮是否滑动出现（仅用户已登录且看到的是自己点评的时候）
-            enterReview() {
+            /*enterReview() {
                 if (!this.isMobile) this.showEditBtn = true;
             },
             leaveReview() {
                 if (!this.isMobile) this.showEditBtn = false;
-            },
+            },*/
 
             // 打分
             onEnter(n) {
@@ -318,20 +318,20 @@
             },
 
             // 编辑点评
-            editReview() {
+            /*editReview() {
                 this.userReviewed = false;
                 this.showForm = true;
                 //再次点开重新把init的值赋给rate，imgs等
-            },
+            },*/
             // 取消编辑
             cancel() {
-                if (!this.initReviewId) {
+                // if (!this.initReviewId) {
                     //用户光操作了一下，并没有提交点评，退回原来
                     this.showForm = false;
                     this.hoverRate = null;
                     this.rate = null;
                     this.rateHint = null;
-                } else {
+                /*} else {
                     //用户已点评或刚刚点评完后，想修改，操作了一下又取消了
                     this.userReviewed = true;
                     this.rate = this.hoverRate = this.initRate;
@@ -340,7 +340,7 @@
                     this.imgs = JSON.parse(JSON.stringify(this.initImgs));
                     this.buy = this.initBuy;
                     this.shop = this.initShop;
-                }
+                }*/
             },
             // 提交点评
             onSubmit() {
@@ -356,7 +356,7 @@
                         this.initBuy = this.buy;
                         this.initShop = this.shop;
                         //没有initReviewid说明是新建点评
-                        if (!this.initReviewId) {
+                        // if (!this.initReviewId) {
                             // 只有新建点评的时候没有机会触发‘展开点评’、所以此处改‘展示点评’为true
                             this.showReview = true;
                             axios.post(`/products/${this.productId}/reviews`, {
@@ -371,7 +371,7 @@
                                     this.initReviewId = response.data.reviewId;
                                     this.updatedAt = response.data.updated_at;
                                 })
-                        } else {
+                        /*} else {
                             //其余为更新点评
                             axios.patch(`/reviews/${this.initReviewId}`, {
                                 rate: this.rate,
@@ -385,7 +385,7 @@
                                     this.updatedAt = response.data.updated_at;
 
                                 })
-                        }
+                        }*/
                     } else {
                         //游客点评
                         this.$store.commit('incrReviewedProduct', this.productId);
@@ -418,7 +418,6 @@
         overflow: hidden;
         max-height: 0;
     }
-
     .fade-enter-active, .fade-leave-active {
         transition: all .1s linear;
         max-height: 50rem;
@@ -426,25 +425,19 @@
 
     .only-fade-enter-active, .only-fade-leave-active {
         transition: opacity .1s;
-        /*max-height: 50rem;*/
     }
-
     .only-fade-enter, .only-fade-leave-to {
         opacity: 0;
-        /* overflow: hidden;
-         max-height: 0;*/
     }
 
     .rate {
         font-size: 1.2rem;
     }
-
     .fa-star {
         color: #DADADA;
         box-sizing: border-box;
         transition: color .1s;
     }
-
     .change-color {
         color: #FFAA00;
     }
