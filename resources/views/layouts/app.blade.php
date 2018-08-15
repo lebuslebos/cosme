@@ -29,7 +29,7 @@
 
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}?t=20180814" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}?t=20180815" rel="stylesheet">
 
 </head>
 <body>
