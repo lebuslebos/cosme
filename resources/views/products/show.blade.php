@@ -7,11 +7,15 @@
         <div class="media align-items-center mb-3 mb-md-0">
             {{--商品的左边部分（移动端和pc端图片大小不一样）--}}
             @if($is_phone)
-                <img src="{{Storage::url('products')}}/{{$product->id}}.jpg!cosme" class="product-size"
-                     alt="{{$product->name}}">
+                <a href="{{Storage::url('products')}}/{{$product->id}}.jpg" class="d-block">
+                    <img src="{{Storage::url('products')}}/{{$product->id}}.jpg!cosme" class="product-size"
+                         alt="{{$product->name}}">
+                </a>
             @else
-                <img class="mr-3 product-l-size" src="{{Storage::url('products')}}/{{$product->id}}.jpg!cosme"
-                     alt="{{$product->name}}">
+                <a href="{{Storage::url('products')}}/{{$product->id}}.jpg" target="_blank" class="d-block">
+                    <img class="mr-3 product-l-size" src="{{Storage::url('products')}}/{{$product->id}}.jpg!cosme"
+                         alt="{{$product->name}}">
+                </a>
             @endif
             {{--商品的右边部分--}}
             <div class="media-body">
@@ -34,7 +38,7 @@
                     <div class="text-main{{$is_phone?' text-normal':' h3 mb-0'}}">{{$product->name}}</div>&nbsp;
                     <div class="text-brown{{$is_phone?'':' text-xl'}}">{{$product->nick_name}}</div>&nbsp;
                     <div class=""><a href="{{route('cats.show',['id'=>$cat->id])}}"
-                                                 class="text-secondary">[ {{$cat->name}} ]</a></div>
+                                     class="text-secondary">[ {{$cat->name}} ]</a></div>
                 </div>
                 {{--商品评分+点评数--}}
                 <div class="d-flex align-items-center py-1 pl-md-2 border-dotted">
